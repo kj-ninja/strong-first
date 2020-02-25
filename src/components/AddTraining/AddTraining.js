@@ -14,12 +14,12 @@ const AddTraining = () => {
     const [notes, setNotes] = useState('');
 
     const [selectedExercise, setSelectedExercise] = useState({});
-    const [selectedRepetitions, setSelectedRepetitions] = useState('');
-    const [selectedExerciseTime, setSelectedExerciseTime] = useState('');
-    const [selectedWeight, setSelectedWeight] = useState('');
+    const [selectedRepetitions, setSelectedRepetitions] = useState(0);
+    const [selectedExerciseTime, setSelectedExerciseTime] = useState(0);
+    const [selectedWeight, setSelectedWeight] = useState(0);
 
     let today = new Date().toISOString().substr(0, 10);
-
+    
 
     const handleAddSet = () => {
         // walidacja
