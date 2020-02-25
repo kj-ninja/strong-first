@@ -1,12 +1,11 @@
 import React from 'react';
-// import logo from './logo.svg';
 import './App.scss';
+import AddTraining from "../AddTraining/AddTraining";
+
 
 function App() {
   return (
-        <h1>
-          Hello world!
-        </h1>
+        <AddTraining />
   );
 }
 

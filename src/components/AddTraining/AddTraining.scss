@@ -1,0 +1,29 @@
+.container {
+  max-width: 400px;
+
+  form {
+    margin-bottom: 50px;
+
+    label {
+      margin-right: 10px;
+    }
+
+    .notes {
+      margin-bottom: 40px;
+    }
+  }
+}
+
+.list-group {
+  //margin-bottom: 50px;
+  .exercise-rep {
+    margin-right: 10px;
+    margin-left: 5px;
+  }
+}
+
+
+//
+//.container.exercises-list {
+//  width: 800px;
+//}
