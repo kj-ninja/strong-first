@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import './AddTraining.scss';
 import ReactSelect from "../ReactSelect/ReactSelect";
 
@@ -20,9 +20,8 @@ const AddTraining = () => {
 
 
     const handleAddSet = () => {
-        // walidacja
-
         let index = null;
+
         exercisesPreview.forEach((exercisePreview, i) => {
             if (exercisePreview.id === selectedExercise.value) {
                 index = i;
@@ -52,19 +51,17 @@ const AddTraining = () => {
         }
     };
 
+
     const handleDeleteExercise = (id) => {
         const tempArray = exercisesPreview.filter(exercise => {
             return exercise.id !== id
         });
-
         setExercisesPreview(tempArray);
     };
 
+
     const handleAddTraining = (e) => {
         e.preventDefault();
-        // walidacja
-
-
         const API = "https://ironman.coderaf.com/training";
 
         const tempSets = [];
@@ -89,11 +86,11 @@ const AddTraining = () => {
         };
 
         fetch(API, {
+            mode: 'no-cors',
             method: "POST",
             body: JSON.stringify(training),
             headers: {
-                "Content-Type": "application/json",
-                "Access-Token": "dj9a!s8dtghi2<i34ND"
+                "Content-Type": "application/json"
             }
         })
             .then(response => response.json())
@@ -104,6 +101,25 @@ const AddTraining = () => {
                 console.log(error);
             });
     };
+
+
+    const getRepsView = element => {
+        let repView = '';
+
+        for (let i = 0; i < element.repetitions.length; i++) {
+
+            if (element.time[i] !== 0 && element.time[i] !== '0') {
+                    repView += element.time[i] + 'sec ';
+            } else if (element.weight[i] !== 0) {
+                    repView += element.repetitions[i] + 'x' + element.weight[i] + 'kg ';
+            } else {
+                    repView += element.repetitions[i] + 'x ';
+            }
+        }
+
+        return repView;
+    };
+
 
     return (
         <div className="container">
@@ -150,21 +166,21 @@ const AddTraining = () => {
                     <input type="text" className="form-control form-control-sm" id="reps"
                            placeholder="Podaj ilość powtórzeń"
                            onChange={(e) => {
-                               setSelectedRepetitions(e.target.value)
+                               setSelectedRepetitions(e.target.value === '' ? 0 : e.target.value)
                            }}/>
                 </div>
                 <div className="form-group form-inline">
                     <label htmlFor="time">Czas:</label>
                     <input type="text" className="form-control form-control-sm" id="time" placeholder=""
                            onChange={(e) => {
-                               setSelectedExerciseTime(e.target.value)
+                               setSelectedExerciseTime(e.target.value === '' ? 0 : e.target.value)
                            }}/>
                 </div>
                 <div className="form-group form-inline">
                     <label htmlFor="weight">Ciężar:</label>
                     <input type="text" className="form-control form-control-sm" id="weight" placeholder=""
                            onChange={(e) => {
-                               setSelectedWeight(e.target.value)
+                               setSelectedWeight(e.target.value === '' ? 0 : e.target.value)
                            }}/>
                 </div>
                 <div className="d-flex justify-content-between">
@@ -174,12 +190,10 @@ const AddTraining = () => {
             </form>
 
             <ul className="list-group">
-                {exercisesPreview.map(element => {
+                {exercisesPreview.map(element=>{
                     return (
                         <li key={element.id} className="list-group-item">
-                            {element.name.toUpperCase()}: {element.repetitions.map((rep, i) => (
-                            <span key={i} className="exercise-rep">{rep}x</span>
-                        ))}
+                            {element.name.toUpperCase()}: {getRepsView(element)}
                             <button onClick={() => handleDeleteExercise(element.id)} type="button" className="close"
                                     aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
