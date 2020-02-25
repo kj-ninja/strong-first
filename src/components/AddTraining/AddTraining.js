@@ -3,11 +3,11 @@ import './AddTraining.scss';
 import ReactSelect from "../ReactSelect/ReactSelect";
 
 
-
 const AddTraining = () => {
     const [exercisesPreview, setExercisesPreview] = useState([]);
+    let today = new Date().toISOString().substr(0, 10);
 
-    const [date, setDate] = useState('');
+    const [date, setDate] = useState(today);
     const [name, setName] = useState('');
     const [duration, setDuration] = useState('');
     const [kcal, setKcal] = useState('');
@@ -18,8 +18,6 @@ const AddTraining = () => {
     const [selectedExerciseTime, setSelectedExerciseTime] = useState(0);
     const [selectedWeight, setSelectedWeight] = useState(0);
 
-    let today = new Date().toISOString().substr(0, 10);
-    
 
     const handleAddSet = () => {
         // walidacja
@@ -62,8 +60,49 @@ const AddTraining = () => {
         setExercisesPreview(tempArray);
     };
 
-    const handleAddTraining = () => {
+    const handleAddTraining = (e) => {
+        e.preventDefault();
+        // walidacja
 
+
+        const API = "https://ironman.coderaf.com/training";
+
+        const tempSets = [];
+        exercisesPreview.forEach((exercise, i)=>{
+            exercise.repetitions.forEach((rep, j)=>{
+                tempSets.push({
+                    exerciseId: exercisesPreview[i].id,
+                    repetitions: exercisesPreview[i].repetitions[j],
+                    weight: exercisesPreview[i].weight[j],
+                    time: exercisesPreview[i].time[j]
+                })
+            });
+        });
+
+        const training = {
+            name,
+            note: notes,
+            date: date + ' 00:00:00',
+            duration,
+            kcal,
+            sets: tempSets
+        };
+
+        fetch(API, {
+            method: "POST",
+            body: JSON.stringify(training),
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Token": "dj9a!s8dtghi2<i34ND"
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
     };
 
     return (
@@ -130,7 +169,7 @@ const AddTraining = () => {
                 </div>
                 <div className="d-flex justify-content-between">
                     <button type="button" className="btn btn-primary" onClick={handleAddSet}>Dodaj serię</button>
-                    <button type="button" className="btn btn-success pull-right" onClick={handleAddTraining}>Zapisz trening</button>
+                    <button type="button" className="btn btn-success pull-right" onClick={(e)=>handleAddTraining(e)}>Zapisz trening</button>
                 </div>
             </form>
 
@@ -153,4 +192,4 @@ const AddTraining = () => {
     );
 };
 
-export default AddTraining;
+export default AddTraining
