@@ -56,6 +56,7 @@ const AddTraining = () => {
         const tempArray = exercisesPreview.filter(exercise => {
             return exercise.id !== id
         });
+
         setExercisesPreview(tempArray);
     };
 
@@ -116,7 +117,6 @@ const AddTraining = () => {
                     repView += element.repetitions[i] + 'x ';
             }
         }
-
         return repView;
     };
 
