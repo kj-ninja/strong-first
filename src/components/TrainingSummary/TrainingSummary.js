@@ -1,47 +1,48 @@
 import React from 'react';
+import {getRepsView} from "../../functions/getRepsView";
 
 const TrainingSummary = ({trainingToShow}) => {
+    let tempArray = [];
+    trainingToShow.sets.forEach(set => {
+        tempArray.push({name: set.exercise.name, id: set.exercise.id, repetitions: [], weight: [], time: []})
+    });
 
-    const exercisePreview = {};
+    const removeDuplicates = arr => {
+        // Create an array of objects
+        let jsonObject = arr.map(JSON.stringify);
+        let uniqueSet = new Set(jsonObject);
 
-
-    const getRepsView = sets => {
-        let repView = '';
-
-            if (sets.time !== 0 && sets.time !== '0' && sets.time !== null && sets.time !== undefined) {
-                repView += sets.time + 'sec ';
-            } else if (sets.weight !== 0 && sets.weight !== '0' && sets.weight !== null && sets.weight !== undefined) {
-                repView += sets.repetitions + 'x' + sets.weight + 'kg ';
-            } else {
-                repView += sets.repetitions + 'x ';
-            }
-            return repView;
+        return [...uniqueSet].map(JSON.parse);
     };
+    const exercisesPreview = removeDuplicates(tempArray);
+
+    trainingToShow.sets.forEach((set)=> {
+        exercisesPreview.forEach((element)=>{
+            if (set.exercise.id === element.id) {
+                element.repetitions.push(set.repetitions);
+                element.weight.push(set.weight);
+                element.time.push(set.time)
+            }
+        })
+    });
 
     return (
         <div>
             <div className="container">
-                <p className="training-date">Data: {exercisePreview.date}</p>
-                <p className="training-name">Nazwa: {exercisePreview.name}</p>
+                <p className="training-date">Data: {trainingToShow.date}</p>
+                <p className="training-name">Nazwa: {trainingToShow.name}</p>
 
-                <div className="container exercise-summary">
-                    {/*<span className="exercise-name" style={{marginRight: '20px'}}>*/}
-                    {/*    {trainingToShow.sets.map(set=>{*/}
-                    {/*        return (*/}
-                    {/*            set.exercise.name.toUpperCase()*/}
-                    {/*        )*/}
-                    {/*    })}*/}
-                    {/*    {trainingToShow.sets[0].exercise.name.toUpperCase()}:*/}
-                    {/*</span>*/}
-
-                    {/*{trainingToShow.sets.map((reps, i)=>{*/}
-                    {/*    return (*/}
-                    {/*        <span key={i}>{i+1} Seria: {getRepsView(trainingToShow.sets[i])}</span>*/}
-                    {/*    )*/}
-                    {/*})}*/}
+                <ul className="list-group">
+                    {exercisesPreview.map(element=>{
+                        return (
+                            <li key={element.id} className="list-group-item">
+                                {element.name.toUpperCase()}: {getRepsView(element)}
+                            </li>
+                        )
+                    })}
+                </ul>
                 </div>
             </div>
-        </div>
     );
 };
 

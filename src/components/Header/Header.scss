@@ -1,8 +1,10 @@
-nav {
-  height: 60px;
-  .header-logo {
-    margin-top: 10px;
-    margin-left: 10px;
-    font-size: 1.5rem;
+.header-logo {
+  margin-top: 5px;
+  font-size: 1.75rem;
+  a:link {
+    text-decoration: none;
+  }
+  a:visited {
+    text-decoration: none;
   }
 }

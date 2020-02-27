@@ -1,6 +1,5 @@
 import React from "react";
 import moment from "moment";
-import {range} from "moment-range";
 import './Calendar.scss';
 
 
@@ -54,7 +53,7 @@ class Calendar extends React.Component {
     MonthList = props => {
         let months = [];
         props.data.map(data => {
-            months.push(
+            return months.push(
                 <td
                     key={data}
                     className="calendar-month"
@@ -70,7 +69,7 @@ class Calendar extends React.Component {
         let cells = [];
 
         months.forEach((row, i) => {
-            if (i % 3 !== 0 || i == 0) {
+            if (i % 3 !== 0 || i === 0) {
                 cells.push(row);
             } else {
                 rows.push(cells);
@@ -140,7 +139,7 @@ class Calendar extends React.Component {
     getDates(startDate, stopDate) {
         var dateArray = [];
         var currentDate = moment(startDate);
-        var stopDate = moment(stopDate);
+        stopDate = moment(stopDate);
         while (currentDate <= stopDate) {
             dateArray.push(moment(currentDate).format("YYYY"));
             currentDate = moment(currentDate).add(1, "year");
@@ -158,7 +157,7 @@ class Calendar extends React.Component {
         let tenyear = this.getDates(props, nextten);
 
         tenyear.map(data => {
-            months.push(
+            return months.push(
                 <td
                     key={data}
                     className="calendar-month"
@@ -174,7 +173,7 @@ class Calendar extends React.Component {
         let cells = [];
 
         months.forEach((row, i) => {
-            if (i % 3 !== 0 || i == 0) {
+            if (i % 3 !== 0 || i === 0) {
                 cells.push(row);
             } else {
                 rows.push(cells);
@@ -205,7 +204,6 @@ class Calendar extends React.Component {
             },
             () => {
                 console.log("SELECTED DAY: ", this.state.selectedDay);
-                console.log(this.props.trainings);
             }
         );
     };
@@ -216,11 +214,11 @@ class Calendar extends React.Component {
         });
         let blanks = [];
         for (let i = 0; i < this.firstDayOfMonth(); i++) {
-            blanks.push(<td className="calendar-day empty">{""}</td>);
+            blanks.push(<td key={i*99} className="calendar-day empty">{""}</td>);
         }
         let daysInMonth = [];
         for (let d = 1; d <= this.daysInMonth(); d++) {
-            let currentDay = d == this.currentDay() ? "today" : "";
+            let currentDay = d === this.currentDay() ? "today" : "";
             let currentTraining;
 
             this.props.trainings.forEach(training => {
@@ -263,7 +261,7 @@ class Calendar extends React.Component {
         });
 
         let daysinmonth = rows.map((d, i) => {
-            return <tr>{d}</tr>;
+            return <tr key={i}>{d}</tr>;
         });
 
         return (
@@ -274,14 +272,14 @@ class Calendar extends React.Component {
               onClick={e => {
                   this.onPrev();
               }}
-              class="calendar-button button-prev"
+              className="calendar-button button-prev"
           />
                         {!this.state.showMonthTable && (
                             <span
                                 onClick={e => {
                                     this.showMonth();
                                 }}
-                                class="calendar-label"
+                                className="calendar-label"
                             >
               {this.month()}
             </span>
