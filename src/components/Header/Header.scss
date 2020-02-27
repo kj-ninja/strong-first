@@ -1,4 +1,7 @@
+@import '../../sass/_fonts.scss';
+
 .header-logo {
+  font-family: $logo-font;
   margin-top: 5px;
   font-size: 1.75rem;
   a:link {

@@ -1,0 +1,23 @@
+.container.training__summary {
+  margin-top: 30px;
+  .training__date span {
+    font-weight: bold;
+  }
+  .training__name span {
+    font-weight: bold;
+  }
+  .training__list li {
+    height: 80px;
+  }
+  .training__list-name {
+    font-weight: bold;
+    margin-right: 0.15rem;
+    display: inline-block;
+    width: 150px;
+  }
+  .training__list-repetition {
+    margin-right: 1.75rem;
+    display: inline-block;
+    width: 40px;
+  }
+}

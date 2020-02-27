@@ -1,6 +1,7 @@
 import React from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
-import Header from "../components/Header/Header";
+import Header from "../Header/Header";
+import {Link} from 'react-router-dom';
 
 const RegisterForm = () => {
     return (
@@ -24,7 +25,7 @@ const RegisterForm = () => {
                                 <MDBInput label="Hasło" icon="lock" group type="password" validate />
                             </div>
                             <div className="text-center">
-                                <MDBBtn color="primary">Zarejestruj się</MDBBtn>
+                                <MDBBtn color="primary"><Link to="/main">Zarejestruj się</Link></MDBBtn>
                             </div>
                         </form>
                     </MDBCol>

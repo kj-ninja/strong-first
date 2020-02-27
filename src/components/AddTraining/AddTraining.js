@@ -104,7 +104,8 @@ const AddTraining = () => {
     };
 
     return (
-        <div className="container">
+        <div className="continer d-flex">
+        <div className="container__add-training">
             <form>
                 <div className="form-group form-inline">
                     <label htmlFor="date">Data:</label>
@@ -165,7 +166,7 @@ const AddTraining = () => {
                                setSelectedWeight(e.target.value === '' ? 0 : e.target.value)
                            }}/>
                 </div>
-                <div className="d-flex justify-content-between">
+                <div className="d-flex justify-content-between container__add-training">
                     <button type="button" className="btn btn-primary" onClick={handleAddSet}>Dodaj serię</button>
                     <button type="button" className="btn btn-success pull-right" onClick={(e)=>handleAddTraining(e)}>Zapisz trening</button>
                 </div>
@@ -184,6 +185,7 @@ const AddTraining = () => {
                     )
                 })}
             </ul>
+        </div>
         </div>
     );
 };

@@ -203,7 +203,7 @@ class Calendar extends React.Component {
                 selectedDay: d
             },
             () => {
-                console.log("SELECTED DAY: ", this.state.selectedDay);
+                // console.log("SELECTED DAY: ", this.state.selectedDay);
             }
         );
     };
@@ -218,13 +218,14 @@ class Calendar extends React.Component {
         }
         let daysInMonth = [];
         for (let d = 1; d <= this.daysInMonth(); d++) {
-            let currentDay = d === this.currentDay() ? "today" : "";
-            let currentTraining;
+            let currentDay = d == this.currentDay() ? "today" : "";
+            let trainingDay;
 
             this.props.trainings.forEach(training => {
                 let day = new Date(training.date);
-                if (day.getMonth() === this.state.dateObject.month() && day.getDay() === d) {
-                    currentTraining = training;
+
+                if (day.getMonth() === this.state.dateObject.month() && day.getDay() == d) {
+                    trainingDay = training;
                 }
             });
 
@@ -236,7 +237,8 @@ class Calendar extends React.Component {
                   }}
                 >
                 {d}
-                {currentTraining && <button onClick={() => this.props.setTrainingToShow(currentTraining)}>i</button>}
+                {trainingDay && <i style={{fontSize: '1.5rem'}} onClick={() => this.props.setTrainingToShow(trainingDay)}
+                    className="fas fa-dumbbell"></i>}
                 </span>
                 </td>
             );

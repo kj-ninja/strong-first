@@ -1,9 +1,10 @@
 import React from 'react';
-import './Hero.scss';
+import './Home.scss';
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Button from "react-bootstrap/Button";
+import {Link} from 'react-router-dom';
 
-const Hero = () => {
+const Home = () => {
     return (
             <Jumbotron>
                 <h1>Hello human</h1>
@@ -12,10 +13,10 @@ const Hero = () => {
                     Zacznij już dziś kontrolować swój progress siłowy.
                 </p>
                 <p>
-                    <Button variant="primary">Zarejestruj sie za darmo!</Button>
+                    <Button variant="primary"><Link to="/register">Zarejestruj sie za darmo!</Link></Button>
                 </p>
             </Jumbotron>
     );
 };
 
-export default Hero;
+export default Home;
