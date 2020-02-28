@@ -1,16 +1,18 @@
 import React from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
-import Header from "../Header/Header";
 import {Link} from "react-router-dom";
+import './LoginForm.scss';
 
 const LoginForm = () => {
+
     return (
         <>
-            <Header isRegister={true}
-                    logoStyles={{color: '#fff'}}
-                    navbarStyles={{marginBottom: '50px', backgroundColor: 'rgb(63, 127, 191)'}}
-                    containerStyles={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
-            />
+            <nav className="login__nav">
+                <div className="container login__header-wrapper">
+                    <h1 className="login__header-logo"><Link to="/">Calisthenics</Link></h1>
+                </div>
+            </nav>
+
             <MDBContainer>
                 <MDBRow display="flex" style={{justifyContent: "center"}}>
                     <MDBCol md="6">
@@ -22,7 +24,7 @@ const LoginForm = () => {
                                 <MDBInput label="Hasło" icon="lock" group type="password" validate />
                             </div>
                             <div className="text-center">
-                                <MDBBtn color="primary"><Link to="/main">Zaloguj się</Link></MDBBtn>
+                                <Link to="/main"><MDBBtn color="primary">Zaloguj się</MDBBtn></Link>
                             </div>
                         </form>
                     </MDBCol>

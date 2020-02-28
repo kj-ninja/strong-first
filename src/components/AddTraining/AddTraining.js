@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './AddTraining.scss';
 import ReactSelect from "../ReactSelect/ReactSelect";
 import {getRepsView} from "../../functions/getRepsView";
+import {Link} from "react-router-dom";
 
 const AddTraining = () => {
     const [exercisesPreview, setExercisesPreview] = useState([]);
@@ -104,7 +105,13 @@ const AddTraining = () => {
     };
 
     return (
-        <div className="continer d-flex">
+        <>
+            <nav className="login__nav">
+                <div className="container login__header-wrapper">
+                    <h1 className="login__header-logo"><Link to="/main">Calisthenics</Link></h1>
+                </div>
+            </nav>
+        <div className="container d-flex">
         <div className="container__add-training">
             <form>
                 <div className="form-group form-inline">
@@ -171,7 +178,6 @@ const AddTraining = () => {
                     <button type="button" className="btn btn-success pull-right" onClick={(e)=>handleAddTraining(e)}>Zapisz trening</button>
                 </div>
             </form>
-
             <ul className="list-group">
                 {exercisesPreview.map(element=>{
                     return (
@@ -187,6 +193,7 @@ const AddTraining = () => {
             </ul>
         </div>
         </div>
+        </>
     );
 };
 

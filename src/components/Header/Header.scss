@@ -1,13 +1,21 @@
 @import '../../sass/_fonts.scss';
 
-.header-logo {
-  font-family: $logo-font;
-  margin-top: 5px;
-  font-size: 1.75rem;
-  a:link {
-    text-decoration: none;
-  }
-  a:visited {
-    text-decoration: none;
+.nav {
+  background-color: white;
+  .container.main__header-wrapper {
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 960px;
+    .header-logo {
+      font-family: $logo-font;
+      margin-top: 5px;
+      font-size: 2rem;
+      a {
+        text-decoration: none;
+      }
+    }
   }
 }
+

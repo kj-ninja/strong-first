@@ -197,15 +197,11 @@ class Calendar extends React.Component {
             </table>
         );
     };
-    onDayClick = (e, d) => {
-        this.setState(
-            {
-                selectedDay: d
-            },
-            () => {
-                // console.log("SELECTED DAY: ", this.state.selectedDay);
-            }
-        );
+    onDayClick = (e, trainingDay) => {
+
+        // console.log("SELECTED DAY: ",trainingDay);
+        this.props.setTrainingToShow(trainingDay)
+
     };
 
     render() {
@@ -221,23 +217,26 @@ class Calendar extends React.Component {
             let currentDay = d == this.currentDay() ? "today" : "";
             let trainingDay;
 
-            this.props.trainings.forEach(training => {
-                let day = new Date(training.date);
+            // console.log("month cal:",this.state.dateObject.month());
+            // console.log("day cal:",d);
 
-                if (day.getMonth() === this.state.dateObject.month() && day.getDay() == d) {
-                    trainingDay = training;
+            for (let j = 0; j < this.props.trainings.length; j++) {
+                let traningDay = new Date(this.props.trainings[j].date);
+                if (traningDay.getMonth() == this.state.dateObject.month() && traningDay.getDay() == d) {
+                    // console.log('+ + + + + +');
+                    // console.log(day.getDay());
+                    // console.log(d);
+                    // console.log('+ + + + + +');
+                    // console.log("znaleziono:",this.props.trainings[j]);
+                    trainingDay = this.props.trainings[j];
                 }
-            });
+            }
 
             daysInMonth.push(
                 <td key={d} className={`calendar-day ${currentDay}`}>
-                <span
-                  onClick={e => {
-                      this.onDayClick(e, d);
-                  }}
-                >
+                <span>
                 {d}
-                {trainingDay && <i style={{fontSize: '1.5rem'}} onClick={() => this.props.setTrainingToShow(trainingDay)}
+                {trainingDay && <i style={{fontSize: '1.5rem'}} onClick={(e)=>this.onDayClick(e,trainingDay)}
                     className="fas fa-dumbbell"></i>}
                 </span>
                 </td>
@@ -267,7 +266,7 @@ class Calendar extends React.Component {
         });
 
         return (
-            <div className="container d-flex justify-content-center">
+            <div className="container d-flex justify-content-center" style={{marginTop: '50px'}}>
                 <div className="tail-datetime-calendar">
                     <div className="calendar-navi">
           <span

@@ -1,14 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import './App.scss';
 import Header from "../Header/Header";
 import Home from "../Home/Home";
 import Main from "../Main/Main";
-import TrainingSummary from "../TrainingSummary/TrainingSummary";
-import Calendar from "../Calendar/Calendar";
 import AddTraining from "../AddTraining/AddTraining";
 import FooterPage from "../Footer/Footer";
 import RegisterForm from "../RegisterForm/RegisterForm";
 import LoginForm from "../LoginForm/LoginForm";
+import NotFound from "../NotFound/NotFound";
 import {
     HashRouter,
     Route,
@@ -16,22 +15,25 @@ import {
     Switch,
     NavLink,
 } from 'react-router-dom';
+import Button from "react-bootstrap/Button";
 
 function App() {
+    let tempArr = window.location.href.split("/");
+    let addressEnd = tempArr[tempArr.length-1]
+    console.log("???",addressEnd);
+
 
   return (
         <>
             <HashRouter>
-                <Header isRegister={true}
-                        isLogged={false}
-                        containerStyles={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: '960px'}}
-                        navbarStyles={{backgroundColor: '#fff', height: '60px'}}
-                />
-                <Route exact path="/" component={Home} />
-                <Route exact path="/login" component={LoginForm}/>
-                <Route exact path="/main" component={Main}/>
-                <Route exact path="/add-training" component={AddTraining}/>
-                <Route exact path="/register" component={RegisterForm}/>
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route path="/login" component={LoginForm}/>
+                    <Route path="/main" component={Main}/>
+                    <Route path="/add-training" component={AddTraining}/>
+                    <Route path="/register" component={RegisterForm}/>
+                    <Route component={NotFound}/>
+                </Switch>
                 <FooterPage />
             </HashRouter>
         </>
