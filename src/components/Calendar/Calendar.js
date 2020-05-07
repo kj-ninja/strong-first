@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
     getDayOfTheWeekOfFirstDayInMonth,
     changeDayOfWeekFromEnglishToPolishSystem,
@@ -9,24 +9,27 @@ import {
     wrapTrainingsWithDate
 } from '../../functions/calendar';
 
-const Calendar = ({trainings}) => {
+const Calendar = ({trainings,setTrainingToShow}) => {
     const [actualDate, setActualDate] = useState(new Date("2020-03-01"));
-    // const [trainings, setTrainings] = useState(trainingsFromApi);
-
-    useEffect(()=>{}, []);
-
     const wrappedTrainings = wrapTrainingsWithDate(trainings);
     const weeksInMonth = createDaysInMonth(actualDate, wrappedTrainings);
 
+    const getTrainingById = id => {
+        trainings.forEach(training=>{
+            if (training.id === id) {
+                setTrainingToShow(training);
+            }
+        })
+    };
+
     const generateRow = (week) => {
-        console.log(week);
         return (
             <tr>
                 {week.map(day=>{
                     if (day.element === null) {
                         return <td><div>{day.dayNumber}</div></td>
                     } else {
-                        return <td><div><i>X</i>{day.dayNumber}</div></td>
+                        return <td><div onClick={()=>getTrainingById(day.element.id)}><i>X</i>{day.dayNumber}</div></td>
                     }
                 })}
             </tr>
@@ -46,11 +49,5 @@ const Calendar = ({trainings}) => {
         </div>
     );
 };
-// const wrappedTrainings = wrapTrainingsWithDate(trainingsFromApi);
-// console.log(wrappedTrainings);
-// const daysIntMonth = createDaysInMonth(new Date(), wrappedTrainings);
-// console.log(daysIntMonth);
-// const calendar = generateTable(daysIntMonth);
-// document.getElementById('calendar').innerHTML = calendar;
 
 export default Calendar;

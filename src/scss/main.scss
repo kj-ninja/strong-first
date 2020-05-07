@@ -1,0 +1,23 @@
+@import "./settings/reset";
+@import "./settings/fonts";
+@import "./settings/mixins";
+@import "./settings/variables";
+
+body {
+  background-color: #f2f2f2 !important;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
+
+.container {
+  max-width: 960px;
+}
+
+h1 {
+  font-family: $logo-font;
+}
+
+
