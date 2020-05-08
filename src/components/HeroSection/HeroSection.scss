@@ -1,0 +1,15 @@
+.jumbotron {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../../images/hero2.jpg');
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  .hero__para {
+    text-align: center;
+    max-width: 400px;
+  }
+}

@@ -1,23 +1,27 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useEffect, useState} from 'react';
+import './Main.scss';
 import TrainingSummary from "../TrainingSummary/TrainingSummary";
 import {Link} from "react-router-dom";
 import Header from "../Header/Header";
 import Button from "react-bootstrap/Button"
 import Calendar from "../Calendar/Calendar";
-import FirebaseAuthContext from "../Firebase/auth";
 import axios from "axios";
 
-const Main = () => {
-    const auth = useContext(FirebaseAuthContext);
+const styles = {
+    backgroundColor: '#fff',
+    color: "#0056b3"
+};
+
+const Main = ({token}) => {
     const [trainings, setTrainings] = useState([]);
     const [trainingToShow, setTrainingToShow] = useState([]);
     const url = "https://ironman.coderaf.com/training";
 
-    const getTrainings = () => {
+    useEffect(()=> {
         axios.get(
             url,
             {
-                'headers': {'Access-Token': `'${auth.currentUser.getIdToken()}'`}
+                'headers': {'Access-Token': `'${token}'`}
             })
             .then(function (response) {
                 // handle success
@@ -31,15 +35,10 @@ const Main = () => {
             .finally(function () {
                 // always executed
             });
-    };
-
-    useEffect(()=> {
-
-        getTrainings();
-    }, [auth]);
+    }, [token]);
 
     // add loading spinner
-    if (trainings.length === 0) {
+    if (trainings.length === 0 || token === null) {
         return (
             <h1>Loading</h1>
         )
@@ -47,8 +46,11 @@ const Main = () => {
 
     return (
         <>
-            <Header logoHomeLink={"/main"}>
-                <Link style={{color: 'white'}} to="/add-training"><Button variant="primary">Dodaj trening</Button></Link>
+            <Header logoLink={"/main"} styles={styles}>
+                <div className="main__buttons">
+                    <Link to="/register"><Button variant="primary">Dodaj trening</Button></Link>
+                    <Link to="/login"><Button variant="secondary">Wyloguj się</Button></Link>
+                </div>
             </Header>
             <Calendar trainings={trainings} setTrainingToShow={setTrainingToShow}/>
             <TrainingSummary trainingToShow={trainingToShow}/>

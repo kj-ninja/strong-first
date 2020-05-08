@@ -2,15 +2,19 @@ import React from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
 import Header from "../Header/Header";
 import {Link} from 'react-router-dom';
+import Button from "react-bootstrap/Button";
+
+const styles = {
+    backgroundColor: 'rgb(63, 127, 191)',
+    color: "#fff"
+};
 
 const RegisterForm = () => {
     return (
         <>
-            <nav className="login__nav">
-                <div className="container login__header-wrapper">
-                    <h1 className="login__header-logo"><Link to="/">Calisthenics</Link></h1>
-                </div>
-            </nav>
+            <Header logoLink={"/"} styles={styles}>
+                <Link to="/login"><Button variant="light" style={{color: 'rgb(63, 127, 191)'}}>Zaloguj się</Button></Link>
+            </Header>
 
             <MDBContainer>
                 <MDBRow display="flex" style={{justifyContent: "center"}}>

@@ -14,9 +14,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
+firebase.auth();
 
-auth.currentUser.getIdToken().then((result)=>console.log(result));
-
-export default auth;
+export default firebase;
 

@@ -1,17 +1,25 @@
-import React, {useContext, useState} from 'react';
-// import './Login.scss';
+import React, {useState} from 'react';
+import './Login.scss';
 import {Formik, Field, Form, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 import Button from "react-bootstrap/Button";
 import {Link} from 'react-router-dom';
-import FirebaseAuthContext from "../Firebase/auth";
+import firebase from '../Firebase/firebase';
+import Header from "../Header/Header";
 
-const Login = () => {
-    const auth = useContext(FirebaseAuthContext);
+const styles = {
+    backgroundColor: 'rgb(63, 127, 191)',
+    color: "#fff"
+};
+
+const Login = ({setToken}) => {
     const [errorMessage, setErrorMessage] = useState(null);
 
     return (
         <>
+            <Header logoLink={"/"} styles={styles}>
+                <Link to="/register"><Button variant="light" style={{color: 'rgb(63, 127, 191)'}}>Zarejestruj się</Button></Link>
+            </Header>
             <div className="login__container">
                 <h2>Zaloguj się</h2>
                 <Formik
@@ -25,10 +33,13 @@ const Login = () => {
                     })}
                     onSubmit={(values) => {
                         // firebase.auth().signIn();
-                        auth.signInWithEmailAndPassword(values.email, values.password)
+                        firebase.auth().signInWithEmailAndPassword(values.email, values.password)
                             .then(res => {
-                                console.log(auth.currentUser);
-                                window.location.href = 'http://localhost:3000/#/main';
+                                res.user.getIdTokenResult()
+                                    .then(res=>{
+                                        setToken(res.token);
+                                        window.location.href = 'http://localhost:3000/#/main';
+                                    });
                             })
                             .catch(function (error) {
                                 console.log(error);

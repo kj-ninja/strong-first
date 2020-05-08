@@ -1,20 +1,16 @@
 @import '../../scss/settings/fonts';
 
-.nav {
+header {
   background-color: white;
-  .container.main__header-wrapper {
-    height: 60px;
+  .container.header__wrapper {
+    height: 65px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 960px;
-    .header-logo {
+    .header__logo {
       font-family: $logo-font;
+      font-size: 2.15rem;
       margin-top: 5px;
-      font-size: 2rem;
-      a {
-        text-decoration: none;
-      }
     }
   }
 }

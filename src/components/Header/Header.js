@@ -1,21 +1,21 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import './Header.scss';
-import Nav from "react-bootstrap/Nav";
 import {Link} from "react-router-dom";
-import FirebaseAuthContext from "../Firebase/auth";
 
 const Header = (props) => {
-    const auth = useContext(FirebaseAuthContext);
+    {/*ogarnac wylogowywanie*/
+    }
 
     return (
-        <Nav>
-            <div className="container main__header-wrapper">
-                <h1 className="header-logo"><Link to={props.logoHomeLink}>Calisthenics</Link></h1>
+        <header style={{backgroundColor: props.styles.backgroundColor}}>
+            <div className="container header__wrapper">
+                <h1 className="header__logo"><Link to={props.logoLink}
+                                                   style={{color: props.styles.color}}>Calisthenics</Link></h1>
                 {props.children}
             </div>
-            {/*ogarnac wylogowywanie*/}
-            <button onClick={()=>auth.signOut()}>WYLOGUJ</button>
-        </Nav>
+
+            {/*<button onClick={()=>auth.signOut()}>WYLOGUJ</button>*/}
+        </header>
     );
 };
 
