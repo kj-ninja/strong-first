@@ -1,7 +1,7 @@
 import React from 'react';
 import './Home.scss';
 import Button from "react-bootstrap/Button";
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Header from "../Header/Header";
 import HeroSection from "../HeroSection/HeroSection";
 

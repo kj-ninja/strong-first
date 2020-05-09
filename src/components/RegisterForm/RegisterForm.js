@@ -1,7 +1,7 @@
 import React from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
 import Header from "../Header/Header";
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Button from "react-bootstrap/Button";
 
 const styles = {

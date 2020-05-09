@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './scss/main.scss';
 import Home from "./components/Home/Home";
 import Main from "./components/Main/Main";
@@ -10,22 +10,18 @@ import AddTraining from "./components/AddTraining/AddTraining";
 import {
     HashRouter,
     Route,
-    Switch,
-    withRouter
+    Switch
 } from 'react-router-dom';
 
 function App() {
-    const [token, setToken] = useState(null);
-    const LoginWith = withRouter(Login);
-
     return (
         <>
             <HashRouter>
                 <Switch>
                     <Route exact path="/" component={Home}/>
-                    <Route path="/login" render={()=><LoginWith setToken={setToken} token={token}/>}/>
+                    <Route path="/login" component={Login}/>
                     <Route path="/register" component={RegisterForm}/>
-                    <Route path="/main" render={()=><Main token={token}/>}/>
+                    <Route path="/main" component={Main}/>
                     <Route path="/add-training" component={AddTraining}/>
                     <Route component={NotFound}/>
                 </Switch>

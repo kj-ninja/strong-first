@@ -1,24 +1,27 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import './Main.scss';
 import TrainingSummary from "../TrainingSummary/TrainingSummary";
-import {Link, Redirect} from "react-router-dom";
+import {Link} from "react-router-dom";
 import Header from "../Header/Header";
 import Button from "react-bootstrap/Button"
 import Calendar from "../Calendar/Calendar";
 import axios from "axios";
 import firebase from '../Firebase/firebase'
+import {getToken} from "../../functions/getToken";
 
 const styles = {
     backgroundColor: '#fff',
     color: "#0056b3"
 };
 
-const Main = ({token}) => {
+const Main = () => {
     const [trainings, setTrainings] = useState([]);
     const [trainingToShow, setTrainingToShow] = useState([]);
+    const [token] = useState(getToken());
     const url = "https://ironman.coderaf.com/training";
 
-    useEffect(()=> {
+    const getTrainings = () => {
+        console.log(token);
         axios.get(
             url,
             {
@@ -36,7 +39,8 @@ const Main = ({token}) => {
             .finally(function () {
                 // always executed
             });
-    }, [token]);
+        console.log(trainings);
+    };
 
     const handleLogout = () => {
         firebase.auth().signOut().then(function() {
@@ -47,7 +51,10 @@ const Main = ({token}) => {
 
     // add loading spinner
     console.log(trainings);
-    if (trainings.length === 0 || token === null) {
+    console.log(token);
+
+    if (trainings.length === 0) {
+        getTrainings();
         return (
             <h1>Loading</h1>
         )

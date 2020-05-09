@@ -1,16 +1,8 @@
 import React, {useState} from 'react';
-import {
-    getDayOfTheWeekOfFirstDayInMonth,
-    changeDayOfWeekFromEnglishToPolishSystem,
-    createDay,
-    createDaysInMonth,
-    formatDate,
-    getFirstMondayInCalendar,
-    wrapTrainingsWithDate
-} from '../../functions/calendar';
+import {createDaysInMonth, wrapTrainingsWithDate} from '../../functions/calendar';
 
 const Calendar = ({trainings,setTrainingToShow}) => {
-    const [actualDate, setActualDate] = useState(new Date("2020-03-01"));
+    const [actualDate] = useState(new Date("2020-03-01"));
     const wrappedTrainings = wrapTrainingsWithDate(trainings);
     const weeksInMonth = createDaysInMonth(actualDate, wrappedTrainings);
 

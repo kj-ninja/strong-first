@@ -13,7 +13,7 @@ const styles = {
 };
 
 const Login = (props) => {
-    const [errorMessage, setErrorMessage] = useState(null);
+    const [errorMessage] = useState(null);
 
     return (
         <>
@@ -37,8 +37,8 @@ const Login = (props) => {
                             .then(res => {
                                 res.user.getIdTokenResult()
                                     .then(res=>{
-                                        props.setToken(res.token);
-                                        setTimeout(()=>{props.history.replace('/main');}, 1500)
+                                        localStorage.setItem('token', res.token);
+                                        props.history.replace('/main');
                                     });
                             })
                             .catch(function (error) {
@@ -59,8 +59,8 @@ const Login = (props) => {
                             {errorMessage}
                         </p>
                         <div className="login__buttons">
-                            <Button type="submit" variant="outline-secondary" size="lg">Zaloguj się</Button>
-                            <Link to="/rejestracja"><Button variant="outline-secondary" size="lg">Załóż
+                            <Button type="submit" variant="outline-secondary">Zaloguj się</Button>
+                            <Link to="/rejestracja"><Button variant="primary">Załóż
                                 konto</Button></Link>
                         </div>
                     </Form>

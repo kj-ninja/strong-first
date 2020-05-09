@@ -48,7 +48,6 @@ function changeDayOfWeekFromEnglishToPolishSystem(dayOfWeek) {
  */
 
 function wrapTrainingsWithDate(trainings) {
-    console.log(trainings);
     let trainingsWrapped = {};
     trainings.forEach(ele => {
         let day = new Date(ele.date);
@@ -67,11 +66,9 @@ function wrapTrainingsWithDate(trainings) {
 
 function getFirstMondayInCalendar(date) {
     let dayOfWeekOfFirstDayInMonth = getDayOfTheWeekOfFirstDayInMonth(date);
-    console.log('dzien tygodnia 1 dnia w miesiacu: ' + dayOfWeekOfFirstDayInMonth);
 
     // nie wiem czemu tak powinno byc po prostu -dayOfWeekOfFirstDayInMonth ale wtedy nie dzialalo ;P
     let minusDays = (-dayOfWeekOfFirstDayInMonth + 1);
-    console.log('minusDay ' + minusDays);
     return new Date(date.getFullYear(), date.getMonth(), minusDays);
 }
 
@@ -117,33 +114,8 @@ function createDay(date, wrappedTrainings) {
     }
 }
 
-/**
- * tworzy zawsze tablice z 6 tablicami ( ilosc tygodni ) w kazdej z tablic jest
- * kolejnych 7 tablic (ilosc dni) w formacie
- *  [
- *      [
- *          {
- *              dayNumber: 30,
- *              element : {
- *                  type: "training",
- *                  icon: "fa fa-check",
- *                  id: 192873
- *              }
- *          },
- *          {
- *              dayNumber: 31,
- *              element: null
- *          },
- *          ..
- *      ]
- *  ]
- *
- */
-
 function createDaysInMonth(date, wrappedTrainings) {
-    console.log(date);
     const firstDay = getFirstMondayInCalendar(date);
-    console.log(firstDay);
     // month
     const month = [];
     let actualDay = firstDay;

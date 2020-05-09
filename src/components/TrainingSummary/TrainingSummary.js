@@ -3,7 +3,6 @@ import {getRepsView} from "../../functions/getRepsView";
 import './TrainingSummary.scss';
 
 const TrainingSummary = ({trainingToShow}) => {
-    console.log("????",trainingToShow);
     // zrobic z tego funkcje \/
     let tempArray = [];
     trainingToShow.sets.forEach(set => {
