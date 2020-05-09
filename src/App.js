@@ -11,17 +11,19 @@ import {
     HashRouter,
     Route,
     Switch,
+    withRouter
 } from 'react-router-dom';
 
 function App() {
     const [token, setToken] = useState(null);
+    const LoginWith = withRouter(Login);
 
     return (
         <>
             <HashRouter>
                 <Switch>
                     <Route exact path="/" component={Home}/>
-                    <Route path="/login" render={()=><Login setToken={setToken}/>}/>
+                    <Route path="/login" render={()=><LoginWith setToken={setToken} token={token}/>}/>
                     <Route path="/register" component={RegisterForm}/>
                     <Route path="/main" render={()=><Main token={token}/>}/>
                     <Route path="/add-training" component={AddTraining}/>

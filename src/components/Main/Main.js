@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import './Main.scss';
 import TrainingSummary from "../TrainingSummary/TrainingSummary";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import Header from "../Header/Header";
 import Button from "react-bootstrap/Button"
 import Calendar from "../Calendar/Calendar";
 import axios from "axios";
+import firebase from '../Firebase/firebase'
 
 const styles = {
     backgroundColor: '#fff',
@@ -37,7 +38,15 @@ const Main = ({token}) => {
             });
     }, [token]);
 
+    const handleLogout = () => {
+        firebase.auth().signOut().then(function() {
+        }).catch(function(error) {
+            console.log(error.message);
+        })
+    };
+
     // add loading spinner
+    console.log(trainings);
     if (trainings.length === 0 || token === null) {
         return (
             <h1>Loading</h1>
@@ -48,8 +57,8 @@ const Main = ({token}) => {
         <>
             <Header logoLink={"/main"} styles={styles}>
                 <div className="main__buttons">
-                    <Link to="/register"><Button variant="primary">Dodaj trening</Button></Link>
-                    <Link to="/login"><Button variant="secondary">Wyloguj się</Button></Link>
+                    <Link to="/add-training"><Button variant="primary">Dodaj trening</Button></Link>
+                    <Link to="/"><Button onClick={handleLogout()} variant="secondary">Wyloguj się</Button></Link>
                 </div>
             </Header>
             <Calendar trainings={trainings} setTrainingToShow={setTrainingToShow}/>

@@ -12,7 +12,7 @@ const styles = {
     color: "#fff"
 };
 
-const Login = ({setToken}) => {
+const Login = (props) => {
     const [errorMessage, setErrorMessage] = useState(null);
 
     return (
@@ -20,6 +20,7 @@ const Login = ({setToken}) => {
             <Header logoLink={"/"} styles={styles}>
                 <Link to="/register"><Button variant="light" style={{color: 'rgb(63, 127, 191)'}}>Zarejestruj się</Button></Link>
             </Header>
+
             <div className="login__container">
                 <h2>Zaloguj się</h2>
                 <Formik
@@ -32,13 +33,12 @@ const Login = ({setToken}) => {
                             .required('Pole wymagane')
                     })}
                     onSubmit={(values) => {
-                        // firebase.auth().signIn();
                         firebase.auth().signInWithEmailAndPassword(values.email, values.password)
                             .then(res => {
                                 res.user.getIdTokenResult()
                                     .then(res=>{
-                                        setToken(res.token);
-                                        window.location.href = 'http://localhost:3000/#/main';
+                                        props.setToken(res.token);
+                                        setTimeout(()=>{props.history.replace('/main');}, 1500)
                                     });
                             })
                             .catch(function (error) {
@@ -48,12 +48,12 @@ const Login = ({setToken}) => {
                 >
                     <Form className="login__form">
                         <label htmlFor="email">Email</label>
-                        <Field name="email" type="email" id="email"/>
+                        <Field name="email" type="email" id="email" className="login__input"/>
                         <p className="error-message">
                             <ErrorMessage name="email"/>
                         </p>
                         <label htmlFor="password">Hasło</label>
-                        <Field name="password" type="password" id="password"/>
+                        <Field name="password" type="password" id="password" className="login__input"/>
                         <p className="error-message">
                             <ErrorMessage name="password"/>
                             {errorMessage}
@@ -69,4 +69,5 @@ const Login = ({setToken}) => {
         </>
     );
 };
+
 export default Login;
