@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './Main.scss';
 import TrainingSummary from "../TrainingSummary/TrainingSummary";
 import {Link} from "react-router-dom";
@@ -19,16 +19,18 @@ const Main = () => {
     const [trainingToShow, setTrainingToShow] = useState([]);
     const [token] = useState(getToken());
     const url = "https://ironman.coderaf.com/training";
+    console.log(trainings);
 
-    const getTrainings = () => {
-        console.log(token);
+    useEffect(()=>{
+        console.log('fetch do ironman');
         axios.get(
             url,
             {
-                'headers': {'Access-Token': `'${token}'`}
+                'headers': {'Access-Token': token}
             })
             .then(function (response) {
                 // handle success
+                console.log('treningi pobrane');
                 setTrainingToShow(response.data[response.data.length-1]);
                 setTrainings(response.data);
             })
@@ -39,8 +41,7 @@ const Main = () => {
             .finally(function () {
                 // always executed
             });
-        console.log(trainings);
-    };
+    }, []);
 
     const handleLogout = () => {
         firebase.auth().signOut().then(function() {
@@ -50,16 +51,13 @@ const Main = () => {
     };
 
     // add loading spinner
-    console.log(trainings);
-    console.log(token);
-
     if (trainings.length === 0) {
-        getTrainings();
         return (
             <h1>Loading</h1>
         )
     }
 
+    console.log('renderuje Main')
     return (
         <>
             <Header logoLink={"/main"} styles={styles}>

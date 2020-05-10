@@ -1,4 +1,4 @@
-.login__container {
+.register__container {
   max-width: 500px;
   margin: 40px auto;
   display: flex;
@@ -8,12 +8,12 @@
     font-size: 20px;
     margin-bottom: 25px;
   }
-  .login__form {
+  .register__form {
     width: 300px;
     label {
       margin-bottom: 3px;
     }
-    .login__input {
+    .register__input {
       margin-bottom: 5px;
       width: 100%;
       height: calc(1.5em + .75rem + 2px);
@@ -27,12 +27,12 @@
       border-radius: .25rem;
       transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     }
-    .login__error-message {
+    .register__error-message {
       color: red;
       font-size: 14px;
       margin-bottom: 15px;
     }
-    .login__buttons {
+    .register__buttons {
       display: flex;
       justify-content: space-between;
       button {
@@ -49,5 +49,3 @@
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
 }
-
-

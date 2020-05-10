@@ -1,5 +1,7 @@
 import * as firebase from "firebase/app";
 import "firebase/auth";
+import {useEffect} from "react";
+import axios from "axios";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -15,6 +17,9 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.auth();
+console.log('firebase init');
+firebase.auth().onAuthStateChanged(()=>{
+    console.log('zmienil sie stan tokena')});
 
 export default firebase;
 
