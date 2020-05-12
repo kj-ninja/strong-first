@@ -18,8 +18,6 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.auth();
 console.log('firebase init');
-firebase.auth().onAuthStateChanged(()=>{
-    console.log('zmienil sie stan tokena')});
 
 export default firebase;
 

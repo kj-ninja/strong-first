@@ -9,7 +9,6 @@
  * 5 - sobota
  * 6 - niedziela
  */
-
 function getDayOfTheWeekOfFirstDayInMonth(date) {
     // days number from 0-6 where 0 is sunday
     let firstDayInCurrentDate = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -22,7 +21,6 @@ function getDayOfTheWeekOfFirstDayInMonth(date) {
  * z systemu angielskiego na polski, w angli tydzien zaczyna sie od niedzieli
  * a w polse od poniedzialku, niesamowite nie!? moze jeszcze jezdza po lewej stronie ulicy?
  */
-
 function changeDayOfWeekFromEnglishToPolishSystem(dayOfWeek) {
     // change day from english system to polish where sunday is 0 not 6
     if (dayOfWeek === 0) {
@@ -46,7 +44,6 @@ function changeDayOfWeekFromEnglishToPolishSystem(dayOfWeek) {
  * }
  * dzieki temu latwiej bedzie szukac w nim elementow po dacie
  */
-
 function wrapTrainingsWithDate(trainings) {
     let trainingsWrapped = {};
     trainings.forEach(ele => {
@@ -63,7 +60,6 @@ function wrapTrainingsWithDate(trainings) {
  * pobieramy aktualny dzien tygodnia naszej 1 dnia miesiaca (czyli np 2 dla srody)
  * w latwy sposob dostajemy sie do poniedzialku robicac cos takiego: new Date(date.getFullYear(), nextMonth, -(firstDay)).getDate();
  */
-
 function getFirstMondayInCalendar(date) {
     let dayOfWeekOfFirstDayInMonth = getDayOfTheWeekOfFirstDayInMonth(date);
 
@@ -75,7 +71,6 @@ function getFirstMondayInCalendar(date) {
 /**
  * fomatuje date na upragniony format
  */
-
 function formatDate(date) {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),
@@ -93,10 +88,10 @@ function formatDate(date) {
 /**
  * tworzy obiekt dnia, albo z treningiem albo bez
  */
-
 function createDay(date, wrappedTrainings) {
     return {
         dayNumber: date.getDate(),
+        monthNumber: date.getMonth(),
         element: (function () {
 
             let dayFormatted = formatDate(date);

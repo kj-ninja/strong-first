@@ -8,6 +8,7 @@ import Calendar from "../Calendar/Calendar";
 import axios from "axios";
 import firebase from '../Firebase/firebase'
 import {getToken} from "../../functions/getToken";
+import {isMobile} from 'react-device-detect';
 
 const styles = {
     backgroundColor: '#fff',
@@ -41,10 +42,11 @@ const Main = () => {
             .finally(function () {
                 // always executed
             });
-    }, []);
+    }, [token]);
 
     const handleLogout = () => {
         firebase.auth().signOut().then(function() {
+            console.log('wylogowano');
         }).catch(function(error) {
             console.log(error.message);
         })
@@ -57,13 +59,27 @@ const Main = () => {
         )
     }
 
-    console.log('renderuje Main')
+    console.log('renderuje Main');
+    if (isMobile) {
+        return (
+            <>
+                <Header logoLink={"/main"} styles={styles}>
+                    <div className="main__icons">
+                        <Link to="/add-training"><i className="fas fa-plus-circle main__icons--add-training"/></Link>
+                        <Link to="/"><i className="fas fa-sign-out-alt main__icons--logout" onClick={handleLogout}/></Link>
+                    </div>
+                </Header>
+                <Calendar trainings={trainings} setTrainingToShow={setTrainingToShow}/>
+                <TrainingSummary trainingToShow={trainingToShow}/>
+            </>
+        )
+    }
     return (
         <>
             <Header logoLink={"/main"} styles={styles}>
                 <div className="main__buttons">
                     <Link to="/add-training"><Button variant="primary">Dodaj trening</Button></Link>
-                    <Link to="/"><Button onClick={handleLogout()} variant="secondary">Wyloguj się</Button></Link>
+                    <Link to="/"><Button onClick={handleLogout} variant="secondary">Wyloguj się</Button></Link>
                 </div>
             </Header>
             <Calendar trainings={trainings} setTrainingToShow={setTrainingToShow}/>
@@ -71,5 +87,7 @@ const Main = () => {
         </>
     );
 };
+//
+//
 
 export default Main;

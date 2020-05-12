@@ -1,3 +1,16 @@
+.main__icons {
+  i {
+    margin-left: 30px;
+    font-size: 35px;
+  }
+  .main__icons--add-training {
+    color: #007bff;
+  }
+  .main__icons--logout {
+    color: #6c757d;
+  }
+}
+
 .main__buttons {
   button {
     width: 120px;
