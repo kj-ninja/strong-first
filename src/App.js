@@ -1,17 +1,13 @@
 import React from 'react';
 import './scss/main.scss';
 import Home from "./components/Home/Home";
-import Main from "./components/Main/Main";
-import FooterPage from "./components/Footer/Footer";
-import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
-import NotFound from "./components/NotFound/NotFound";
+import Register from "./components/Register/Register";
+import Main from "./components/Main/Main";
 import AddTraining from "./components/AddTraining/AddTraining";
-import {
-    HashRouter,
-    Route,
-    Switch
-} from 'react-router-dom';
+import FooterPage from "./components/Footer/Footer";
+import NotFound from "./components/NotFound/NotFound";
+import {HashRouter, Route, Switch} from 'react-router-dom';
 
 function App() {
     return (

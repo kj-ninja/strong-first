@@ -6,6 +6,8 @@ import {Link} from "react-router-dom";
 import Header from "../Header/Header";
 import Button from "react-bootstrap/Button";
 import firebase from "../Firebase/firebase";
+import {getToken} from "../../functions/getToken";
+import axios from 'axios';
 
 const styles = {
     backgroundColor: 'rgb(63, 127, 191)',
@@ -17,13 +19,14 @@ const AddTraining = () => {
     let today = new Date().toISOString().substr(0, 10);
     const [date, setDate] = useState(today);
     const [name, setName] = useState('');
-    const [duration, setDuration] = useState('');
-    const [kcal, setKcal] = useState('');
+    const [duration, setDuration] = useState(0);
+    const [kcal, setKcal] = useState(0);
     const [notes, setNotes] = useState('');
     const [selectedExercise, setSelectedExercise] = useState({});
     const [selectedRepetitions, setSelectedRepetitions] = useState(0);
     const [selectedExerciseTime, setSelectedExerciseTime] = useState(0);
     const [selectedWeight, setSelectedWeight] = useState(0);
+    const [token] = useState(getToken());
 
     const handleAddSet = () => {
         let index = null;
@@ -88,17 +91,14 @@ const AddTraining = () => {
             sets: tempSets
         };
 
-        fetch(API, {
-            mode: 'no-cors',
-            method: "POST",
-            body: JSON.stringify(training),
+        axios.post(API, training, {
             headers: {
-                "Content-Type": "application/json"
-            }
+            'Access-Token': token
+            },
         })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
+            .then(function (res) {
+                // handle success
+                console.log('treningi wyslane');
             })
             .catch(error => {
                 console.log(error);
@@ -112,11 +112,13 @@ const AddTraining = () => {
         })
     };
 
+    console.log('renderuje Add-training');
     return (
         <>
             <Header logoLink={"/main"} styles={styles}>
                 <Link to="/"><Button onClick={handleLogout} variant="light" style={{color: 'rgb(63, 127, 191)'}}>Wyloguj się</Button></Link>
             </Header>
+
             <div className="container d-flex">
                 <div className="container__add-training">
                     <form>
@@ -135,14 +137,14 @@ const AddTraining = () => {
                             <label htmlFor="time">Czas trwania:</label>
                             <input type="text" className="form-control form-control-sm" id="time"
                                    placeholder="Podaj czas trwania treningu"
-                                   onChange={((e) => setDuration(e.target.value))}/>
+                                   onChange={((e) => setDuration(+e.target.value))}/>
                         </div>
                         <div className="form-group form-inline">
                             <label htmlFor="kcal">Kcal:</label>
                             <input type="text" className="form-control form-control-sm" id="kcal"
                                    placeholder="Ilość spalonych kalorii"
                                    onChange={(e) => {
-                                       setKcal(e.target.value)
+                                       setKcal(+e.target.value);
                                    }}/>
                         </div>
                         <div className="form-group notes">
@@ -162,21 +164,21 @@ const AddTraining = () => {
                             <input type="text" className="form-control form-control-sm" id="reps"
                                    placeholder="Podaj ilość powtórzeń"
                                    onChange={(e) => {
-                                       setSelectedRepetitions(e.target.value === '' ? 0 : e.target.value)
+                                       setSelectedRepetitions(e.target.value === '' ? 0 : +e.target.value)
                                    }}/>
                         </div>
                         <div className="form-group form-inline">
                             <label htmlFor="time">Czas:</label>
                             <input type="text" className="form-control form-control-sm" id="time" placeholder=""
                                    onChange={(e) => {
-                                       setSelectedExerciseTime(e.target.value === '' ? 0 : e.target.value)
+                                       setSelectedExerciseTime(e.target.value === '' ? 0 : +e.target.value)
                                    }}/>
                         </div>
                         <div className="form-group form-inline">
                             <label htmlFor="weight">Ciężar:</label>
                             <input type="text" className="form-control form-control-sm" id="weight" placeholder=""
                                    onChange={(e) => {
-                                       setSelectedWeight(e.target.value === '' ? 0 : e.target.value)
+                                       setSelectedWeight(e.target.value === '' ? 0 : +e.target.value)
                                    }}/>
                         </div>
                         <div className="d-flex justify-content-between container__add-training">

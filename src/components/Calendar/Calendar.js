@@ -1,11 +1,37 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './Calendar.scss';
 import {createDaysInMonth, wrapTrainingsWithDate} from '../../functions/calendar';
 
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
 const Calendar = ({trainings, setTrainingToShow}) => {
-    const [actualDate] = useState(new Date("2020-03-01"));
+    const [actualDate, setActualDate] = useState(new Date());
     const wrappedTrainings = wrapTrainingsWithDate(trainings);
     const weeksInMonth = createDaysInMonth(actualDate, wrappedTrainings);
+
+    useEffect(()=>{
+        document.addEventListener('keydown', handleKeyArrow);
+        console.log('zamontowano event');
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyArrow);
+        }
+    }, []);
+
+    const handleKeyArrow = (e) => {
+        if (e.keyCode === 37) {
+            handlePreviousMonth();
+        }
+        if (e.keyCode === 39)
+            handleNextMonth();
+    };
+
+    const handlePreviousMonth = () => {
+        setActualDate(new Date(actualDate.setMonth(actualDate.getMonth() - 1)));
+    };
+    const handleNextMonth = () => {
+        setActualDate(new Date(actualDate.setMonth(actualDate.getMonth() + 1)));
+    };
 
     const getTrainingById = id => {
         trainings.forEach(training => {
@@ -21,7 +47,7 @@ const Calendar = ({trainings, setTrainingToShow}) => {
                 {week.map(day => {
                     if (day.monthNumber !== actualDate.getMonth()) {
                         return <td>
-                            <div className="calendar__day--notActual">{day.dayNumber}</div>
+                            <div className="calendar__day calendar__day--notActual">{day.dayNumber}</div>
                         </td>
                     }
                     if (day.element === null) {
@@ -41,23 +67,37 @@ const Calendar = ({trainings, setTrainingToShow}) => {
         )
     };
 
+    console.log('renderuje Calendar');
     return (
-        <table className="calendar">
-            <thead className="calendar__days">
-            <tr>
-                <th>PN</th>
-                <th>WT</th>
-                <th>ŚR</th>
-                <th>CZ</th>
-                <th>PT</th>
-                <th>SB</th>
-                <th>ND</th>
-            </tr>
-            </thead>
-            <tbody>
-            {weeksInMonth.map(week => generateRow(week))}
-            </tbody>
-        </table>
+
+        <div className="calendar__container">
+            <div className="calendar__header">
+                <span className="calendar__month">{months[actualDate.getMonth()]}</span>
+                <span className="calendar__year">{actualDate.getFullYear()}</span>
+            </div>
+            <table className="calendar">
+                <thead className="calendar__days">
+                <tr>
+                    <th>PN</th>
+                    <th>WT</th>
+                    <th>ŚR</th>
+                    <th>CZ</th>
+                    <th>PT</th>
+                    <th>SB</th>
+                    <th>ND</th>
+                </tr>
+                </thead>
+                <tbody className="calendar__body">
+                {weeksInMonth.map(week => generateRow(week))}
+                </tbody>
+            </table>
+            <div className="calendar__arrow calendar__arrow--left">
+                <i className="fas fa-angle-left" onClick={handlePreviousMonth}/>
+            </div>
+            <div className="calendar__arrow calendar__arrow--right" onClick={handleNextMonth}>
+                <i className="fas fa-angle-right"/>
+            </div>
+        </div>
     );
 };
 

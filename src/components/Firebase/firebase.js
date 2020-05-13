@@ -1,7 +1,5 @@
 import * as firebase from "firebase/app";
 import "firebase/auth";
-import {useEffect} from "react";
-import axios from "axios";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
