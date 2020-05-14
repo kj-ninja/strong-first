@@ -6,6 +6,8 @@ import {getToken} from "../../functions/getToken";
 import ReactSelect from "../ReactSelect/ReactSelect";
 import Button from "react-bootstrap/Button";
 import {getRepsView} from "../../functions/getRepsView";
+import axios from "axios";
+import firebase from "../Firebase/firebase";
 
 const AT = () => {
     const [exercisesPreview, setExercisesPreview] = useState([]);
@@ -66,8 +68,58 @@ const AT = () => {
         }
     };
 
-    const handleChange = (e) => {
-        console.log(e)}
+    const handleDeleteExercise = (id) => {
+        const tempArray = exercisesPreview.filter(exercise => {
+            return exercise.id !== id
+        });
+        setExercisesPreview(tempArray);
+    };
+
+    const handleAddTraining = (e) => {
+        e.preventDefault();
+        const API = "https://ironman.coderaf.com/training";
+        const tempSets = [];
+
+        exercisesPreview.forEach((exercise, i) => {
+            exercise.repetitions.forEach((rep, j) => {
+                tempSets.push({
+                    exerciseId: exercisesPreview[i].id,
+                    repetitions: exercisesPreview[i].repetitions[j],
+                    weight: exercisesPreview[i].weight[j],
+                    time: exercisesPreview[i].time[j]
+                })
+            });
+        });
+
+        const training = {
+            name,
+            note: notes,
+            date: date + ' 00:00:00',
+            duration,
+            kcal,
+            sets: tempSets
+        };
+
+        axios.post(API, training, {
+            headers: {
+                'Access-Token': token
+            },
+        })
+            .then(function (res) {
+                // handle success
+                console.log('treningi wyslane');
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    };
+
+    const handleLogout = () => {
+        firebase.auth().signOut().then(function() {
+        }).catch(function(error) {
+            console.log(error.message);
+        })
+    };
 
     return (
         <>
@@ -141,14 +193,14 @@ const AT = () => {
                     <div className="add-training__form-group">
                         <label htmlFor="selectedWeight">Ciężar:</label>
                         <Field name="selectedWeight" type="text" placeholder=""
-                               className="form-control form-control-sm" onChange={(e)=>handleChange(e)}/>
+                               className="form-control form-control-sm"/>
                         <p className="add-training__error-message">
                             <ErrorMessage name="selectedWeight"/>
                         </p>
                     </div>
 
                     <div className="d-flex justify-content-between container__add-training">
-                        <Button className="btn btn-primary">Dodaj serię
+                        <Button className="btn btn-primary" onClick={handleAddSet}>Dodaj serię
                         </Button>
                         <Button type="submit" className="btn btn-success pull-right">Zapisz trening
                         </Button>
@@ -161,11 +213,11 @@ const AT = () => {
                 return (
                     <li key={element.id} className="list-group-item">
                         {element.name.toUpperCase()}: {getRepsView(element)}
-                        {/*<button onClick={() => handleDeleteExercise(element.id)} type="button"*/}
-                        {/*        className="close"*/}
-                        {/*        aria-label="Close">*/}
-                        {/*    <span aria-hidden="true">&times;</span>*/}
-                        {/*</button>*/}
+                        <button onClick={() => handleDeleteExercise(element.id)} type="button"
+                                className="close"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </li>
                 )
             })}
