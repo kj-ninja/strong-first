@@ -8,11 +8,6 @@ import firebase from '../Firebase/firebase';
 import Header from "../Header/Header";
 import {translate} from '../../functions/translate';
 
-const styles = {
-    backgroundColor: 'rgb(63, 127, 191)',
-    color: "#fff"
-};
-
 const Schema = Yup.object({
     email: Yup.string()
         .email('Zły adres email')
@@ -24,12 +19,10 @@ const Schema = Yup.object({
 const Login = (props) => {
     const [errorMessage, setErrorMessage] = useState(null);
 
-    console.log('renderuje Login');
     return (
         <>
-            <Header logoLink={"/"} styles={styles}>
-                <Link to="/register"><Button variant="light" style={{color: 'rgb(63, 127, 191)'}}>Zarejestruj
-                    się</Button></Link>
+            <Header logoLink={"/"}>
+                <Link to="/register"><Button variant="primary">Zarejestruj się</Button></Link>
             </Header>
 
             <div className="login__container">

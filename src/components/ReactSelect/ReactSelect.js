@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import AsyncSelect from 'react-select/async'
 import {getToken} from "../../functions/getToken";
-import axios from "axios";
 
 class ReactSelect extends Component {
     constructor(props, context) {
