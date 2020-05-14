@@ -1,0 +1,25 @@
+.add-training__form {
+  padding: 30px;
+  max-width: 720px;
+  .add-training__container {
+    width: 100%;
+    .add-training__form-group {
+      margin-bottom: 1.15rem;
+      max-width: 450px;
+    }
+    .notes {
+      margin-bottom: 40px;
+      textarea {
+        resize: none;
+      }
+    }
+    .reactSelect div:first-of-type {
+      width: 100% !important;
+    }
+    .add-training__error-message {
+      color: red;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+  }
+}

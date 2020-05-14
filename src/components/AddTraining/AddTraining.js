@@ -8,6 +8,7 @@ import Button from "react-bootstrap/Button";
 import firebase from "../Firebase/firebase";
 import {getToken} from "../../functions/getToken";
 import axios from 'axios';
+import AT from './AT';
 
 const AddTraining = () => {
     const [exercisesPreview, setExercisesPreview] = useState([]);
@@ -200,6 +201,7 @@ const AddTraining = () => {
                     </ul>
                 </div>
             </div>
+            <AT/>
         </>
     );
 };
