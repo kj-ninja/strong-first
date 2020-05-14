@@ -4,13 +4,10 @@ import {Link} from "react-router-dom";
 
 const Header = (props) => {
     return (
-        <header style={{backgroundColor: props.styles.backgroundColor}}>
+        <header>
             <div className="container header__wrapper">
                 <h1 className="header__logo">
-                    <Link
-                        to={props.logoLink}
-                        style={{color: props.styles.color}}>Calisthenics
-                    </Link>
+                    <Link to={props.logoLink}>Calisthenics</Link>
                 </h1>
                 {props.children}
             </div>

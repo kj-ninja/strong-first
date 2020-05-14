@@ -9,11 +9,6 @@ import firebase from "../Firebase/firebase";
 import {getToken} from "../../functions/getToken";
 import axios from 'axios';
 
-const styles = {
-    backgroundColor: 'rgb(63, 127, 191)',
-    color: "#fff"
-};
-
 const AddTraining = () => {
     const [exercisesPreview, setExercisesPreview] = useState([]);
     let today = new Date().toISOString().substr(0, 10);
@@ -115,8 +110,8 @@ const AddTraining = () => {
     console.log('renderuje Add-training');
     return (
         <>
-            <Header logoLink={"/main"} styles={styles}>
-                <Link to="/"><Button onClick={handleLogout} variant="light" style={{color: 'rgb(63, 127, 191)'}}>Wyloguj się</Button></Link>
+            <Header logoLink={"/main"}>
+                <Link to="/"><Button onClick={handleLogout} variant="primary">Wyloguj się</Button></Link>
             </Header>
 
             <div className="container d-flex">
