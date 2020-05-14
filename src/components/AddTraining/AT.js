@@ -75,8 +75,7 @@ const AT = () => {
         setExercisesPreview(tempArray);
     };
 
-    const handleAddTraining = (e) => {
-        e.preventDefault();
+    const handleAddTraining = (values) => {
         const API = "https://ironman.coderaf.com/training";
         const tempSets = [];
 
@@ -92,11 +91,11 @@ const AT = () => {
         });
 
         const training = {
-            name,
-            note: notes,
-            date: date + ' 00:00:00',
-            duration,
-            kcal,
+            name: values.name,
+            note: values.notes,
+            date: values.date + ' 00:00:00',
+            duration: values.duration,
+            kcal: values.kcal,
             sets: tempSets
         };
 
@@ -113,21 +112,14 @@ const AT = () => {
                 console.log(error);
             });
     };
-
-    const handleLogout = () => {
-        firebase.auth().signOut().then(function() {
-        }).catch(function(error) {
-            console.log(error.message);
-        })
-    };
-
+    
     return (
         <>
         <Formik
             initialValues={formInputs}
             validationSchema={validationSchema}
             onSubmit={(values) => {
-                console.log(values);
+                handleAddTraining(values);
             }}
         >
             <Form className="add-training__form">
