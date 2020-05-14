@@ -4,10 +4,10 @@ import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Main from "./components/Main/Main";
-import AddTraining from "./components/AddTraining/AddTraining";
 import FooterPage from "./components/Footer/Footer";
 import NotFound from "./components/NotFound/NotFound";
 import {HashRouter, Route, Switch} from 'react-router-dom';
+import AddTraining from "./components/AddTraining/AddTraining";
 
 function App() {
     return (

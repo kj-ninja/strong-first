@@ -1,32 +1,25 @@
-.container__add-training {
+.add-training__form {
+  padding: 30px;
   max-width: 720px;
-  margin: 0 auto;
-  margin-top: 50px;
-  form {
-    margin-bottom: 50px;
-    label {
-      margin-right: 10px;
+  .add-training__container {
+    width: 100%;
+    .add-training__form-group {
+      margin-bottom: 1.15rem;
+      max-width: 450px;
     }
     .notes {
       margin-bottom: 40px;
+      textarea {
+        resize: none;
+      }
     }
-    .container__add-training {
-      max-width: 600px;
+    .reactSelect div:first-of-type {
+      width: 100% !important;
     }
-  }
-
-  .list-group {
-    //margin-bottom: 50px;
-    .exercise-rep {
-      margin-right: 10px;
-      margin-left: 5px;
+    .add-training__error-message {
+      color: red;
+      font-size: 14px;
+      margin-bottom: 15px;
     }
   }
 }
-
-
-
-//
-//.container.exercises-list {
-//  width: 800px;
-//}
