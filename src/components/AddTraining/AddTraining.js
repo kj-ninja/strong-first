@@ -15,25 +15,24 @@ const AddTraining = (props) => {
     const [token] = useState(getToken());
 
     const handleAddSet = (values) => {
-        let index = null;
+
         console.log(values);
 
-        // Jak to ogarnac i wydzielic do osobnej funckji?
+        // zmien na setsView
+        // getIndexOfSelectedExercise
+        let index = null;
         exercisesPreview.forEach((exercisePreview, i) => {
             if (exercisePreview.id === selectedExercise.value) {
                 index = i;
             }
         });
 
-        // albo to...
-        if (index !== null) {
-            const tempArray = [...exercisesPreview];
-            tempArray[index].repetitions.push(values.selectedRepetitions);
-            tempArray[index].weight.push(values.selectedWeight);
-            tempArray[index].time.push(values.selectedExerciseTime);
-
-            setExercisesPreview(tempArray);
-        } else {
+        // nie ma indexu czyli trzeba stworzyc obiekt exercise a potem dodac do niego set
+        if (index === null) {
+            // odpal funckje stworz obiekt z cwiczeniem
+            // createExerciseView
+            // odpal funkcje dodaj set do cwiczenia
+            // addSetToSelectedExercise
             setExercisesPreview(prevState => {
                 return (
                     [...prevState, {
@@ -45,6 +44,16 @@ const AddTraining = (props) => {
                     }]
                 )
             });
+            // jesli mamy index to znaczy ze obiekt exercicse juz jest
+        } else {
+
+            // addSetToSelectedExercise
+            const tempArray = [...exercisesPreview];
+            tempArray[index].repetitions.push(values.selectedRepetitions);
+            tempArray[index].weight.push(values.selectedWeight);
+            tempArray[index].time.push(values.selectedExerciseTime);
+
+            setExercisesPreview(tempArray);
         }
     };
 
@@ -56,10 +65,11 @@ const AddTraining = (props) => {
     };
 
     const handleAddTraining = (values) => {
-        const API = "https://ironman.coderaf.com/training";
         const tempSets = [];
 
-        // tu tez?
+
+        // wydziel do funkcji getTrainingDataFromView
+        // przyjmie exercisePreview i zwraca training
         exercisesPreview.forEach((exercise, i) => {
             exercise.repetitions.forEach((rep, j) => {
                 tempSets.push({
@@ -79,6 +89,11 @@ const AddTraining = (props) => {
             kcal: +values.kcal,
             sets: tempSets
         };
+
+        // wydzielic do funkcji
+        // sendTrainingToApi
+        // przyjmuje tylko trening
+        const API = "https://ironman.coderaf.com/training";
 
         axios.post(API, training, {
             headers: {
