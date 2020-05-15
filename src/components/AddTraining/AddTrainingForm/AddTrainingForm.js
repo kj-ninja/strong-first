@@ -96,7 +96,7 @@ const AddTrainingForm = ({setSelectedExercise, handleAddTraining, handleAddSet})
                             </div>
 
                             <div className="add-training__buttons-container">
-                                <Button className="btn btn-primary" onClick={()=>handleAddSet(values)}>Dodaj serię
+                                <Button className="btn btn-primary" onClick={() => handleAddSet(values)}>Dodaj serię
                                 </Button>
                                 <Button type="submit" className="btn btn-success pull-right">Zapisz trening
                                 </Button>

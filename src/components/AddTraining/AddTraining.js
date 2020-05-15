@@ -96,8 +96,8 @@ const AddTraining = (props) => {
     };
 
     const handleLogout = () => {
-        firebase.auth().signOut().then(function() {
-        }).catch(function(error) {
+        firebase.auth().signOut().then(function () {
+        }).catch(function (error) {
             console.log(error.message);
         })
     };
@@ -108,13 +108,14 @@ const AddTraining = (props) => {
                 <Link to="/"><Button onClick={handleLogout} variant="primary">Wyloguj się</Button></Link>
             </Header>
 
-            <AddTrainingForm setSelectedExercise={setSelectedExercise} handleAddTraining={handleAddTraining} handleAddSet={handleAddSet}/>
+            <AddTrainingForm setSelectedExercise={setSelectedExercise} handleAddTraining={handleAddTraining}
+                             handleAddSet={handleAddSet}/>
 
             <ul className="list-group">
                 {exercisesPreview.map(element => {
                     return (
                         <li key={element.id} className="list-group-item">
-                            {element.name.toUpperCase()}: <span className="list-group-item">{getRepsView(element)}</span>
+                            {element.name.toUpperCase()}: {getRepsView(element)}
                             <button onClick={() => handleDeleteExercise(element.id)} type="button"
                                     className="close"
                                     aria-label="Close">
