@@ -1,6 +1,6 @@
 import React from 'react';
-import {getRepsView} from "../../functions/getRepsView";
 import './TrainingSummary.scss';
+import TrainingSummaryList from "./TrainingSummaryList/TrainingSummaryList";
 
 const TrainingSummary = ({trainingToShow}) => {
     // zrobic z tego funkcje \/
@@ -34,22 +34,8 @@ const TrainingSummary = ({trainingToShow}) => {
                 <p className="training__date"><span>Data:</span> {trainingToShow.date}</p>
                 <p className="training__name"><span>Nazwa:</span>  {trainingToShow.name}</p>
 
-                <ul className="list-group training__list">
-                    {exercisesPreview.map(element=>{
-                        return (
-                            <li key={element.id} className="list-group-item">
-                                <span className="training__list-name">{element.name.toUpperCase()}:</span>
-                                {getRepsView(element).map((rep,i)=>{
-                                    return (
-                                        <span key={i} className="training__list-repetition">
-                                            {rep}
-                                        </span>
-                                    )
-                                })}
-                            </li>
-                        )
-                    })}
-                </ul>
+                <TrainingSummaryList exercisesPreview={exercisesPreview}/>
+
                 </div>
             </div>
     );

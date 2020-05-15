@@ -10,7 +10,6 @@ import firebase from '../Firebase/firebase'
 import {getToken} from "../../functions/getToken";
 import {isMobile} from 'react-device-detect';
 import Footer from "../Footer/Footer";
-import Spinner from "react-bootstrap/Spinner";
 
 const Main = () => {
     const [trainings, setTrainings] = useState([]);
