@@ -11,15 +11,15 @@ import {Link} from "react-router-dom";
 import Header from "../Header/Header";
 import firebase from "../Firebase/firebase";
 
-const AddTraining = () => {
+const AddTraining = (props) => {
     const [exercisesPreview, setExercisesPreview] = useState([]);
     const [selectedExercise, setSelectedExercise] = useState({});
     const [token] = useState(getToken());
     let today = new Date().toISOString().substr(0, 10);
 
     const formInputs = {
-        date: today, name: '', duration: '', kcal: '', notes: '', selectedRepetitions: '',
-        selectedExerciseTime: '', selectedWeight: ''
+        date: today, name: '', duration: '', kcal: '', notes: '', selectedRepetitions: '', selectedExerciseTime: '',
+        selectedWeight: ''
     };
     const validationSchema = Yup.object({
         name: Yup.string()
@@ -28,8 +28,7 @@ const AddTraining = () => {
         duration: Yup.string()
             .required('Required'),
         selectedRepetitions: Yup.string()
-            .matches(/^[0-9]+[0-9]*$/, 'Podana wartość musi być liczbą')
-            .required('Required'),
+            .matches(/^[0-9]+[0-9]*$/, 'Podana wartość musi być liczbą'),
         selectedExerciseTime: Yup.string()
             .matches(/^[0-9]+[0-9]*$/, 'Podana wartość musi być liczbą'),
         selectedWeight: Yup.string()
@@ -107,6 +106,7 @@ const AddTraining = () => {
             .then(function (res) {
                 // handle success
                 console.log('treningi wyslane');
+                props.history.replace('/main');
             })
             .catch(error => {
                 console.log(error);

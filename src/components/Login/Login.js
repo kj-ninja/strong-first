@@ -7,6 +7,7 @@ import {Link} from 'react-router-dom';
 import firebase from '../Firebase/firebase';
 import Header from "../Header/Header";
 import {translate} from '../../functions/translate';
+import useSticky from "../../functions/hooks/useSticky";
 
 const Schema = Yup.object({
     email: Yup.string()
