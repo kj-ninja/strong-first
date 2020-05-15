@@ -18,8 +18,8 @@ const TrainingSummary = ({trainingToShow}) => {
     };
     const exercisesPreview = removeDuplicates(tempArray);
 
-    trainingToShow.sets.forEach((set)=> {
-        exercisesPreview.forEach((element)=>{
+    trainingToShow.sets.forEach((set) => {
+        exercisesPreview.forEach((element) => {
             if (set.exercise.id === element.id) {
                 element.repetitions.push(set.repetitions);
                 element.weight.push(set.weight);
@@ -32,12 +32,12 @@ const TrainingSummary = ({trainingToShow}) => {
         <div>
             <div className="container training__summary">
                 <p className="training__date"><span>Data:</span> {trainingToShow.date}</p>
-                <p className="training__name"><span>Nazwa:</span>  {trainingToShow.name}</p>
+                <p className="training__name"><span>Nazwa:</span> {trainingToShow.name}</p>
 
                 <TrainingSummaryList exercisesPreview={exercisesPreview}/>
 
-                </div>
             </div>
+        </div>
     );
 };
 
