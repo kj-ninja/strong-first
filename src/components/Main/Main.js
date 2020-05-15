@@ -10,6 +10,7 @@ import firebase from '../Firebase/firebase'
 import {getToken} from "../../functions/getToken";
 import {isMobile} from 'react-device-detect';
 import Footer from "../Footer/Footer";
+import Spinner from "react-bootstrap/Spinner";
 
 const Main = () => {
     const [trainings, setTrainings] = useState([]);
@@ -49,9 +50,39 @@ const Main = () => {
 
     // add loading spinner
     if (trainings.length === 0) {
+        if (isMobile) {
+            return (
+                <>
+                    <Header logoLink={"/main"}>
+                        <div className="main__icons">
+                            <Link to="/add-training"><i className="fas fa-plus-circle main__icons--add-training"/></Link>
+                            <Link to="/"><i className="fas fa-sign-out-alt main__icons--logout" onClick={handleLogout}/></Link>
+                        </div>
+                    </Header>
+                    <div className="d-flex justify-content-center">
+                        <div className="spinner-border text-primary" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </>
+            )
+        }
         return (
-            <h1>Loading</h1>
+            <>
+                <Header logoLink={"/main"}>
+                    <div className="main__buttons">
+                        <Link to="/add-training"><Button variant="primary">Dodaj trening</Button></Link>
+                        <Link to="/"><Button onClick={handleLogout} variant="secondary">Wyloguj się</Button></Link>
+                    </div>
+                </Header>
+                <div className="d-flex justify-content-center">
+                    <div className="spinner-border text-primary" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </>
         )
+
     }
 
     console.log('renderuje Main');

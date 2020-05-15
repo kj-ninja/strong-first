@@ -56,7 +56,7 @@ const Calendar = ({trainings, setTrainingToShow}) => {
                         </td>
                     } else {
                         return <td>
-                            <div className="calendar__day" onClick={() => getTrainingById(day.element.id)}>
+                            <div className="calendar__day calendar__training-day" onClick={() => getTrainingById(day.element.id)}>
                                 {day.dayNumber} <br/>
                                 <i className="fas fa-dumbbell"/>
                             </div>

@@ -197,7 +197,7 @@ const AddTraining = (props) => {
                                     </p>
                                 </div>
 
-                                <div className="d-flex justify-content-between container__add-training">
+                                <div className="add-training__buttons-container">
                                     <Button className="btn btn-primary" onClick={()=>handleAddSet(values)}>Dodaj serię
                                     </Button>
                                     <Button type="submit" className="btn btn-success pull-right">Zapisz trening
@@ -212,7 +212,7 @@ const AddTraining = (props) => {
                 {exercisesPreview.map(element => {
                     return (
                         <li key={element.id} className="list-group-item">
-                            {element.name.toUpperCase()}: {getRepsView(element)}
+                            {element.name.toUpperCase()}: <span className="list-group-item">{getRepsView(element)}</span>
                             <button onClick={() => handleDeleteExercise(element.id)} type="button"
                                     className="close"
                                     aria-label="Close">

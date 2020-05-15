@@ -8,7 +8,7 @@ const getRepsView = element => {
         } else if (element.weight[i] !== 0 && element.weight[i] !== '') {
             repView.push(element.repetitions[i] + 'x' + element.weight[i] + 'kg ');
         } else {
-            repView.push(element.repetitions[i] + 'x ');
+            repView.push(element.repetitions[i]);
         }
     }
 
