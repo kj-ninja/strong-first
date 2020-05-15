@@ -9,6 +9,7 @@ import axios from "axios";
 import firebase from '../Firebase/firebase'
 import {getToken} from "../../functions/getToken";
 import {isMobile} from 'react-device-detect';
+import Footer from "../Footer/Footer";
 
 const Main = () => {
     const [trainings, setTrainings] = useState([]);
@@ -65,6 +66,7 @@ const Main = () => {
                 </Header>
                 <Calendar trainings={trainings} setTrainingToShow={setTrainingToShow}/>
                 <TrainingSummary trainingToShow={trainingToShow}/>
+                <Footer relative={true}/>
             </>
         )
     }
@@ -78,6 +80,7 @@ const Main = () => {
             </Header>
             <Calendar trainings={trainings} setTrainingToShow={setTrainingToShow}/>
             <TrainingSummary trainingToShow={trainingToShow}/>
+            <Footer relative={true}/>
         </>
     );
 };

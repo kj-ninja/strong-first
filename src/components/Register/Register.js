@@ -7,6 +7,8 @@ import firebase from '../Firebase/firebase';
 import {Link} from 'react-router-dom';
 import Header from "../Header/Header";
 import {translate} from '../../functions/translate';
+import Footer from "../Footer/Footer";
+import {isMobile} from "react-device-detect";
 
 const Schema = Yup.object().shape({
     email: Yup.string()
@@ -24,18 +26,20 @@ const Schema = Yup.object().shape({
     })
 });
 
-const styles = {
-    backgroundColor: 'rgb(63, 127, 191)',
-    color: "#fff"
-};
-
 const Register = (props) => {
     const [errorMessage, setErrorMessage] = useState(null);
+    let styles = {
+        top: "100px"
+    };
+
+    if (isMobile) {
+        styles = {top: 0}
+    }
+
     return (
         <>
-            <Header logoLink={"/"} styles={styles}>
-                <Link to="/login"><Button variant="light" style={{color: 'rgb(63, 127, 191)'}}>Zaloguj
-                    się</Button></Link>
+            <Header logoLink={"/"}>
+                <Link to="/login"><Button variant="primary">Zaloguj się</Button></Link>
             </Header>
 
             <Formik
@@ -58,59 +62,62 @@ const Register = (props) => {
             >
                 {({values, errors, handleSubmit, handleChange, handleBlur}) => {
                     return (
-                        <div className="register__container">
-                            <h2>Załóż konto</h2>
-                            <form onSubmit={handleSubmit} className="register__form">
-                                <label htmlFor="email">Email</label>
-                                <input
-                                    type="text"
-                                    name="email"
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    value={values.email}
-                                    className="register__input"
-                                />
-                                <p className="register__error-message">
-                                    {errors.email}
-                                    {errorMessage}
-                                </p>
+                        <section className="register">
+                            <div className="register__container" style={{...styles}}>
+                                <h2>Załóż konto</h2>
+                                <form onSubmit={handleSubmit} className="register__form">
+                                    <label htmlFor="email">Email</label>
+                                    <input
+                                        type="text"
+                                        name="email"
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        value={values.email}
+                                        className="register__input"
+                                    />
+                                    <p className="register__error-message">
+                                        {errors.email}
+                                        {errorMessage}
+                                    </p>
 
-                                <label htmlFor="password">Hasło</label>
-                                <input
-                                    type="password"
-                                    name="password"
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    value={values.password}
-                                    className="register__input"
-                                />
-                                <p className="register__error-message">
-                                    {errors.password}
-                                    {errorMessage}
-                                </p>
+                                    <label htmlFor="password">Hasło</label>
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        value={values.password}
+                                        className="register__input"
+                                    />
+                                    <p className="register__error-message">
+                                        {errors.password}
+                                        {errorMessage}
+                                    </p>
 
-                                <label htmlFor="password">Powtórz hasło</label>
-                                <input
-                                    type="password"
-                                    name="changepassword"
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    value={values.changepassword}
-                                    className="register__input"
-                                />
-                                <p className="register__error-message">
-                                    {errors.changepassword}
-                                    {errorMessage}
-                                </p>
-                                <div className="register__buttons">
-                                    <Link to="/register"><Button type="submit" variant="outline-secondary">Załóż
-                                        konto</Button></Link>
-                                </div>
-                            </form>
-                        </div>
+                                    <label htmlFor="password">Powtórz hasło</label>
+                                    <input
+                                        type="password"
+                                        name="changepassword"
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        value={values.changepassword}
+                                        className="register__input"
+                                    />
+                                    <p className="register__error-message">
+                                        {errors.changepassword}
+                                        {errorMessage}
+                                    </p>
+                                    <div className="register__buttons">
+                                        <Link to="/register"><Button type="submit" variant="outline-secondary">Załóż
+                                            konto</Button></Link>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
                     );
                 }}
             </Formik>
+            <Footer props={false}/>
         </>
     );
 }

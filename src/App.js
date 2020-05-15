@@ -23,7 +23,6 @@ function App() {
                     <Route path="/add-training" render={(props) => <AddTraining {...props}/>}/>
                     <Route component={NotFound}/>
                 </Switch>
-                <FooterPage/>
             </HashRouter>
         </>
     );

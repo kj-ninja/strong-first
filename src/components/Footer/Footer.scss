@@ -1,0 +1,18 @@
+footer {
+  position: absolute;
+  bottom: 0;
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  .footer__copyright {
+  }
+}
+
+.footer__relative {
+  position: relative;
+}
+
+.footer__absolute {
+  position: absolute;
+}
