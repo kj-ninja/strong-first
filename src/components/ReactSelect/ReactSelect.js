@@ -47,7 +47,7 @@ class ReactSelect extends Component {
         }
     };
     render() {
-        return ( <div style={{width: '200px'}}>
+        return ( <div>
             <AsyncSelect
                 value={this.state.selectedOption}
                 loadOptions={this.fetchData}
