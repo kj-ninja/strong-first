@@ -1,87 +1,80 @@
 import React, {useState} from 'react';
 import './AddTraining.scss';
-import {getToken} from "../../functions/getToken";
 import Button from "react-bootstrap/Button";
 import {getRepsView} from "../../functions/getRepsView";
-import axios from "axios";
 import {Link} from "react-router-dom";
 import Header from "../Header/Header";
 import firebase from "../Firebase/firebase";
 import AddTrainingForm from "./AddTrainingForm/AddTrainingForm";
+import addTraining from "../Ironman/Ironman";
 
 const AddTraining = (props) => {
-    const [exercisesPreview, setExercisesPreview] = useState([]);
+    const [exercisesView, setExercisesView] = useState([]);
     const [selectedExercise, setSelectedExercise] = useState({});
-    const [token] = useState(getToken());
 
-    const handleAddSet = (values) => {
-
-        console.log(values);
-
-        // zmien na setsView
-        // getIndexOfSelectedExercise
-        let index = null;
-        exercisesPreview.forEach((exercisePreview, i) => {
-            if (exercisePreview.id === selectedExercise.value) {
-                index = i;
+    const createExerciseView = (values) => {
+        setExercisesView (prevState => {
+            return (
+                [...prevState, {
+                    name: selectedExercise.label,
+                    repetitions: [values.selectedRepetitions],
+                    weight: [values.selectedWeight],
+                    time: [values.selectedExerciseTime],
+                    id: selectedExercise.value
+                }]
+            )
+        });
+    };
+    // przeszukuje exercisesView i sprawdza czy zaznaczone cwiczenie bylo juz dodawane
+    // zwraca obiekt cwiczenia albo nulla gdy cwiczenie dodawane jest poraz pierwszy
+    const getSelectedExercise = () => {
+        let exercise = null;
+        exercisesView.forEach((exerciseView) => {
+            if (exerciseView.id === selectedExercise.value) {
+                exercise = exerciseView;
             }
         });
+        return exercise;
+    };
+    const addSetToSelectedExercise = (exercise, values) => {
+        exercise.repetitions.push(values.selectedRepetitions);
+        exercise.weight.push(values.selectedWeight);
+        exercise.time.push(values.selectedExerciseTime);
 
-        // nie ma indexu czyli trzeba stworzyc obiekt exercise a potem dodac do niego set
-        if (index === null) {
-            // odpal funckje stworz obiekt z cwiczeniem
-            // createExerciseView
-            // odpal funkcje dodaj set do cwiczenia
-            // addSetToSelectedExercise
-            setExercisesPreview(prevState => {
-                return (
-                    [...prevState, {
-                        name: selectedExercise.label,
-                        repetitions: [values.selectedRepetitions],
-                        weight: [values.selectedWeight],
-                        time: [values.selectedExerciseTime],
-                        id: selectedExercise.value
-                    }]
-                )
-            });
-            // jesli mamy index to znaczy ze obiekt exercicse juz jest
+        const tempArray = [...exercisesView];
+        setExercisesView(tempArray);
+    };
+    const handleAddSet = (values) => {
+        const exercise = getSelectedExercise();
+
+        // nie ma cwiczenia, czyli trzeba stworzyc obiekt exercise a potem dodac do niego set
+        if (exercise === null) {
+            createExerciseView(values);
         } else {
-
-            // addSetToSelectedExercise
-            const tempArray = [...exercisesPreview];
-            tempArray[index].repetitions.push(values.selectedRepetitions);
-            tempArray[index].weight.push(values.selectedWeight);
-            tempArray[index].time.push(values.selectedExerciseTime);
-
-            setExercisesPreview(tempArray);
+            addSetToSelectedExercise(exercise, values);
         }
     };
-
     const handleDeleteExercise = (id) => {
-        const tempArray = exercisesPreview.filter(exercise => {
+        const tempArray = exercisesView.filter(exercise => {
             return exercise.id !== id
         });
-        setExercisesPreview(tempArray);
+        setExercisesView(tempArray);
     };
-
-    const handleAddTraining = (values) => {
+    const mapExercisesViewToApiRequest = (exercisesView,  values) => {
         const tempSets = [];
 
-
-        // wydziel do funkcji getTrainingDataFromView
-        // przyjmie exercisePreview i zwraca training
-        exercisesPreview.forEach((exercise, i) => {
-            exercise.repetitions.forEach((rep, j) => {
+        exercisesView.forEach((exerciseView, i) => {
+            exerciseView.repetitions.forEach((rep, j) => {
                 tempSets.push({
-                    exerciseId: +exercisesPreview[i].id,
-                    repetitions: +exercisesPreview[i].repetitions[j],
-                    weight: +exercisesPreview[i].weight[j],
-                    time: +exercisesPreview[i].time[j]
+                    exerciseId: +exercisesView[i].id,
+                    repetitions: +exercisesView[i].repetitions[j],
+                    weight: +exercisesView[i].weight[j],
+                    time: +exercisesView[i].time[j]
                 })
             });
         });
 
-        const training = {
+        return {
             name: values.name,
             note: values.notes,
             date: values.date + ' 00:00:00',
@@ -89,27 +82,11 @@ const AddTraining = (props) => {
             kcal: +values.kcal,
             sets: tempSets
         };
-
-        // wydzielic do funkcji
-        // sendTrainingToApi
-        // przyjmuje tylko trening
-        const API = "https://ironman.coderaf.com/training";
-
-        axios.post(API, training, {
-            headers: {
-                'Access-Token': token
-            },
-        })
-            .then(function (res) {
-                // handle success
-                console.log('treningi wyslane');
-                props.history.replace('/main');
-            })
-            .catch(error => {
-                console.log(error);
-            });
     };
-
+    const handleAddTraining = (values) => {
+        const training = mapExercisesViewToApiRequest(exercisesView, values);
+        addTraining(training, ()=>props.history.replace('/main'));
+    };
     const handleLogout = () => {
         firebase.auth().signOut().then(function () {
         }).catch(function (error) {
@@ -122,12 +99,10 @@ const AddTraining = (props) => {
             <Header logoLink={"/main"}>
                 <Link to="/"><Button onClick={handleLogout} variant="primary">Wyloguj się</Button></Link>
             </Header>
-
             <AddTrainingForm setSelectedExercise={setSelectedExercise} handleAddTraining={handleAddTraining}
                              handleAddSet={handleAddSet}/>
-
             <ul className="list-group">
-                {exercisesPreview.map(element => {
+                {exercisesView.map(element => {
                     return (
                         <li key={element.id} className="list-group-item">
                             {element.name.toUpperCase()}: {getRepsView(element)}
