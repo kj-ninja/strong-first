@@ -36,6 +36,7 @@ const AddTraining = (props) => {
         });
         return exercise;
     };
+
     const addSetToSelectedExercise = (exercise, values) => {
         exercise.repetitions.push(values.selectedRepetitions);
         exercise.weight.push(values.selectedWeight);
@@ -44,6 +45,7 @@ const AddTraining = (props) => {
         const tempArray = [...exercisesView];
         setExercisesView(tempArray);
     };
+
     const handleAddSet = (values) => {
         const exercise = getSelectedExercise();
 
@@ -54,12 +56,14 @@ const AddTraining = (props) => {
             addSetToSelectedExercise(exercise, values);
         }
     };
+
     const handleDeleteExercise = (id) => {
         const tempArray = exercisesView.filter(exercise => {
             return exercise.id !== id
         });
         setExercisesView(tempArray);
     };
+
     const mapExercisesViewToApiRequest = (exercisesView,  values) => {
         const tempSets = [];
 
@@ -83,10 +87,12 @@ const AddTraining = (props) => {
             sets: tempSets
         };
     };
+
     const handleAddTraining = (values) => {
         const training = mapExercisesViewToApiRequest(exercisesView, values);
         addTraining(training, ()=>props.history.replace('/main'));
     };
+
     const handleLogout = () => {
         firebase.auth().signOut().then(function () {
         }).catch(function (error) {
@@ -101,10 +107,10 @@ const AddTraining = (props) => {
             </Header>
             <AddTrainingForm setSelectedExercise={setSelectedExercise} handleAddTraining={handleAddTraining}
                              handleAddSet={handleAddSet}/>
-            <ul className="list-group">
+            <ul className="add-training__list list-group">
                 {exercisesView.map(element => {
                     return (
-                        <li key={element.id} className="list-group-item">
+                        <li key={element.id} className="add-training__exercise list-group-item">
                             {element.name.toUpperCase()}: {getRepsView(element)}
                             <button onClick={() => handleDeleteExercise(element.id)} type="button"
                                     className="close"

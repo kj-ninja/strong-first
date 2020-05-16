@@ -1,23 +1,30 @@
-.container.training__summary {
-  margin-top: 30px;
-  .training__date span {
-    font-weight: bold;
+.training_summary {
+  margin: 30px auto;
+  max-width: 960px;
+  padding: 15px;
+  .training_summary__date, .training_summary__name {
+    margin-bottom: 10px;
+    span {
+      font-weight: 600;
+    }
   }
-  .training__name span {
-    font-weight: bold;
-  }
-  .training__list li {
-    height: 80px;
-  }
-  .training__list-name {
-    font-weight: bold;
-    margin-right: 0.15rem;
-    display: inline-block;
-    width: 150px;
-  }
-  .training__list-repetition {
-    margin-right: 1.75rem;
-    display: inline-block;
-    width: 40px;
+  .training_summary__list {
+    margin-top: 15px;
+    .training_summary__exercise {
+      padding: 1rem 1rem;
+    }
+
+    .training_summary__exercise-name {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .training-summary__exercise-rep {
+      margin-right: 0.75rem;
+      margin-bottom: 5px;
+      display: inline-block;
+
+    }
   }
 }

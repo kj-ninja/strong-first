@@ -29,14 +29,12 @@ const TrainingSummary = ({trainingToShow}) => {
     });
 
     return (
-        <div>
-            <div className="container training__summary">
-                <p className="training__date"><span>Data:</span> {trainingToShow.date}</p>
-                <p className="training__name"><span>Nazwa:</span> {trainingToShow.name}</p>
+        <div className="training_summary">
+            <p className="training_summary__date"><span>Data:</span> {trainingToShow.date}</p>
+            <p className="training_summary__name"><span>Nazwa:</span> {trainingToShow.name}</p>
 
-                <TrainingSummaryList exercisesPreview={exercisesPreview}/>
+            <TrainingSummaryList exercisesPreview={exercisesPreview}/>
 
-            </div>
         </div>
     );
 };
