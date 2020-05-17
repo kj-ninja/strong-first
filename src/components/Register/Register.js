@@ -55,7 +55,7 @@ const Register = (props) => {
                         .then(res => {
                             firebase.auth().currentUser.getIdToken()
                                 .then((token)=>{
-                                    registerUser({username: 'Mietek' + Math.floor(Math.random() * 666) + 1 , email:values.email, externalId: res.user.uid}, token, ()=>props.history.replace('/main'))
+                                    registerUser({username: 'Mietek' + (Math.floor(Math.random() * 666) + 1) , email:values.email, externalId: res.user.uid}, token, ()=>props.history.replace('/main'))
                                 })
                         })
                         .catch(function(error) {

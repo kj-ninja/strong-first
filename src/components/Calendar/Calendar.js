@@ -42,7 +42,6 @@ const Calendar = ({trainings, setTrainingToShow}) => {
     };
 
     const generateRow = (week, i) => {
-        console.log(week);
         return (
             <tr key={i}>
                 {week.map(day => {
