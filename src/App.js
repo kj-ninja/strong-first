@@ -1,10 +1,8 @@
 import React from 'react';
-import './scss/main.scss';
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Main from "./components/Main/Main";
-import FooterPage from "./components/Footer/Footer";
 import AddTraining from "./components/AddTraining/AddTraining";
 import NotFound from "./components/NotFound/NotFound";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";

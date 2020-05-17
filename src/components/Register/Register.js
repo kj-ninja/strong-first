@@ -50,12 +50,15 @@ const Register = (props) => {
                 }}
                 validationSchema={Schema}
                 onSubmit={(values) => {
+                    console.log('przeszlo walidacje');
                     firebase.auth().createUserWithEmailAndPassword(values.email, values.password)
                         .then(res => {
-                            props.history.replace('/main');
+                            console.log(res);
+                            // props.history.replace('/main');
                         })
                         .catch(function (error) {
                             // Handle Errors here.
+                            console.log(error);
                             setErrorMessage(translate(error.code));
                         });
                 }}

@@ -1,0 +1,16 @@
+.add-training__list {
+  margin-top: 15px;
+  .add-training__exercise {
+    padding: 1rem 1rem;
+  }
+  .add-training__exercise-name {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .add-training__exercise-rep {
+    margin-right: 0.75rem;
+    margin-bottom: 5px;
+    display: inline-block;
+  }
+}

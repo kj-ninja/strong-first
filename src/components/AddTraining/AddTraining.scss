@@ -3,6 +3,7 @@
   max-width: 900px;
   display: flex;
   justify-content: center;
+  margin: 30px auto;
   .add-training__container {
     max-width: 450px;
     .add-training__form-group {
@@ -28,8 +29,4 @@
       justify-content: space-between;
     }
   }
-}
-
-.add-training__list {
-
 }

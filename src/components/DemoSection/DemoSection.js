@@ -14,9 +14,10 @@ const DemoSection = () => {
                     <div className="demo__header">
                         <h2>Obejrzyj demo</h2>
                     </div>
-                    <div className="demo__movie" onClick={() => setModalShow(true)}>
-                        Tutaj bedzie screen z ikonka playera
-                    </div>
+                        <div className="demo__movie" onClick={() => setModalShow(true)}>
+                            <div className="overlay"/>
+                            <i className="fas fa-play-circle"/>
+                        </div>
                     <div className="demo__button">
                         <Link to="/"><Button onClick={() => setModalShow(true)} variant="primary">
                             Obejrzyj video

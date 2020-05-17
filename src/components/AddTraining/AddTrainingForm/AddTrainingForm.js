@@ -10,10 +10,10 @@ const formInputs = {
 };
 const validationSchema = Yup.object({
     name: Yup.string()
-        .max(50, 'Must be 50 characters or less')
-        .required('Required'),
+        .max(50, 'Maksymalnie 50 znaków')
+        .required('Pole wymagane'),
     duration: Yup.string()
-        .required('Required'),
+        .required('Pole wymagane'),
     selectedRepetitions: Yup.string()
         .matches(/^[0-9]+[0-9]*$/, 'Podana wartość musi być liczbą'),
     selectedExerciseTime: Yup.string()
