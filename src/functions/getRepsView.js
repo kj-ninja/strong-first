@@ -1,6 +1,5 @@
 const getRepsView = element => {
     let repView = [];
-    console.log(element);
 
     for (let i = 0; i < element.repetitions.length; i++) {
         if (element.time[i] !== 0 && element.time[i] !== '') {

@@ -9,6 +9,7 @@ import Header from "../Header/Header";
 import {translate} from '../../functions/translate';
 import Footer from "../Footer/Footer";
 import {isMobile} from "react-device-detect";
+import {registerUser} from "../Ironman/Ironman";
 
 const Schema = Yup.object().shape({
     email: Yup.string()
@@ -50,15 +51,15 @@ const Register = (props) => {
                 }}
                 validationSchema={Schema}
                 onSubmit={(values) => {
-                    console.log('przeszlo walidacje');
                     firebase.auth().createUserWithEmailAndPassword(values.email, values.password)
                         .then(res => {
-                            console.log(res);
-                            // props.history.replace('/main');
+                            firebase.auth().currentUser.getIdToken()
+                                .then((token)=>{
+                                    registerUser({username: 'Mietek' + Math.floor(Math.random() * 666) + 1 , email:values.email, externalId: res.user.uid}, token, ()=>props.history.replace('/main'))
+                                })
                         })
-                        .catch(function (error) {
+                        .catch(function(error) {
                             // Handle Errors here.
-                            console.log(error);
                             setErrorMessage(translate(error.code));
                         });
                 }}
@@ -111,8 +112,7 @@ const Register = (props) => {
                                         {errorMessage}
                                     </p>
                                     <div className="register__buttons">
-                                        <Link to="/register"><Button type="submit" variant="outline-secondary">Załóż
-                                            konto</Button></Link>
+                                        <Button type="submit" variant="outline-secondary">Załóż konto</Button>
                                     </div>
                                 </form>
                             </div>

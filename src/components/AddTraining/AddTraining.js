@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 import Header from "../Header/Header";
 import firebase from "../Firebase/firebase";
 import AddTrainingForm from "./AddTrainingForm/AddTrainingForm";
-import addTraining from "../Ironman/Ironman";
+import {addTraining} from "../Ironman/Ironman";
 
 const AddTraining = (props) => {
     const [exercisesView, setExercisesView] = useState([]);

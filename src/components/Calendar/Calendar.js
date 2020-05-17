@@ -41,21 +41,22 @@ const Calendar = ({trainings, setTrainingToShow}) => {
         })
     };
 
-    const generateRow = (week) => {
+    const generateRow = (week, i) => {
+        console.log(week);
         return (
-            <tr>
+            <tr key={i}>
                 {week.map(day => {
                     if (day.monthNumber !== actualDate.getMonth()) {
-                        return <td>
+                        return <td key={day.dayNumber + day.monthNumber + 100}>
                             <div className="calendar__day calendar__day--notActual">{day.dayNumber}</div>
                         </td>
                     }
                     if (day.element === null) {
-                        return <td>
+                        return <td key={day.dayNumber + day.monthNumber + 200}>
                             <div className="calendar__day">{day.dayNumber}</div>
                         </td>
                     } else {
-                        return <td>
+                        return <td key={day.dayNumber + day.monthNumber + 300}>
                             <div className="calendar__day calendar__training-day" onClick={() => getTrainingById(day.element.id)}>
                                 {day.dayNumber} <br/>
                                 <i className="fas fa-dumbbell"/>
@@ -88,7 +89,7 @@ const Calendar = ({trainings, setTrainingToShow}) => {
                 </tr>
                 </thead>
                 <tbody className="calendar__body">
-                {weeksInMonth.map(week => generateRow(week))}
+                {weeksInMonth.map((week, i) => generateRow(week, i))}
                 </tbody>
             </table>
             <div className="calendar__arrow calendar__arrow--left">

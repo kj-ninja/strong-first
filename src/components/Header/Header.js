@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 const Header = (props) => {
     return (
-        <header className={props.sticky && 'navbar navbar-sticky'}>
+        <header className={props.sticky ? 'navbar navbar-sticky' : null}>
             <div className="container header__wrapper">
                 <h1 className="header__logo">
                     <Link to={props.logoLink}>Calisthenics</Link>

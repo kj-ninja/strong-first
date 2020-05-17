@@ -5,7 +5,6 @@ const TrainingSummaryList = ({exercisesPreview}) => {
     return (
         <ul className="training_summary__list list-group">
             {exercisesPreview.map(element => {
-                console.log(element);
                 return (
                     <li key={element.id} className="training_summary__exercise list-group-item">
                         <span className="training_summary__exercise-name">{element.name.toUpperCase()}:</span>
