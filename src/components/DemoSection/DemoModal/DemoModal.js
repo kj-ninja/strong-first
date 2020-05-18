@@ -13,7 +13,7 @@ const DemoModal = (props) => {
         >
             <Modal.Body>
                 <ReactPlayer
-                    url="https://www.youtube.com/watch?v=s7Z75i_xYZg"
+                    url="https://www.youtube.com/watch?v=FWgDQILC91c"
                     controls={true}
                     width="100%"
                     height="100%"
