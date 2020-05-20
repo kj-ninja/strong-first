@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import './AddTraining.scss';
 import Button from "react-bootstrap/Button";
-import {getRepsView} from "../../functions/getRepsView";
 import {Link} from "react-router-dom";
 import Header from "../Header/Header";
 import firebase from "../Firebase/firebase";
 import AddTrainingForm from "./AddTrainingForm/AddTrainingForm";
 import {addTraining} from "../Ironman/Ironman";
+import AddTrainingList from "./AddTrainingList/AddTrainingList";
 
 const AddTraining = (props) => {
     const [exercisesView, setExercisesView] = useState([]);
@@ -107,20 +107,7 @@ const AddTraining = (props) => {
             </Header>
             <AddTrainingForm setSelectedExercise={setSelectedExercise} handleAddTraining={handleAddTraining}
                              handleAddSet={handleAddSet}/>
-            <ul className="add-training__list list-group">
-                {exercisesView.map(element => {
-                    return (
-                        <li key={element.id} className="add-training__exercise list-group-item">
-                            {element.name.toUpperCase()}: {getRepsView(element)}
-                            <button onClick={() => handleDeleteExercise(element.id)} type="button"
-                                    className="close"
-                                    aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </li>
-                    )
-                })}
-            </ul>
+            <AddTrainingList exercisesView={exercisesView} setExercisesView={setExercisesView}/>
         </>
     );
 };
