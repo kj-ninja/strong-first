@@ -1,20 +1,22 @@
-.training_summary {
+.training-summary {
   margin: 30px auto;
   max-width: 960px;
-  padding: 15px;
-  .training_summary__date, .training_summary__name {
+  padding: 25px;
+  border: 1px solid rgba(0,0,0,.125);
+  background-color: #b6b6b626;
+  .training-summary__date, .training-summary__name {
     margin-bottom: 10px;
     span {
       font-weight: 600;
     }
   }
-  .training_summary__list {
+  .training-summary__list {
     margin-top: 15px;
-    .training_summary__exercise {
+    .training-summary__exercise {
       padding: 1rem 1rem;
     }
 
-    .training_summary__exercise-name {
+    .training-summary__exercise-name {
       font-weight: 600;
       display: block;
       margin-bottom: 8px;
@@ -24,6 +26,15 @@
       margin-right: 0.75rem;
       margin-bottom: 5px;
       display: inline-block;
+    }
+  }
+  .training-summary__notes {
+    border-top: none;
+    padding: 30px 0;
+    //font-size: 18px;
+    p {
+      margin-bottom: 3px;
+      font-weight: 600;
     }
   }
 }

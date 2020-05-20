@@ -3,6 +3,7 @@ import './TrainingSummary.scss';
 import TrainingSummaryList from "./TrainingSummaryList/TrainingSummaryList";
 
 const TrainingSummary = ({trainingToShow}) => {
+    console.log(trainingToShow);
     // zrobic z tego funkcje \/
     let tempArray = [];
     trainingToShow.sets.forEach(set => {
@@ -29,12 +30,15 @@ const TrainingSummary = ({trainingToShow}) => {
     });
 
     return (
-        <div className="training_summary">
-            <p className="training_summary__date"><span>Data:</span> {trainingToShow.date}</p>
-            <p className="training_summary__name"><span>Nazwa:</span> {trainingToShow.name}</p>
+        <div className="training-summary">
+            <p className="training-summary__date"><span>Data:</span> {trainingToShow.date}</p>
+            <p className="training-summary__name"><span>Nazwa:</span> {trainingToShow.name}</p>
 
             <TrainingSummaryList exercisesPreview={exercisesPreview}/>
-
+            <div className="training-summary__notes">
+                <p>Notatki:</p>
+                {trainingToShow.note.toLowerCase()}
+            </div>
         </div>
     );
 };
