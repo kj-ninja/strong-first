@@ -3,7 +3,8 @@
   max-width: 960px;
   padding: 25px;
   border: 1px solid rgba(0,0,0,.125);
-  background-color: #b6b6b626;
+  background-color: #fff;
+  box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, .12);
   .training-summary__date, .training-summary__name {
     margin-bottom: 10px;
     span {
@@ -36,5 +37,8 @@
       margin-bottom: 3px;
       font-weight: 600;
     }
+  }
+  .list-group-item {
+    background-color: #f7f7f7;
   }
 }
