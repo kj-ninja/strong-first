@@ -25,7 +25,6 @@ class ReactSelect extends Component {
                     })
                     .then((data) => {
                         const tempArray = [];
-                        console.log(data);
                         data.forEach((element) => {
                             tempArray.push({ label: `${element.name}`, value: element.id });
                         });

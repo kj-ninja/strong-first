@@ -47,6 +47,13 @@ const AddTraining = (props) => {
     };
 
     const handleAddSet = (values) => {
+        if (Object.keys(selectedExercise).length === 0 && selectedExercise.constructor === Object) {
+            return alert('Musisz wybrać ćwiczenie z listy!');
+        }
+        if (values.selectedRepetitions === '' && values.selectedWeight === '' && values.selectedExerciseTime === '') {
+            return alert('Musisz podać ilość powtórzeń, ciężar obciążenia lub czas wykonywanego ćwiczenia!');
+        }
+
         const exercise = getSelectedExercise();
 
         // nie ma cwiczenia, czyli trzeba stworzyc obiekt exercise a potem dodac do niego set
@@ -57,7 +64,7 @@ const AddTraining = (props) => {
         }
     };
 
-    const mapExercisesViewToApiRequest = (exercisesView,  values) => {
+    const mapExercisesViewToApiRequest = (exercisesView,  values, valuesStepOne) => {
         const tempSets = [];
 
         exercisesView.forEach((exerciseView, i) => {
@@ -72,17 +79,23 @@ const AddTraining = (props) => {
         });
 
         return {
-            name: values.name,
-            note: values.notes,
-            date: values.date + ' 00:00:00',
-            duration: +values.duration,
-            kcal: +values.kcal,
+            name: valuesStepOne.name,
+            note: valuesStepOne.notes,
+            date: valuesStepOne.date + ' 00:00:00',
+            duration: +valuesStepOne.duration,
+            kcal: +valuesStepOne.kcal,
             sets: tempSets
         };
     };
 
-    const handleAddTraining = (values) => {
-        const training = mapExercisesViewToApiRequest(exercisesView, values);
+    const handleAddTraining = (values, valuesStepOne) => {
+        if (Object.keys(selectedExercise).length === 0 && selectedExercise.constructor === Object) {
+            return alert('Musisz wybrać ćwiczenie z listy!');
+        }
+        if (values.selectedRepetitions === '' && values.selectedWeight === '' && values.selectedExerciseTime === '') {
+            return alert('Musisz podać ilość powtórzeń, ciężar obciążenia lub czas wykonywanego ćwiczenia!');
+        }
+        const training = mapExercisesViewToApiRequest(exercisesView, values, valuesStepOne);
         addTraining(training, ()=>props.history.replace('/main'));
     };
 
@@ -98,6 +111,7 @@ const AddTraining = (props) => {
             <Header logoLink={"/main"}>
                 <Link to="/"><Button onClick={handleLogout} variant="primary">Wyloguj się</Button></Link>
             </Header>
+
             <AddTrainingForm setSelectedExercise={setSelectedExercise} handleAddTraining={handleAddTraining}
                              handleAddSet={handleAddSet}/>
             <AddTrainingList exercisesView={exercisesView} setExercisesView={setExercisesView}/>
