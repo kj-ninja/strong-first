@@ -1,10 +1,10 @@
 import React from 'react';
 import {getRepsView} from "../../../functions/getRepsView";
 
-const TrainingSummaryList = ({exercisesPreview}) => {
+const TrainingSummaryList = ({exerciseView}) => {
     return (
         <ul className="training-summary__list list-group">
-            {exercisesPreview.map(element => {
+            {exerciseView.map(element => {
                 return (
                     <li key={element.id} className="training-summary__exercise list-group-item">
                         <span className="training-summary__exercise-name">{element.name.toUpperCase()}:</span>

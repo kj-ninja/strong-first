@@ -5,7 +5,6 @@ import * as Yup from "yup";
 import Button from "react-bootstrap/Button";
 
 const AddTrainingFormStepTwo = ({setSelectedExercise, handleAddTraining, handleAddSet, valuesStepOne}) => {
-
     const formInputs = {
         selectedRepetitions: '', selectedExerciseTime: '', selectedWeight: ''
     };
@@ -24,7 +23,6 @@ const AddTrainingFormStepTwo = ({setSelectedExercise, handleAddTraining, handleA
                 initialValues={formInputs}
                 validationSchema={validationSchema}
                 onSubmit={(values) => {
-                    console.log(values);
                     handleAddTraining(values, valuesStepOne);
                 }}
             >
@@ -73,10 +71,6 @@ const AddTrainingFormStepTwo = ({setSelectedExercise, handleAddTraining, handleA
                     );
                 }}
             </Formik>
-
-
-
-
         </>
     );
 };

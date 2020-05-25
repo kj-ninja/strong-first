@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import AddTrainingFormStepTwo from "./AddTrainingFormStepTwo";
 import AddTrainingFormStepOne from './AddTrainingFormStepOne';
 
-const AddTrainingForm = ({setSelectedExercise, handleAddTraining, handleAddSet, selectedExercise}) => {
+const AddTrainingForm = ({setSelectedExercise, handleAddTraining, handleAddSet}) => {
     const [stepOne, setStepOne] = useState(true);
     const [stepTwo, setStepTwo] = useState(false);
     const [valuesStepOne, setValuesStepOne] = useState();

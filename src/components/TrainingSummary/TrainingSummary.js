@@ -3,7 +3,6 @@ import './TrainingSummary.scss';
 import TrainingSummaryList from "./TrainingSummaryList/TrainingSummaryList";
 
 const TrainingSummary = ({trainingToShow}) => {
-    console.log(trainingToShow);
     // zrobic z tego funkcje \/
     let tempArray = [];
     trainingToShow.sets.forEach(set => {
@@ -17,10 +16,10 @@ const TrainingSummary = ({trainingToShow}) => {
 
         return [...uniqueSet].map(JSON.parse);
     };
-    const exercisesPreview = removeDuplicates(tempArray);
+    const exerciseView = removeDuplicates(tempArray);
 
     trainingToShow.sets.forEach((set) => {
-        exercisesPreview.forEach((element) => {
+        exerciseView.forEach((element) => {
             if (set.exercise.id === element.id) {
                 element.repetitions.push(set.repetitions);
                 element.weight.push(set.weight);
@@ -34,7 +33,7 @@ const TrainingSummary = ({trainingToShow}) => {
             <p className="training-summary__date"><span>Data:</span> {trainingToShow.date}</p>
             <p className="training-summary__name"><span>Nazwa:</span> {trainingToShow.name}</p>
 
-            <TrainingSummaryList exercisesPreview={exercisesPreview}/>
+            <TrainingSummaryList exerciseView={exerciseView}/>
             <div className="training-summary__notes">
                 <p>Notatki:</p>
                 {trainingToShow.note.toLowerCase()}
