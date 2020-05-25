@@ -9,8 +9,8 @@ const HeroSection = ({element}) => {
         <Jumbotron className="hero">
             <h2 ref={element}>Strong First</h2>
             <p className="hero__para">
-                Calisthenics to łatwy w użyciu dzienniczek sportowy.
-                Zacznij już dziś kontrolować swój progress siłowy.
+                to łatwy w użyciu i szybki w działaniu dzienniczek sportowy.
+                Zacznij już dziś kontrolować swój postęp siłowy.
             </p>
             <p>
                 <Link to="/register"><Button variant="primary">Zarejestruj sie za darmo!</Button></Link>

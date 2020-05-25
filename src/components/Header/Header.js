@@ -7,7 +7,7 @@ const Header = (props) => {
         <header className={props.sticky ? 'navbar navbar-sticky' : null}>
             <div className="container header__wrapper">
                 <h1 className="header__logo">
-                    <Link to={props.logoLink}>Calisthenics</Link>
+                    <Link to={props.logoLink}>StrongFirst</Link>
                 </h1>
                 {props.children}
             </div>
