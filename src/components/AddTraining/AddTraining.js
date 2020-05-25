@@ -57,13 +57,6 @@ const AddTraining = (props) => {
         }
     };
 
-    const handleDeleteExercise = (id) => {
-        const tempArray = exercisesView.filter(exercise => {
-            return exercise.id !== id
-        });
-        setExercisesView(tempArray);
-    };
-
     const mapExercisesViewToApiRequest = (exercisesView,  values) => {
         const tempSets = [];
 

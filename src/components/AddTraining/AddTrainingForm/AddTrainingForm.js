@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
-import {ErrorMessage, Field, Form, Formik} from "formik";
-import ReactSelect from "../../ReactSelect/ReactSelect";
-import Button from "react-bootstrap/Button";
+import {Form, Formik} from "formik";
 import * as Yup from "yup";
+import Button from "react-bootstrap/Button";
 import AddTrainingFormStepTwo from "./AddTrainingFormStepTwo";
 import AddTrainingFormStepOne from './AddTrainingFormStepOne';
 
@@ -28,6 +27,8 @@ const AddTrainingForm = ({setSelectedExercise, handleAddTraining, handleAddSet})
     const [stepOne, setStepOne] = useState(true);
     const [stepTwo, setStepTwo] = useState(false);
 
+    // @TODO
+    // zrobic togglera !prevState i dodac button wstecz
     const handleStep = () => {
         setStepOne(false);
         setStepTwo(true);
@@ -47,18 +48,20 @@ const AddTrainingForm = ({setSelectedExercise, handleAddTraining, handleAddSet})
                     <Form className="add-training__form">
                         <div className="add-training__container">
 
-                            {stepOne ? <AddTrainingFormStepOne/> : null}
-                            {stepTwo? <AddTrainingFormStepTwo setSelectedExercise={setSelectedExercise}/> : null}
+                            {stepOne ? <AddTrainingFormStepOne values={values}/> : null}
+                            {stepTwo ? <AddTrainingFormStepTwo setSelectedExercise={setSelectedExercise}/> : null}
 
                             <div className="add-training__buttons-container">
-                                {stepOne ? <Button className="btn btn-primary" onClick={handleStep}>Dalej
-                                </Button> : <><Button className="btn btn-primary" onClick={() => handleAddSet(values)}>Dodaj serię
-                                </Button>
-                                    <Button type="submit" className="btn btn-success pull-right">Zapisz trening
-                                    </Button></>}
-
+                                {stepOne ? <Button className="btn btn-primary align-self-end" onClick={handleStep}>Dalej</Button> :
+                                    <>
+                                        <Button className="btn btn-primary" onClick={() => handleAddSet(values)}>Dodaj
+                                            serię
+                                        </Button>
+                                        <Button type="submit" className="btn btn-success pull-right">Zapisz trening
+                                        </Button>
+                                    </>
+                                }
                             </div>
-
                         </div>
                     </Form>
                 );

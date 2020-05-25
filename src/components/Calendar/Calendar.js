@@ -16,7 +16,7 @@ const Calendar = ({trainings, setTrainingToShow}) => {
         return () => {
             document.removeEventListener('keydown', handleKeyArrow);
         }
-    }, []);
+    });
 
     const handleKeyArrow = (e) => {
         if (e.keyCode === 37) {

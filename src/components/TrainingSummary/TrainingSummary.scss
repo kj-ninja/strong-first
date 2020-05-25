@@ -4,7 +4,8 @@
   padding: 25px;
   border: 1px solid rgba(0,0,0,.125);
   background-color: #fff;
-  box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, .12);
+  //box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, .12);
+  box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.08);
   .training-summary__date, .training-summary__name {
     margin-bottom: 10px;
     span {
@@ -12,6 +13,7 @@
     }
   }
   .training-summary__list {
+    box-shadow: 0 3px 24px 0 rgba(0, 0, 0, 0.08);
     margin-top: 15px;
     .training-summary__exercise {
       padding: 1rem 1rem;

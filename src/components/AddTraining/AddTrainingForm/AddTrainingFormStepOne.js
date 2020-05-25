@@ -1,7 +1,16 @@
 import React from 'react';
 import {ErrorMessage, Field} from "formik";
 
-const AddTrainingFormStepOne = () => {
+const AddTrainingFormStepOne = ({values}) => {
+
+    function validateUsername(values) {
+        let error;
+        if (values.name === 'admin') {
+            error = 'Nice try!';
+        }
+        return error;
+    }
+
     return (
         <>
             <div className="add-training__form-group">
@@ -11,7 +20,8 @@ const AddTrainingFormStepOne = () => {
             <div className="add-training__form-group">
                 <label htmlFor="name">Nazwa:</label>
                 <Field name="name" type="text" placeholder="Podaj nazwę treningu"
-                       className="form-control form-control-sm"/>
+                       className="form-control form-control-sm" validate={validateUsername(values)}/>
+                {}
                 <p className="add-training__error-message">
                     <ErrorMessage name="name"/>
                 </p>
