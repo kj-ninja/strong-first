@@ -1,0 +1,32 @@
+.big-six--mobile {
+  position: relative;
+  top: 60px;
+  h2 {
+    font-size: 28px;
+    text-align: center;
+    margin-top: 30px;
+  }
+  .big-six__description--mobile {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 1rem;
+    text-align: justify;
+    text-align-last: left;
+  }
+  .big-six__container--mobile {
+    border: 1px solid #6c757d;
+    padding: 1rem;
+    margin: 0.5rem;
+    background-color: #beccd899;
+    .row {
+      margin-bottom: 15px;
+      .big-six__exercise {
+        font-weight: 600;
+      }
+      .col {
+        line-height: 18px;
+      }
+    }
+  }
+}
+
