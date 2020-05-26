@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import handleLogout from "../../functions/logout";
 import Header from "../Header/Header";
 import BigSixTable from "./BigSixTable/BigSixTable";
+import BigSixIcons from "./BigSixIcons/BigSixIcons";
 
 const BigSix = () => {
     const width = useWindowWidth();
@@ -23,9 +24,9 @@ const BigSix = () => {
                             Wyloguj się</Button>
                         </Link>
                     </div>
-                </Header>}
-
+            </Header>}
             <BigSixTable/>
+            <BigSixIcons/>
         </>
     )
 };

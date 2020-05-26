@@ -1,0 +1,24 @@
+.big-six__icons {
+  position: relative;
+  top: 60px;
+  max-width: 900px;
+  margin: 50px auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  .big-six_icon {
+    width: 15%;
+    border: 1px solid #6c757d;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.big-six_icon:hover {
+  filter: opacity(0.6);
+  border: 3px solid #007bff;
+}
