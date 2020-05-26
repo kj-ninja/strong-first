@@ -1,4 +1,5 @@
 import React from 'react';
+import {HashRouter, Route, Switch} from 'react-router-dom';
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
@@ -6,7 +7,7 @@ import Main from "./components/Main/Main";
 import AddTraining from "./components/AddTraining/AddTraining";
 import NotFound from "./components/NotFound/NotFound";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
-import {HashRouter, Route, Switch} from 'react-router-dom';
+import BigSix from "./components/BigSix/BigSix";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                     <Route path="/register" component={Register}/>
                     <Route path="/main" component={Main}/>
                     <Route path="/add-training" render={(props) => <AddTraining {...props}/>}/>
+                    <Route path="/big-six" component={BigSix}/>
                     <Route component={NotFound}/>
                 </Switch>
             </HashRouter>

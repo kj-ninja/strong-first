@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import './AddTraining.scss';
-import Button from "react-bootstrap/Button";
 import {Link} from "react-router-dom";
+import handleLogout from "../../functions/logout";
+import Button from "react-bootstrap/Button";
 import Header from "../Header/Header";
-import firebase from "../Firebase/firebase";
 import AddTrainingForm from "./AddTrainingForm/AddTrainingForm";
 import {addTraining} from "../Ironman/Ironman";
 import AddTrainingList from "./AddTrainingList/AddTrainingList";
@@ -97,13 +97,6 @@ const AddTraining = (props) => {
         }
         const training = mapExercisesViewToApiRequest(exercisesView, values, valuesStepOne);
         addTraining(training, ()=>props.history.replace('/main'));
-    };
-
-    const handleLogout = () => {
-        firebase.auth().signOut().then(function () {
-        }).catch(function (error) {
-            console.log(error.message);
-        })
     };
 
     return (

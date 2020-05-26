@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import './Main.scss';
-import TrainingSummary from "../TrainingSummary/TrainingSummary";
+import axios from "axios";
+import {isMobile} from 'react-device-detect';
 import {Link} from "react-router-dom";
+import handleLogout from "../../functions/logout";
+import TrainingSummary from "../TrainingSummary/TrainingSummary";
 import Header from "../Header/Header";
 import Button from "react-bootstrap/Button"
 import Calendar from "../Calendar/Calendar";
-import axios from "axios";
-import firebase from '../Firebase/firebase'
 import {getToken} from "../../functions/getToken";
-import {isMobile} from 'react-device-detect';
 import Footer from "../Footer/Footer";
 
 const Main = () => {
@@ -38,14 +38,6 @@ const Main = () => {
                 // always executed
             });
     }, [token]);
-
-    const handleLogout = () => {
-        firebase.auth().signOut().then(function() {
-            console.log('wylogowano');
-        }).catch(function(error) {
-            console.log(error.message);
-        })
-    };
 
     // add loading spinner
     if (trainings.length === 0) {
@@ -114,7 +106,5 @@ const Main = () => {
         </>
     );
 };
-//
-//
 
 export default Main;

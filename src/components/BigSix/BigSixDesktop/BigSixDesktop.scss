@@ -1,0 +1,19 @@
+.big-six--desktop {
+  .big-six__buttons--desktop {
+    button {
+      margin-left: 10px;
+    }
+    .btn--logout {
+      margin-left: 25px;
+    }
+  }
+  h2 {
+    font-size: 28px;
+    text-align: center;
+    margin-top: 30px;
+  }
+  .big-six__description {
+    max-width: 600px;
+    margin: 30px auto;
+  }
+}
