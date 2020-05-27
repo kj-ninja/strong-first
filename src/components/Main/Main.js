@@ -10,6 +10,7 @@ import Button from "react-bootstrap/Button"
 import Calendar from "../Calendar/Calendar";
 import {getToken} from "../../functions/getToken";
 import Footer from "../Footer/Footer";
+import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 
 const Main = () => {
     const [trainings, setTrainings] = useState([]);
@@ -44,12 +45,13 @@ const Main = () => {
         if (isMobile) {
             return (
                 <>
-                    <Header logoLink={"/main"}>
-                        <div className="main__icons">
-                            <Link to="/add-training"><i className="fas fa-plus-circle main__icons--add-training"/></Link>
-                            <Link to="/"><i className="fas fa-sign-out-alt main__icons--logout" onClick={handleLogout}/></Link>
-                        </div>
-                    </Header>
+                    {/*<Header logoLink={"/main"}>*/}
+                    {/*    <div className="main__icons">*/}
+                    {/*        <Link to="/add-training"><i className="fas fa-plus-circle main__icons--add-training"/></Link>*/}
+                    {/*        <Link to="/"><i className="fas fa-sign-out-alt main__icons--logout" onClick={handleLogout}/></Link>*/}
+                    {/*    </div>*/}
+                    {/*</Header>*/}
+                    <HamburgerMenu/>
                     <div className="d-flex justify-content-center">
                         <div className="spinner-border text-primary" role="status">
                             <span className="sr-only">Loading...</span>
@@ -61,9 +63,13 @@ const Main = () => {
         return (
             <>
                 <Header logoLink={"/main"}>
-                    <div className="main__buttons">
+                    <div className="big-six__buttons--desktop">
+                        <Link to="/big-six"><Button variant="primary">Wielka szóstka</Button></Link>
                         <Link to="/add-training"><Button variant="primary">Dodaj trening</Button></Link>
-                        <Link to="/"><Button onClick={handleLogout} variant="secondary">Wyloguj się</Button></Link>
+                        <Link to="/"><Button className="big-six__btn--logout" onClick={handleLogout}
+                                             variant="secondary">
+                            Wyloguj się</Button>
+                        </Link>
                     </div>
                 </Header>
                 <div className="d-flex justify-content-center">
@@ -80,12 +86,13 @@ const Main = () => {
     if (isMobile) {
         return (
             <>
-                <Header logoLink={"/main"}>
-                    <div className="main__icons">
-                        <Link to="/add-training"><i className="fas fa-plus-circle main__icons--add-training"/></Link>
-                        <Link to="/"><i className="fas fa-sign-out-alt main__icons--logout" onClick={handleLogout}/></Link>
-                    </div>
-                </Header>
+                {/*<Header logoLink={"/main"}>*/}
+                {/*    <div className="main__icons">*/}
+                {/*        <Link to="/add-training"><i className="fas fa-plus-circle main__icons--add-training"/></Link>*/}
+                {/*        <Link to="/"><i className="fas fa-sign-out-alt main__icons--logout" onClick={handleLogout}/></Link>*/}
+                {/*    </div>*/}
+                {/*</Header>*/}
+                <HamburgerMenu/>
                 <Calendar trainings={trainings} setTrainingToShow={setTrainingToShow}/>
                 <TrainingSummary trainingToShow={trainingToShow}/>
                 <Footer relative={true}/>
@@ -95,9 +102,13 @@ const Main = () => {
     return (
         <>
             <Header logoLink={"/main"}>
-                <div className="main__buttons">
+                <div className="big-six__buttons--desktop">
+                    <Link to="/big-six"><Button variant="primary">Wielka szóstka</Button></Link>
                     <Link to="/add-training"><Button variant="primary">Dodaj trening</Button></Link>
-                    <Link to="/"><Button onClick={handleLogout} variant="secondary">Wyloguj się</Button></Link>
+                    <Link to="/"><Button className="big-six__btn--logout" onClick={handleLogout}
+                                         variant="secondary">
+                        Wyloguj się</Button>
+                    </Link>
                 </div>
             </Header>
             <Calendar trainings={trainings} setTrainingToShow={setTrainingToShow}/>

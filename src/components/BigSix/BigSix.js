@@ -8,6 +8,7 @@ import handleLogout from "../../functions/logout";
 import Header from "../Header/Header";
 import BigSixTable from "./BigSixTable/BigSixTable";
 import BigSixIcons from "./BigSixIcons/BigSixIcons";
+import PushUps from "./Exercises/PushUps/PushUps";
 
 const BigSix = () => {
     const width = useWindowWidth();
@@ -25,8 +26,10 @@ const BigSix = () => {
                         </Link>
                     </div>
             </Header>}
-            <BigSixTable/>
+
+            {/*<BigSixTable/>*/}
             <BigSixIcons/>
+            <PushUps/>
         </>
     )
 };
