@@ -1,24 +1,27 @@
 .big-six__icons {
-  position: relative;
-  //top: 60px;
-  max-width: 900px;
-  margin: 50px auto;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  .big-six_icon {
-    width: 13%;
-    border: 3px solid #6c757d;
-    border-radius: 50%;
-    overflow: hidden;
-    cursor: pointer;
-    img {
-      width: 100%;
+  padding-top: 40px;
+  max-width: 700px;
+  margin: 0 auto;
+  .big-six__icons-container {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 95%;
+    .big-six_icon {
+      width: 85px;
+      border: 3px solid #6c757d;
+      border-radius: 50%;
+      overflow: hidden;
+      cursor: pointer;
+      margin: 0 5px 20px;
+      img {
+        width: 100%;
+      }
+    }
+    .big-six_icon:hover {
+      filter: opacity(0.6);
+      border: 5px solid #007bff;
     }
   }
-}
-
-.big-six_icon:hover {
-  filter: opacity(0.6);
-  border: 5px solid #007bff;
 }

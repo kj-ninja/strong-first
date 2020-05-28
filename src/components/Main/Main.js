@@ -1,48 +1,31 @@
 import React, {useEffect, useState} from 'react';
 import './Main.scss';
-import axios from "axios";
-import {isMobile} from 'react-device-detect';
 import {Link} from "react-router-dom";
+import useWindowWidth from "../../functions/hooks/useWindowWidth";
+import {getToken} from "../../functions/getToken";
+import {getTrainings} from "../Ironman/Ironman";
 import handleLogout from "../../functions/logout";
-import TrainingSummary from "../TrainingSummary/TrainingSummary";
 import Header from "../Header/Header";
+import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
+import TrainingSummary from "../TrainingSummary/TrainingSummary";
 import Button from "react-bootstrap/Button"
 import Calendar from "../Calendar/Calendar";
-import {getToken} from "../../functions/getToken";
 import Footer from "../Footer/Footer";
-import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 
 const Main = () => {
     const [trainings, setTrainings] = useState([]);
     const [trainingToShow, setTrainingToShow] = useState([]);
     const [token] = useState(getToken());
-    const url = "https://ironman.coderaf.com/training";
+    const width = useWindowWidth();
 
     useEffect(()=>{
         console.log('fetch do ironman');
-        axios.get(
-            url,
-            {
-                'headers': {'Access-Token': token}
-            })
-            .then(function (response) {
-                // handle success
-                console.log('treningi pobrane');
-                setTrainingToShow(response.data[response.data.length-1]);
-                setTrainings(response.data);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            })
-            .finally(function () {
-                // always executed
-            });
+        getTrainings(setTrainingToShow, setTrainings);
     }, [token]);
 
     // add loading spinner
     if (trainings.length === 0) {
-        if (isMobile) {
+        if (width < 650) {
             return (
                 <>
                     {/*<Header logoLink={"/main"}>*/}
@@ -83,7 +66,7 @@ const Main = () => {
     }
 
     console.log('renderuje Main');
-    if (isMobile) {
+    if (width < 650) {
         return (
             <>
                 {/*<Header logoLink={"/main"}>*/}
@@ -92,7 +75,7 @@ const Main = () => {
                 {/*        <Link to="/"><i className="fas fa-sign-out-alt main__icons--logout" onClick={handleLogout}/></Link>*/}
                 {/*    </div>*/}
                 {/*</Header>*/}
-                <HamburgerMenu/>
+                <HamburgerMenu isMain={true}/>
                 <Calendar trainings={trainings} setTrainingToShow={setTrainingToShow}/>
                 <TrainingSummary trainingToShow={trainingToShow}/>
                 <Footer relative={true}/>

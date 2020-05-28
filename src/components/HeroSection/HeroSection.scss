@@ -1,15 +1,17 @@
 .hero {
   opacity: 0.9;
-  color: white;
+  color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-image: url('../../assets/hero2.jpg');
-  background-position: center;
   background-size: cover;
+  background-position: center;
   height: 100vh;
   margin-bottom: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   h2 {
     text-align: center;
     font-size: 4rem;

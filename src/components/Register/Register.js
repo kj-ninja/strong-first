@@ -2,14 +2,14 @@ import React, {useState} from "react";
 import './Register.scss';
 import {Formik} from "formik";
 import * as Yup from "yup";
-import Button from "react-bootstrap/Button";
 import firebase from '../Firebase/firebase';
 import {Link} from 'react-router-dom';
-import Header from "../Header/Header";
-import {translate} from '../../functions/translate';
-import Footer from "../Footer/Footer";
-import {isMobile} from "react-device-detect";
+import useWindowWidth from "../../functions/hooks/useWindowWidth";
 import {registerUser} from "../Ironman/Ironman";
+import {translate} from '../../functions/translate';
+import Header from "../Header/Header";
+import Button from "react-bootstrap/Button";
+import Footer from "../Footer/Footer";
 
 const Schema = Yup.object().shape({
     email: Yup.string()
@@ -29,11 +29,12 @@ const Schema = Yup.object().shape({
 
 const Register = (props) => {
     const [errorMessage, setErrorMessage] = useState(null);
+    const width = useWindowWidth();
     let styles = {
         top: "100px"
     };
 
-    if (isMobile) {
+    if (width < 600) {
         styles = {top: 0}
     }
 

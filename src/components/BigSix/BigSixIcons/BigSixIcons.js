@@ -7,26 +7,28 @@ import bridge from '../../../assets/bridge.png';
 import situp from '../../../assets/situp.png';
 import hand from '../../../assets/hand.png';
 
-const BigSixIcons = () => {
+const BigSixIcons = ({setExercise}) => {
     return (
         <section className="big-six__icons">
-            <div className="big-six_icon">
-                <img src={push} alt=""/>
-            </div>
-            <div className="big-six_icon">
-                <img src={squat} alt=""/>
-            </div>
-            <div className="big-six_icon">
-                <img src={pull} alt=""/>
-            </div>
-            <div className="big-six_icon">
-                <img src={situp} alt=""/>
-            </div>
-            <div className="big-six_icon">
-                <img src={bridge} alt=""/>
-            </div>
-            <div className="big-six_icon">
-                <img src={hand} alt=""/>
+            <div className="big-six__icons-container">
+                <div onClick={()=>setExercise('push-ups')} className="big-six_icon">
+                    <img src={push} alt=""/>
+                </div>
+                <div className="big-six_icon">
+                    <img src={squat} alt=""/>
+                </div>
+                <div className="big-six_icon">
+                    <img src={pull} alt=""/>
+                </div>
+                <div className="big-six_icon">
+                    <img src={situp} alt=""/>
+                </div>
+                <div className="big-six_icon">
+                    <img src={bridge} alt=""/>
+                </div>
+                <div className="big-six_icon">
+                    <img src={hand} alt=""/>
+                </div>
             </div>
         </section>
     );

@@ -1,12 +1,13 @@
-.push-ups {
+.exercises {
   max-width: 1200px;
-  margin: 50px auto;
-  .push-ups__header {
+  margin: 40px auto;
+  .exercises__header {
     display: flex;
     justify-content: space-evenly;
-    margin-bottom: 20px;
+    padding: 0 10px;
+    margin-bottom: 5px;
     h3 {
-      font-size: 26px;
+      font-size: 20px;
       text-align: center;
       padding: 10px 20px;
       background-color: #434343;
@@ -14,43 +15,50 @@
       border-radius: 3px;
       text-transform: uppercase;
       font-weight: 600;
+      min-width: 120px;
     }
     h2 {
-      font-size: 30px;
+      font-size: 22px;
       text-transform: uppercase;
       font-weight: 600;
+      margin-left: 30px;
+      text-align: center;
     }
   }
-  .push-ups__images {
+  .exercises__images {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     width: 100%;
-    justify-content: space-between;
-    .push-ups__image {
-      background-image: url("../../../../assets/hero2.jpg");
-      width: 100%;
+    padding: 0 5px;
+    .exercises__image {
+      background-image: url("../../../assets/hero2.jpg");
+      min-width: 330px;
       height: 400px;
       background-size: cover;
       background-position: center;
-      margin: 1rem;
+      margin: 5px 5px;
+      flex-grow: 1;
     }
   }
-  .push-ups__goals-container {
+  .exercises__goals-container {
     display: flex;
     flex-direction: column;
-    margin: 10px auto;
-    max-width: 400px;
-    .push-ups__goals-title {
+    margin: 25px auto;
+    max-width: 430px;
+    padding: 0 10px;
+    .exercises__goals-title {
       font-weight: 600;
-      font-size: 24px;
+      font-size: 20px;
       margin-bottom: 10px;
     }
-    .push-ups__goals-list {
-      list-style-image: url("../../../../assets/push.svg");
+    .exercises__goals-list {
+      list-style-image: url("../../../assets/push.svg");
     }
   }
-  .push-ups__paginate-container {
+  .exercises__paginate-container {
     margin-top: 50px;
-    .push-ups__paginate-list {
+    .exercises__paginate-list {
       display: flex;
       justify-content: center;
       max-width: 500px;

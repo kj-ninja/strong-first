@@ -2,13 +2,13 @@ import React, {useState} from 'react';
 import './Login.scss';
 import {Formik, Field, Form, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
-import Button from "react-bootstrap/Button";
 import {Link} from 'react-router-dom';
 import firebase from '../Firebase/firebase';
-import Header from "../Header/Header";
+import useWindowWith from '../../functions/hooks/useWindowWidth';
 import {translate} from '../../functions/translate';
+import Header from "../Header/Header";
+import Button from "react-bootstrap/Button";
 import Footer from "../Footer/Footer";
-import {isMobile} from "react-device-detect";
 
 const Schema = Yup.object({
     email: Yup.string()
@@ -20,11 +20,12 @@ const Schema = Yup.object({
 
 const Login = (props) => {
     const [errorMessage, setErrorMessage] = useState(null);
+    const width = useWindowWith();
     let styles = {
         top: "100px"
     };
 
-    if (isMobile) {
+    if (width < 600) {
         styles = {top: 0}
     }
     return (

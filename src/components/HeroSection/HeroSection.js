@@ -4,10 +4,10 @@ import {Link} from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Jumbotron from "react-bootstrap/Jumbotron";
 
-const HeroSection = ({element}) => {
+const HeroSection = () => {
     return (
         <Jumbotron className="hero">
-            <h2 ref={element}>Strong First</h2>
+            <h2>Strong First</h2>
             <p className="hero__para">
                 to łatwy w użyciu i szybki w działaniu dzienniczek sportowy.
                 Zacznij już dziś kontrolować swój postęp siłowy.
