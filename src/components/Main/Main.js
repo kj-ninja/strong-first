@@ -96,7 +96,7 @@ const Main = () => {
             </Header>
             <Calendar trainings={trainings} setTrainingToShow={setTrainingToShow}/>
             <TrainingSummary trainingToShow={trainingToShow}/>
-            <Footer relative={false}/>
+            <Footer bottom={0}/>
         </>
     );
 };

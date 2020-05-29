@@ -7,11 +7,12 @@ import bridge from '../../../assets/bridge.png';
 import situp from '../../../assets/situp.png';
 import hand from '../../../assets/hand.png';
 
-const BigSixIcons = ({setExercise}) => {
+const BigSixIcons = ({handleClickPushUps}) => {
     return (
         <section className="big-six__icons">
             <div className="big-six__icons-container">
-                <div onClick={()=>setExercise('push-ups')} className="big-six_icon">
+                <div onClick={handleClickPushUps}
+                     className="big-six_icon">
                     <img src={push} alt=""/>
                 </div>
                 <div className="big-six_icon">

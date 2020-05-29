@@ -73,7 +73,7 @@ const Login = (props) => {
                     </Formik>
                 </div>
             </section>
-            <Footer props={false}/>
+            <Footer bottom={0}/>
         </>
     );
 };

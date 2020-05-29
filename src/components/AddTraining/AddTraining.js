@@ -7,6 +7,7 @@ import Header from "../Header/Header";
 import AddTrainingForm from "./AddTrainingForm/AddTrainingForm";
 import {addTraining} from "../Ironman/Ironman";
 import AddTrainingList from "./AddTrainingList/AddTrainingList";
+import Footer from "../Footer/Footer";
 
 const AddTraining = (props) => {
     const [exercisesView, setExercisesView] = useState([]);
@@ -108,6 +109,7 @@ const AddTraining = (props) => {
             <AddTrainingForm setSelectedExercise={setSelectedExercise} handleAddTraining={handleAddTraining}
                              handleAddSet={handleAddSet}/>
             <AddTrainingList exercisesView={exercisesView} setExercisesView={setExercisesView}/>
+            <Footer bottom={0}/>
         </>
     );
 };
