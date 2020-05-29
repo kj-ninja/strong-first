@@ -121,7 +121,7 @@ const Register = (props) => {
                     );
                 }}
             </Formik>
-            <Footer props={false}/>
+            <Footer bottom={0}/>
         </>
     );
 }

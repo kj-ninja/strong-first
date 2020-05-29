@@ -9,7 +9,7 @@ const AddTrainingFormStepOne = ({handleNextStep, setValuesStepOne}) => {
     };
     const validationSchema = Yup.object({
         name: Yup.string()
-            .max(50, 'Maksymalnie 50 znaków')
+            .max(60, 'Maksymalnie 60 znaków')
             .required('Pole wymagane'),
         duration: Yup.string()
             .required('Pole wymagane')
