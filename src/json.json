@@ -1,0 +1,42 @@
+{
+  "techniques": [
+    {
+      "exercise": {
+        "id": 1,
+        "name": "pompki"
+      },
+      "steps": [
+        {
+          "id": 1,
+          "name": "Pompki przy ścianie",
+          "stepNumber": 1,
+          "stepName": "Krok 1",
+          "images": [
+            "http://costam-zobaczymy.com/starting_position_1.jpeg",
+            "http://costam-zobaczymy.com/end_position_1.jpeg"
+          ],
+          "stages": {
+            "expert": "3 serie po 50 powtórzeń",
+            "beginner": "3 serie po 10 powtórzeń",
+            "intermediate": "3 serie po 25 powtórzeń"
+          }
+        },
+        {
+          "id": 2,
+          "name": "Pompki pochylone",
+          "stepNumber": 2,
+          "stepName": "Krok 2",
+          "images": [
+            "http://costam-zobaczymy.com/starting_position_1.jpeg",
+            "http://costam-zobaczymy.com/end_position_1.jpeg"
+          ],
+          "stages": {
+            "expert": "3 serie po 40 powtórzeń",
+            "beginner": "3 serie po 10 powtórzeń",
+            "intermediate": "3 serie po 25 powtórzeń"
+          }
+        }
+      ]
+    }
+  ]
+}

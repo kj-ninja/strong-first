@@ -1,18 +1,16 @@
 import axios from "axios";
-import {getToken} from "../../functions/getToken";
+import {getToken} from "../functions/getToken";
 const USER_URL = "https://ironman.coderaf.com/user";
 const TRAINING_URL = "https://ironman.coderaf.com/training";
-const BIG_SIX_URL = "https://ironman.coderaf.com/big-six";
+const BIG_SIX_URL = "https://ironman.coderaf.com/workout-program/big-six";
 
 const addTraining = (training, success) => {
-
     axios.post(TRAINING_URL, training, {
         headers: {
             'Access-Token': getToken()
         },
     })
         .then(function (res) {
-            // handle success
             console.log('treningi wyslane');
             success();
         })
@@ -28,7 +26,6 @@ const registerUser = (user, token, success) => {
         },
     })
         .then(function (res) {
-            // handle success
             console.log('user zarejestrowany');
             success();
         })
@@ -66,17 +63,15 @@ const getBigSix = (success) => {
         })
         .then(function (response) {
             // handle success
-            console.log('treningi pobrane');
+            console.log('cwiczenia pobrane');
             success(response.data);
         })
         .catch(function (error) {
-            // handle error
             console.log(error);
         })
         .finally(function () {
-            // always executed
         });
 };
 
-// TODO: ogarnac MAIN i BIG-SIX FETCH
+// TODO: ogarnac BIG-SIX FETCH
 export {addTraining, registerUser, getTrainings, getBigSix};

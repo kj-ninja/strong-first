@@ -1,88 +1,76 @@
 import React, {useState} from 'react';
 import './BigSix.scss';
-import {Link} from "react-router-dom";
-import Transition from "react-transition-group/cjs/Transition";
-import useWindowWidth from '../../functions/hooks/useWindowWidth';
-import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
-import Button from "react-bootstrap/Button";
-import handleLogout from "../../functions/logout";
-import Header from "../Header/Header";
 import BigSixTable from "./BigSixTable";
 import BigSixIcons from "./BigSixIcons/BigSixIcons";
-import PushUps from "./Exercises/PushUps/PushUps";
-
-const defaultStyleBigSix = {
-    opacity: '1'
-}
-const transitionStylesBigSix = {
-    entering: {opacity: 0, top: '-1000px'},
-    entered: {opacity: 1, top: '0'},
-    exiting:  { opacity: 1, top: '0' },
-    exited:  { opacity: 0, top: '-1000px'}
-};
-const defaultStylePushUps= {
-    opacity: '0',
-}
-const transitionStylesPushUps = {
-    entering: {opacity: 0},
-    entered: {opacity: 1},
-    exiting:  { opacity: 1 },
-    exited:  { opacity: 0}
-};
+import BigSixHeader from "./BigSixHeader/BigSixHeader";
+import BigSixExercises from "./BigSixExercises/BigSixExercises";
 
 const BigSix = () => {
-    const width = useWindowWidth();
+    const [bigSix, setBigSix] = useState([{
+        "techniques": [
+            {
+                "exercise": {
+                    "id": 1,
+                    "name": "pompki"
+                },
+                "steps": [
+                    {
+                        "id": 1,
+                        "name": "Pompki przy ścianie",
+                        "stepNumber": 1,
+                        "stepName": "Krok 1",
+                        "images": [
+                            "http://costam-zobaczymy.com/starting_position_1.jpeg",
+                            "http://costam-zobaczymy.com/end_position_1.jpeg"
+                        ],
+                        "stages": {
+                            "expert": "3 serie po 50 powtórzeń",
+                            "beginner": "3 serie po 10 powtórzeń",
+                            "intermediate": "3 serie po 25 powtórzeń"
+                        }
+                    },
+                    {
+                        "id": 1,
+                        "name": "Pompki pochylone",
+                        "stepNumber": 2,
+                        "stepName": "Krok 2",
+                        "images": [
+                            "http://costam-zobaczymy.com/starting_position_1.jpeg",
+                            "http://costam-zobaczymy.com/end_position_1.jpeg"
+                        ],
+                        "stages": {
+                            "expert": "3 serie po 40 powtórzeń",
+                            "beginner": "3 serie po 10 powtórzeń",
+                            "intermediate": "3 serie po 25 powtórzeń"
+                        }
+                    }
+                ]
+            }
+        ]
+    }]);
     const [exercise, setExercise] = useState('table');
     const [isTable, setIsTable] = useState(true);
-    const [isPushUps, setIsPushUps] = useState(false);
+    const [isExercise, setIsExercise] = useState(false);
+    console.log(bigSix[0].techniques[0].steps);
 
-    const handleClickPushUps = () => {
+    const handleClickExercise = (e) => {
         setIsTable(false);
-        setExercise('push-ups');
-        setIsPushUps(true);
+        setExercise(e.target.id);
+        setIsExercise(true);
     };
 
     const handleClickBigSix = () => {
         setIsTable(true);
         setExercise('table');
-        setIsPushUps(false);
+        setIsExercise(false);
     };
 
     return (
         <>
-            {width < 650 ? <HamburgerMenu setExercise={setExercise}/> :
-            <Header logoLink={"/main"}>
-                    <div className="big-six__buttons--desktop">
-                        <Link onClick={handleClickBigSix}
-                              to="/big-six"><Button variant="primary">Wielka szóstka</Button></Link>
-                        <Link to="/add-training"><Button variant="primary">Dodaj trening</Button></Link>
-                        <Link to="/"><Button className="big-six__btn--logout" onClick={handleLogout}
-                                             variant="secondary">
-                            Wyloguj się</Button>
-                        </Link>
-                    </div>
-            </Header>}
-            <BigSixIcons handleClickPushUps={handleClickPushUps}/>
-            <Transition in={isTable} timeout={50} appear={true} unmountOnExit={true}>
-                {state => (
-                    <section className="big-six__cover" style={{
-                        ...defaultStyleBigSix,
-                        ...transitionStylesBigSix[state]
-                    }}>
-                        {exercise === 'table' && <BigSixTable/>}
-                    </section>
-                )}
-            </Transition>
-            <Transition in={isPushUps} timeout={50} appear={true} unmountOnExit={true}>
-                {state => (
-                    <section className="push-ups__cover" style={{
-                        ...defaultStylePushUps,
-                        ...transitionStylesPushUps[state]
-                    }}>
-                        {exercise === 'push-ups' && <PushUps/>}
-                    </section>
-                )}
-            </Transition>
+            <BigSixHeader handleBigSix={handleClickBigSix}/>
+            <BigSixIcons handleClickExercise={handleClickExercise}/>
+            <BigSixTable exercise={exercise} isTable={isTable}/>
+            <BigSixExercises bigSix={bigSix} isExercise={isExercise} exercise={exercise}/>
         </>
     )
 };

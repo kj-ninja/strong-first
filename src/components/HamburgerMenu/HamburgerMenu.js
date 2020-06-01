@@ -15,7 +15,7 @@ const HamburgerMenu = (props) => {
                 <Nav className="hamburger__actions">
                     {
                         props.isMain ? <Link to="/big-six">Wielka szóstka</Link> :
-                        <Link onClick={() => props.setExercise('table')} to="/big-six">Wielka szóstka</Link>
+                        <Link onClick={props.handleBigSix} to="/big-six">Wielka szóstka</Link>
                     }
                     <Link to="/add-training">Dodaj trening</Link>
                     <Link to="/" onClick={logout}>Wyloguj się</Link>

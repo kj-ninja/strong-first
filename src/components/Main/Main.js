@@ -3,7 +3,7 @@ import './Main.scss';
 import {Link} from "react-router-dom";
 import useWindowWidth from "../../functions/hooks/useWindowWidth";
 import {getToken} from "../../functions/getToken";
-import {getTrainings} from "../Ironman/Ironman";
+import {getTrainings} from "../../api/ironman";
 import handleLogout from "../../functions/logout";
 import Header from "../Header/Header";
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";

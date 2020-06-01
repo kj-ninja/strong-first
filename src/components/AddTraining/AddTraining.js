@@ -5,7 +5,7 @@ import handleLogout from "../../functions/logout";
 import Button from "react-bootstrap/Button";
 import Header from "../Header/Header";
 import AddTrainingForm from "./AddTrainingForm/AddTrainingForm";
-import {addTraining} from "../Ironman/Ironman";
+import {addTraining} from "../../api/ironman";
 import AddTrainingList from "./AddTrainingList/AddTrainingList";
 import Footer from "../Footer/Footer";
 

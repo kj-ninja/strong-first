@@ -1,32 +1,32 @@
 export default function handleStep(e, set) {
     if (e.currentTarget.innerText === '1') {
-        set('stepOne');
+        set(0);
     }
     if (e.currentTarget.innerText === '2') {
-        set('stepTwo');
+        set(1);
     }
     if (e.currentTarget.innerText === '3') {
-        set('stepThree');
+        set(2);
     }
     if (e.currentTarget.innerText === '4') {
-        set('stepFour');
+        set(3);
     }
     if (e.currentTarget.innerText === '5') {
-        set('stepFive');
+        set(4);
     }
     if (e.currentTarget.innerText === '6') {
-        set('stepSix');
+        set(5);
     }
     if (e.currentTarget.innerText === '7') {
-        set('stepSeven');
+        set(6);
     }
     if (e.currentTarget.innerText === '8') {
-        set('stepEight');
+        set(7);
     }
     if (e.currentTarget.innerText === '9') {
-        set('stepNine');
+        set(8);
     }
     if (e.currentTarget.innerText === '10') {
-        set('stepMaster');
+        set(9);
     }
 };

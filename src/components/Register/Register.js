@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import firebase from '../Firebase/firebase';
 import {Link} from 'react-router-dom';
 import useWindowWidth from "../../functions/hooks/useWindowWidth";
-import {registerUser} from "../Ironman/Ironman";
+import {registerUser} from "../../api/ironman";
 import {translate} from '../../functions/translate';
 import Header from "../Header/Header";
 import Button from "react-bootstrap/Button";
