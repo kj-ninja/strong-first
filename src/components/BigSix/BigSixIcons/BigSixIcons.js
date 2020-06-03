@@ -1,11 +1,11 @@
 import React from 'react';
 import './BigSixIcons.scss';
-import push from '../../../assets/push.svg';
-import pull from '../../../assets/pull.svg';
-import squat from '../../../assets/squat.svg';
-import bridge from '../../../assets/bridge.png';
-import situp from '../../../assets/situp.png';
-import hand from '../../../assets/hand.png';
+import push from '../../../assets/icons/push.svg';
+import pull from '../../../assets/icons/pull.svg';
+import squat from '../../../assets/icons/squat.svg';
+import bridge from '../../../assets/icons/bridge.png';
+import situp from '../../../assets/icons/situp.png';
+import hand from '../../../assets/icons/hand.png';
 
 const BigSixIcons = ({handleClickExercise}) => {
     return (

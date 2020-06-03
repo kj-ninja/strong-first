@@ -11,7 +11,6 @@ const BigSix = () => {
     const [exercise, setExercise] = useState('table');
     const [isTable, setIsTable] = useState(true);
     const [isExercise, setIsExercise] = useState(false);
-    console.log(bigSix.workouts);
 
     useEffect(()=>{
         console.log('fetch do ironman');
