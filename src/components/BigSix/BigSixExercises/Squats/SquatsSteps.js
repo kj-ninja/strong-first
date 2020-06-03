@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PushUpSteps = ({bigSix, active}) => {
+const SquatsSteps = ({bigSix, active}) => {
     return (
         <>
             <div className="exercises__header">
@@ -23,5 +23,4 @@ const PushUpSteps = ({bigSix, active}) => {
     );
 };
 
-export default PushUpSteps;
-
+export default SquatsSteps;

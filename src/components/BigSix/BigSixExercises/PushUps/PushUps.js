@@ -9,7 +9,7 @@ const PushUps = ({bigSix}) => {
     return (
         <section className="exercises">
             <PushUpsSteps bigSix={bigSix} active={active}/>
-            <Pagination active={active} setActive={setActive} bigSix={bigSix}/>
+            <Pagination active={active} setActive={setActive} bigSix={bigSix} exerciseNumber={1}/>
         </section>
     );
 };
