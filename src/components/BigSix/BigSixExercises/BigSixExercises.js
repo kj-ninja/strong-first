@@ -1,15 +1,15 @@
 import React from 'react';
-import PushUps from "./PushUps/PushUps";
 import Transition from "react-transition-group/cjs/Transition";
+import Exercise from "./Exercise/Exercise";
 
-const defaultStyleExercise= {
+const defaultStyleExercise = {
     opacity: '0',
 }
 const transitionStylesExercise = {
     entering: {opacity: 0},
     entered: {opacity: 1},
-    exiting:  { opacity: 1 },
-    exited:  { opacity: 0}
+    exiting: {opacity: 1},
+    exited: {opacity: 0}
 };
 
 const BigSixExercises = ({bigSix, isExercise, exercise}) => {
@@ -20,7 +20,7 @@ const BigSixExercises = ({bigSix, isExercise, exercise}) => {
                     ...defaultStyleExercise,
                     ...transitionStylesExercise[state]
                 }}>
-                    {exercise === 'push-ups' && <PushUps bigSix={bigSix}/>}
+                    <Exercise bigSix={bigSix} exercise={exercise}/>
                 </section>
             )}
         </Transition>
