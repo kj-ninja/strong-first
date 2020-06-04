@@ -1,8 +1,8 @@
 
-# Calisthenics
+# Strong First
 
 ## Introduction
-Calisthenics is an application and website, which motivates to practice sports 
+Strong First is an application and website, which motivates to practice sports 
 by controlling strength and condition progress by the user.
 
 
