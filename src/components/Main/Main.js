@@ -62,7 +62,6 @@ const Main = () => {
                 </div>
             </>
         )
-
     }
 
     console.log('renderuje Main');

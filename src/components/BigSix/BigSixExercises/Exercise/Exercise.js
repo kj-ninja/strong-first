@@ -32,6 +32,8 @@ const Exercise = ({bigSix, exercise}) => {
             exerciseNumber = 5;
             url = 'https://coderaf-strong-first-images.s3.eu-west-3.amazonaws.com/hand-stand.jpg';
             break;
+        default:
+            console.log('Brak ćwiczenia');
     }
 
     return (
