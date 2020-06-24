@@ -1,31 +1,61 @@
-import React from 'react';
-import {HashRouter, Route, Switch} from 'react-router-dom';
+import React, {useEffect} from 'react';
+import {connect} from 'react-redux';
+import {Route, Switch, Redirect} from 'react-router-dom';
+import {authStateCheck} from './store/actions/auth';
+import Layout from "./containers/Layout/Layout";
 import Home from "./components/Home/Home";
-import Login from "./components/Login/Login";
-import Register from "./components/Register/Register";
-import Main from "./components/Main/Main";
+import Login from "./containers/Auth/Login/Login";
+import Register from "./containers/Auth/Register/Register";
+import Diary from "./containers/Diary/Diary";
 import AddTraining from "./components/AddTraining/AddTraining";
 import NotFound from "./components/NotFound/NotFound";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
-import BigSix from "./components/BigSix/BigSix";
+import BigSix from "./containers/BigSix/BigSix";
+import Logout from "./containers/Auth/Logout/Logout";
 
-function App() {
+function App(props) {
+    const {authStateCheck} = props;
+
+    useEffect(() => {
+        authStateCheck();
+    }, [authStateCheck]);
+
+    let routes = (
+        <Switch>
+            <Route path="/login" component={Login}/>
+            <Route path="/register" component={Register}/>
+            <Route exact path="/" component={Home}/>
+            <Redirect to="/"/>
+        </Switch>
+    );
+
+    if (props.isAuth) {
+        routes = (
+            <Switch>
+                <Route path="/diary" component={Diary}/>
+                <Route path="/big-six" component={BigSix}/>
+                <Route path="/add-training" render={(props) => <AddTraining {...props}/>}/>
+                <Route path="/logout" component={Logout}/>
+                <Redirect to='/diary'/>
+                <Route component={NotFound}/>
+            </Switch>
+        );
+    }
+
     return (
         <>
-            <HashRouter>
-                <ScrollToTop />
-                <Switch>
-                    <Route exact path="/" component={Home}/>
-                    <Route path="/login" component={Login}/>
-                    <Route path="/register" component={Register}/>
-                    <Route path="/main" component={Main}/>
-                    <Route path="/add-training" render={(props) => <AddTraining {...props}/>}/>
-                    <Route path="/big-six" component={BigSix}/>
-                    <Route component={NotFound}/>
-                </Switch>
-            </HashRouter>
+            <Layout>
+                <ScrollToTop/>
+                {routes}
+            </Layout>
         </>
     );
 }
 
-export default App;
+const mapStateToProps = state => {
+    return {
+        isAuth: state.token !== null
+    }
+};
+
+export default connect(mapStateToProps, {authStateCheck})(App);

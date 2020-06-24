@@ -1,0 +1,41 @@
+@import '../../../scss/settings/fonts';
+@import '../../../scss/settings/mixins';
+
+header {
+  box-shadow: 0 3px 6px #00000029;
+  background-color: #fafbfc;
+  position: relative;
+  z-index: 1000;
+  .header__container.header__wrapper {
+    max-width: 1350px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .header__logo {
+      font-family: $logo-font;
+      font-size: 2.15rem;
+      a {
+        color: #bd2130;
+        .header__logo--accent {
+          color: #1c1919;
+        }
+      }
+    }
+    nav {
+      display: none;
+      @include tablet() {
+        display: block;
+      }
+    }
+    .hamburger {
+      font-size: 40px;
+      cursor: pointer;
+      @include tablet() {
+        display: none;
+      }
+    }
+  }
+}

@@ -73,5 +73,4 @@ const getBigSix = (success) => {
         });
 };
 
-// TODO: ogarnac BIG-SIX FETCH
 export {addTraining, registerUser, getTrainings, getBigSix};

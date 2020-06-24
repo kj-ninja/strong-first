@@ -1,0 +1,37 @@
+@import '../../../scss/settings/mixins';
+
+.side-drawer {
+  position: fixed;
+  width: 280px;
+  max-width: 70%;
+  height: 100%;
+  right: 0;
+  top: 0;
+  z-index: 1100;
+  background-color: #fff;
+  padding: 70px 16px;
+  transition: transform 0.3s ease-out;
+  @include tablet() {
+    .side-drawer {
+      display: none;
+    }
+  }
+  .side-drawer__cross {
+    position: absolute;
+    top: 10px;
+    right: 16px;
+    i {
+      font-size: 50px;
+      cursor: pointer;
+    }
+  }
+}
+
+.open {
+  transform: translateX(0);
+}
+
+.close {
+  transform: translateX(100%);
+}
+
