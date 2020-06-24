@@ -3,11 +3,9 @@ import './Register.scss';
 import {Formik} from "formik";
 import * as Yup from "yup";
 import firebase from '../../../api/firebase';
-import {Link} from 'react-router-dom';
 import useWindowWidth from "../../../functions/hooks/useWindowWidth";
 import {registerUser} from "../../../api/ironman";
 import {translate} from '../../../functions/translate'
-import Header from "../../../components/Header/Header";
 import Button from "react-bootstrap/Button";
 import Footer from "../../../components/Footer/Footer";
 
@@ -40,10 +38,6 @@ const Register = (props) => {
 
     return (
         <>
-            <Header logoLink={"/"}>
-                <Link to="/login"><Button variant="primary">Zaloguj się</Button></Link>
-            </Header>
-
             <Formik
                 initialValues={{
                     email: "",

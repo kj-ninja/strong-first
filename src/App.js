@@ -1,5 +1,6 @@
 import React from 'react';
-import {HashRouter, Route, Switch} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
+import Layout from "./containers/Layout/Layout";
 import Home from "./components/Home/Home";
 import Login from "./containers/Auth/Login/Login";
 import Register from "./containers/Auth/Register/Register";
@@ -12,8 +13,8 @@ import BigSix from "./containers/BigSix/BigSix";
 function App() {
     return (
         <>
-            <HashRouter>
-                <ScrollToTop />
+            <Layout>
+                <ScrollToTop/>
                 <Switch>
                     <Route exact path="/" component={Home}/>
                     <Route path="/login" component={Login}/>
@@ -23,7 +24,7 @@ function App() {
                     <Route path="/big-six" component={BigSix}/>
                     <Route component={NotFound}/>
                 </Switch>
-            </HashRouter>
+            </Layout>
         </>
     );
 }

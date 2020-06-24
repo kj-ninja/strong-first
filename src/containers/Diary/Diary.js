@@ -5,7 +5,6 @@ import useWindowWidth from "../../functions/hooks/useWindowWidth";
 import {getToken} from "../../functions/getToken";
 import {getTrainings} from "../../api/ironman";
 import handleLogout from "../../functions/logout";
-import Header from "../../components/Header/Header";
 import HamburgerMenu from "../../components/HamburgerMenu/HamburgerMenu";
 import TrainingSummary from "./TrainingSummary/TrainingSummary";
 import Button from "react-bootstrap/Button"
@@ -45,7 +44,7 @@ const Diary = () => {
         }
         return (
             <>
-                <Header logoLink={"/main"}>
+                {/*<Header logoLink={"/main"}>*/}
                     <div className="big-six__buttons--desktop">
                         <Link to="/big-six"><Button variant="primary">Wielka szóstka</Button></Link>
                         <Link to="/add-training"><Button variant="primary">Dodaj trening</Button></Link>
@@ -54,7 +53,7 @@ const Diary = () => {
                             Wyloguj się</Button>
                         </Link>
                     </div>
-                </Header>
+                {/*</Header>*/}
                 <div className="d-flex justify-content-center">
                     <div className="spinner-border text-primary" role="status">
                         <span className="sr-only">Loading...</span>
@@ -83,7 +82,7 @@ const Diary = () => {
     }
     return (
         <>
-            <Header logoLink={"/main"}>
+            {/*<Header logoLink={"/main"}>*/}
                 <div className="big-six__buttons--desktop">
                     <Link to="/big-six"><Button variant="primary">Wielka szóstka</Button></Link>
                     <Link to="/add-training"><Button variant="primary">Dodaj trening</Button></Link>
@@ -92,7 +91,7 @@ const Diary = () => {
                         Wyloguj się</Button>
                     </Link>
                 </div>
-            </Header>
+            {/*</Header>*/}
             <Calendar trainings={trainings} setTrainingToShow={setTrainingToShow}/>
             <TrainingSummary trainingToShow={trainingToShow}/>
             {/*<Footer bottom={0}/>*/}

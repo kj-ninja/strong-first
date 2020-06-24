@@ -2,11 +2,9 @@ import React, {useState} from 'react';
 import './Login.scss';
 import {Formik, Field, Form, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
-import {Link} from 'react-router-dom';
 import firebase from '../../../api/firebase';
 import useWindowWith from '../../../functions/hooks/useWindowWidth';
 import {translate} from '../../../functions/translate';
-import Header from "../../../components/Header/Header";
 import Button from "react-bootstrap/Button";
 import Footer from "../../../components/Footer/Footer";
 
@@ -30,9 +28,9 @@ const Login = (props) => {
     }
     return (
         <>
-            <Header logoLink={"/"}>
-                <Link to="/register"><Button variant="primary">Zarejestruj się</Button></Link>
-            </Header>
+            {/*<Header logoLink={"/"}>*/}
+            {/*    <Link to="/register"><Button variant="primary">Zarejestruj się</Button></Link>*/}
+            {/*</Header>*/}
             <section className="login">
                 <div className="login__container" style={{...styles}}>
                     <h2>Zaloguj się</h2>

@@ -3,7 +3,6 @@ import './AddTraining.scss';
 import {Link} from "react-router-dom";
 import handleLogout from "../../functions/logout";
 import Button from "react-bootstrap/Button";
-import Header from "../Header/Header";
 import AddTrainingForm from "./AddTrainingForm/AddTrainingForm";
 import {addTraining} from "../../api/ironman";
 import AddTrainingList from "./AddTrainingList/AddTrainingList";
@@ -102,9 +101,9 @@ const AddTraining = (props) => {
 
     return (
         <>
-            <Header logoLink={"/main"}>
-                <Link to="/"><Button onClick={handleLogout} variant="primary">Wyloguj się</Button></Link>
-            </Header>
+            {/*<Header logoLink={"/main"}>*/}
+            {/*    <Link to="/"><Button onClick={handleLogout} variant="primary">Wyloguj się</Button></Link>*/}
+            {/*</Header>*/}
 
             <AddTrainingForm setSelectedExercise={setSelectedExercise} handleAddTraining={handleAddTraining}
                              handleAddSet={handleAddSet}/>

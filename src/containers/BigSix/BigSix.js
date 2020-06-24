@@ -32,7 +32,7 @@ const BigSix = () => {
 
     return (
         <>
-            <BigSixHeader handleBigSix={handleClickBigSix}/>
+            {/*<BigSixHeader handleBigSix={handleClickBigSix}/>*/}
             <BigSixIcons handleClickExercise={handleClickExercise}/>
             <BigSixTable exercise={exercise} isTable={isTable}/>
             {bigSix.length === 0 ? null : <BigSixExercises bigSix={bigSix} isExercise={isExercise} exercise={exercise}/>}
