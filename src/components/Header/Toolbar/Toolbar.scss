@@ -1,5 +1,5 @@
 @import '../../../scss/settings/fonts';
-@import url('https://fonts.googleapis.com/css2?family=Piedra&display=swap');
+@import '../../../scss/settings/mixins';
 
 header {
   box-shadow: 0 3px 6px #00000029;
@@ -26,7 +26,17 @@ header {
       }
     }
     nav {
-      height: 70px;
+      display: none;
+      @include tablet() {
+        display: block;
+      }
+    }
+    .hamburger {
+      font-size: 40px;
+      cursor: pointer;
+      @include tablet() {
+        display: none;
+      }
     }
   }
 }

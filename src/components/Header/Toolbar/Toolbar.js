@@ -10,7 +10,7 @@ const Toolbar = (props) => {
                 <h1 className="header__logo">
                     <Link to="/">Strong<span className="header__logo--accent">First</span></Link>
                 </h1>
-                {props.children}
+                <i className="fas fa-bars hamburger" onClick={props.showDrawer}/>
                 <nav>
                     <NavigationItems/>
                 </nav>

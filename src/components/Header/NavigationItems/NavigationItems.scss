@@ -1,6 +1,13 @@
+@import '../../../scss/settings/mixins';
+
 .navigation-items {
   display: flex;
+  flex-flow: column;
+  align-items: center;
   height: 100%;
+  @include tablet() {
+    flex-direction: row;
+  }
   .navigation-item {
     margin: 0 0 0 45px;
     display: block;
@@ -19,3 +26,4 @@
     }
   }
 }
+
