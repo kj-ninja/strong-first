@@ -2,8 +2,8 @@ import React from 'react';
 import './Login.scss';
 import * as Yup from 'yup';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 import {login} from '../../../store/actions/auth';
-
 import {Formik, Field, Form, ErrorMessage} from 'formik';
 import useWindowWith from '../../../functions/hooks/useWindowWidth';
 import Button from "react-bootstrap/Button";
@@ -32,10 +32,16 @@ const Login = (props) => {
         return <Spinner />;
     }
 
+    let authRedirect = null;
+    if (props.isAuth) {
+        authRedirect = <Redirect to="/diary"/>;
+    }
+
     return (
         <>
             <section className="login">
                 <div className="login__container" style={{...styles}}>
+                    {authRedirect}
                     <h2>Zaloguj się</h2>
                     <Formik
                         initialValues={{email: '', password: ''}}
@@ -54,6 +60,7 @@ const Login = (props) => {
                             <Field name="password" type="password" id="password" className="login__input"/>
                             <p className="login__error-message">
                                 <ErrorMessage name="password"/> <br/>
+                                {props.error}
                             </p>
                             <div className="login__buttons">
                                 <Button variant="outline-secondary" type="submit">Zaloguj się</Button>
@@ -70,9 +77,9 @@ const Login = (props) => {
 const mapStateToProps = state => {
     return {
         token: state.token,
-        userId: state.userId,
         error: state.error,
-        loading: state.loading
+        loading: state.loading,
+        isAuth: state.token  !== null
     }
 };
 

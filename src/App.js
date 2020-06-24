@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch, Redirect} from 'react-router-dom';
+import {authStateCheck} from './store/actions/auth';
 import Layout from "./containers/Layout/Layout";
 import Home from "./components/Home/Home";
 import Login from "./containers/Auth/Login/Login";
@@ -13,20 +14,39 @@ import BigSix from "./containers/BigSix/BigSix";
 import Logout from "./containers/Auth/Logout/Logout";
 
 function App(props) {
+    const {authStateCheck} = props;
+
+    useEffect(() => {
+        authStateCheck();
+    }, [authStateCheck]);
+
+    let routes = (
+        <Switch>
+            <Route path="/login" component={Login}/>
+            <Route path="/register" component={Register}/>
+            <Route exact path="/" component={Home}/>
+            <Redirect to="/"/>
+        </Switch>
+    );
+
+    if (props.isAuth) {
+        routes = (
+            <Switch>
+                <Route path="/diary" component={Diary}/>
+                <Route path="/big-six" component={BigSix}/>
+                <Route path="/add-training" render={(props) => <AddTraining {...props}/>}/>
+                <Route path="/logout" component={Logout}/>
+                <Redirect to='/diary'/>
+                <Route component={NotFound}/>
+            </Switch>
+        );
+    }
+
     return (
         <>
             <Layout>
                 <ScrollToTop/>
-                <Switch>
-                    <Route exact path="/" component={Home}/>
-                    <Route path="/login" component={Login}/>
-                    <Route path="/register" component={Register}/>
-                    <Route path="/logout" component={Logout}/>
-                    <Route path="/diary" component={Diary}/>
-                    <Route path="/add-training" render={(props) => <AddTraining {...props}/>}/>
-                    <Route path="/big-six" component={BigSix}/>
-                    <Route component={NotFound}/>
-                </Switch>
+                {routes}
             </Layout>
         </>
     );
@@ -38,4 +58,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect()(App);
+export default connect(mapStateToProps, {authStateCheck})(App);

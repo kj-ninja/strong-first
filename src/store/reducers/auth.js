@@ -2,7 +2,6 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     token: null,
-    userId: null,
     error: null,
     loading: false
 };
@@ -19,7 +18,6 @@ const auth = (state=initialState, action) => {
             return {
                 ...state,
                 token: action.token,
-                userId: action.userId,
                 error: null,
                 loading: false
             }
@@ -37,8 +35,7 @@ const auth = (state=initialState, action) => {
         case actionTypes.AUTH_LOGOUT:
             return {
                 ...state,
-                token: null,
-                userId: null
+                token: null
             }
         default:
             return state;
