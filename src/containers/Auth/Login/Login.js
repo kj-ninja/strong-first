@@ -1,12 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './Login.scss';
-import {Formik, Field, Form, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
-import firebase from '../../../api/firebase';
+import {connect} from 'react-redux';
+import {login} from '../../../store/actions/auth';
+
+import {Formik, Field, Form, ErrorMessage} from 'formik';
 import useWindowWith from '../../../functions/hooks/useWindowWidth';
-import {translate} from '../../../functions/translate';
 import Button from "react-bootstrap/Button";
 import Footer from "../../../components/Footer/Footer";
+import Spinner from "../../../components/UI/Spinner/Spinner";
 
 const Schema = Yup.object({
     email: Yup.string()
@@ -17,7 +19,6 @@ const Schema = Yup.object({
 });
 
 const Login = (props) => {
-    const [errorMessage, setErrorMessage] = useState(null);
     const width = useWindowWith();
     let styles = {
         top: "100px"
@@ -26,6 +27,11 @@ const Login = (props) => {
     if (width < 600) {
         styles = {top: 0}
     }
+
+    if (props.loading) {
+        return <Spinner />;
+    }
+
     return (
         <>
             <section className="login">
@@ -35,17 +41,7 @@ const Login = (props) => {
                         initialValues={{email: '', password: ''}}
                         validationSchema={Schema}
                         onSubmit={(values) => {
-                            firebase.auth().signInWithEmailAndPassword(values.email, values.password)
-                                .then(res => {
-                                    res.user.getIdTokenResult()
-                                        .then(res => {
-                                            localStorage.setItem('token', res.token);
-                                            props.history.replace('/main');
-                                        });
-                                })
-                                .catch(function (error) {
-                                    setErrorMessage(translate(error.code));
-                                });
+                            props.login(values);
                         }}
                     >
                         <Form className="login__form">
@@ -58,7 +54,6 @@ const Login = (props) => {
                             <Field name="password" type="password" id="password" className="login__input"/>
                             <p className="login__error-message">
                                 <ErrorMessage name="password"/> <br/>
-                                {errorMessage}
                             </p>
                             <div className="login__buttons">
                                 <Button variant="outline-secondary" type="submit">Zaloguj się</Button>
@@ -72,4 +67,13 @@ const Login = (props) => {
     );
 };
 
-export default Login;
+const mapStateToProps = state => {
+    return {
+        token: state.token,
+        userId: state.userId,
+        error: state.error,
+        loading: state.loading
+    }
+};
+
+export default connect(mapStateToProps, {login})(Login);

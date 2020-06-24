@@ -1,24 +1,42 @@
 import React from 'react';
+import {connect} from 'react-redux'
+
 import './NavigationItems.scss';
 import {NavLink} from "react-router-dom";
 
-const NavigationItems = () => {
+const NavigationItems = (props) => {
     return (
         <ul className="navigation-items">
+            {props.isAuth ?
             <li className="navigation-item">
                 <NavLink exact to="/big-six">Wielka szóstka</NavLink>
-            </li>
+            </li> : null}
+
+            {props.isAuth ?
             <li className="navigation-item">
                 <NavLink exact to="/add-training">Dodaj trening</NavLink>
-            </li>
+            </li> : null}
+
+            {props.isAuth ? null :
             <li className="navigation-item">
                 <NavLink exact to="/register">Zarejestruj się</NavLink>
-            </li>
+            </li>}
+
+            {props.isAuth ?
+            <li className="navigation-item">
+                <NavLink exact to="/logout">Wyloguj się</NavLink>
+            </li> :
             <li className="navigation-item">
                 <NavLink exact to="/login">Zaloguj się</NavLink>
-            </li>
+            </li>}
         </ul>
     );
 };
 
-export default NavigationItems;
+const mapStateToProps = state => {
+    return {
+        isAuth: state.token !== null
+    }
+};
+
+export default connect(mapStateToProps)(NavigationItems);

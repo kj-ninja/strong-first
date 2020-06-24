@@ -13,7 +13,7 @@ This is my final project at `Coders Lab` bootcamp.
 
 ## Features
 
-Application has the ability to register and login handled by `Firebase`. Otherwise adding, editing, deleting trainings from actual calendar and 
+Application has the ability to register and auth handled by `Firebase`. Otherwise adding, editing, deleting trainings from actual calendar and 
 displaying statistics and training history.
 
 
