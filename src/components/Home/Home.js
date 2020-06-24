@@ -19,7 +19,6 @@ const Home = () => {
                     </div>
                 </Header>
                 <HeroSection/>
-                {/*<DemoSection/>*/}
                 <Footer relative={true}/>
             </>
         )
@@ -33,7 +32,6 @@ const Home = () => {
                 </div>
             </Header>
             <HeroSection/>
-            {/*<DemoSection/>*/}
             <Footer relative={true}/>
         </>
     )

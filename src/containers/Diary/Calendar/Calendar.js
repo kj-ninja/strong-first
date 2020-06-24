@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './Calendar.scss';
-import {createDaysInMonth, wrapTrainingsWithDate} from '../../functions/calendar';
+import {createDaysInMonth, wrapTrainingsWithDate} from '../../../functions/calendar';
 
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 

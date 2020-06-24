@@ -2,14 +2,14 @@ import React, {useState} from "react";
 import './Register.scss';
 import {Formik} from "formik";
 import * as Yup from "yup";
-import firebase from '../Firebase/firebase';
+import firebase from '../../../api/firebase';
 import {Link} from 'react-router-dom';
-import useWindowWidth from "../../functions/hooks/useWindowWidth";
-import {registerUser} from "../../api/ironman";
-import {translate} from '../../functions/translate';
-import Header from "../Header/Header";
+import useWindowWidth from "../../../functions/hooks/useWindowWidth";
+import {registerUser} from "../../../api/ironman";
+import {translate} from '../../../functions/translate'
+import Header from "../../../components/Header/Header";
 import Button from "react-bootstrap/Button";
-import Footer from "../Footer/Footer";
+import Footer from "../../../components/Footer/Footer";
 
 const Schema = Yup.object().shape({
     email: Yup.string()

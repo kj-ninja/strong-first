@@ -1,5 +1,5 @@
 import React from 'react';
-import {getRepsView} from "../../../functions/getRepsView";
+import {getRepsView} from "../../../../functions/getRepsView";
 
 const TrainingSummaryList = ({exerciseView}) => {
     return (

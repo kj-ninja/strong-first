@@ -1,18 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import './Main.scss';
+import './Diary.scss';
 import {Link} from "react-router-dom";
 import useWindowWidth from "../../functions/hooks/useWindowWidth";
 import {getToken} from "../../functions/getToken";
 import {getTrainings} from "../../api/ironman";
 import handleLogout from "../../functions/logout";
-import Header from "../Header/Header";
-import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
-import TrainingSummary from "../TrainingSummary/TrainingSummary";
+import Header from "../../components/Header/Header";
+import HamburgerMenu from "../../components/HamburgerMenu/HamburgerMenu";
+import TrainingSummary from "./TrainingSummary/TrainingSummary";
 import Button from "react-bootstrap/Button"
-import Calendar from "../Calendar/Calendar";
-import Footer from "../Footer/Footer";
+import Calendar from "./Calendar/Calendar";
+import Footer from "../../components/Footer/Footer";
 
-const Main = () => {
+const Diary = () => {
     const [trainings, setTrainings] = useState([]);
     const [trainingToShow, setTrainingToShow] = useState([]);
     const [token] = useState(getToken());
@@ -64,7 +64,7 @@ const Main = () => {
         )
     }
 
-    console.log('renderuje Main');
+    console.log('renderuje Diary');
     if (width < 650) {
         return (
             <>
@@ -100,4 +100,4 @@ const Main = () => {
     );
 };
 
-export default Main;
+export default Diary;

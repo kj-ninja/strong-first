@@ -3,12 +3,12 @@ import './Login.scss';
 import {Formik, Field, Form, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 import {Link} from 'react-router-dom';
-import firebase from '../Firebase/firebase';
-import useWindowWith from '../../functions/hooks/useWindowWidth';
-import {translate} from '../../functions/translate';
-import Header from "../Header/Header";
+import firebase from '../../../api/firebase';
+import useWindowWith from '../../../functions/hooks/useWindowWidth';
+import {translate} from '../../../functions/translate';
+import Header from "../../../components/Header/Header";
 import Button from "react-bootstrap/Button";
-import Footer from "../Footer/Footer";
+import Footer from "../../../components/Footer/Footer";
 
 const Schema = Yup.object({
     email: Yup.string()
