@@ -6,16 +6,16 @@ const NavigationItems = () => {
     return (
         <ul className="navigation-items">
             <li className="navigation-item">
-                <NavLink exact to="/4">Wielka szóstka</NavLink>
+                <NavLink exact to="/big-six">Wielka szóstka</NavLink>
             </li>
             <li className="navigation-item">
-                <NavLink exact to="/1">Dodaj trening</NavLink>
+                <NavLink exact to="/add-training">Dodaj trening</NavLink>
             </li>
             <li className="navigation-item">
-                <NavLink exact to="/2">Zarejestruj się</NavLink>
+                <NavLink exact to="/register">Zarejestruj się</NavLink>
             </li>
             <li className="navigation-item">
-                <NavLink exact to="/3">Zaloguj się</NavLink>
+                <NavLink exact to="/login">Zaloguj się</NavLink>
             </li>
         </ul>
     );

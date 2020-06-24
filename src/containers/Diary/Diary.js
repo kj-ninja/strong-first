@@ -37,12 +37,12 @@ const Diary = () => {
         return (
             <>
                     <div className="big-six__buttons--desktop">
-                        <Link to="/big-six"><Button variant="primary">Wielka szóstka</Button></Link>
-                        <Link to="/add-training"><Button variant="primary">Dodaj trening</Button></Link>
-                        <Link to="/"><Button className="big-six__btn--logout" onClick={handleLogout}
-                                             variant="secondary">
-                            Wyloguj się</Button>
-                        </Link>
+                        {/*<Link to="/big-six"><Button variant="primary">Wielka szóstka</Button></Link>*/}
+                        {/*<Link to="/add-training"><Button variant="primary">Dodaj trening</Button></Link>*/}
+                        {/*<Link to="/"><Button className="big-six__btn--logout" onClick={handleLogout}*/}
+                        {/*                     variant="secondary">*/}
+                        {/*    Wyloguj się</Button>*/}
+                        {/*</Link>*/}
                     </div>
                 <div className="d-flex justify-content-center">
                     <div className="spinner-border text-primary" role="status">
@@ -53,7 +53,6 @@ const Diary = () => {
         )
     }
 
-    console.log('renderuje Diary');
     if (width < 650) {
         return (
             <>
@@ -66,12 +65,12 @@ const Diary = () => {
     return (
         <>
                 <div className="big-six__buttons--desktop">
-                    <Link to="/big-six"><Button variant="primary">Wielka szóstka</Button></Link>
-                    <Link to="/add-training"><Button variant="primary">Dodaj trening</Button></Link>
-                    <Link to="/"><Button className="big-six__btn--logout" onClick={handleLogout}
-                                         variant="secondary">
-                        Wyloguj się</Button>
-                    </Link>
+                    {/*<Link to="/big-six"><Button variant="primary">Wielka szóstka</Button></Link>*/}
+                    {/*<Link to="/add-training"><Button variant="primary">Dodaj trening</Button></Link>*/}
+                    {/*<Link to="/"><Button className="big-six__btn--logout" onClick={handleLogout}*/}
+                    {/*                     variant="secondary">*/}
+                    {/*    Wyloguj się</Button>*/}
+                    {/*</Link>*/}
                 </div>
             <Calendar trainings={trainings} setTrainingToShow={setTrainingToShow}/>
             <TrainingSummary trainingToShow={trainingToShow}/>

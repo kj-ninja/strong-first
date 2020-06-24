@@ -15,12 +15,15 @@
     width: 100%;
     border: 1px solid gray;
     .calendar__days {
-      background-color: #b9deff;
+      background-color: #bd2130;
       tr {
         border-bottom: 1px solid gray;
       }
       th {
         width: 14%;
+        color: #fff;
+        font-weight: 600;
+        padding: 0 0 5px;
       }
     }
     .calendar__body {
@@ -30,7 +33,7 @@
       min-height: 50px;
       border: 1px solid #8080803d;
       .fas.fa-dumbbell {
-        color: #1651c9;
+        color: #bd2130;
       }
     }
     .calendar__training-day {

@@ -28,9 +28,6 @@ const Login = (props) => {
     }
     return (
         <>
-            {/*<Header logoLink={"/"}>*/}
-            {/*    <Link to="/register"><Button variant="primary">Zarejestruj się</Button></Link>*/}
-            {/*</Header>*/}
             <section className="login">
                 <div className="login__container" style={{...styles}}>
                     <h2>Zaloguj się</h2>
@@ -47,7 +44,6 @@ const Login = (props) => {
                                         });
                                 })
                                 .catch(function (error) {
-                                    console.log(values);
                                     setErrorMessage(translate(error.code));
                                 });
                         }}
