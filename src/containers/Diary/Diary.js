@@ -10,10 +10,11 @@ const Diary = (props) => {
     const {fetchTrainings, token, trainingToShow, trainings, trainingToShowHandler} = props;
 
     useEffect(() => {
+        console.log('fetch');
         fetchTrainings(token);
-    }, []);
+    }, [fetchTrainings, token]);
 
-    if (trainings.length === 0 || trainingToShow.length === 0) {
+    if (trainings.length === 0) {
         return <Spinner/>;
     }
 

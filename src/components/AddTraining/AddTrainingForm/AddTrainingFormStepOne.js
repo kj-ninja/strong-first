@@ -60,7 +60,6 @@ const AddTrainingFormStepOne = ({handleNextStep, setValuesStepOne}) => {
                             </div>
 
                             <div className="add-training__buttons-container">
-                                <Button>Dalej</Button>
                                 <Button className="btn btn-primary align-self-end" type="submit">Dalej</Button>
                             </div>
                         </div>

@@ -1,16 +1,16 @@
 button {
   font-size: 13px;
-  line-height: 41px;
+  line-height: 35px;
   font-weight: 700;
   color: #fff;
-  background-color: #08a6e4;
-  padding: 5px 57px;
+  background-color: #bd2130;
+  padding: 5px 50px;
   border-radius: 23px;
   transition: 0.3s;
   border: 1px solid transparent;
   &:hover {
     background-color: #fff;
-    color: #08a6e4;
-    border: 1px solid #08a6e4;
+    color: #bd2130;
+    border: 1px solid #bd2130;
   }
 }

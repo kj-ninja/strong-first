@@ -1,8 +1,5 @@
 import React, {useState} from 'react';
 import './AddTraining.scss';
-import {Link} from "react-router-dom";
-import handleLogout from "../../functions/logout";
-import Button from "react-bootstrap/Button";
 import AddTrainingForm from "./AddTrainingForm/AddTrainingForm";
 import {addTraining} from "../../api/ironman";
 import AddTrainingList from "./AddTrainingList/AddTrainingList";

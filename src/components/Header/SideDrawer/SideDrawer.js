@@ -12,9 +12,9 @@ const SideDrawer = (props) => {
     return (
         <>
             <Backdrop show={props.isOpen} cancel={props.hideDrawer}/>
-            <div className={attachedClasses.join(' ')}>
+            <div className={attachedClasses.join(' ')} onClick={props.hideDrawer}>
                 <div className="side-drawer__cross">
-                    <i className="fas fa-times cross" onClick={props.hideDrawer}/>
+                    <i className="fas fa-times cross"/>
                 </div>
                 <nav>
                     <NavigationItems/>
