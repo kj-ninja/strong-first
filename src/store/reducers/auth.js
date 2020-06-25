@@ -27,11 +27,6 @@ const auth = (state=initialState, action) => {
                 error: action.error,
                 loading: false
             }
-        case actionTypes.AUTH_CLEAR_ERROR:
-            return {
-                ...state,
-                error: null
-            }
         case actionTypes.AUTH_LOGOUT:
             return {
                 ...state,

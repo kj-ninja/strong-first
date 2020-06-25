@@ -11,7 +11,6 @@ const Calendar = ({trainings, setTrainingToShow}) => {
 
     useEffect(()=>{
         document.addEventListener('keydown', handleKeyArrow);
-        console.log('zamontowano event');
 
         return () => {
             document.removeEventListener('keydown', handleKeyArrow);
@@ -67,9 +66,7 @@ const Calendar = ({trainings, setTrainingToShow}) => {
         )
     };
 
-    console.log('renderuje Calendar');
     return (
-
         <div className="calendar__container">
             <div className="calendar__header">
                 <span className="calendar__month">{months[actualDate.getMonth()]}</span>

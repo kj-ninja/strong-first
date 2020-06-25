@@ -1,7 +1,7 @@
 import React from 'react';
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from "yup";
-import Button from "react-bootstrap/Button";
+import Button from "../../UI/Button/Button";
 
 const AddTrainingFormStepOne = ({handleNextStep, setValuesStepOne}) => {
     const formInputs = {
@@ -60,6 +60,7 @@ const AddTrainingFormStepOne = ({handleNextStep, setValuesStepOne}) => {
                             </div>
 
                             <div className="add-training__buttons-container">
+                                <Button>Dalej</Button>
                                 <Button className="btn btn-primary align-self-end" type="submit">Dalej</Button>
                             </div>
                         </div>

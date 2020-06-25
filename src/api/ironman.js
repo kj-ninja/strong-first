@@ -34,27 +34,6 @@ const registerUser = (user, token, success) => {
         });
 }
 
-const getTrainings = (training, trainings) => {
-    axios.get(
-        TRAINING_URL,
-        {
-            'headers': {'Access-Token': getToken()}
-        })
-        .then(function (response) {
-            // handle success
-            console.log('treningi pobrane');
-            training(response.data[response.data.length - 1]);
-            trainings(response.data);
-        })
-        .catch(function (error) {
-            // handle error
-            console.log(error);
-        })
-        .finally(function () {
-            // always executed
-        });
-}
-
 const getBigSix = (success) => {
     axios.get(
         BIG_SIX_URL,
@@ -73,4 +52,4 @@ const getBigSix = (success) => {
         });
 };
 
-export {addTraining, registerUser, getTrainings, getBigSix};
+export {addTraining, registerUser, getBigSix};

@@ -101,10 +101,6 @@ const AddTraining = (props) => {
 
     return (
         <>
-            {/*<Header logoLink={"/main"}>*/}
-            {/*    <Link to="/"><Button onClick={handleLogout} variant="primary">Wyloguj się</Button></Link>*/}
-            {/*</Header>*/}
-
             <AddTrainingForm setSelectedExercise={setSelectedExercise} handleAddTraining={handleAddTraining}
                              handleAddSet={handleAddSet}/>
             <AddTrainingList exercisesView={exercisesView} setExercisesView={setExercisesView}/>

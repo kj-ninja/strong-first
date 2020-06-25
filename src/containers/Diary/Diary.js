@@ -1,81 +1,36 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import './Diary.scss';
-import {Link} from "react-router-dom";
-import useWindowWidth from "../../functions/hooks/useWindowWidth";
-import {getToken} from "../../functions/getToken";
-import {getTrainings} from "../../api/ironman";
-import handleLogout from "../../functions/logout";
+import {connect} from 'react-redux';
+import {fetchTrainings, trainingToShowHandler} from "../../store/actions/trainings";
 import TrainingSummary from "./TrainingSummary/TrainingSummary";
-import Button from "react-bootstrap/Button"
 import Calendar from "./Calendar/Calendar";
-import Footer from "../../components/Footer/Footer";
+import Spinner from "../../components/UI/Spinner/Spinner";
 
-const Diary = () => {
-    const [trainings, setTrainings] = useState([]);
-    const [trainingToShow, setTrainingToShow] = useState([]);
-    const [token] = useState(getToken());
-    const width = useWindowWidth();
+const Diary = (props) => {
+    const {fetchTrainings, token, trainingToShow, trainings, trainingToShowHandler} = props;
 
-    useEffect(()=>{
-        console.log('fetch do ironman');
-        getTrainings(setTrainingToShow, setTrainings);
-    }, [token]);
+    useEffect(() => {
+        fetchTrainings(token);
+    }, []);
 
-    // add loading spinner
-    if (trainings.length === 0) {
-        if (width < 650) {
-            return (
-                <>
-                    <div className="d-flex justify-content-center">
-                        <div className="spinner-border text-primary" role="status">
-                            <span className="sr-only">Loading...</span>
-                        </div>
-                    </div>
-                </>
-            )
-        }
-        return (
-            <>
-                    <div className="big-six__buttons--desktop">
-                        {/*<Link to="/big-six"><Button variant="primary">Wielka szóstka</Button></Link>*/}
-                        {/*<Link to="/add-training"><Button variant="primary">Dodaj trening</Button></Link>*/}
-                        {/*<Link to="/"><Button className="big-six__btn--logout" onClick={handleLogout}*/}
-                        {/*                     variant="secondary">*/}
-                        {/*    Wyloguj się</Button>*/}
-                        {/*</Link>*/}
-                    </div>
-                <div className="d-flex justify-content-center">
-                    <div className="spinner-border text-primary" role="status">
-                        <span className="sr-only">Loading...</span>
-                    </div>
-                </div>
-            </>
-        )
+    if (trainings.length === 0 || trainingToShow.length === 0) {
+        return <Spinner/>;
     }
 
-    if (width < 650) {
-        return (
-            <>
-                <Calendar trainings={trainings} setTrainingToShow={setTrainingToShow}/>
-                <TrainingSummary trainingToShow={trainingToShow}/>
-                <Footer relative={true}/>
-            </>
-        )
-    }
     return (
         <>
-                <div className="big-six__buttons--desktop">
-                    {/*<Link to="/big-six"><Button variant="primary">Wielka szóstka</Button></Link>*/}
-                    {/*<Link to="/add-training"><Button variant="primary">Dodaj trening</Button></Link>*/}
-                    {/*<Link to="/"><Button className="big-six__btn--logout" onClick={handleLogout}*/}
-                    {/*                     variant="secondary">*/}
-                    {/*    Wyloguj się</Button>*/}
-                    {/*</Link>*/}
-                </div>
-            <Calendar trainings={trainings} setTrainingToShow={setTrainingToShow}/>
+            <Calendar trainings={trainings} setTrainingToShow={trainingToShowHandler}/>
             <TrainingSummary trainingToShow={trainingToShow}/>
         </>
     );
 };
 
-export default Diary;
+const mapStateToProps = state => {
+    return {
+        token: state.auth.token,
+        trainings: state.trainings.trainings,
+        trainingToShow: state.trainings.trainingToShow
+    }
+};
+
+export default connect(mapStateToProps, {fetchTrainings, trainingToShowHandler})(Diary);

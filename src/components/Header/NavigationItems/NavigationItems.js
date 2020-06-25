@@ -35,7 +35,7 @@ const NavigationItems = (props) => {
 
 const mapStateToProps = state => {
     return {
-        isAuth: state.token !== null
+        isAuth: state.auth.token !== null
     }
 };
 

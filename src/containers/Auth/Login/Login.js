@@ -76,10 +76,10 @@ const Login = (props) => {
 
 const mapStateToProps = state => {
     return {
-        token: state.token,
-        error: state.error,
-        loading: state.loading,
-        isAuth: state.token  !== null
+        token: state.auth.token,
+        error: state.auth.error,
+        loading: state.auth.loading,
+        isAuth: state.auth.token  !== null
     }
 };
 
