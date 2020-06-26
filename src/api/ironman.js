@@ -19,7 +19,7 @@ const addTraining = (training, success) => {
         });
 }
 
-const registerUser = (user, token, success) => {
+const registerUser = (user, token) => {
     axios.post(USER_URL, user, {
         headers: {
             'Access-Token': token
@@ -27,7 +27,6 @@ const registerUser = (user, token, success) => {
     })
         .then(function (res) {
             console.log('user zarejestrowany');
-            success();
         })
         .catch(error => {
             console.log(error);
