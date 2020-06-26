@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactSelect from "../../ReactSelect/ReactSelect";
+import ReactSelect from "../../../components/ReactSelect/ReactSelect";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from "yup";
 import Button from "react-bootstrap/Button";

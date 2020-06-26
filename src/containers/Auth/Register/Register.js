@@ -8,7 +8,6 @@ import useWindowWidth from "../../../functions/hooks/useWindowWidth";
 import Button from "react-bootstrap/Button";
 import Footer from "../../../components/Footer/Footer";
 import Spinner from "../../../components/UI/Spinner/Spinner";
-import {Redirect} from "react-router-dom";
 
 const Schema = Yup.object().shape({
     email: Yup.string()

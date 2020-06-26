@@ -3,7 +3,7 @@ import './TrainingSummary.scss';
 import TrainingSummaryList from "./TrainingSummaryList/TrainingSummaryList";
 
 const TrainingSummary = ({trainingToShow}) => {
-    console.log(trainingToShow);
+
     // zrobic z tego funkcje \/
     let tempArray = [];
     trainingToShow.sets.forEach(set => {

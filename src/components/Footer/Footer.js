@@ -15,7 +15,7 @@ const Footer = (props) => {
     return (
         <footer style={{...styles, bottom: props.bottom}}>
             <div className='footer__copyright'>
-                &copy; {new Date().getFullYear()} Copyright: <a href="https://github.com/kj-ninja"> kj-ninja </a>
+                &copy; {new Date().getFullYear()} Copyright: <a href="https://github.com/kj-ninja" style={{color: '#bd2130'}}> kj-ninja </a>
             </div>
         </footer>
     );

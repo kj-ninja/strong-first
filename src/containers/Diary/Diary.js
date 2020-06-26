@@ -10,21 +10,22 @@ const Diary = (props) => {
     const {fetchAllTrainings, token, trainingToShow, trainings, trainingToShowHandler, error} = props;
 
     useEffect(() => {
-        console.log('fetch');
         fetchAllTrainings(token);
     }, [fetchAllTrainings, token]);
 
-    if (trainings === null) {
-        return <Spinner/>;
-    }
-
     if (error) {
-        return <h1>Coś poszło nie tak!</h1>
+        return <h1 style={{textAlign: 'center', marginTop: '70px', fontSize: '22px'}}>Coś poszło nie tak! lub brak treningów w historii,
+            dodaj swój pierwszy trening!</h1>
     }
 
     if (trainings.length === 0) {
-        return <h1>Brak treningów w historii, dodaj trening!</h1>
+        return <Spinner/>;
     }
+
+    //
+    // if (trainings.length === 0) {
+    //     return <h1>Brak treningów w historii, dodaj trening!</h1>
+    // }
 
     return (
         <>

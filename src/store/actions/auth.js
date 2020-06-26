@@ -1,7 +1,6 @@
 import * as actionTypes from './actionTypes';
 import firebase from "../../api/firebase";
 import {translate} from "../../functions/translate";
-import {registerUser} from "../../api/ironman";
 import axios from "axios";
 
 export const authStart = () => ({type: actionTypes.AUTH_START});
@@ -39,6 +38,7 @@ export const login = (values) => {
 
         firebase.auth().signInWithEmailAndPassword(values.email, values.password)
             .then(res => {
+                // zrobic z tego funkcje \/
                 res.user.getIdTokenResult()
                     .then(res => {
                         localStorage.setItem('token', res.token);
