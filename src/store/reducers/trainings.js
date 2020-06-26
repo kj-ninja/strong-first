@@ -4,7 +4,7 @@ const initialState = {
     trainings: [],
     error: false,
     loading: true,
-    trainingToShow: []
+    trainingToShow: null
 }
 
 const trainings = (state = initialState, action) => {
@@ -24,12 +24,23 @@ const trainings = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                error: action.error
+                error: action.error,
             }
-        case actionTypes.TRAINING_TO_SHOW:
+        case actionTypes.TRAINING_TO_SHOW_HANDLER:
             return {
                 ...state,
                 trainingToShow: action.trainingToShow
+            }
+        case actionTypes.TRAININGS_CLEAR_ERROR:
+            return {
+                ...state,
+                error: false
+            }
+        case actionTypes.ADD_TRAINING:
+            return {
+                ...state,
+                trainings: state.trainings.concat(action.training),
+                trainingToShow: action.training
             }
         default:
             return state;

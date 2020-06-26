@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import './AddTraining.scss';
+import {connect} from 'react-redux';
+import {addTrainingToApi} from '../../store/actions/trainings';
 import AddTrainingForm from "./AddTrainingForm/AddTrainingForm";
-import {addTraining} from "../../api/ironman";
 import AddTrainingList from "./AddTrainingList/AddTrainingList";
-import Footer from "../Footer/Footer";
+import Footer from "../../components/Footer/Footer";
 
 const AddTraining = (props) => {
     const [exercisesView, setExercisesView] = useState([]);
@@ -93,7 +94,8 @@ const AddTraining = (props) => {
             return alert('Musisz podać ilość powtórzeń, ciężar obciążenia lub czas wykonywanego ćwiczenia!');
         }
         const training = mapExercisesViewToApiRequest(exercisesView, values, valuesStepOne);
-        addTraining(training, ()=>props.history.replace('/main'));
+        props.addTrainingToApi(props.token, training, ()=>props.history.replace('/diary'));
+        // addTraining(training, ()=>props.history.replace('/diary'), props.trainingsClearError);
     };
 
     return (
@@ -106,4 +108,10 @@ const AddTraining = (props) => {
     );
 };
 
-export default AddTraining;
+const mapStateToProps = state => {
+    return {
+        token: state.auth.token
+    }
+};
+
+export default connect(mapStateToProps, {addTrainingToApi})(AddTraining);

@@ -7,7 +7,7 @@ import Home from "./components/Home/Home";
 import Login from "./containers/Auth/Login/Login";
 import Register from "./containers/Auth/Register/Register";
 import Diary from "./containers/Diary/Diary";
-import AddTraining from "./components/AddTraining/AddTraining";
+import AddTraining from "./containers/AddTraining/AddTraining";
 import NotFound from "./components/NotFound/NotFound";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import BigSix from "./containers/BigSix/BigSix";

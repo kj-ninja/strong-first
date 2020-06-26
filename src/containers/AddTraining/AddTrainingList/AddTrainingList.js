@@ -29,7 +29,6 @@ const AddTrainingList = ({exercisesView, setExercisesView}) => {
                         </li>
                     )
                 })}
-
             </ul>
     );
 };

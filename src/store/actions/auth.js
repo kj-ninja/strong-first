@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes';
 import firebase from "../../api/firebase";
 import {translate} from "../../functions/translate";
+import axios from "axios";
 
 export const authStart = () => ({type: actionTypes.AUTH_START});
 export const authSuccess = (token) => {
@@ -26,25 +27,67 @@ export const checkAuthTimeout = (expirationTime) => {
     };
 };
 
+const getExpirationDate = (res) => {
+    const expireTime = res.claims.exp - res.claims.auth_time;
+    return new Date(new Date().getTime() + expireTime * 1000);
+};
+
 export const login = (values) => {
     return dispatch => {
         dispatch(authStart());
 
         firebase.auth().signInWithEmailAndPassword(values.email, values.password)
             .then(res => {
+                // zrobic z tego funkcje \/
                 res.user.getIdTokenResult()
                     .then(res => {
-                        const expireTime = res.claims.exp - res.claims.auth_time;
-                        const expirationDate = new Date(new Date().getTime() + expireTime * 1000)
-
                         localStorage.setItem('token', res.token);
-                        localStorage.setItem('expirationDate', expirationDate);
+                        localStorage.setItem('expirationDate', getExpirationDate(res));
                         dispatch(authSuccess(res.token));
-                        dispatch(checkAuthTimeout(expireTime));
+                        dispatch(checkAuthTimeout(res.claims.exp - res.claims.auth_time));
                     });
             })
             .catch(function (error) {
-                console.log(error);
+                dispatch(authFail(translate(error.code)));
+            });
+    };
+};
+
+export const register = (values) => {
+    return dispatch => {
+        dispatch(authStart());
+
+        firebase.auth().createUserWithEmailAndPassword(values.email, values.password)
+            .then(res => {
+                res.user.getIdTokenResult()
+                    .then(res => {
+                        localStorage.setItem('token', res.token);
+                        localStorage.setItem('expirationDate', getExpirationDate(res));
+                        dispatch(authSuccess(res.token));
+                        dispatch(checkAuthTimeout(res.claims.exp - res.claims.auth_time));
+                    });
+                firebase.auth().currentUser.getIdToken()
+                    .then((token) => {
+                        console.log(token);
+                        axios.post('https://ironman.coderaf.com/user', {
+                            username: 'Andrzej' + (Math.floor(Math.random() * 666) + 1),
+                            email: values.email,
+                            externalId: res.user.uid
+                        }, {
+                            headers: {
+                                'Access-Token': token
+                            },
+                        })
+                            .then(function (res) {
+                                console.log('user zarejestrowany');
+                            })
+                            .catch(error => {
+                                dispatch(authFail(translate(error.code)));
+                            });
+                    })
+            })
+            .catch(function (error) {
+                // Handle Errors here.
                 dispatch(authFail(translate(error.code)));
             });
     };
@@ -65,4 +108,6 @@ export const authStateCheck = () => {
             }
         }
     }
-}
+};
+
+export const authClearError = () => ({type: actionTypes.AUTH_CLEAR_ERROR});

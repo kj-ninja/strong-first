@@ -7,10 +7,9 @@ button {
   padding: 5px 50px;
   border-radius: 23px;
   transition: 0.3s;
-  border: 1px solid transparent;
+  border: none;
   &:hover {
-    background-color: #fff;
-    color: #bd2130;
-    border: 1px solid #bd2130;
+    background-color: #7f0a15;
+    color: #fff;
   }
 }
