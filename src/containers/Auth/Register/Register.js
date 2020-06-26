@@ -1,12 +1,14 @@
-import React, {useState} from "react";
+import React from "react";
 import './Register.scss';
 import {connect} from 'react-redux';
-import {register} from "../../../store/actions/auth";
+import {register, authClearError} from "../../../store/actions/auth";
 import {Formik} from "formik";
 import * as Yup from "yup";
 import useWindowWidth from "../../../functions/hooks/useWindowWidth";
 import Button from "react-bootstrap/Button";
 import Footer from "../../../components/Footer/Footer";
+import Spinner from "../../../components/UI/Spinner/Spinner";
+import {Redirect} from "react-router-dom";
 
 const Schema = Yup.object().shape({
     email: Yup.string()
@@ -25,7 +27,6 @@ const Schema = Yup.object().shape({
 });
 
 const Register = (props) => {
-    const [errorMessage, setErrorMessage] = useState(null);
     const width = useWindowWidth();
     let styles = {
         top: "100px"
@@ -33,6 +34,10 @@ const Register = (props) => {
 
     if (width < 600) {
         styles = {top: 0}
+    }
+
+    if (props.loading) {
+        return <Spinner />;
     }
 
     return (
@@ -62,10 +67,11 @@ const Register = (props) => {
                                         onChange={handleChange}
                                         value={values.email}
                                         className="register__input"
+                                        onFocus={props.authClearError}
                                     />
                                     <p className="register__error-message">
                                         {errors.email}
-                                        {errorMessage}
+                                        {props.error}
                                     </p>
 
                                     <label htmlFor="password">Hasło</label>
@@ -79,7 +85,6 @@ const Register = (props) => {
                                     />
                                     <p className="register__error-message">
                                         {errors.password}
-                                        {errorMessage}
                                     </p>
 
                                     <label htmlFor="password">Powtórz hasło</label>
@@ -93,7 +98,6 @@ const Register = (props) => {
                                     />
                                     <p className="register__error-message">
                                         {errors.changepassword}
-                                        {errorMessage}
                                     </p>
                                     <div className="register__buttons">
                                         <Button type="submit" variant="outline-secondary">Załóż konto</Button>
@@ -118,4 +122,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, {register})(Register);
+export default connect(mapStateToProps, {register, authClearError})(Register);

@@ -108,4 +108,6 @@ export const authStateCheck = () => {
             }
         }
     }
-}
+};
+
+export const authClearError = () => ({type: actionTypes.AUTH_CLEAR_ERROR});

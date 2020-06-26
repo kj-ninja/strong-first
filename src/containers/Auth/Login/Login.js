@@ -2,8 +2,7 @@ import React from 'react';
 import './Login.scss';
 import * as Yup from 'yup';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
-import {login} from '../../../store/actions/auth';
+import {login, authClearError} from '../../../store/actions/auth';
 import {Formik, Field, Form, ErrorMessage} from 'formik';
 import useWindowWith from '../../../functions/hooks/useWindowWidth';
 import Button from "react-bootstrap/Button";
@@ -32,16 +31,10 @@ const Login = (props) => {
         return <Spinner />;
     }
 
-    let authRedirect = null;
-    if (props.isAuth) {
-        authRedirect = <Redirect to="/diary"/>;
-    }
-
     return (
         <>
             <section className="login">
                 <div className="login__container" style={{...styles}}>
-                    {authRedirect}
                     <h2>Zaloguj się</h2>
                     <Formik
                         initialValues={{email: '', password: ''}}
@@ -52,7 +45,7 @@ const Login = (props) => {
                     >
                         <Form className="login__form">
                             <label htmlFor="email">Email</label>
-                            <Field name="email" type="email" id="email" className="login__input"/>
+                            <Field name="email" type="email" id="email" className="login__input" onFocus={props.authClearError}/>
                             <p className="login__error-message">
                                 <ErrorMessage name="email"/>
                             </p>
@@ -83,4 +76,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, {login})(Login);
+export default connect(mapStateToProps, {login, authClearError})(Login);

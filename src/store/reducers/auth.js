@@ -20,18 +20,23 @@ const auth = (state=initialState, action) => {
                 token: action.token,
                 error: null,
                 loading: false
-            }
+            };
         case actionTypes.AUTH_FAIL:
             return {
                 ...state,
                 error: action.error,
                 loading: false
-            }
+            };
         case actionTypes.AUTH_LOGOUT:
             return {
                 ...state,
                 token: null
-            }
+            };
+        case actionTypes.AUTH_CLEAR_ERROR:
+            return {
+                ...state,
+                error: null
+            };
         default:
             return state;
     }
