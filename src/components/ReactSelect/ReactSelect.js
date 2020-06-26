@@ -16,7 +16,7 @@ class ReactSelect extends Component {
             callback([]);
         } else {
             setTimeout(() => {
-                fetch("http://ironman.coderaf.com/exercise?q=" + inputValue, {
+                fetch("https://ironman.coderaf.com/exercise?q=" + inputValue, {
                     method: "GET",
                     'headers': {'Access-Token': this.state.token}
                 })
