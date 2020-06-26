@@ -1,10 +1,10 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    trainings: [],
+    trainings: null,
     error: false,
     loading: true,
-    trainingToShow: []
+    trainingToShow: null
 }
 
 const trainings = (state = initialState, action) => {
@@ -23,10 +23,11 @@ const trainings = (state = initialState, action) => {
         case actionTypes.FETCH_TRAININGS_FAIL:
             return {
                 ...state,
+                trainings: false,
                 loading: false,
                 error: action.error
             }
-        case actionTypes.TRAINING_TO_SHOW:
+        case actionTypes.TRAINING_TO_SHOW_HANDLER:
             return {
                 ...state,
                 trainingToShow: action.trainingToShow
