@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 import './AddTraining.scss';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 import {addTrainingToApi} from '../../store/actions/trainings';
 import AddTrainingForm from "./AddTrainingForm/AddTrainingForm";
 import AddTrainingList from "./AddTrainingList/AddTrainingList";
 import Footer from "../../components/Footer/Footer";
+import Spinner from "../../components/UI/Spinner/Spinner";
 
 const AddTraining = (props) => {
     const [exercisesView, setExercisesView] = useState([]);
@@ -94,15 +96,24 @@ const AddTraining = (props) => {
             return alert('Musisz podać ilość powtórzeń, ciężar obciążenia lub czas wykonywanego ćwiczenia!');
         }
         const training = mapExercisesViewToApiRequest(exercisesView, values, valuesStepOne);
-        props.addTrainingToApi(props.token, training, ()=>props.history.replace('/diary'));
+
+        props.addTrainingToApi(props.token, training);
         // addTraining(training, ()=>props.history.replace('/diary'), props.trainingsClearError);
     };
 
+    let trainingAdded = (
+        props.trainingAdded ? <Redirect to="/diary"/> : null
+    );
+
     return (
         <>
-            <AddTrainingForm setSelectedExercise={setSelectedExercise} handleAddTraining={handleAddTraining}
-                             handleAddSet={handleAddSet}/>
-            <AddTrainingList exercisesView={exercisesView} setExercisesView={setExercisesView}/>
+            {trainingAdded}
+            {props.loading ? <Spinner /> :
+            <>
+                <AddTrainingForm setSelectedExercise={setSelectedExercise} handleAddTraining={handleAddTraining}
+                                 handleAddSet={handleAddSet}/>
+                <AddTrainingList exercisesView={exercisesView} setExercisesView={setExercisesView}/>
+            </>}
             <Footer bottom={0}/>
         </>
     );
@@ -110,7 +121,9 @@ const AddTraining = (props) => {
 
 const mapStateToProps = state => {
     return {
-        token: state.auth.token
+        token: state.auth.token,
+        loading: state.trainings.loading,
+        trainingAdded: state.trainings.trainingAdded
     }
 };
 
