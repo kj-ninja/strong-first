@@ -5,7 +5,11 @@ import Button from "../../../components/UI/Button/Button";
 
 const AddTrainingFormStepOne = ({handleNextStep, setValuesStepOne}) => {
     const formInputs = {
-        date: new Date().toISOString().substr(0, 10), name: '', duration: '', kcal: '', notes: ''
+        date: new Date().toISOString().substr(0, 10),
+        name: '',
+        duration: '',
+        kcal: '',
+        notes: ''
     };
     const validationSchema = Yup.object({
         name: Yup.string()
