@@ -25,7 +25,6 @@ export const addTrainingToApi = (token, training) => {
             .then(function (res) {
                 dispatch(trainingsClearError());
                 dispatch(addTraining(training));
-                // dispatch(fetchAllTrainings(token));
             })
             .catch(error => {
                 dispatch(fetchTrainingsFail(error));

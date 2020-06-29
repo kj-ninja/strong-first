@@ -1,62 +1,74 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useForm} from "react-hook-form";
+import ReactSelect from "../../components/ReactSelect/ReactSelect";
 
-const DodajTreningStepTwo = () => {
-    const {register, handleSubmit, errors, formState} = useForm({
-    });
-    const {isValid} = formState;
+const DodajTreningStepTwo = ({prevStep, addTraining}) => {
+    const [sets, setSets] = useState([]);
+    const {register, handleSubmit, errors, formState, getValues} = useForm();
+    const [selectedExercise, setSelectedExercise] = useState({});
 
-    const handleOrder = () => console.log('poszlo');
+    const handleAddSet = () => {
+        const set = {...getValues(), exercise: {id: selectedExercise.value, name: selectedExercise.label}};
+
+        setSets((prevState)=> {
+            return [...prevState, {
+                repetitions: +set.reps,
+                time: +set.duration,
+                weight: +set.weight,
+                exercise: {
+                    id: set.exercise.id,
+                    name: set.exercise.name
+                }
+            }]
+        });
+    };
+
+    const handleAddTraining = () => {
+        addTraining(sets);
+    };
 
     return (
-        <form onSubmit={handleSubmit(handleOrder)}>
+        <form onSubmit={handleSubmit(handleAddTraining)}>
+            <div className="add-training__form-group reactSelect">
+                <label>Ćwiczenie</label>
+                <ReactSelect setExercise={setSelectedExercise} name="selectedExercise"/>
+            </div>
+
             <div className="input-container">
+                <label>Powtórzenia:</label>
                 <input
-                    name="date"
-                    type="date"
+                    name="reps"
+                    placeholder="Podaj ilość powtórzeń"
                     ref={register}
                 />
             </div>
 
             <div className="input-container">
+                <label>Czas:</label>
                 <input
-                    name="name"
-                    placeholder="Podaj nazwę treningu"
-                    ref={register({required: true})}
-                />
-                {errors.name ? <p>{errors.name.message}</p> : null}
-            </div>
-
-            <div className="input-container">
-                <input name="duration"
-                       placeholder="Podaj czas trwania treningu (w minutach)"
-                       ref={register({required: true})}
-                />
-                {errors.duration ? <p>{errors.duration.message}</p> : null}
-            </div>
-
-            <div className="input-container">
-                <input name="kcal"
-                       placeholder="Ilość spalonych kalorii"
-                       ref={register}
+                    name="duration"
+                    ref={register}
                 />
             </div>
 
             <div className="input-container">
-                <input name="duration"
-                       placeholder="Podaj czas trwania treningu"
-                       ref={register}
+                <label>Ciężar:</label>
+                <input
+                    name="weight"
+                    ref={register}
                 />
             </div>
 
-            <div className="input-container">
-                <input name="notes"
-                       placeholder="Podsumowanie treningu, krótki opis a może jakieś wnioski?"
-                       ref={register}
-                />
-            </div>
+            <button type="button" onClick={prevStep}>Wstecz</button>
+            <button type="button" onClick={handleAddSet}>Dodaj serię</button>
+            <button type="submit">Zapisz trening</button>
 
-            <button type="submit">Dalej</button>
+            {sets.map(set=>(
+                <>
+                    <p>{set.exercise.name}</p>
+                    <p>{set.reps}</p>
+                </>
+            ))}
         </form>
     );
 };

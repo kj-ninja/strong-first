@@ -1,7 +1,7 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
 
-const DodajTreningStepOne = ({handleNextStep}) => {
+const DodajTreningStepOne = ({nextStep}) => {
     const {register, handleSubmit, errors} = useForm({
         defaultValues: {
             date: new Date().toISOString().substr(0, 10)
@@ -9,7 +9,7 @@ const DodajTreningStepOne = ({handleNextStep}) => {
     });
 
     return (
-        <form onSubmit={handleSubmit(handleNextStep)}>
+        <form onSubmit={handleSubmit(nextStep)}>
             <div className="input-container">
                 <input
                     name="date"
@@ -29,7 +29,7 @@ const DodajTreningStepOne = ({handleNextStep}) => {
 
             <div className="input-container">
                 <input name="duration"
-                       placeholder="Podaj czas trwania treningu (w minutach)"
+                       placeholder="Podaj czas trwania treningu (w min.)"
                        ref={register({required: true})}
                 />
                 {errors.duration ? <p>{errors.duration.message}</p> : null}
@@ -43,14 +43,7 @@ const DodajTreningStepOne = ({handleNextStep}) => {
             </div>
 
             <div className="input-container">
-                <input name="duration"
-                       placeholder="Podaj czas trwania treningu"
-                       ref={register}
-                />
-            </div>
-
-            <div className="input-container">
-                <input name="notes"
+                <input name="note"
                        placeholder="Podsumowanie treningu, krótki opis a może jakieś wnioski?"
                        ref={register}
                 />
