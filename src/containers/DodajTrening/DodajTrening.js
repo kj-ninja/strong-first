@@ -1,28 +1,33 @@
 import React, {useState} from 'react';
+import '../AddTraining/AddTraining.scss';
 import {connect} from 'react-redux';
 import {addTrainingToApi} from "../../store/actions/trainings";
-import '../AddTraining/AddTraining.scss';
 import DodajTreningStepOne from "./DodajTreningStepOne";
 import DodajTreningStepTwo from "./DodajTreningStepTwo";
+import PodsumowanieTreningu from "./PodsumowanieTreningu";
 import Spinner from "../../components/UI/Spinner/Spinner";
 
 const DodajTrening = (props) => {
     const [stepOne, setStepOne] = useState(true);
     const [stepTwo, setStepTwo] = useState(false);
+    const [resultStep, setResultStep] = useState(false);
     const [valuesStepOne, setValuesStepOne] = useState();
+    const [training, setTraining] = useState({});
 
-    const handleNextStep = (values) => {
+    const handleStepOneTraining = (values) => {
         setValuesStepOne(values);
         setStepOne(false);
         setStepTwo(true);
+        setResultStep(false);
     };
-    const handlePrevStep = () => {
+    const handleBackToStepOne = () => {
         setStepOne(true);
         setStepTwo(false);
+        setResultStep(false);
     };
 
-    const handleAddTraining = (sets) => {
-        const training = {
+    const handleStepTwoTraining = (sets) => {
+        const newTraining = {
             date: valuesStepOne.date,
             name: valuesStepOne.name,
             duration: +valuesStepOne.duration,
@@ -30,7 +35,13 @@ const DodajTrening = (props) => {
             note: valuesStepOne.note,
             sets
         };
+        setTraining(newTraining);
+        setStepOne(false);
+        setStepTwo(false);
+        setResultStep(true);
+    };
 
+    const handleAddTraining = () => {
         props.addTrainingToApi(props.token, training);
         setTimeout(()=> {props.history.push('/diary')}, 1500);
     };
@@ -39,12 +50,15 @@ const DodajTrening = (props) => {
         <>
             {props.loading ? <Spinner/> :
             <>
-                {stepOne ? <DodajTreningStepOne nextStep={handleNextStep}/> : null}
-                {stepTwo ? <DodajTreningStepTwo prevStep={handlePrevStep} addTraining={handleAddTraining} /> : null}
+                {stepOne ? <DodajTreningStepOne handleStepOneTraining={handleStepOneTraining}/> : null}
+                {stepTwo ? <DodajTreningStepTwo prevStep={handleBackToStepOne} handleStepTwoTraining={handleStepTwoTraining} /> : null}
+                {resultStep ? <PodsumowanieTreningu
+                    training={training}
+                    setTraining={setTraining}
+                    backToStepOne={handleBackToStepOne}
+                    addTraining={handleAddTraining}/> : null}
             </>}
-
         </>
-
     );
 };
 

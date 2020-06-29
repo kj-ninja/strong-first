@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useForm} from "react-hook-form";
 import ReactSelect from "../../components/ReactSelect/ReactSelect";
 
-const DodajTreningStepTwo = ({prevStep, addTraining}) => {
+const DodajTreningStepTwo = ({prevStep, handleStepTwoTraining}) => {
     const [sets, setSets] = useState([]);
     const {register, handleSubmit, errors, formState, getValues} = useForm();
     const [selectedExercise, setSelectedExercise] = useState({});
@@ -23,12 +23,12 @@ const DodajTreningStepTwo = ({prevStep, addTraining}) => {
         });
     };
 
-    const handleAddTraining = () => {
-        addTraining(sets);
+    const handleNextStep = () => {
+        handleStepTwoTraining(sets);
     };
 
     return (
-        <form onSubmit={handleSubmit(handleAddTraining)}>
+        <form onSubmit={handleSubmit(handleNextStep)}>
             <div className="add-training__form-group reactSelect">
                 <label>Ćwiczenie</label>
                 <ReactSelect setExercise={setSelectedExercise} name="selectedExercise"/>
@@ -61,12 +61,11 @@ const DodajTreningStepTwo = ({prevStep, addTraining}) => {
 
             <button type="button" onClick={prevStep}>Wstecz</button>
             <button type="button" onClick={handleAddSet}>Dodaj serię</button>
-            <button type="submit">Zapisz trening</button>
+            <button type="submit">Dalej</button>
 
-            {sets.map(set=>(
+            {sets.map((set, i)=>(
                 <>
-                    <p>{set.exercise.name}</p>
-                    <p>{set.reps}</p>
+                    <p key={i}>{set.exercise.name}</p>
                 </>
             ))}
         </form>

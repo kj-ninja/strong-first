@@ -1,7 +1,7 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
 
-const DodajTreningStepOne = ({nextStep}) => {
+const DodajTreningStepOne = ({handleStepOneTraining}) => {
     const {register, handleSubmit, errors} = useForm({
         defaultValues: {
             date: new Date().toISOString().substr(0, 10)
@@ -9,7 +9,7 @@ const DodajTreningStepOne = ({nextStep}) => {
     });
 
     return (
-        <form onSubmit={handleSubmit(nextStep)}>
+        <form onSubmit={handleSubmit(handleStepOneTraining)}>
             <div className="input-container">
                 <input
                     name="date"
