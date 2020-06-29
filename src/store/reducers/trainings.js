@@ -4,8 +4,7 @@ const initialState = {
     trainings: [],
     error: false,
     loading: true,
-    trainingToShow: null,
-    trainingAdded: false
+    trainingToShow: null
 }
 
 const trainings = (state = initialState, action) => {
@@ -19,14 +18,13 @@ const trainings = (state = initialState, action) => {
             return {
                 ...state,
                 trainings: action.trainings,
-                loading: false,
-                trainingAdded: false
+                loading: false
             }
         case actionTypes.FETCH_TRAININGS_FAIL:
             return {
                 ...state,
                 loading: false,
-                error: action.error,
+                error: action.error
             }
         case actionTypes.TRAINING_TO_SHOW_HANDLER:
             return {
@@ -42,13 +40,7 @@ const trainings = (state = initialState, action) => {
             return {
                 ...state,
                 trainingToShow: action.training,
-                trainings: state.trainings.concat(action.training),
-                trainingAdded: true
-            }
-        case actionTypes.ADD_TRAINING_SUCCESS:
-            return {
-                ...state,
-                loading: false
+                trainings: state.trainings.concat(action.training)
             }
         default:
             return state;

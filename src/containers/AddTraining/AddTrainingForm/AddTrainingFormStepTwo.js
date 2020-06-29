@@ -34,6 +34,7 @@ const AddTrainingFormStepTwo = ({setSelectedExercise, handleAddTraining, handleA
                                     <label>Ćwiczenie</label>
                                     <ReactSelect setExercise={setSelectedExercise} name="selectedExercise"/>
                                 </div>
+
                                 <div className="add-training__form-group">
                                     <label htmlFor="selectedRepetitions">Powtórzenia:</label>
                                     <Field name="selectedRepetitions" type="text" placeholder="Podaj ilość powtórzeń"

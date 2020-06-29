@@ -1,9 +1,8 @@
 import React from 'react';
 import './TrainingSummary.scss';
-import TrainingSummaryList from "./TrainingSummaryList/TrainingSummaryList";
+import {getRepsView} from "../../../functions/getRepsView";
 
 const TrainingSummary = ({trainingToShow}) => {
-    // zrobic z tego funkcje \/
     let tempArray = [];
     trainingToShow.sets.forEach(set => {
         tempArray.push({name: set.exercise.name, id: set.exercise.id, repetitions: [], weight: [], time: []})
@@ -28,12 +27,36 @@ const TrainingSummary = ({trainingToShow}) => {
         })
     });
 
+    let trainingSummaryList = (
+        <ul className="training-summary__list list-group">
+            {exerciseView.map(element => {
+                return (
+                    <li key={element.id} className="training-summary__exercise list-group-item">
+                        <span className="training-summary__exercise-name">{element.name.toUpperCase()}:</span>
+                        {getRepsView(element).map((rep, i) => {
+                            return (
+                                <span key={i} className="training-summary__exercise-rep">
+                                    {rep}
+                                </span>
+                            )
+                        })}
+                    </li>
+                )
+            })}
+        </ul>
+    );
+
+    const handleEditTraining = () => {
+        console.log(trainingToShow);
+    };
+
     return (
         <div className="training-summary">
+            <i className="far fa-edit edit" onClick={handleEditTraining}/>
+            <i className="far fa-trash-alt trash"/>
             <p className="training-summary__date"><span>Data:</span> {trainingToShow.date}</p>
             <p className="training-summary__name"><span>Nazwa:</span> {trainingToShow.name}</p>
-
-            <TrainingSummaryList exerciseView={exerciseView}/>
+            {trainingSummaryList}
             <div className="training-summary__notes">
                 <p>Notatki:</p>
                 {trainingToShow.note.toLowerCase()}

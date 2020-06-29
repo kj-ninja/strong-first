@@ -21,21 +21,17 @@ const Diary = (props) => {
         );
     }
 
-    if (trainings.length === 0) {
-        return <Spinner/>;
+    let diary = <Spinner/>;
+    if (trainingToShow) {
+        diary = (
+            <>
+                <Calendar trainings={trainings} setTrainingToShow={trainingToShowHandler}/>
+                <TrainingSummary trainingToShow={trainingToShow}/>
+            </>
+        );
     }
 
-    //
-    // if (trainings.length === 0) {
-    //     return <h1>Brak treningów w historii, dodaj trening!</h1>
-    // }
-
-    return (
-        <>
-            <Calendar trainings={trainings} setTrainingToShow={trainingToShowHandler}/>
-            <TrainingSummary trainingToShow={trainingToShow}/>
-        </>
-    );
+    return diary;
 };
 
 const mapStateToProps = state => {
