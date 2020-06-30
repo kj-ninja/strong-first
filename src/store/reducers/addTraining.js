@@ -34,7 +34,7 @@ const addTraining = (state = initialState, action) => {
                 ...state,
                 training: {
                     ...state.training,
-                    sets: state.training.sets.filter((item, index) => index !== action.payload)
+                    sets: state.training.sets.filter((set, index) => index !== action.payload)
                 }
             }
         default:

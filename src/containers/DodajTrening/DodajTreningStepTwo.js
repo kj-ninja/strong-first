@@ -55,7 +55,12 @@ const DodajTreningStepTwo = (props) => {
 
             {props.addTrainingForm.sets.map((set, i)=>(
                 <>
-                    <p key={i} onClick={()=>props.deleteSet(i)}>{set.exercise.name} {set.repetitions}</p>
+                    <p key={i} onClick={()=>props.deleteSet(i)}>
+                        {set.exercise.name}
+                        <p>{set.repetitions ? 'powtórzenia: ' + set.repetitions : null}</p>
+                        <p>{set.duration ? 'czas: ' + set.duration : null}</p>
+                        <p>{set.weight ? 'obciążenie: ' + set.weight : null}</p>
+                    </p>
                 </>
             ))}
         </form>
