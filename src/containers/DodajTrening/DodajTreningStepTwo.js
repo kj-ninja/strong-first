@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useForm} from "react-hook-form";
 import ReactSelect from "../../components/ReactSelect/ReactSelect";
 
-const DodajTreningStepTwo = ({prevStep, handleStepTwoTraining}) => {
+const DodajTreningStepTwo = (props) => {
     const [sets, setSets] = useState([]);
     const {register, handleSubmit, getValues} = useForm();
     const [selectedExercise, setSelectedExercise] = useState({});
@@ -23,12 +23,10 @@ const DodajTreningStepTwo = ({prevStep, handleStepTwoTraining}) => {
         });
     };
 
-    const handleNextStep = () => {
-        handleStepTwoTraining(sets);
-    };
+    const handleStepTwo = (data) => console.log(data);
 
     return (
-        <form onSubmit={handleSubmit(handleNextStep)}>
+        <form onSubmit={handleSubmit(handleStepTwo)}>
             <div className="add-training__form-group reactSelect">
                 <label>Ćwiczenie</label>
                 <ReactSelect setExercise={setSelectedExercise} name="selectedExercise"/>
@@ -59,7 +57,7 @@ const DodajTreningStepTwo = ({prevStep, handleStepTwoTraining}) => {
                 />
             </div>
 
-            <button type="button" onClick={prevStep}>Wstecz</button>
+            <button type="button" onClick={()=>props.history.goBack()}>Wstecz</button>
             <button type="button" onClick={handleAddSet}>Dodaj serię</button>
             <button type="submit">Dalej</button>
 

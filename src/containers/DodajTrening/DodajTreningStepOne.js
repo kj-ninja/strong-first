@@ -1,15 +1,20 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
+import {connect} from 'react-redux';
+import {addTrainingStepOne} from '../../store/actions/addTraining';
 
-const DodajTreningStepOne = ({handleStepOneTraining}) => {
+const DodajTreningStepOne = (props) => {
     const {register, handleSubmit, errors} = useForm({
-        defaultValues: {
-            date: new Date().toISOString().substr(0, 10)
-        }
+        defaultValues: props.addTrainingForm, 
     });
 
+    const handleStepOne = (data) => {
+        props.addTrainingStepOne(data);
+        props.history.push('/add-training/step2');
+    };
+
     return (
-        <form onSubmit={handleSubmit(handleStepOneTraining)}>
+        <form onSubmit={handleSubmit(handleStepOne)}>
             <div className="input-container">
                 <input
                     name="date"
@@ -54,4 +59,10 @@ const DodajTreningStepOne = ({handleStepOneTraining}) => {
     );
 };
 
-export default DodajTreningStepOne;
+const mapStateToProps = state => {
+    return {
+        addTrainingForm: state.addTrainingForm.training
+    }
+};
+
+export default connect(null, {addTrainingStepOne})(DodajTreningStepOne);
