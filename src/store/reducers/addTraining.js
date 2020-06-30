@@ -2,7 +2,7 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     training: {
-        date: '',
+        date: new Date().toISOString().substr(0, 10),
         name: '',
         duration: '',
         kcal: '',
@@ -18,17 +18,30 @@ const addTraining = (state = initialState, action) => {
                 ...state,
                 training: {
                     ...state.training,
-                    ...action.payload
+                    date: action.payload.date,
+                    name: action.payload.name,
+                    duration: +action.payload.duration,
+                    kcal: +action.payload.kcal,
+                    note: action.payload.note
                 }
             };
+        case actionTypes.ADD_TRAINING_TO_STORE:
+            return {
+                training: action.payload
+            }
         case actionTypes.ADD_SET:
             return {
                 ...state,
                 training: {
                     ...state.training,
-                    sets: state.training.sets.concat(action.payload)
+                    sets: state.training.sets.concat({
+                        repetitions: +action.payload.repetitions,
+                        time: +action.payload.time,
+                        weight: +action.payload.weight,
+                        exercise: action.payload.exercise
+                    })
                 }
-            }
+            };
         case actionTypes.DELETE_SET:
             return {
                 ...state,

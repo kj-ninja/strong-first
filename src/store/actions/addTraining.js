@@ -20,3 +20,10 @@ export const deleteSet = (index) => {
         payload: index
     }
 };
+
+export const addTrainingToStore = (training) => {
+    return {
+        type: actionTypes.ADD_TRAINING_TO_STORE,
+        payload: training
+    }
+}

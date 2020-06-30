@@ -18,7 +18,7 @@ const DodajTreningStepOne = (props) => {
                     name="date"
                     type="date"
                     ref={register}
-                    defaultValue={new Date().toISOString().substr(0, 10)}
+                    defaultValue={props.addTrainingForm.date}
                 />
             </div>
 

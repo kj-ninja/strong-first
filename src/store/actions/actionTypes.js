@@ -15,3 +15,4 @@ export const AUTH_CLEAR_ERROR = 'AUTH_CLEAR_ERROR';
 export const ADD_TRAINING_STEP_1 = 'ADD_TRAINING_STEP_1';
 export const ADD_SET = 'ADD_SET';
 export const DELETE_SET = 'DELETE_SET';
+export const ADD_TRAINING_TO_STORE = 'ADD_TRAINING_TO_STORE';

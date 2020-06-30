@@ -1,10 +1,13 @@
 import React from 'react';
 import './TrainingSummary.scss';
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
+import {addTrainingToStore} from '../../../store/actions/addTraining';
 import {getRepsView} from "../../../functions/getRepsView";
 
-const TrainingSummary = ({trainingToShow}) => {
+const TrainingSummary = (props) => {
     let tempArray = [];
-    trainingToShow.sets.forEach(set => {
+    props.trainingToShow.sets.forEach(set => {
         tempArray.push({name: set.exercise.name, id: set.exercise.id, repetitions: [], weight: [], time: []})
     });
 
@@ -17,7 +20,7 @@ const TrainingSummary = ({trainingToShow}) => {
     };
     const exerciseView = removeDuplicates(tempArray);
 
-    trainingToShow.sets.forEach((set) => {
+    props.trainingToShow.sets.forEach((set) => {
         exerciseView.forEach((element) => {
             if (set.exercise.id === element.id) {
                 element.repetitions.push(set.repetitions);
@@ -47,22 +50,23 @@ const TrainingSummary = ({trainingToShow}) => {
     );
 
     const handleEditTraining = () => {
-        console.log(trainingToShow);
+        props.addTrainingToStore(props.trainingToShow);
+        props.history.push('/add-training');
     };
 
     return (
         <div className="training-summary">
             <i className="far fa-edit edit" onClick={handleEditTraining}/>
             <i className="far fa-trash-alt trash"/>
-            <p className="training-summary__date"><span>Data:</span> {trainingToShow.date}</p>
-            <p className="training-summary__name"><span>Nazwa:</span> {trainingToShow.name}</p>
+            <p className="training-summary__date"><span>Data:</span> {props.trainingToShow.date}</p>
+            <p className="training-summary__name"><span>Nazwa:</span> {props.trainingToShow.name}</p>
             {trainingSummaryList}
             <div className="training-summary__notes">
                 <p>Notatki:</p>
-                {trainingToShow.note.toLowerCase()}
+                {props.trainingToShow.note.toLowerCase()}
             </div>
         </div>
     );
 };
 
-export default TrainingSummary;
+export default connect(null, {addTrainingToStore})(withRouter(TrainingSummary));

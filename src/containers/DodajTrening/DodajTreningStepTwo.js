@@ -36,7 +36,7 @@ const DodajTreningStepTwo = (props) => {
             <div className="input-container">
                 <label>Czas:</label>
                 <input
-                    name="duration"
+                    name="time"
                     ref={register}
                 />
             </div>
@@ -58,7 +58,7 @@ const DodajTreningStepTwo = (props) => {
                     <p key={i} onClick={()=>props.deleteSet(i)}>
                         {set.exercise.name}
                         <p>{set.repetitions ? 'powtórzenia: ' + set.repetitions : null}</p>
-                        <p>{set.duration ? 'czas: ' + set.duration : null}</p>
+                        <p>{set.time ? 'czas: ' + set.time : null}</p>
                         <p>{set.weight ? 'obciążenie: ' + set.weight : null}</p>
                     </p>
                 </>
