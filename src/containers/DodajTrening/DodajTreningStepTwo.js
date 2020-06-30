@@ -1,34 +1,24 @@
 import React, {useState} from 'react';
+import {connect} from 'react-redux';
+import {addSet, deleteSet} from '../../store/actions/addTraining';
 import {useForm} from "react-hook-form";
 import ReactSelect from "../../components/ReactSelect/ReactSelect";
 
-const DodajTreningStepTwo = ({prevStep, handleStepTwoTraining}) => {
-    const [sets, setSets] = useState([]);
-    const {register, handleSubmit, errors, formState, getValues} = useForm();
+const DodajTreningStepTwo = (props) => {
+    const {register, handleSubmit, getValues} = useForm();
     const [selectedExercise, setSelectedExercise] = useState({});
 
     const handleAddSet = () => {
         const set = {...getValues(), exercise: {id: selectedExercise.value, name: selectedExercise.label}};
-
-        setSets((prevState)=> {
-            return [...prevState, {
-                repetitions: +set.reps,
-                time: +set.duration,
-                weight: +set.weight,
-                exercise: {
-                    id: set.exercise.id,
-                    name: set.exercise.name
-                }
-            }]
-        });
+        props.addSet(set);
     };
 
-    const handleNextStep = () => {
-        handleStepTwoTraining(sets);
-    };
+    const handleStepTwo = () => {
+        props.history.push('/add-training/result');
+    }
 
     return (
-        <form onSubmit={handleSubmit(handleNextStep)}>
+        <form onSubmit={handleSubmit(handleStepTwo)}>
             <div className="add-training__form-group reactSelect">
                 <label>Ćwiczenie</label>
                 <ReactSelect setExercise={setSelectedExercise} name="selectedExercise"/>
@@ -37,7 +27,7 @@ const DodajTreningStepTwo = ({prevStep, handleStepTwoTraining}) => {
             <div className="input-container">
                 <label>Powtórzenia:</label>
                 <input
-                    name="reps"
+                    name="repetitions"
                     placeholder="Podaj ilość powtórzeń"
                     ref={register}
                 />
@@ -46,7 +36,7 @@ const DodajTreningStepTwo = ({prevStep, handleStepTwoTraining}) => {
             <div className="input-container">
                 <label>Czas:</label>
                 <input
-                    name="duration"
+                    name="time"
                     ref={register}
                 />
             </div>
@@ -59,17 +49,28 @@ const DodajTreningStepTwo = ({prevStep, handleStepTwoTraining}) => {
                 />
             </div>
 
-            <button type="button" onClick={prevStep}>Wstecz</button>
+            <button type="button" onClick={()=>props.history.goBack()}>Wstecz</button>
             <button type="button" onClick={handleAddSet}>Dodaj serię</button>
             <button type="submit">Dalej</button>
 
-            {sets.map((set, i)=>(
+            {props.addTrainingForm.sets.map((set, i)=>(
                 <>
-                    <p key={i}>{set.exercise.name}</p>
+                    <p key={i} onClick={()=>props.deleteSet(i)}>
+                        {set.exercise.name}
+                        <p>{set.repetitions ? 'powtórzenia: ' + set.repetitions : null}</p>
+                        <p>{set.time ? 'czas: ' + set.time : null}</p>
+                        <p>{set.weight ? 'obciążenie: ' + set.weight : null}</p>
+                    </p>
                 </>
             ))}
         </form>
     );
 };
 
-export default DodajTreningStepTwo;
+const mapStateToProps = state => {
+    return {
+        addTrainingForm: state.addTrainingForm.training
+    }
+};
+
+export default connect(mapStateToProps, {addSet, deleteSet})(DodajTreningStepTwo);

@@ -1,87 +1,41 @@
 import React from 'react';
-import {useForm} from "react-hook-form";
+import {connect} from 'react-redux';
+import {addTrainingToApi} from "../../store/actions/trainings";
 
-const PodsumowanieTreningu = ({training, setTraining, addTraining, backToStepOne}) => {
-    const {register, handleSubmit, setValue} = useForm({
-        defaultValues: {
-            date: training.date,
-            name: training.name,
-            duration: training.duration,
-            kcal: training.kcal,
-            note: training.note
-        }
-    });
+const PodsumowanieTreningu = (props) => {
+    const {addTrainingForm, addTrainingToApi} = props;
 
-    const handleAddTraining = (data) => {
-        console.log(data);
+    const handleAddTraining = () => {
+        addTrainingToApi(props.token, addTrainingForm);
+        setTimeout(()=> {props.history.push('/diary')}, 1500);
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit(handleAddTraining)}>
-                <div className="input-container">
-                    <input
-                        name="date"
-                        type="date"
-                        ref={register}
-                    />
-                </div>
+        <div style={{margin: '50px auto', maxWidth: '800px', border: '1px solid #eee', boxShadow: '2px 2px 0 0 #ddd'}}>
+            <h1>Nazwa treningu: {addTrainingForm.name}</h1>
+            <p>Data treningu: {addTrainingForm.date}</p>
+            <p>Czas trwania treningu: {addTrainingForm.duration}</p>
+            <p>Ilość spalonych kalorri: {addTrainingForm.kcal}</p>
+            <p>Notatki: {addTrainingForm.note}</p>
 
-                <div className="input-container">
-                    <label>Nazwa treningu</label>
-                    <input
-                        name="name"
-                        placeholder="Podaj nazwę treningu"
-                        ref={register({required: true})}
-                    />
-                </div>
+            <h2>Cwiczenia:</h2>
+            {props.addTrainingForm.sets.map((set, i)=>(
+                <>
+                    <p key={i}>{set.exercise.name} {set.repetitions}</p>
+                </>
+            ))}
 
-                <div className="input-container">
-                    <label>Czas trwania treningu</label>
-                    <input name="duration"
-                           placeholder="Podaj czas trwania treningu (w min.)"
-                           ref={register({required: true})}
-                    />
-                </div>
-
-                <div className="input-container">
-                    <label>Spalone kalorię</label>
-                    <input name="kcal"
-                           placeholder="Ilość spalonych kalorii"
-                           ref={register}
-                    />
-                </div>
-
-                <div className="input-container">
-                    <label>Notatki</label>
-                    <input name="note"
-                           placeholder="Podsumowanie treningu, krótki opis a może jakieś wnioski?"
-                           ref={register}
-                    />
-                </div>
-                {training.sets.map((set, i) => (
-                    <div className="input-container">
-                        <label>{set.exercise.name}</label>
-                        <input name="sets.reps"
-                               ref={register}
-                               value={set.repetitions}
-                        />
-                        <input name="sets.duration"
-                               ref={register}
-                               value={set.weight}
-                        />
-                        <input name="sets.weight"
-                               ref={register}
-                               value={set.time}
-                        />
-                    </div>
-                ))}
-
-                <button type="button" onClick={backToStepOne}>Anuluj</button>
-                <button type="submit">Zapisz trening</button>
-            </form>
+            <button type="button" onClick={()=>props.history.goBack()}>Wstecz</button>
+            <button type="button" onClick={handleAddTraining}>Zapisz trening</button>
         </div>
     );
 };
 
-export default PodsumowanieTreningu;
+const mapStateToProps = state => {
+    return {
+        addTrainingForm: state.addTrainingForm.training,
+        token: state.auth.token
+    }
+};
+
+export default connect(mapStateToProps, {addTrainingToApi})(PodsumowanieTreningu);
