@@ -6,6 +6,7 @@ import {addTrainingToStore} from '../../../store/actions/addTraining';
 import {getRepsView} from "../../../functions/getRepsView";
 
 const TrainingSummary = (props) => {
+    console.log(props.trainingToShow)
     let tempArray = [];
     props.trainingToShow.sets.forEach(set => {
         tempArray.push({name: set.exercise.name, id: set.exercise.id, repetitions: [], weight: [], time: []})

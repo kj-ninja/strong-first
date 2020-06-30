@@ -48,7 +48,14 @@ function wrapTrainingsWithDate(trainings) {
     let trainingsWrapped = {};
     trainings.forEach(ele => {
         let day = new Date(ele.date);
-        trainingsWrapped[formatDate(day)] = ele;
+        const key = formatDate(day);
+
+        if (trainingsWrapped.hasOwnProperty(key)) {
+            trainingsWrapped[key].push(ele);
+        } else {
+            trainingsWrapped[key] = [ele];
+        }
+
     });
 
     return trainingsWrapped;
@@ -92,16 +99,18 @@ function createDay(date, wrappedTrainings) {
     return {
         dayNumber: date.getDate(),
         monthNumber: date.getMonth(),
-        element: (function () {
+        elements: (function () {
 
             let dayFormatted = formatDate(date);
             // if wrappedTrainings has training in this date
             if (wrappedTrainings.hasOwnProperty(dayFormatted)) {
-                return {
-                    type: "training",
-                    icon: "fa fa-check",
-                    id: wrappedTrainings[dayFormatted].id
-                };
+                return wrappedTrainings[dayFormatted].map(ele => {
+                    return {
+                        type: "training",
+                        icon: "fa fa-check",
+                        id: ele.id
+                    }
+                })
             } else {
                 return null;
             }

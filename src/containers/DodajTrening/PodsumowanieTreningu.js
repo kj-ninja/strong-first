@@ -6,6 +6,8 @@ const PodsumowanieTreningu = (props) => {
     const {addTrainingForm, addTrainingToApi} = props;
 
     const handleAddTraining = () => {
+        //@TODO
+        // sprawdz czy w danym dniu sa juz 2 treningi jak tak to wypad z baru
         addTrainingToApi(props.token, addTrainingForm);
         setTimeout(()=> {props.history.push('/diary')}, 1500);
     };
@@ -34,7 +36,8 @@ const PodsumowanieTreningu = (props) => {
 const mapStateToProps = state => {
     return {
         addTrainingForm: state.addTrainingForm.training,
-        token: state.auth.token
+        token: state.auth.token,
+        trainings: state.trainings.trainings
     }
 };
 

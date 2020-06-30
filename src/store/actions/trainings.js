@@ -46,6 +46,7 @@ export const fetchAllTrainings = (token) => {
                 dispatch(fetchTrainingsSuccess(response.data));
             })
             .catch(function (error) {
+                console.log(error.response.status);
                 dispatch(fetchTrainingsFail(error));
             })
     };

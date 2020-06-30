@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
+import {clearForm} from '../../../store/actions/addTraining';
 
 import './NavigationItems.scss';
 import {NavLink} from "react-router-dom";
@@ -14,7 +15,7 @@ const NavigationItems = (props) => {
 
             {props.isAuth ?
             <li className="navigation-item">
-                <NavLink exact to="/add-training">Dodaj trening</NavLink>
+                <NavLink exact to="/add-training" onClick={()=>props.clearForm}>Dodaj trening</NavLink>
             </li> : null}
 
             {props.isAuth ? null :
@@ -39,4 +40,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps)(NavigationItems);
+export default connect(mapStateToProps, {clearForm})(NavigationItems);

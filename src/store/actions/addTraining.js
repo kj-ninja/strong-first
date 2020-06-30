@@ -27,3 +27,5 @@ export const addTrainingToStore = (training) => {
         payload: training
     }
 }
+
+export const clearForm = () => ({type: actionTypes.CLEAR_ADD_TRAINING_FORM})

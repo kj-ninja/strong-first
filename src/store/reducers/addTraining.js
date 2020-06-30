@@ -50,6 +50,10 @@ const addTraining = (state = initialState, action) => {
                     sets: state.training.sets.filter((set, index) => index !== action.payload)
                 }
             }
+        case actionTypes.CLEAR_ADD_TRAINING_FORM:
+            return {
+                training: initialState.training
+            }
         default:
             return state;
     }
