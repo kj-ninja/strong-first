@@ -4,7 +4,7 @@ import ReactSelect from "../../components/ReactSelect/ReactSelect";
 
 const DodajTreningStepTwo = ({prevStep, handleStepTwoTraining}) => {
     const [sets, setSets] = useState([]);
-    const {register, handleSubmit, errors, formState, getValues} = useForm();
+    const {register, handleSubmit, getValues} = useForm();
     const [selectedExercise, setSelectedExercise] = useState({});
 
     const handleAddSet = () => {

@@ -59,12 +59,17 @@ const PodsumowanieTreningu = ({training, setTraining, addTraining, backToStepOne
                            ref={register}
                     />
                 </div>
+
+
                 {training.sets.map((set, i) => (
                     <div className="input-container">
                         <label>{set.exercise.name}</label>
                         <input name="sets.reps"
                                ref={register}
                                value={set.repetitions}
+                               onChange={(e)=>setTraining((prevState)=>{
+                                   console.log(prevState);
+                               })}
                         />
                         <input name="sets.duration"
                                ref={register}
@@ -74,8 +79,17 @@ const PodsumowanieTreningu = ({training, setTraining, addTraining, backToStepOne
                                ref={register}
                                value={set.time}
                         />
+                        <input name="sets.exercise.id"
+                               ref={register}
+                               value={set.exercise.id}
+                        />
+                        <input name="sets.exercise.name"
+                               ref={register}
+                               value={set.exercise.name}
+                        />
                     </div>
                 ))}
+
 
                 <button type="button" onClick={backToStepOne}>Anuluj</button>
                 <button type="submit">Zapisz trening</button>
