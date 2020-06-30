@@ -5,6 +5,7 @@ import {addTrainingStepOne} from '../../store/actions/addTraining';
 
 const DodajTreningStepOne = (props) => {
     const {register, handleSubmit, errors} = useForm();
+
     const handleStepOne = (data) => {
         props.addTrainingStepOne(data);
         props.history.push('/add-training/step2');

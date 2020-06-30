@@ -21,6 +21,22 @@ const addTraining = (state = initialState, action) => {
                     ...action.payload
                 }
             };
+        case actionTypes.ADD_SET:
+            return {
+                ...state,
+                training: {
+                    ...state.training,
+                    sets: state.training.sets.concat(action.payload)
+                }
+            }
+        case actionTypes.DELETE_SET:
+            return {
+                ...state,
+                training: {
+                    ...state.training,
+                    sets: state.training.sets.filter((item, index) => index !== action.payload)
+                }
+            }
         default:
             return state;
     }

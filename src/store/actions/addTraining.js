@@ -6,3 +6,17 @@ export const addTrainingStepOne = (data) => {
         payload: data
     }
 }
+
+export const addSet = (set) => {
+    return {
+        type: actionTypes.ADD_SET,
+        payload: set
+    }
+};
+
+export const deleteSet = (index) => {
+    return {
+        type: actionTypes.DELETE_SET,
+        payload: index
+    }
+};

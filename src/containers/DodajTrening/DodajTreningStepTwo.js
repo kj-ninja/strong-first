@@ -1,29 +1,21 @@
 import React, {useState} from 'react';
+import {connect} from 'react-redux';
+import {addSet, deleteSet} from '../../store/actions/addTraining';
 import {useForm} from "react-hook-form";
 import ReactSelect from "../../components/ReactSelect/ReactSelect";
 
 const DodajTreningStepTwo = (props) => {
-    const [sets, setSets] = useState([]);
     const {register, handleSubmit, getValues} = useForm();
     const [selectedExercise, setSelectedExercise] = useState({});
 
     const handleAddSet = () => {
         const set = {...getValues(), exercise: {id: selectedExercise.value, name: selectedExercise.label}};
-
-        setSets((prevState)=> {
-            return [...prevState, {
-                repetitions: +set.reps,
-                time: +set.duration,
-                weight: +set.weight,
-                exercise: {
-                    id: set.exercise.id,
-                    name: set.exercise.name
-                }
-            }]
-        });
+        props.addSet(set);
     };
 
-    const handleStepTwo = (data) => console.log(data);
+    const handleStepTwo = () => {
+        props.history.push('/add-training/result');
+    }
 
     return (
         <form onSubmit={handleSubmit(handleStepTwo)}>
@@ -35,7 +27,7 @@ const DodajTreningStepTwo = (props) => {
             <div className="input-container">
                 <label>Powtórzenia:</label>
                 <input
-                    name="reps"
+                    name="repetitions"
                     placeholder="Podaj ilość powtórzeń"
                     ref={register}
                 />
@@ -61,13 +53,19 @@ const DodajTreningStepTwo = (props) => {
             <button type="button" onClick={handleAddSet}>Dodaj serię</button>
             <button type="submit">Dalej</button>
 
-            {sets.map((set, i)=>(
+            {props.addTrainingForm.sets.map((set, i)=>(
                 <>
-                    <p key={i}>{set.exercise.name}</p>
+                    <p key={i} onClick={()=>props.deleteSet(i)}>{set.exercise.name} {set.repetitions}</p>
                 </>
             ))}
         </form>
     );
 };
 
-export default DodajTreningStepTwo;
+const mapStateToProps = state => {
+    return {
+        addTrainingForm: state.addTrainingForm.training
+    }
+};
+
+export default connect(mapStateToProps, {addSet, deleteSet})(DodajTreningStepTwo);
