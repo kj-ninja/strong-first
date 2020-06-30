@@ -4,10 +4,7 @@ import {connect} from 'react-redux';
 import {addTrainingStepOne} from '../../store/actions/addTraining';
 
 const DodajTreningStepOne = (props) => {
-    const {register, handleSubmit, errors} = useForm({
-        defaultValues: props.addTrainingForm, 
-    });
-
+    const {register, handleSubmit, errors} = useForm();
     const handleStepOne = (data) => {
         props.addTrainingStepOne(data);
         props.history.push('/add-training/step2');
@@ -20,6 +17,7 @@ const DodajTreningStepOne = (props) => {
                     name="date"
                     type="date"
                     ref={register}
+                    defaultValue={new Date().toISOString().substr(0, 10)}
                 />
             </div>
 
@@ -28,6 +26,7 @@ const DodajTreningStepOne = (props) => {
                     name="name"
                     placeholder="Podaj nazwę treningu"
                     ref={register({required: true})}
+                    defaultValue={props.addTrainingForm.name}
                 />
                 {errors.name ? <p>{errors.name.message}</p> : null}
             </div>
@@ -36,6 +35,7 @@ const DodajTreningStepOne = (props) => {
                 <input name="duration"
                        placeholder="Podaj czas trwania treningu (w min.)"
                        ref={register({required: true})}
+                       defaultValue={props.addTrainingForm.duration}
                 />
                 {errors.duration ? <p>{errors.duration.message}</p> : null}
             </div>
@@ -44,6 +44,7 @@ const DodajTreningStepOne = (props) => {
                 <input name="kcal"
                        placeholder="Ilość spalonych kalorii"
                        ref={register}
+                       defaultValue={props.addTrainingForm.kcal}
                 />
             </div>
 
@@ -51,6 +52,7 @@ const DodajTreningStepOne = (props) => {
                 <input name="note"
                        placeholder="Podsumowanie treningu, krótki opis a może jakieś wnioski?"
                        ref={register}
+                       defaultValue={props.addTrainingForm.note}
                 />
             </div>
 
@@ -65,4 +67,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(null, {addTrainingStepOne})(DodajTreningStepOne);
+export default connect(mapStateToProps, {addTrainingStepOne})(DodajTreningStepOne);

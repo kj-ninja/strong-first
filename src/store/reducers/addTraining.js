@@ -2,7 +2,7 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     training: {
-        date: new Date().toISOString().substr(0, 10),
+        date: '',
         name: '',
         duration: '',
         kcal: '',
@@ -16,8 +16,11 @@ const addTraining = (state = initialState, action) => {
         case actionTypes.ADD_TRAINING_STEP_1:
             return {
                 ...state,
-                training: action.training
-            }
+                training: {
+                    ...state.training,
+                    ...action.payload
+                }
+            };
         default:
             return state;
     }
