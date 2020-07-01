@@ -51,4 +51,6 @@ export const addTrainingToApi = (token, training) => {
     };
 };
 
+export const editTraining = (info) => ({type: actionTypes.EDIT_TRAINING, payload: info});
+
 export const clearForm = () => ({type: actionTypes.CLEAR_ADD_TRAINING_FORM})

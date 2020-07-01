@@ -11,6 +11,7 @@ export const ADD_TRAINING_TO_STORE = 'ADD_TRAINING_TO_STORE';
 export const ADD_TRAINING_STEP_1 = 'ADD_TRAINING_STEP_1';
 export const ADD_SET = 'ADD_SET';
 export const DELETE_SET = 'DELETE_SET';
+export const EDIT_TRAINING = 'EDIT_TRAINING';
 export const CLEAR_ADD_TRAINING_FORM = 'CLEAR_ADD_TRAINING_FORM';
 
 export const AUTH_START = 'AUTH_START';

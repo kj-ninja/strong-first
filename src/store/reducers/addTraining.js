@@ -10,7 +10,8 @@ const initialState = {
         sets: []
     },
     loading: false,
-    error: false
+    error: false,
+    isEdit: false
 }
 
 const addTrainingReducer = (state = initialState, action) => {
@@ -40,8 +41,8 @@ const addTrainingReducer = (state = initialState, action) => {
             };
         case actionTypes.ADD_TRAINING_TO_STORE:
             return {
-                training: action.payload,
-                loading: true
+                ...state,
+                training: action.payload
             }
         case actionTypes.ADD_SET:
             return {
@@ -63,6 +64,16 @@ const addTrainingReducer = (state = initialState, action) => {
                     ...state.training,
                     sets: state.training.sets.filter((set, index) => index !== action.payload)
                 }
+            }
+        case actionTypes.EDIT_TRAINING:
+            return {
+                ...state,
+                isEdit: action.payload
+            }
+        case actionTypes.CLEAR_ADD_TRAINING_FORM:
+            return {
+                ...state,
+                training: initialState.training
             }
         default:
             return state;
