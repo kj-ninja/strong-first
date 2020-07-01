@@ -36,12 +36,6 @@ const trainings = (state = initialState, action) => {
                 ...state,
                 error: false
             }
-        case actionTypes.ADD_TRAINING:
-            return {
-                ...state,
-                trainingToShow: action.training,
-                trainings: state.trainings.concat(action.training)
-            }
         default:
             return state;
     }

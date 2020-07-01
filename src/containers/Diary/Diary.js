@@ -13,10 +13,19 @@ const Diary = (props) => {
         fetchAllTrainings(token);
     }, [fetchAllTrainings, token]);
 
+    if (error === 404) {
+        return (
+            <h1 style={{textAlign: 'center', marginTop: '70px', fontSize: '22px'}}>
+                Brak treningów w historii! <br/>
+                Dodaj swój pierwszy trening!
+            </h1>
+        );
+    }
+
     if (error) {
         return (
             <h1 style={{textAlign: 'center', marginTop: '70px', fontSize: '22px'}}>
-                Coś poszło nie tak! Brak treningów w historii? Dodaj swój pierwszy trening!
+                Coś poszło nie tak!
             </h1>
         );
     }

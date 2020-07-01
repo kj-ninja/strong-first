@@ -8,11 +8,24 @@ const initialState = {
         kcal: '',
         note: '',
         sets: []
-    }
+    },
+    loading: false,
+    error: false
 }
 
-const addTraining = (state = initialState, action) => {
+const addTrainingReducer = (state = initialState, action) => {
     switch (action.type) {
+        case actionTypes.ADD_TRAINING_START:
+            return {
+                ...state,
+                loading: true
+            }
+        case actionTypes.ADD_TRAINING_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.error
+            }
         case actionTypes.ADD_TRAINING_STEP_1:
             return {
                 ...state,
@@ -27,7 +40,8 @@ const addTraining = (state = initialState, action) => {
             };
         case actionTypes.ADD_TRAINING_TO_STORE:
             return {
-                training: action.payload
+                training: action.payload,
+                loading: true
             }
         case actionTypes.ADD_SET:
             return {
@@ -50,13 +64,9 @@ const addTraining = (state = initialState, action) => {
                     sets: state.training.sets.filter((set, index) => index !== action.payload)
                 }
             }
-        case actionTypes.CLEAR_ADD_TRAINING_FORM:
-            return {
-                training: initialState.training
-            }
         default:
             return state;
     }
 };
 
-export default addTraining;
+export default addTrainingReducer;

@@ -4,7 +4,7 @@ import {addSet, deleteSet} from '../../store/actions/addTraining';
 import {useForm} from "react-hook-form";
 import ReactSelect from "../../components/ReactSelect/ReactSelect";
 
-const DodajTreningStepTwo = (props) => {
+const AddTrainingStepTwo = (props) => {
     const {register, handleSubmit, getValues} = useForm();
     const [selectedExercise, setSelectedExercise] = useState({});
 
@@ -53,7 +53,7 @@ const DodajTreningStepTwo = (props) => {
             <button type="button" onClick={handleAddSet}>Dodaj serię</button>
             <button type="submit">Dalej</button>
 
-            {props.addTrainingForm.sets.map((set, i)=>(
+            {props.addTraining.sets.map((set, i)=>(
                 <>
                     <p key={i} onClick={()=>props.deleteSet(i)}>
                         {set.exercise.name}
@@ -69,8 +69,8 @@ const DodajTreningStepTwo = (props) => {
 
 const mapStateToProps = state => {
     return {
-        addTrainingForm: state.addTrainingForm.training
+        addTraining: state.addTraining.training
     }
 };
 
-export default connect(mapStateToProps, {addSet, deleteSet})(DodajTreningStepTwo);
+export default connect(mapStateToProps, {addSet, deleteSet})(AddTrainingStepTwo);

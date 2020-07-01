@@ -6,5 +6,5 @@ import addTrainingReducer from './addTraining';
 export default combineReducers({
     auth: authReducer,
     trainings: trainingsReducer,
-    addTrainingForm: addTrainingReducer
+    addTraining: addTrainingReducer
 });
