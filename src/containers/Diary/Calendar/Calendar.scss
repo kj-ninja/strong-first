@@ -33,6 +33,10 @@
       td {
         border: 2px solid #8080803d;
       }
+      .stylesForToday {
+        background-color: #e8e6e678;
+        border: 2px solid #0c0c0c36;
+      } 
       .calendar__day {
         min-height: 58px;
       }
@@ -45,7 +49,7 @@
         padding-bottom: 13px;
         padding-right: 5px;
         &:hover {
-          background-color: #efefef;
+          background-color: #cecece
         }
       }
       .calendar__training-day:nth-of-type(2) {

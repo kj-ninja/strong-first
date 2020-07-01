@@ -40,21 +40,34 @@ const Calendar = ({trainings, setTrainingToShow}) => {
         })
     };
 
+    const isToday = (someDate) => {
+        const today = new Date()
+        return someDate.getDate() == today.getDate() &&
+            someDate.getMonth() == today.getMonth() &&
+            someDate.getFullYear() == today.getFullYear()
+    }
+
     const generateRow = (week, i) => {
         return (
             <tr key={i}>
                 {week.map(day => {
+                    const aktualnaData = new Date(new Date().getFullYear(), day.monthNumber, day.dayNumber);
+                    let stylesForToday = 'stylesForToday';
+                    if (!isToday(aktualnaData)) {
+                        stylesForToday = '';
+                    }
+
                     if (day.monthNumber !== actualDate.getMonth()) {
-                        return <td key={day.dayNumber + day.monthNumber + 100}>
+                        return <td key={day.dayNumber + day.monthNumber + 100} className={stylesForToday}>
                             <div className="calendar__day calendar__day--notActual">{day.dayNumber}</div>
                         </td>
                     }
                     if (day.elements === null) {
-                        return <td key={day.dayNumber + day.monthNumber + 200}>
+                        return <td key={day.dayNumber + day.monthNumber + 200} className={stylesForToday}>
                             <div className="calendar__day">{day.dayNumber}</div>
                         </td>
                     } else {
-                        return <td key={day.dayNumber + day.monthNumber + 300}>
+                        return <td key={day.dayNumber + day.monthNumber + 300} className={stylesForToday}>
                             <span style={{position: 'absolute'}}>{day.dayNumber}</span>
                             {day.elements.map(ele => (
                                 <>
