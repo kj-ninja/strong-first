@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {addTrainingToApi} from "../../store/actions/trainings";
+import {addTrainingToApi, editTrainingInApi} from "../../store/actions/trainings";
 
 const AddTrainingResult = (props) => {
-    const {addTrainingForm, addTrainingToApi} = props;
+    const {addTrainingForm, addTrainingToApi, editTrainingInApi} = props;
 
     const handleAddTraining = () => {
         let counter = 0;
@@ -24,6 +24,11 @@ const AddTrainingResult = (props) => {
         }
     };
 
+    const handleEditTraining = () => {
+        editTrainingInApi(props.token, addTrainingForm, addTrainingForm.id);
+        setTimeout(()=> {props.history.push('/diary')}, 1500);
+    };
+
     return (
         <div style={{margin: '50px auto', maxWidth: '800px', border: '1px solid #eee', boxShadow: '2px 2px 0 0 #ddd'}}>
             <h1>Nazwa treningu: {addTrainingForm.name}</h1>
@@ -40,7 +45,10 @@ const AddTrainingResult = (props) => {
             ))}
 
             <button type="button" onClick={()=>props.history.goBack()}>Wstecz</button>
-            <button type="button" onClick={handleAddTraining}>Zapisz trening</button>
+            {props.isEdit ?
+                <button type="button" onClick={handleEditTraining}>Zapisz zmiany</button> :
+                <button type="button" onClick={handleAddTraining}>Zapisz trening</button>}
+
         </div>
     );
 };
@@ -49,8 +57,9 @@ const mapStateToProps = state => {
     return {
         addTrainingForm: state.addTrainingForm.training,
         token: state.auth.token,
-        trainings: state.trainings.trainings
+        trainings: state.trainings.trainings,
+        isEdit: state.addTrainingForm.isEdit
     }
 };
 
-export default connect(mapStateToProps, {addTrainingToApi})(AddTrainingResult);
+export default connect(mapStateToProps, {addTrainingToApi, editTrainingInApi})(AddTrainingResult);

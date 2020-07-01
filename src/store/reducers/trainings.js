@@ -42,6 +42,18 @@ const trainingsReducer = (state = initialState, action) => {
                 ...state,
                 error: false
             }
+        case actionTypes.EDIT_TRAINING_IN_STORE:
+            const editTrainings = state.trainings.filter(training => training.id !== action.payload.id);
+            return {
+                ...state,
+                trainings: editTrainings.concat(action.payload)
+            }
+        case actionTypes.DELETE_TRAINING_FROM_STORE:
+            const newTrainings = state.trainings.filter(training => training.id !== action.payload.id);
+            return {
+                ...state,
+                trainings: newTrainings
+            }
         default:
             return state;
     }

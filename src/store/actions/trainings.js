@@ -50,3 +50,53 @@ export const addTrainingToApi = (token, training) => {
             });
     };
 };
+
+export const editTrainingInStore = (training) => {
+    return {
+        type: actionTypes.EDIT_TRAINING_IN_STORE,
+        payload: training
+    }
+};
+
+export const editTrainingInApi = (token, training, id) => {
+    return dispatch => {
+        dispatch(fetchTrainingsStart());
+        axios.post('https://ironman.coderaf.com/training/' + id, training, {
+            headers: {
+                'Access-Token': token
+            },
+        })
+            .then(function (res) {
+                dispatch(trainingsClearError());
+                dispatch(editTrainingInStore(training));
+            })
+            .catch(error => {
+                dispatch(fetchTrainingsFail(error));
+            });
+    };
+};
+
+export const deleteTrainingFromStore = (id) => {
+    return {
+        type: actionTypes.DELETE_TRAINING_FROM_STORE,
+        payload: id
+    }
+};
+
+export const deleteTrainingFromApi = (id, token) => {
+    return dispatch => {
+        dispatch(fetchTrainingsStart());
+        axios.delete('https://ironman.coderaf.com/training/' + id, {
+            headers: {
+                'Access-Token': token
+            },
+        })
+            .then(function (res) {
+                dispatch(trainingsClearError());
+                dispatch(deleteTrainingFromStore(id));
+            })
+            .catch(error => {
+                dispatch(fetchTrainingsFail(error));
+            });
+    };
+};

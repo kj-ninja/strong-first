@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import {clearForm, isEditTraining} from '../../../store/actions/addTrainingForm';
+import {trainingsClearError} from '../../../store/actions/trainings';
 
 import './NavigationItems.scss';
 import {NavLink} from "react-router-dom";
@@ -30,7 +31,7 @@ const NavigationItems = (props) => {
 
             {props.isAuth ?
             <li className="navigation-item">
-                <NavLink exact to="/logout">Wyloguj się</NavLink>
+                <NavLink exact to="/logout" onClick={()=>props.trainingsClearError()}>Wyloguj się</NavLink>
             </li> :
             <li className="navigation-item">
                 <NavLink exact to="/login">Zaloguj się</NavLink>
@@ -45,4 +46,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, {isEditTraining, clearForm})(NavigationItems);
+export default connect(mapStateToProps, {isEditTraining, clearForm,trainingsClearError})(NavigationItems);
