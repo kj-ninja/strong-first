@@ -9,7 +9,7 @@ const Calendar = ({trainings, setTrainingToShow}) => {
     const wrappedTrainings = wrapTrainingsWithDate(trainings);
     const weeksInMonth = createDaysInMonth(actualDate, wrappedTrainings);
 
-    useEffect(()=>{
+    useEffect(() => {
         document.addEventListener('keydown', handleKeyArrow);
 
         return () => {
@@ -41,7 +41,6 @@ const Calendar = ({trainings, setTrainingToShow}) => {
     };
 
     const generateRow = (week, i) => {
-        console.log(week);
         return (
             <tr key={i}>
                 {week.map(day => {
@@ -56,14 +55,14 @@ const Calendar = ({trainings, setTrainingToShow}) => {
                         </td>
                     } else {
                         return <td key={day.dayNumber + day.monthNumber + 300}>
-                            {day.dayNumber}
-                            {day.elements.map(ele=>(
-                                <div className="calendar__day calendar__training-day" onClick={() => getTrainingById(ele.id)}>
-                                    <br/>
-                                    <i className="fas fa-dumbbell"/>
-                                </div>
+                            <span style={{position: 'absolute'}}>{day.dayNumber}</span>
+                            {day.elements.map(ele => (
+                                <>
+                                    <i className="calendar__training-day fas fa-dumbbell"
+                                       onClick={() => getTrainingById(ele.id)}/>
+                                   <br/>
+                                </>
                             ))}
-
                         </td>
                     }
                 })}
