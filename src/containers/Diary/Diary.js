@@ -13,7 +13,7 @@ const Diary = (props) => {
         fetchAllTrainings(token);
     }, [fetchAllTrainings, token]);
 
-    if (error === 404) {
+    if (error === 404 || error === 401) {
         return (
             <h1 style={{textAlign: 'center', marginTop: '70px', fontSize: '22px'}}>
                 Brak treningów w historii! <br/>

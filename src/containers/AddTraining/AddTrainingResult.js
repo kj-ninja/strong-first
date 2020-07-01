@@ -6,10 +6,22 @@ const AddTrainingResult = (props) => {
     const {addTraining, addTrainingToApi} = props;
 
     const handleAddTraining = () => {
-        //@TODO
-        // sprawdz czy w danym dniu sa juz 2 treningi jak tak to wypad z baru
-        addTrainingToApi(props.token, addTraining);
-        setTimeout(()=> {props.history.push('/diary')}, 1500);
+        let counter = 0;
+
+        props.trainings.forEach(training => {
+            if (training.date === addTraining.date) {
+                counter++;
+            }
+        })
+
+        if (counter >= 2) {
+          alert('Osiągnięto limit treningów w ciągu jednego dnia! Czas na relaks.' +
+              'Zawsze możesz edytować jeden z treningów w sekcji dzienniczka.');
+            setTimeout(()=> {props.history.push('/diary')}, 500);
+        } else {
+            addTrainingToApi(props.token, addTraining);
+            setTimeout(()=> {props.history.push('/diary')}, 1500);
+        }
     };
 
     return (
