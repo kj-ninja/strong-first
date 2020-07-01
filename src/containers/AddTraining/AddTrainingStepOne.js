@@ -1,7 +1,7 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
 import {connect} from 'react-redux';
-import {addTrainingStepOne} from '../../store/actions/addTraining';
+import {addTrainingStepOne} from '../../store/actions/addTrainingForm';
 
 const AddTrainingStepOne = (props) => {
     const {register, handleSubmit, errors} = useForm();
@@ -18,7 +18,7 @@ const AddTrainingStepOne = (props) => {
                     name="date"
                     type="date"
                     ref={register}
-                    defaultValue={props.addTraining.date}
+                    defaultValue={props.addTrainingForm.date}
                 />
             </div>
 
@@ -27,7 +27,7 @@ const AddTrainingStepOne = (props) => {
                     name="name"
                     placeholder="Podaj nazwę treningu"
                     ref={register({required: true})}
-                    defaultValue={props.addTraining.name}
+                    defaultValue={props.addTrainingForm.name}
                 />
                 {errors.name ? <p>{errors.name.message}</p> : null}
             </div>
@@ -36,7 +36,7 @@ const AddTrainingStepOne = (props) => {
                 <input name="duration"
                        placeholder="Podaj czas trwania treningu (w min.)"
                        ref={register({required: true})}
-                       defaultValue={props.addTraining.duration}
+                       defaultValue={props.addTrainingForm.duration}
                 />
                 {errors.duration ? <p>{errors.duration.message}</p> : null}
             </div>
@@ -45,7 +45,7 @@ const AddTrainingStepOne = (props) => {
                 <input name="kcal"
                        placeholder="Ilość spalonych kalorii"
                        ref={register}
-                       defaultValue={props.addTraining.kcal}
+                       defaultValue={props.addTrainingForm.kcal}
                 />
             </div>
 
@@ -53,7 +53,7 @@ const AddTrainingStepOne = (props) => {
                 <input name="note"
                        placeholder="Podsumowanie treningu, krótki opis a może jakieś wnioski?"
                        ref={register}
-                       defaultValue={props.addTraining.note}
+                       defaultValue={props.addTrainingForm.note}
                 />
             </div>
 
@@ -64,7 +64,7 @@ const AddTrainingStepOne = (props) => {
 
 const mapStateToProps = state => {
     return {
-        addTraining: state.addTraining.training
+        addTrainingForm: state.addTrainingForm.training
     }
 };
 

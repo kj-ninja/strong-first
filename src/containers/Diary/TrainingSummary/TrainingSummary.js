@@ -2,7 +2,7 @@ import React from 'react';
 import './TrainingSummary.scss';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {addTrainingToStore, editTraining} from '../../../store/actions/addTraining';
+import {isEditTraining, addTrainingEditForm} from '../../../store/actions/addTrainingForm';
 import {getRepsView} from "../../../functions/getRepsView";
 
 const TrainingSummary = (props) => {
@@ -50,8 +50,8 @@ const TrainingSummary = (props) => {
     );
 
     const handleEditTraining = () => {
-        props.editTraining(true);
-        props.addTrainingToStore(props.trainingToShow);
+        props.isEditTraining(true);
+        props.addTrainingEditForm(props.trainingToShow);
         props.history.push('/add-training');
     };
 
@@ -70,4 +70,4 @@ const TrainingSummary = (props) => {
     );
 };
 
-export default connect(null, {addTrainingToStore, editTraining})(withRouter(TrainingSummary));
+export default connect(null, {addTrainingEditForm, isEditTraining})(withRouter(TrainingSummary));

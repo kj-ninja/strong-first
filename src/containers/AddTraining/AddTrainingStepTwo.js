@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import {addSet, deleteSet} from '../../store/actions/addTraining';
+import {addSet, deleteSet} from '../../store/actions/addTrainingForm';
 import {useForm} from "react-hook-form";
 import ReactSelect from "../../components/ReactSelect/ReactSelect";
 
@@ -53,7 +53,7 @@ const AddTrainingStepTwo = (props) => {
             <button type="button" onClick={handleAddSet}>Dodaj serię</button>
             <button type="submit">Dalej</button>
 
-            {props.addTraining.sets.map((set, i)=>(
+            {props.addTrainingForm.sets.map((set, i)=>(
                 <>
                     <p key={i} onClick={()=>props.deleteSet(i)}>
                         {set.exercise.name}
@@ -69,7 +69,7 @@ const AddTrainingStepTwo = (props) => {
 
 const mapStateToProps = state => {
     return {
-        addTraining: state.addTraining.training
+        addTrainingForm: state.addTrainingForm.training
     }
 };
 

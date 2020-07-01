@@ -23,9 +23,7 @@ const AddTraining = (props) => {
 
 const mapStateToProps = state => {
     return {
-        token: state.auth.token,
-        loading: state.addTraining.loading,
-        training: state.addTraining.training
+        loading: state.trainings.loading,
     }
 };
 

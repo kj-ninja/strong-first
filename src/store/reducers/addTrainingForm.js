@@ -9,24 +9,11 @@ const initialState = {
         note: '',
         sets: []
     },
-    loading: false,
-    error: false,
     isEdit: false
 }
 
-const addTrainingReducer = (state = initialState, action) => {
+const addTrainingFormReducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.ADD_TRAINING_START:
-            return {
-                ...state,
-                loading: true
-            }
-        case actionTypes.ADD_TRAINING_FAIL:
-            return {
-                ...state,
-                loading: false,
-                error: action.error
-            }
         case actionTypes.ADD_TRAINING_STEP_1:
             return {
                 ...state,
@@ -39,10 +26,11 @@ const addTrainingReducer = (state = initialState, action) => {
                     note: action.payload.note
                 }
             };
-        case actionTypes.ADD_TRAINING_TO_STORE:
+        case actionTypes.ADD_TRAINING_EDIT_FORM:
             return {
                 ...state,
-                training: action.payload
+                training: action.payload,
+                isEdit: true
             }
         case actionTypes.ADD_SET:
             return {
@@ -65,7 +53,7 @@ const addTrainingReducer = (state = initialState, action) => {
                     sets: state.training.sets.filter((set, index) => index !== action.payload)
                 }
             }
-        case actionTypes.EDIT_TRAINING:
+        case actionTypes.IS_EDIT_TRAINING:
             return {
                 ...state,
                 isEdit: action.payload
@@ -80,4 +68,4 @@ const addTrainingReducer = (state = initialState, action) => {
     }
 };
 
-export default addTrainingReducer;
+export default addTrainingFormReducer;

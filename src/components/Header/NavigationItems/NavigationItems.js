@@ -1,13 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {editTraining, clearForm} from '../../../store/actions/addTraining';
+import {clearForm, isEditTraining} from '../../../store/actions/addTrainingForm';
 
 import './NavigationItems.scss';
 import {NavLink} from "react-router-dom";
 
 const NavigationItems = (props) => {
     const handleAddTrainingLink = () => {
-        props.editTraining(false);
+        props.isEditTraining(false);
         props.clearForm();
     };
 
@@ -45,4 +45,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, {editTraining, clearForm})(NavigationItems);
+export default connect(mapStateToProps, {isEditTraining, clearForm})(NavigationItems);

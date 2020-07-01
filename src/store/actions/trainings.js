@@ -21,8 +21,32 @@ export const fetchAllTrainings = (token) => {
                 dispatch(fetchTrainingsSuccess(response.data));
             })
             .catch(function (error) {
-                console.log(error.response.status);
                 dispatch(fetchTrainingsFail(error.response.status));
             })
+    };
+};
+
+export const addTrainingToStore = (training) => {
+    return {
+        type: actionTypes.ADD_TRAINING_TO_STORE,
+        payload: training
+    }
+}
+
+export const addTrainingToApi = (token, training) => {
+    return dispatch => {
+        dispatch(fetchTrainingsStart());
+        axios.post('https://ironman.coderaf.com/training', training, {
+            headers: {
+                'Access-Token': token
+            },
+        })
+            .then(function (res) {
+                dispatch(trainingsClearError());
+                dispatch(addTrainingToStore(training));
+            })
+            .catch(error => {
+                dispatch(fetchTrainingsFail(error));
+            });
     };
 };

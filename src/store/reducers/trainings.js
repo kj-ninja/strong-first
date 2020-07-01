@@ -7,7 +7,7 @@ const initialState = {
     trainingToShow: null
 }
 
-const trainings = (state = initialState, action) => {
+const trainingsReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.FETCH_TRAININGS_START:
             return {
@@ -31,6 +31,12 @@ const trainings = (state = initialState, action) => {
                 ...state,
                 trainingToShow: action.trainingToShow
             }
+        case actionTypes.ADD_TRAINING_TO_STORE:
+            return {
+                ...state,
+                trainingToShow: action.payload,
+                trainings: state.trainings.concat(action.payload)
+            }
         case actionTypes.TRAININGS_CLEAR_ERROR:
             return {
                 ...state,
@@ -41,4 +47,4 @@ const trainings = (state = initialState, action) => {
     }
 };
 
-export default trainings;
+export default trainingsReducer;
