@@ -21,17 +21,11 @@ export const fetchAllTrainings = (token) => {
                 dispatch(fetchTrainingsSuccess(response.data));
             })
             .catch(function (error) {
+                console.log(error.response);
                 dispatch(fetchTrainingsFail(error.response.status));
             })
     };
 };
-
-export const addTrainingToStore = (training) => {
-    return {
-        type: actionTypes.ADD_TRAINING_TO_STORE,
-        payload: training
-    }
-}
 
 export const addTrainingToApi = (token, training) => {
     return dispatch => {
@@ -43,7 +37,7 @@ export const addTrainingToApi = (token, training) => {
         })
             .then(function (res) {
                 dispatch(trainingsClearError());
-                dispatch(addTrainingToStore(training));
+                fetchAllTrainings(token);
             })
             .catch(error => {
                 dispatch(fetchTrainingsFail(error));

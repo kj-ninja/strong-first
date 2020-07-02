@@ -74,11 +74,11 @@ const Calendar = ({trainings, setTrainingToShow, trainingToShow}) => {
                             <div className="calendar__day">{day.dayNumber}</div>
                         </td>
                     } else {
-                        // if (day.elements[0].id === trainingToShow.id || day.elements[1].id === trainingToShow.id) {
-                        //     stylesForFocus = ' focus'
-                        // } else {
-                        //     stylesForFocus = '';
-                        // }
+                        if (day.elements[0].id === trainingToShow.id || day.elements[1].id === trainingToShow.id) {
+                            stylesForFocus = ' focus'
+                        } else {
+                            stylesForFocus = '';
+                        }
                         return <td key={day.dayNumber + day.monthNumber + 300} className={stylesForToday + stylesForFocus}>
                             <span style={{position: 'absolute'}}>{day.dayNumber}</span>
                             {day.elements.map(ele => (

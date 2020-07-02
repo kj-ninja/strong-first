@@ -38,7 +38,6 @@ const Diary = (props) => {
         setTimeout(()=>setModal(false), 1000);
     };
 
-
     let diary = <Spinner/>;
     let popUp = (
         <div className="popUp" style={{

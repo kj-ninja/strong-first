@@ -31,12 +31,6 @@ const trainingsReducer = (state = initialState, action) => {
                 ...state,
                 trainingToShow: action.trainingToShow
             }
-        case actionTypes.ADD_TRAINING_TO_STORE:
-            return {
-                ...state,
-                trainingToShow: action.payload,
-                trainings: state.trainings.concat(action.payload)
-            }
         case actionTypes.TRAININGS_CLEAR_ERROR:
             return {
                 ...state,
@@ -52,6 +46,7 @@ const trainingsReducer = (state = initialState, action) => {
             const newTrainings = state.trainings.filter(training => training.id !== action.payload);
             return {
                 ...state,
+                trainingToShow: null,
                 trainings: newTrainings
             }
         default:
