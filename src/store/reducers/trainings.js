@@ -49,7 +49,7 @@ const trainingsReducer = (state = initialState, action) => {
                 trainings: editTrainings.concat(action.payload)
             }
         case actionTypes.DELETE_TRAINING_FROM_STORE:
-            const newTrainings = state.trainings.filter(training => training.id !== action.payload.id);
+            const newTrainings = state.trainings.filter(training => training.id !== action.payload);
             return {
                 ...state,
                 trainings: newTrainings
