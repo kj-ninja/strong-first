@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import './AddTraining.scss';
 import {Switch, Route} from 'react-router-dom';
 import DodajTreningStepOne from "./AddTrainingStepOne";
 import DodajTreningStepTwo from "./AddTrainingStepTwo";
