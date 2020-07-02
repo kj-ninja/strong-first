@@ -34,10 +34,13 @@
         border: 2px solid #8080803d;
       }
       .stylesForToday {
+        font-weight: bold;
+        color: #007bff;
+      }
+      .focus {
         background-color: #f1f1f178;
         border: 2px solid #0c0c0c36;
-        font-weight: bold;
-      } 
+      }
       .calendar__day {
         min-height: 58px;
       }

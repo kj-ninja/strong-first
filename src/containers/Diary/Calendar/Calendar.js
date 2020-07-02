@@ -1,10 +1,15 @@
 import React, {useEffect, useState} from 'react';
+import {connect} from "react-redux";
 import './Calendar.scss';
 import {createDaysInMonth, wrapTrainingsWithDate} from '../../../functions/calendar';
 
-const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const months = [
+    "Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec",
+    "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"
+];
 
-const Calendar = ({trainings, setTrainingToShow}) => {
+
+const Calendar = ({trainings, setTrainingToShow, trainingToShow}) => {
     const [actualDate, setActualDate] = useState(new Date());
     const wrappedTrainings = wrapTrainingsWithDate(trainings);
     const weeksInMonth = createDaysInMonth(actualDate, wrappedTrainings);
@@ -51,11 +56,13 @@ const Calendar = ({trainings, setTrainingToShow}) => {
         return (
             <tr key={i}>
                 {week.map(day => {
+                    console.log(day);
                     const aktualnaData = new Date(new Date().getFullYear(), day.monthNumber, day.dayNumber);
                     let stylesForToday = 'stylesForToday';
                     if (!isToday(aktualnaData)) {
                         stylesForToday = '';
                     }
+                    let stylesForFocus = '';
 
                     if (day.monthNumber !== actualDate.getMonth()) {
                         return <td key={day.dayNumber + day.monthNumber + 100} className={stylesForToday}>
@@ -67,13 +74,18 @@ const Calendar = ({trainings, setTrainingToShow}) => {
                             <div className="calendar__day">{day.dayNumber}</div>
                         </td>
                     } else {
-                        return <td key={day.dayNumber + day.monthNumber + 300} className={stylesForToday}>
+                        // if (day.elements[0].id === trainingToShow.id || day.elements[1].id === trainingToShow.id) {
+                        //     stylesForFocus = ' focus'
+                        // } else {
+                        //     stylesForFocus = '';
+                        // }
+                        return <td key={day.dayNumber + day.monthNumber + 300} className={stylesForToday + stylesForFocus}>
                             <span style={{position: 'absolute'}}>{day.dayNumber}</span>
                             {day.elements.map(ele => (
                                 <>
                                     <i className="calendar__training-day fas fa-dumbbell"
                                        onClick={() => getTrainingById(ele.id)}/>
-                                   <br/>
+                                    <br/>
                                 </>
                             ))}
                         </td>
@@ -115,4 +127,10 @@ const Calendar = ({trainings, setTrainingToShow}) => {
     );
 };
 
-export default Calendar;
+const mapStateToProps = state => {
+    return {
+        trainingToShow: state.trainings.trainingToShow
+    }
+};
+
+export default connect(mapStateToProps)(Calendar);
