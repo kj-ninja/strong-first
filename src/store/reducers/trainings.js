@@ -17,6 +17,7 @@ const trainingsReducer = (state = initialState, action) => {
         case actionTypes.FETCH_TRAININGS_SUCCESS:
             return {
                 ...state,
+                trainingToShow: action.trainings[action.trainings.length - 1],
                 trainings: action.trainings,
                 loading: false
             }

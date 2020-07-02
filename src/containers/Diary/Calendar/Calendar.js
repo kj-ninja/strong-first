@@ -38,8 +38,10 @@ const Calendar = ({trainings, setTrainingToShow, trainingToShow}) => {
     };
 
     const getTrainingById = id => {
+        console.log(id);
         trainings.forEach(training => {
             if (training.id === id) {
+                console.log(training);
                 setTrainingToShow(training);
             }
         })
@@ -56,7 +58,6 @@ const Calendar = ({trainings, setTrainingToShow, trainingToShow}) => {
         return (
             <tr key={i}>
                 {week.map(day => {
-                    console.log(day);
                     const aktualnaData = new Date(new Date().getFullYear(), day.monthNumber, day.dayNumber);
                     let stylesForToday = 'stylesForToday';
                     if (!isToday(aktualnaData)) {
@@ -74,11 +75,13 @@ const Calendar = ({trainings, setTrainingToShow, trainingToShow}) => {
                             <div className="calendar__day">{day.dayNumber}</div>
                         </td>
                     } else {
-                        if (day.elements[0].id === trainingToShow.id || day.elements[1].id === trainingToShow.id) {
-                            stylesForFocus = ' focus'
-                        } else {
-                            stylesForFocus = '';
-                        }
+                        // console.log(day.elements[0].id);
+                        // console.log(trainingToShow.id);
+                        // if (day.elements[0].id === trainingToShow.id || day.elements[1].id === trainingToShow.id) {
+                        //     stylesForFocus = ' focus'
+                        // } else {
+                        //     stylesForFocus = '';
+                        // }
                         return <td key={day.dayNumber + day.monthNumber + 300} className={stylesForToday + stylesForFocus}>
                             <span style={{position: 'absolute'}}>{day.dayNumber}</span>
                             {day.elements.map(ele => (

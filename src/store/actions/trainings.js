@@ -17,11 +17,9 @@ export const fetchAllTrainings = (token) => {
             })
             .then(function (response) {
                 // handle success
-                dispatch(trainingToShowHandler(response.data[response.data.length - 1]));
                 dispatch(fetchTrainingsSuccess(response.data));
             })
             .catch(function (error) {
-                console.log(error.response);
                 dispatch(fetchTrainingsFail(error.response.status));
             })
     };
@@ -37,7 +35,6 @@ export const addTrainingToApi = (token, training) => {
         })
             .then(function (res) {
                 dispatch(trainingsClearError());
-                fetchAllTrainings(token);
             })
             .catch(error => {
                 dispatch(fetchTrainingsFail(error));
