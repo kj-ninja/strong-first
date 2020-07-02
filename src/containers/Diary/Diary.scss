@@ -22,3 +22,32 @@
   margin-top: 200px;
 }
 
+.popUp {
+  position: fixed;
+  z-index: 9999;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 1px black;
+  padding: 16px;
+  width: 300px;
+  left: calc(50% - 150px);
+  top: 50%;
+  transition: all 0.3s ease-out;
+  h2 {
+    margin-bottom: 10px;
+
+  }
+  button {
+    border: none;
+    margin-right: 25px;
+    background-color: #fff;
+    padding: 10px 10px 10px 0;
+  }
+}
+
+@media (min-width: 600px) {
+  .popUp {
+    width: 500px;
+    left: calc(50% - 250px);
+  }
+}

@@ -3,7 +3,6 @@ import './TrainingSummary.scss';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {isEditTraining, addTrainingEditForm} from '../../../store/actions/addTrainingForm';
-import {deleteTrainingFromApi} from '../../../store/actions/trainings';
 import {getRepsView} from "../../../functions/getRepsView";
 
 const TrainingSummary = (props) => {
@@ -56,14 +55,10 @@ const TrainingSummary = (props) => {
         props.history.push('/add-training');
     };
 
-    const handleDeleteTraining = () => {
-        props.deleteTrainingFromApi(props.trainingToShow.id, props.token);
-    };
-
     return (
         <div className="training-summary">
             <i className="far fa-edit edit" onClick={handleEditTraining}/>
-            <i className="far fa-trash-alt trash" onClick={handleDeleteTraining}/>
+            <i className="far fa-trash-alt trash" onClick={()=>props.setModal(true)}/>
             <p className="training-summary__date"><span>Data:</span> {props.trainingToShow.date}</p>
             <p className="training-summary__name"><span>Nazwa:</span> {props.trainingToShow.name}</p>
             {trainingSummaryList}
@@ -81,4 +76,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, {addTrainingEditForm, isEditTraining, deleteTrainingFromApi})(withRouter(TrainingSummary));
+export default connect(mapStateToProps, {addTrainingEditForm, isEditTraining})(withRouter(TrainingSummary));

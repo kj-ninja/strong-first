@@ -1,17 +1,24 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './Diary.scss';
 import {connect} from 'react-redux';
-import {fetchAllTrainings, trainingToShowHandler} from "../../store/actions/trainings";
+import {fetchAllTrainings, trainingToShowHandler, deleteTrainingFromApi} from "../../store/actions/trainings";
 import TrainingSummary from "./TrainingSummary/TrainingSummary";
 import Calendar from "./Calendar/Calendar";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import Modal from "../../components/UI/Modal/Modal";
+import Backdrop from "../../components/UI/Backdrop/Backdrop";
 
 const Diary = (props) => {
     const {fetchAllTrainings, token, trainingToShow, trainings, trainingToShowHandler, error} = props;
+    const [modal, setModal] = useState(false);
 
     useEffect(() => {
         fetchAllTrainings(token);
     }, [fetchAllTrainings, token]);
+
+    const handleDeleteTraining = () => {
+        props.deleteTrainingFromApi(props.trainingToShow.id, props.token);
+    };
 
     if (error === 404 || error === 401) {
         return (
@@ -31,11 +38,24 @@ const Diary = (props) => {
     }
 
     let diary = <Spinner/>;
+    let popUp = (
+        <div className="popUp" style={{
+            transform: modal ? 'translateY(0)' : 'translateY(-100vh)',
+            opacity: modal ? '1' : '0'
+        }}>
+            <h2>Na pewno chcesz usunąć trening?</h2>
+            <button type="button" onClick={() => setModal(false)} style={{color: 'green'}}>Anuluj</button>
+            <button type="button" onClick={handleDeleteTraining} style={{color: '#bd2130'}}>Usuń trening</button>
+        </div>
+    );
+
     if (trainingToShow) {
         diary = (
             <>
+                <Backdrop show={modal} cancel={()=>setModal(false)}/>
+                {popUp}
                 <Calendar trainings={trainings} setTrainingToShow={trainingToShowHandler}/>
-                <TrainingSummary trainingToShow={trainingToShow}/>
+                <TrainingSummary trainingToShow={trainingToShow} setModal={setModal}/>
             </>
         );
     }
@@ -52,4 +72,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, {fetchAllTrainings, trainingToShowHandler})(Diary);
+export default connect(mapStateToProps, {fetchAllTrainings, trainingToShowHandler, deleteTrainingFromApi})(Diary);
