@@ -10,7 +10,7 @@ import Spinner from "../../components/UI/Spinner/Spinner";
 const AddTraining = (props) => {
     return (
         <>
-            {!props.loading ? <Spinner/> :
+            {props.loading ? <Spinner/> :
             <>
                 <Switch>
                     <Route path="/add-training/step2" component={DodajTreningStepTwo}/>

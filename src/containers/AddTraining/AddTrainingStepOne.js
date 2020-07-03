@@ -11,7 +11,6 @@ const AddTrainingStepOne = (props) => {
         props.addTrainingStepOne(data);
         props.history.push('/add-training/step2');
     };
-    console.log(errors?.duration?.type?.pattern);
 
     return (
         <>

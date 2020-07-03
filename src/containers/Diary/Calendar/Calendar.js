@@ -49,9 +49,9 @@ const Calendar = ({trainings, setTrainingToShow, trainingToShow}) => {
 
     const isToday = (someDate) => {
         const today = new Date()
-        return someDate.getDate() == today.getDate() &&
-            someDate.getMonth() == today.getMonth() &&
-            someDate.getFullYear() == today.getFullYear()
+        return someDate.getDate() === today.getDate() &&
+            someDate.getMonth() === today.getMonth() &&
+            someDate.getFullYear() === today.getFullYear()
     }
 
     const generateRow = (week, i) => {
@@ -82,16 +82,17 @@ const Calendar = ({trainings, setTrainingToShow, trainingToShow}) => {
                         // } else {
                         //     stylesForFocus = '';
                         // }
-                        return <td key={day.dayNumber + day.monthNumber + 300} className={stylesForToday + stylesForFocus}>
-                            <span style={{position: 'absolute'}}>{day.dayNumber}</span>
-                            {day.elements.map(ele => (
-                                <>
-                                    <i className="calendar__training-day fas fa-dumbbell"
-                                       onClick={() => getTrainingById(ele.id)}/>
-                                    <br/>
-                                </>
-                            ))}
-                        </td>
+                        return (
+                            <td key={day.dayNumber + day.monthNumber + 300} className={stylesForToday + stylesForFocus}>
+                                <span style={{position: 'absolute'}}>{day.dayNumber}</span>
+                                {day.elements.map((ele, i) => (
+                                    <i key={i}
+                                       className="calendar__training-day fas fa-dumbbell"
+                                       onClick={() => getTrainingById(ele.id)}><br/>
+                                    </i>
+                                ))}
+                            </td>
+                        )
                     }
                 })}
             </tr>

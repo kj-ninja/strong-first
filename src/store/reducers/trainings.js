@@ -47,7 +47,6 @@ const trainingsReducer = (state = initialState, action) => {
             const newTrainings = state.trainings.filter(training => training.id !== action.payload);
             return {
                 ...state,
-                trainingToShow: null,
                 trainings: newTrainings
             }
         default:
