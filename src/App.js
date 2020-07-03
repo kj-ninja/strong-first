@@ -36,7 +36,7 @@ function App(props) {
                 <Route path="/big-six" component={BigSix}/>
                 <Route path="/add-training" render={(props) => <DodajTrening {...props}/>}/>
                 <Route path="/logout" component={Logout}/>
-                <Redirect to='/diary'/>
+                <Redirect to='/add-training/result'/>
                 <Route component={NotFound}/>
             </Switch>
         );

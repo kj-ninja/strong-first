@@ -2,7 +2,7 @@ import React from 'react';
 import './Button.scss';
 
 const Button = (props) => (
-        <button onClick={props.clicked}>
+        <button type={props.type} onClick={props.clicked} className={"button " + props.color}>
             {props.children}
         </button>
 );

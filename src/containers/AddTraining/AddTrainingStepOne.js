@@ -2,6 +2,7 @@ import React from 'react';
 import {useForm} from "react-hook-form";
 import {connect} from 'react-redux';
 import {addTrainingStepOne} from '../../store/actions/addTrainingForm';
+import Button from "../../components/UI/Button/Button";
 
 const AddTrainingStepOne = (props) => {
     const {register, handleSubmit, errors} = useForm();
@@ -10,6 +11,7 @@ const AddTrainingStepOne = (props) => {
         props.addTrainingStepOne(data);
         props.history.push('/add-training/step2');
     };
+    console.log(errors?.duration?.type?.pattern);
 
     return (
         <>
@@ -34,49 +36,57 @@ const AddTrainingStepOne = (props) => {
                         <input
                             name="name"
                             placeholder="Podaj nazwę treningu"
-                            ref={register({required: true})}
+                            ref={register({required: "Pole wymagane"})}
                             defaultValue={props.addTrainingForm.name}
                             className="form-control form-control-sm"
                             id="name"
                         />
-                        {errors.name ? <p>{errors.name.message}</p> : null}
+                        {errors.name ? <p className="add-training__error-message">{errors.name.message}</p> : null}
                     </div>
 
                     <div className="add-training__form-group">
                         <label htmlFor="trainingTime">Czas trwania:</label>
                         <input name="duration"
                                placeholder="Podaj czas trwania treningu (w min.)"
-                               ref={register({required: true})}
+                               ref={register({required: "Pole wymagane", pattern: /^[1-9]+[0-9]*$/})}
                                defaultValue={props.addTrainingForm.duration}
                                className="form-control form-control-sm"
                                id="trainingTime"
                         />
-                        {errors.duration ? <p>{errors.duration.message}</p> : null}
+                        {errors.duration ?
+                            <p className="add-training__error-message">{errors.duration.message}</p> : null}
+                        {errors.duration?.type === "pattern" &&
+                        <p className="add-training__error-message">Podany czas musi być liczbą</p>}
                     </div>
 
                     <div className="add-training__form-group">
                         <label htmlFor="kcal">Kcal:</label>
                         <input name="kcal"
                                placeholder="Ilość spalonych kalorii"
-                               ref={register}
+                               ref={register({pattern: /^[1-9]+[0-9]*$/})}
                                defaultValue={props.addTrainingForm.kcal}
                                className="form-control form-control-sm"
                                id="kcal"
                         />
+                        {errors.kcal?.type === "pattern" &&
+                        <p className="add-training__error-message">Podana wartość musi być liczbą większą niż 0</p>}
                     </div>
 
                     <div className="add-training__form-group note">
                         <label htmlFor="note">Notatki:</label>
-                        <input name="note"
+                        <textarea name="note"
                                placeholder="Podsumowanie treningu, krótki opis a może jakieś wnioski?"
                                ref={register}
                                defaultValue={props.addTrainingForm.note}
                                className="form-control form-control-sm"
                                id="note"
+                               rows={3}
                         />
                     </div>
-
-                    <button type="submit">Dalej</button>
+                    <div className="add-training__buttons">
+                        <Button type="button" clicked={() => props.history.goBack()} color="blue">Wstecz</Button>
+                        <Button type="submit" color="red">Dalej</Button>
+                    </div>
                 </form>
             </div>
         </>

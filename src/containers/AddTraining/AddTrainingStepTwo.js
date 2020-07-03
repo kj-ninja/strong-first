@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {addSet, deleteSet} from '../../store/actions/addTrainingForm';
 import {useForm} from "react-hook-form";
 import ReactSelect from "../../components/ReactSelect/ReactSelect";
+import Button from "../../components/UI/Button/Button";
 
 const AddTrainingStepTwo = (props) => {
     const {register, handleSubmit, getValues} = useForm();
@@ -16,6 +17,18 @@ const AddTrainingStepTwo = (props) => {
     const handleStepTwo = () => {
         props.history.push('/add-training/result');
     }
+
+    const handleExercisesView = () => (
+        props.addTrainingForm.sets.map((set, i) => (
+                <div key={i} onClick={() => props.deleteSet(i)} className="add-training__exerciseView">
+                    <p>{i + 1 + '. '}{set.exercise.name + ':'}</p>
+                    <p className="add-training__exerciseView--reps">{set.repetitions ? 'powtórzenia: ' + set.repetitions : null}</p>
+                    <p className="add-training__exerciseView--time">{set.time ? 'czas: ' + set.time : null}</p>
+                    <p className="add-training__exerciseView--weight">{set.weight ? 'obciążenie: ' + set.weight + ' kg' : null}</p>
+                    <p>X</p>
+                </div>
+            ))
+    );
 
     return (
         <>
@@ -56,21 +69,17 @@ const AddTrainingStepTwo = (props) => {
                         />
                     </div>
 
-                    <button type="button" onClick={() => props.history.goBack()}>Wstecz</button>
-                    <button type="button" onClick={handleAddSet}>Dodaj serię</button>
-                    <button type="submit">Dalej</button>
-
-                    {props.addTrainingForm.sets.map((set, i) => (
-                        <>
-                            <p key={i} onClick={() => props.deleteSet(i)}>
-                                {set.exercise.name}
-                                <p>{set.repetitions ? 'powtórzenia: ' + set.repetitions : null}</p>
-                                <p>{set.time ? 'czas: ' + set.time : null}</p>
-                                <p>{set.weight ? 'obciążenie: ' + set.weight : null}</p>
-                            </p>
-                        </>
-                    ))}
+                    <button className="add-training--button" type="button" onClick={handleAddSet}>
+                        Dodaj serię
+                    </button>
+                    <div className="add-training__buttons">
+                        <Button type="button" color="blue" clicked={() => props.history.goBack()}>Wstecz</Button>
+                        <Button type="submit" color="red">Dalej</Button>
+                    </div>
                 </form>
+            </div>
+            <div className="add-training__exercises-view-container">
+                {handleExercisesView()}
             </div>
         </>
     );
