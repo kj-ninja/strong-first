@@ -55,12 +55,16 @@ const TrainingSummary = (props) => {
         props.history.push('/add-training');
     };
 
+    console.log(props.trainingToShow);
     return (
         <div className="training-summary">
             <i className="far fa-edit edit" onClick={handleEditTraining}/>
             <i className="far fa-trash-alt trash" onClick={()=>props.setModal(true)}/>
-            <p className="training-summary__date"><span>Data:</span> {props.trainingToShow.date}</p>
-            <p className="training-summary__name"><span>Nazwa:</span> {props.trainingToShow.name}</p>
+            <p className="training-summary__element"><span>Data:</span> {props.trainingToShow.date}</p>
+            <p className="training-summary__element"><span>Nazwa:</span> {props.trainingToShow.name}</p>
+            <p className="training-summary__element"><span>Czas:</span> {props.trainingToShow.duration}</p>
+            <p className="training-summary__element"><span>Spalone kalorie:</span> {props.trainingToShow.kcal}</p>
+            <p className="training-summary__element"><span>Łączna ilość serii:</span> {props.trainingToShow.sets.length}</p>
             {trainingSummaryList}
             <div className="training-summary__notes">
                 <p>Notatki:</p>

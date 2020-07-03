@@ -16,12 +16,12 @@ const NavigationItems = (props) => {
         <ul className="navigation-items">
             {props.isAuth ?
             <li className="navigation-item">
-                <NavLink exact to="/big-six">Wielka szóstka</NavLink>
+                <NavLink to="/big-six">Wielka szóstka</NavLink>
             </li> : null}
 
             {props.isAuth ?
             <li className="navigation-item">
-                <NavLink exact to="/add-training" onClick={handleAddTrainingLink}>Dodaj trening</NavLink>
+                <NavLink to="/add-training" onClick={handleAddTrainingLink}>Dodaj trening</NavLink>
             </li> : null}
 
             {props.isAuth ? null :
