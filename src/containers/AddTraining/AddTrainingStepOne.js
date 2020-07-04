@@ -12,10 +12,12 @@ const AddTrainingStepOne = (props) => {
         props.history.push('/add-training/step2');
     };
 
+    const height = {height: '100vh'};
+
     return (
         <>
-            <div className="add-training__overlay"/>
-            <div className="add-training__background"/>
+            <div className="add-training__overlay" style={height}/>
+            <div className="add-training__background" style={height}/>
             <div className="add-training__container">
                 <form onSubmit={handleSubmit(handleStepOne)} className="add-training__form">
                     <div className="add-training__form-group">
