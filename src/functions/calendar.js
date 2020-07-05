@@ -99,6 +99,7 @@ function createDay(date, wrappedTrainings) {
     return {
         dayNumber: date.getDate(),
         monthNumber: date.getMonth(),
+        date: formatDate(date),
         elements: (function () {
 
             let dayFormatted = formatDate(date);
