@@ -15,9 +15,14 @@ const trainingsReducer = (state = initialState, action) => {
                 loading: true
             }
         case actionTypes.FETCH_TRAININGS_SUCCESS:
+            const trainingsToShow = [];
+            if (action.trainings[action.trainings.length - 1].date === action.trainings[action.trainings.length - 2].date) {
+                trainingsToShow.push(action.trainings[action.trainings.length - 1]);
+                trainingsToShow.push(action.trainings[action.trainings.length - 2]);
+            }
             return {
                 ...state,
-                trainingToShow: action.trainings[action.trainings.length - 1],
+                trainingToShow: trainingsToShow,
                 trainings: action.trainings,
                 loading: false
             }

@@ -45,17 +45,9 @@
       }
       .calendar__training-day {
         cursor: pointer;
-        width: 100%;
-        color: #bd2130;
-        text-align: right;
-        height: 50%;
-        padding-bottom: 13px;
-        padding-right: 5px;
-      }
-      .calendar__training-day:nth-of-type(2) {
-      padding-bottom: 0;
-        padding-top: 13px;
-        padding-right: 5px;
+        i {
+          color: #bd2130;
+        }
       }
       .calendar__day--notActual {
         color: #80808070;

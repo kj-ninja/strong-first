@@ -55,7 +55,6 @@ const TrainingSummary = (props) => {
         props.history.push('/add-training');
     };
 
-    console.log(props.trainingToShow);
     return (
         <div className="training-summary">
             <i className="far fa-edit edit" onClick={handleEditTraining}/>

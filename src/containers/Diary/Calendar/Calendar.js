@@ -37,14 +37,14 @@ const Calendar = ({trainings, setTrainingToShow, trainingToShow}) => {
         setActualDate(new Date(actualDate.setMonth(actualDate.getMonth() + 1)));
     };
 
-    const getTrainingById = id => {
-        console.log(id);
+    const getTrainingsByDate = date => {
+        const newTrainings = [];
         trainings.forEach(training => {
-            if (training.id === id) {
-                console.log(training);
-                setTrainingToShow(training);
+            if (training.date === date) {
+                newTrainings.push(training);
             }
         })
+        setTrainingToShow(newTrainings);
     };
 
     const isToday = (someDate) => {
@@ -81,14 +81,13 @@ const Calendar = ({trainings, setTrainingToShow, trainingToShow}) => {
                             stylesForFocus = '';
                         }
                         return (
-                            <td key={day.dayNumber + day.monthNumber + 300} className={stylesForToday + stylesForFocus}>
-                                <span style={{position: 'absolute'}}>{day.dayNumber}</span>
-                                {day.elements.map((ele, i) => (
-                                    <i key={i}
-                                       className="calendar__training-day fas fa-dumbbell"
-                                       onClick={() => getTrainingById(ele.id)}><br/>
-                                    </i>
-                                ))}
+                            <td
+                                key={day.dayNumber + day.monthNumber + 300}
+                                className={"calendar__training-day " + stylesForToday + stylesForFocus}
+                                onClick={() => getTrainingsByDate(day.date)}
+                            >
+                                <span style={{display: 'block'}}>{day.dayNumber}</span>
+                                <i className="fas fa-dumbbell"/>
                             </td>
                         )
                     }
