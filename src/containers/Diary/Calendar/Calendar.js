@@ -75,8 +75,6 @@ const Calendar = ({trainings, setTrainingToShow, trainingToShow}) => {
                             <div className="calendar__day">{day.dayNumber}</div>
                         </td>
                     } else {
-                        console.log(day.date);
-                        console.log(trainingToShow.date);
                         if (day.date === trainingToShow.date) {
                             stylesForFocus = ' focus'
                         } else {
