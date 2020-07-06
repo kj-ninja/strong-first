@@ -38,7 +38,11 @@
         color: #007bff;
       }
       .focus {
-        background-color: #f1f1f178;
+        transition: 0.3s;
+        background-color: #f1f1f1;
+        -moz-box-shadow: inset 0px 0px 7px  rgba(0, 0, 0, 0.33);
+        -webkit-box-shadow: inset 0px 0px 7px  rgba(0, 0, 0, 0.33);
+        box-shadow: inset 0px 0px 7px  rgba(0, 0, 0, 0.33);
       }
       .calendar__day {
         min-height: 58px;
@@ -46,9 +50,12 @@
       .calendar__training-day {
         cursor: pointer;
         i {
+          color: #ffae08;
+        }
+        .stylesForMoreTrainings {
           color: #bd2130;
         }
-        // #ffae08 poarancz
+        // #bd2130;
       }
       .calendar__day--notActual {
         color: #80808070;

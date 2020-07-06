@@ -60,6 +60,7 @@ const Calendar = ({trainings, setTrainingToShow, trainingToShow}) => {
                 {week.map(day => {
                     const aktualnaData = new Date(new Date().getFullYear(), day.monthNumber, day.dayNumber);
                     let stylesForToday = 'stylesForToday';
+                    let stylesForMoreTrainings = '';
                     if (!isToday(aktualnaData)) {
                         stylesForToday = '';
                     }
@@ -75,7 +76,12 @@ const Calendar = ({trainings, setTrainingToShow, trainingToShow}) => {
                             <div className="calendar__day">{day.dayNumber}</div>
                         </td>
                     } else {
-                        if (day.date === trainingToShow.date) {
+                        if (day.elements.length === 2) {
+                            stylesForMoreTrainings = ' stylesForMoreTrainings'
+                        } else {
+                            stylesForMoreTrainings = '';
+                        }
+                        if (day.date === trainingToShow[0].date) {
                             stylesForFocus = ' focus'
                         } else {
                             stylesForFocus = '';
@@ -87,7 +93,7 @@ const Calendar = ({trainings, setTrainingToShow, trainingToShow}) => {
                                 onClick={() => getTrainingsByDate(day.date)}
                             >
                                 <span style={{display: 'block'}}>{day.dayNumber}</span>
-                                <i className="fas fa-dumbbell"/>
+                                <i className={"fas fa-dumbbell" + stylesForMoreTrainings}/>
                             </td>
                         )
                     }
