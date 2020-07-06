@@ -5,6 +5,7 @@ import {withRouter} from 'react-router-dom';
 import {isEditTraining, addTrainingEditForm} from '../../../store/actions/addTrainingForm';
 import {trainingToDelete} from '../../../store/actions/trainings';
 import {getRepsView} from "../../../functions/getRepsView";
+import {timeConvert} from '../../../functions/timeConvert';
 import {trainingSummaryView} from '../../../functions/trainingSummaryView';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab'
@@ -34,7 +35,7 @@ const TrainingSummary = (props) => {
 
     const handleTab = (k) => {
         setKey(k);
-        const setTrainingToDelete = trainingToShow.filter(training=>training.id === +k)
+        const setTrainingToDelete = trainingToShow.filter(training => training.id === +k)
         props.trainingToDelete(setTrainingToDelete);
     };
 
@@ -58,21 +59,22 @@ const TrainingSummary = (props) => {
     );
 
     let trainingView = (
-        <div className={trainingToShow.length === 2 ? "training-summary tabs" : "training-summary"}>
-            <i className="far fa-edit edit" onClick={handleEditTraining}/>
-            <i className="far fa-trash-alt trash" onClick={() => props.setModal(true)}/>
-            <p className="training-summary__element"><span>Data:</span> {trainingToShow[0].date}</p>
-            <p className="training-summary__element"><span>Nazwa:</span> {trainingToShow[0].name}</p>
-            <p className="training-summary__element"><span>Czas:</span> {trainingToShow[0].duration}</p>
-            <p className="training-summary__element"><span>Spalone kalorie:</span> {trainingToShow[0].kcal}</p>
-            <p className="training-summary__element">
-                <span>Łączna ilość serii:</span> {trainingToShow[0].sets.length}</p>
-            {trainingSummaryList}
-            <div className="training-summary__notes">
-                <p>Notatki:</p>
-                {trainingToShow[0].note.toLowerCase()}
+            <div className={trainingToShow.length === 2 ? "training-summary tabs" : "training-summary"}>
+                <i className="far fa-edit edit" onClick={handleEditTraining}/>
+                <i className="far fa-trash-alt trash" onClick={() => props.setModal(true)}/>
+                <p className="training-summary__element"><span>Data:</span> {trainingToShow[0].date}</p>
+                <p className="training-summary__element"><span>Nazwa:</span> {trainingToShow[0].name}</p>
+                <p className="training-summary__element"><span>Czas:</span> {timeConvert(trainingToShow[0].duration)}
+                </p>
+                <p className="training-summary__element"><span>Spalone kalorie:</span> {trainingToShow[0].kcal}</p>
+                <p className="training-summary__element">
+                    <span>Łączna ilość serii:</span> {trainingToShow[0].sets.length}</p>
+                {trainingSummaryList}
+                <div className="training-summary__notes">
+                    <p>Notatki:</p>
+                    {trainingToShow[0].note.toLowerCase()}
+                </div>
             </div>
-        </div>
     );
 
     if (trainingToShow.length === 2) {
@@ -97,38 +99,43 @@ const TrainingSummary = (props) => {
             </ul>
         );
         trainingsView = (
-            <Tabs
-                unmountOnExit
-                id="controlled-tab-example"
-                activeKey={key}
-                onSelect={(k) => handleTab(k)}
-            >
-                <Tab eventKey={trainingToShow[0].id} title={trainingToShow[0].name}>
-                    {trainingView}
-                </Tab>
-                <Tab eventKey={trainingToShow[1].id} title={trainingToShow[1].name}>
-                    <div className="training-summary tabs">
-                        <i className="far fa-edit edit" onClick={handleEditTraining}/>
-                        <i className="far fa-trash-alt trash" onClick={() => props.setModal(true)}/>
-                        <p className="training-summary__element"><span>Data:</span> {trainingToShow[1].date}</p>
-                        <p className="training-summary__element"><span>Nazwa:</span> {trainingToShow[1].name}</p>
-                        <p className="training-summary__element"><span>Czas:</span> {trainingToShow[1].duration}</p>
-                        <p className="training-summary__element">
-                            <span>Spalone kalorie:</span> {trainingToShow[1].kcal}</p>
-                        <p className="training-summary__element">
-                            <span>Łączna ilość serii:</span> {trainingToShow[1].sets.length}</p>
-                        {trainingSummaryList2}
-                        <div className="training-summary__notes">
-                            <p>Notatki:</p>
-                            {trainingToShow[1].note.toLowerCase()}
+                <Tabs
+                    unmountOnExit
+                    id="controlled-tab-example"
+                    activeKey={key}
+                    onSelect={(k) => handleTab(k)}
+                >
+                    <Tab eventKey={trainingToShow[0].id} title={trainingToShow[0].name}>
+                        {trainingView}
+                    </Tab>
+                    <Tab eventKey={trainingToShow[1].id} title={trainingToShow[1].name}>
+                        <div className="training-summary tabs">
+                            <i className="far fa-edit edit" onClick={handleEditTraining}/>
+                            <i className="far fa-trash-alt trash" onClick={() => props.setModal(true)}/>
+                            <p className="training-summary__element"><span>Data:</span> {trainingToShow[1].date}</p>
+                            <p className="training-summary__element"><span>Nazwa:</span> {trainingToShow[1].name}</p>
+                            <p className="training-summary__element">
+                                <span>Czas:</span> {timeConvert(trainingToShow[1].duration)}</p>
+                            <p className="training-summary__element">
+                                <span>Spalone kalorie:</span> {trainingToShow[1].kcal}</p>
+                            <p className="training-summary__element">
+                                <span>Łączna ilość serii:</span> {trainingToShow[1].sets.length}</p>
+                            {trainingSummaryList2}
+                            <div className="training-summary__notes">
+                                <p>Notatki:</p>
+                                {trainingToShow[1].note.toLowerCase()}
+                            </div>
                         </div>
-                    </div>
-                </Tab>
-            </Tabs>
+                    </Tab>
+                </Tabs>
         );
     }
 
-    return trainingToShow.length === 2 ? trainingsView : trainingView;
+    return (
+        <div className="training-summary__container">
+            {trainingToShow.length === 2 ? trainingsView : trainingView}
+        </div>
+    );
 };
 
 const mapStateToProps = state => {
@@ -137,4 +144,8 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, {addTrainingEditForm, isEditTraining, trainingToDelete})(withRouter(TrainingSummary));
+export default connect(mapStateToProps, {
+    addTrainingEditForm,
+    isEditTraining,
+    trainingToDelete
+})(withRouter(TrainingSummary));

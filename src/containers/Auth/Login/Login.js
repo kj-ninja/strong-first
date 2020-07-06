@@ -1,10 +1,9 @@
 import React from 'react';
-import './Login.scss';
+import '../Auth.scss';
 import * as Yup from 'yup';
 import {connect} from 'react-redux';
 import {login, authClearError} from '../../../store/actions/auth';
 import {Formik, Field, Form, ErrorMessage} from 'formik';
-import useWindowWith from '../../../functions/hooks/useWindowWidth';
 import Button from "react-bootstrap/Button";
 import Footer from "../../../components/Footer/Footer";
 import Spinner from "../../../components/UI/Spinner/Spinner";
@@ -18,14 +17,6 @@ const Schema = Yup.object({
 });
 
 const Login = (props) => {
-    const width = useWindowWith();
-    let styles = {
-        top: "100px"
-    };
-
-    if (width < 600) {
-        styles = {top: 0}
-    }
 
     if (props.loading) {
         return <Spinner />;
@@ -34,7 +25,7 @@ const Login = (props) => {
     return (
         <>
             <section className="login">
-                <div className="login__container" style={{...styles}}>
+                <div className="login__container">
                     <h2>Zaloguj się</h2>
                     <Formik
                         initialValues={{email: '', password: ''}}

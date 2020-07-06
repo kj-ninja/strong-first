@@ -4,6 +4,7 @@ import './AddTraining.scss';
 import {addTrainingToApi, editTrainingInApi} from "../../store/actions/trainings";
 import Button from "../../components/UI/Button/Button";
 import {getRepsView} from "../../functions/getRepsView";
+import {trainingSummaryView} from "../../functions/trainingSummaryView";
 
 const AddTrainingResult = (props) => {
     const {addTrainingForm, addTrainingToApi, editTrainingInApi} = props;
@@ -37,30 +38,7 @@ const AddTrainingResult = (props) => {
         }, 1500);
     };
 
-    let tempArray = [];
-    props.addTrainingForm.sets.forEach(set => {
-        tempArray.push({name: set.exercise.name, id: set.exercise.id, repetitions: [], weight: [], time: []})
-    });
-
-    const removeDuplicates = arr => {
-        // Create an array of objects
-        let jsonObject = arr.map(JSON.stringify);
-        let uniqueSet = new Set(jsonObject);
-
-        return [...uniqueSet].map(JSON.parse);
-    };
-    const exerciseView = removeDuplicates(tempArray);
-
-    props.addTrainingForm.sets.forEach((set) => {
-        exerciseView.forEach((element) => {
-            if (set.exercise.id === element.id) {
-                element.repetitions.push(set.repetitions);
-                element.weight.push(set.weight);
-                element.time.push(set.time)
-            }
-        })
-    });
-
+    const exerciseView = trainingSummaryView(addTrainingForm);
 
     return (
         <>

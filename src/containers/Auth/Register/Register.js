@@ -1,10 +1,9 @@
 import React from "react";
-import './Register.scss';
+import '../Auth.scss';
 import {connect} from 'react-redux';
 import {register, authClearError} from "../../../store/actions/auth";
 import {Formik} from "formik";
 import * as Yup from "yup";
-import useWindowWidth from "../../../functions/hooks/useWindowWidth";
 import Button from "react-bootstrap/Button";
 import Footer from "../../../components/Footer/Footer";
 import Spinner from "../../../components/UI/Spinner/Spinner";
@@ -26,14 +25,6 @@ const Schema = Yup.object().shape({
 });
 
 const Register = (props) => {
-    const width = useWindowWidth();
-    let styles = {
-        top: "100px"
-    };
-
-    if (width < 600) {
-        styles = {top: 0}
-    }
 
     if (props.loading) {
         return <Spinner />;
@@ -55,7 +46,7 @@ const Register = (props) => {
                 {({values, errors, handleSubmit, handleChange, handleBlur}) => {
                     return (
                         <section className="register">
-                            <div className="register__container" style={{...styles}}>
+                            <div className="register__container">
                                 <h2>Załóż konto</h2>
                                 <form onSubmit={handleSubmit} className="register__form">
                                     <label htmlFor="email">Email</label>

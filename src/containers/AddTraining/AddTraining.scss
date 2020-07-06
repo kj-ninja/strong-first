@@ -105,6 +105,22 @@
       margin-top: 5px;
     }
   }
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  textarea:-webkit-autofill:active,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:active {
+    -webkit-text-fill-color: #bd2130;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    //-webkit-box-shadow: 0 0 0 0.2rem #bd21302b;
+  }
 }
 
 .add-training__exercises-view-container {
@@ -160,22 +176,7 @@
   }
 }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active,
-textarea:-webkit-autofill,
-textarea:-webkit-autofill:hover,
-textarea:-webkit-autofill:focus,
-textarea:-webkit-autofill:active,
-select:-webkit-autofill,
-select:-webkit-autofill:hover,
-select:-webkit-autofill:hover,
-select:-webkit-autofill:active {
-  -webkit-text-fill-color: #bd2130;
-  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
-  //-webkit-box-shadow: 0 0 0 0.2rem #bd21302b;
-}
+
 
 .add-training__buttons {
   display: flex;

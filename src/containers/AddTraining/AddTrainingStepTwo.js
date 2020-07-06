@@ -6,7 +6,7 @@ import ReactSelect from "../../components/ReactSelect/ReactSelect";
 import Button from "../../components/UI/Button/Button";
 
 const AddTrainingStepTwo = (props) => {
-    const {register, handleSubmit, getValues} = useForm();
+    const {register, handleSubmit, getValues, errors} = useForm();
     const [selectedExercise, setSelectedExercise] = useState({});
 
     const handleAddSet = () => {
@@ -42,31 +42,40 @@ const AddTrainingStepTwo = (props) => {
                     </div>
 
                     <div className="add-training__form-group">
-                        <label>Powtórzenia:</label>
+                        <label htmlFor="repetitions">Powtórzenia:</label>
                         <input
                             name="repetitions"
                             placeholder="Podaj ilość powtórzeń"
-                            ref={register}
+                            ref={register({pattern: /^[1-9]+[0-9]*$/})}
                             className="form-control form-control-sm"
+                            id="repetitions"
                         />
+                        {errors.repetitions?.type === "pattern" &&
+                        <p className="add-training__error-message">Podana wartość musi być liczbą większą niż 0</p>}
                     </div>
 
                     <div className="add-training__form-group">
-                        <label>Czas:</label>
+                        <label htmlFor="time">Czas:</label>
                         <input
                             name="time"
-                            ref={register}
+                            ref={register({pattern: /^[1-9]+[0-9]*$/})}
                             className="form-control form-control-sm"
+                            id="time"
                         />
+                        {errors.time?.type === "pattern" &&
+                        <p className="add-training__error-message">Podana wartość musi być liczbą większą niż 0 (sekundy)</p>}
                     </div>
 
                     <div className="add-training__form-group">
-                        <label>Ciężar:</label>
+                        <label htmlFor="weight">Ciężar:</label>
                         <input
                             name="weight"
-                            ref={register}
+                            ref={register({pattern: /^[1-9]+[0-9]*$/})}
                             className="form-control form-control-sm"
+                            id="weight"
                         />
+                        {errors.weight?.type === "pattern" &&
+                        <p className="add-training__error-message">Podana wartość musi być liczbą większą niż 0 (kg)</p>}
                     </div>
 
                     <button className="add-training--button" type="button" onClick={handleAddSet}>

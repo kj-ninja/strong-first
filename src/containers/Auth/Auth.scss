@@ -1,6 +1,8 @@
-.login {
+@import '../../scss/settings/mixins';
+
+.login, .register {
   padding: 15px;
-  .login__container {
+  .login__container, .register__container {
     max-width: 500px;
     margin: 0 auto;
     display: flex;
@@ -11,17 +13,21 @@
     border: 1px solid #dbe2e8;
     padding: 2rem;
     border-radius: 4px;
+    top: 0;
+    @include tablet() {
+      top: 100px;
+    }
     h2 {
       font-size: 28px;
       margin-bottom: 50px;
       font-weight: 300;
     }
-    .login__form {
+    .login__form, .register__form {
       width: 300px;
       label {
         margin-bottom: 3px;
       }
-      .login__input {
+      .login__input, .register__input {
         margin-bottom: 5px;
         width: 100%;
         height: calc(1.5em + .75rem + 2px);
@@ -35,12 +41,12 @@
         border-radius: .25rem;
         transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
       }
-      .login__error-message {
+      .login__error-message, .register__error-message {
         color: red;
         font-size: 14px;
         margin-bottom: 15px;
       }
-      .login__buttons {
+      .login__buttons, .register__buttons  {
         display: flex;
         justify-content: space-between;
         margin-top: 20px;
@@ -49,6 +55,21 @@
         }
       }
     }
+  }
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  textarea:-webkit-autofill:active,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:active {
+    -webkit-text-fill-color: #495057;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
   }
 }
 
