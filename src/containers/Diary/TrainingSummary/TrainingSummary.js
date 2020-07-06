@@ -3,21 +3,39 @@ import './TrainingSummary.scss';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {isEditTraining, addTrainingEditForm} from '../../../store/actions/addTrainingForm';
+import {trainingToDelete} from '../../../store/actions/trainings';
 import {getRepsView} from "../../../functions/getRepsView";
 import {trainingSummaryView} from '../../../functions/trainingSummaryView';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab'
 
 const TrainingSummary = (props) => {
-    const {trainingToShow} = props;
-    const [key, setKey] = useState(trainingToShow[0].name);
+    const {trainingToShow, addTrainingEditForm} = props;
+    const [key, setKey] = useState();
     const exerciseView = trainingSummaryView(trainingToShow[0]);
     let trainingsView;
 
     const handleEditTraining = () => {
+        let trainingToEdit = null;
+        if (trainingToShow.length === 2) {
+            trainingToShow.forEach(training => {
+                if (training.id === key) {
+                    trainingToEdit = training;
+                }
+            });
+        } else {
+            trainingToEdit = trainingToShow[0];
+        }
+
         props.isEditTraining(true);
-        props.addTrainingEditForm(trainingToShow);
+        addTrainingEditForm(trainingToEdit);
         props.history.push('/add-training');
+    };
+
+    const handleTab = (k) => {
+        setKey(k);
+        const setTrainingToDelete = trainingToShow.filter(training=>training.id === +k)
+        props.trainingToDelete(setTrainingToDelete);
     };
 
     let trainingSummaryList = (
@@ -40,7 +58,7 @@ const TrainingSummary = (props) => {
     );
 
     let trainingView = (
-        <div className="training-summary">
+        <div className={trainingToShow.length === 2 ? "training-summary tabs" : "training-summary"}>
             <i className="far fa-edit edit" onClick={handleEditTraining}/>
             <i className="far fa-trash-alt trash" onClick={() => props.setModal(true)}/>
             <p className="training-summary__element"><span>Data:</span> {trainingToShow[0].date}</p>
@@ -80,15 +98,16 @@ const TrainingSummary = (props) => {
         );
         trainingsView = (
             <Tabs
+                unmountOnExit
                 id="controlled-tab-example"
                 activeKey={key}
-                onSelect={(k) => setKey(k)}
+                onSelect={(k) => handleTab(k)}
             >
-                <Tab eventKey={trainingToShow[0].name} title={trainingToShow[0].name}>
+                <Tab eventKey={trainingToShow[0].id} title={trainingToShow[0].name}>
                     {trainingView}
                 </Tab>
-                <Tab eventKey={trainingToShow[1].name} title={trainingToShow[1].name}>
-                    <div className="training-summary">
+                <Tab eventKey={trainingToShow[1].id} title={trainingToShow[1].name}>
+                    <div className="training-summary tabs">
                         <i className="far fa-edit edit" onClick={handleEditTraining}/>
                         <i className="far fa-trash-alt trash" onClick={() => props.setModal(true)}/>
                         <p className="training-summary__element"><span>Data:</span> {trainingToShow[1].date}</p>
@@ -110,7 +129,6 @@ const TrainingSummary = (props) => {
     }
 
     return trainingToShow.length === 2 ? trainingsView : trainingView;
-
 };
 
 const mapStateToProps = state => {
@@ -119,4 +137,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, {addTrainingEditForm, isEditTraining})(withRouter(TrainingSummary));
+export default connect(mapStateToProps, {addTrainingEditForm, isEditTraining, trainingToDelete})(withRouter(TrainingSummary));

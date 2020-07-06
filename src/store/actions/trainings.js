@@ -1,10 +1,14 @@
 import * as actionTypes from './actionTypes';
 import axios from "axios";
+import {TRAINING_TO_DELETE} from "./actionTypes";
 
 export const fetchTrainingsStart = () => ({type: actionTypes.FETCH_TRAININGS_START});
 export const fetchTrainingsSuccess = (trainings) => ({type: actionTypes.FETCH_TRAININGS_SUCCESS, trainings: trainings});
 export const fetchTrainingsFail = (error) => ({type: actionTypes.FETCH_TRAININGS_FAIL, error: error});
-export const trainingToShowHandler = (training) => ({type: actionTypes.TRAINING_TO_SHOW_HANDLER, trainingToShow: training});
+export const trainingToShowHandler = (training) => ({
+    type: actionTypes.TRAINING_TO_SHOW_HANDLER,
+    trainingToShow: training
+});
 export const trainingsClearError = () => ({type: actionTypes.TRAININGS_CLEAR_ERROR});
 
 export const fetchAllTrainings = (token) => {
@@ -75,6 +79,13 @@ export const deleteTrainingFromStore = (id) => {
     }
 };
 
+export const trainingToDelete = (training) => {
+    return {
+        type: TRAINING_TO_DELETE,
+        payload: training
+    }
+};
+
 export const deleteTrainingFromApi = (id, token) => {
     return dispatch => {
         dispatch(fetchTrainingsStart());
@@ -86,6 +97,7 @@ export const deleteTrainingFromApi = (id, token) => {
             .then(function (res) {
                 dispatch(trainingsClearError());
                 dispatch(deleteTrainingFromStore(id));
+                dispatch(trainingToDelete(null));
             })
             .catch(error => {
                 dispatch(fetchTrainingsFail(error));
