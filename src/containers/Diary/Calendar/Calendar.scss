@@ -38,24 +38,24 @@
         color: #007bff;
       }
       .focus {
-        background-color: #f1f1f178;
+        transition: 0.3s;
+        background-color: #f1f1f1;
+        -moz-box-shadow: inset 0px 0px 7px  rgba(0, 0, 0, 0.33);
+        -webkit-box-shadow: inset 0px 0px 7px  rgba(0, 0, 0, 0.33);
+        box-shadow: inset 0px 0px 7px  rgba(0, 0, 0, 0.33);
       }
       .calendar__day {
         min-height: 58px;
       }
       .calendar__training-day {
         cursor: pointer;
-        width: 100%;
-        color: #bd2130;
-        text-align: right;
-        height: 50%;
-        padding-bottom: 13px;
-        padding-right: 5px;
-      }
-      .calendar__training-day:nth-of-type(2) {
-      padding-bottom: 0;
-        padding-top: 13px;
-        padding-right: 5px;
+        i {
+          color: #ffae08;
+        }
+        .stylesForMoreTrainings {
+          color: #bd2130;
+        }
+        // #bd2130;
       }
       .calendar__day--notActual {
         color: #80808070;

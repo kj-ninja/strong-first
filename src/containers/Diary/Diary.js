@@ -8,7 +8,7 @@ import Spinner from "../../components/UI/Spinner/Spinner";
 import Backdrop from "../../components/UI/Backdrop/Backdrop";
 
 const Diary = (props) => {
-    const {fetchAllTrainings, token, trainingToShow, trainings, trainingToShowHandler, error, deleteTrainingFromApi} = props;
+    const {fetchAllTrainings, token, trainingToShow, trainings, trainingToShowHandler, error, deleteTrainingFromApi, trainingToDelete} = props;
     const [modal, setModal] = useState(false);
 
     useEffect(() => {
@@ -33,9 +33,15 @@ const Diary = (props) => {
     }
 
     const handleDeleteTraining = () => {
-        deleteTrainingFromApi(trainingToShow.id, token);
-        fetchAllTrainings(token);
-        setTimeout(()=>setModal(false), 1000);
+        if (trainingToShow.length === 2) {
+            deleteTrainingFromApi(trainingToDelete[0].id, token);
+            fetchAllTrainings(token);
+            setTimeout(() => setModal(false), 1000);
+        } else {
+            deleteTrainingFromApi(trainingToShow[0].id, token);
+            fetchAllTrainings(token);
+            setTimeout(() => setModal(false), 1000);
+        }
     };
 
     let diary = <Spinner/>;
@@ -45,21 +51,22 @@ const Diary = (props) => {
             opacity: modal ? '1' : '0'
         }}>
             {props.loading ? <Spinner dimensions={{margin: '9px auto', fontSize: '50px'}}/> :
-            <>
-                <h2>Na pewno chcesz usunąć trening?</h2>
-                <button type="button" onClick={() => setModal(false)} style={{color: 'green'}}>Anuluj</button>
-                <button type="button" onClick={handleDeleteTraining} style={{color: '#bd2130'}}>Usuń trening</button>
-            </>}
+                <>
+                    <h2>Na pewno chcesz usunąć trening?</h2>
+                    <button type="button" onClick={() => setModal(false)} style={{color: 'green'}}>Anuluj</button>
+                    <button type="button" onClick={handleDeleteTraining} style={{color: '#bd2130'}}>Usuń trening
+                    </button>
+                </>}
         </div>
     );
 
     if (trainingToShow) {
         diary = (
             <>
-                <Backdrop show={modal} cancel={()=>setModal(false)}/>
+                <Backdrop show={modal} cancel={() => setModal(false)}/>
                 {popUp}
                 <Calendar trainings={trainings} setTrainingToShow={trainingToShowHandler}/>
-                {!trainingToShow ? null : <TrainingSummary trainingToShow={trainingToShow} setModal={setModal}/>}
+                <TrainingSummary trainingToShow={trainingToShow} setModal={setModal}/>
             </>
         );
     }
@@ -73,7 +80,8 @@ const mapStateToProps = state => {
         trainings: state.trainings.trainings,
         trainingToShow: state.trainings.trainingToShow,
         error: state.trainings.error,
-        loading: state.trainings.loading
+        loading: state.trainings.loading,
+        trainingToDelete: state.trainings.trainingToDelete
     }
 };
 
