@@ -1,75 +1,131 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './TrainingSummary.scss';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {isEditTraining, addTrainingEditForm} from '../../../store/actions/addTrainingForm';
 import {getRepsView} from "../../../functions/getRepsView";
+import {trainingSummaryView} from '../../../functions/trainingSummaryView';
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab'
 
 const TrainingSummary = (props) => {
-    let tempArray = [];
-    props.trainingToShow.sets.forEach(set => {
-        tempArray.push({name: set.exercise.name, id: set.exercise.id, repetitions: [], weight: [], time: []})
-    });
+    const {trainingToShow} = props;
+    const [key, setKey] = useState(trainingToShow[0].name);
+    let trainingSummaryList = null;
+    let trainingSummaryList2 = null;
 
-    const removeDuplicates = arr => {
-        // Create an array of objects
-        let jsonObject = arr.map(JSON.stringify);
-        let uniqueSet = new Set(jsonObject);
+    if (trainingToShow.length === 2) {
+        const exerciseView = trainingSummaryView(trainingToShow[0]);
+        const exerciseView2 = trainingSummaryView(trainingToShow[1]);
 
-        return [...uniqueSet].map(JSON.parse);
-    };
-    const exerciseView = removeDuplicates(tempArray);
-
-    props.trainingToShow.sets.forEach((set) => {
-        exerciseView.forEach((element) => {
-            if (set.exercise.id === element.id) {
-                element.repetitions.push(set.repetitions);
-                element.weight.push(set.weight);
-                element.time.push(set.time)
-            }
-        })
-    });
-
-    let trainingSummaryList = (
-        <ul className="training-summary__list list-group">
-            {exerciseView.map(element => {
-                return (
-                    <li key={element.id} className="training-summary__exercise list-group-item">
-                        <span className="training-summary__exercise-name">{element.name.toUpperCase()}:</span>
-                        {getRepsView(element).map((rep, i) => {
-                            return (
-                                <span key={i} className="training-summary__exercise-rep">
+        trainingSummaryList = (
+            <ul className="training-summary__list list-group">
+                {exerciseView.map(element => {
+                    return (
+                        <li key={element.id} className="training-summary__exercise list-group-item">
+                            <span className="training-summary__exercise-name">{element.name.toUpperCase()}:</span>
+                            {getRepsView(element).map((rep, i) => {
+                                return (
+                                    <span key={i} className="training-summary__exercise-rep">
                                     {rep}
                                 </span>
-                            )
-                        })}
-                    </li>
-                )
-            })}
-        </ul>
-    );
+                                )
+                            })}
+                        </li>
+                    )
+                })}
+            </ul>
+        );
+        trainingSummaryList2 = (
+            <ul className="training-summary__list list-group">
+                {exerciseView2.map(element => {
+                    return (
+                        <li key={element.id} className="training-summary__exercise list-group-item">
+                            <span className="training-summary__exercise-name">{element.name.toUpperCase()}:</span>
+                            {getRepsView(element).map((rep, i) => {
+                                return (
+                                    <span key={i} className="training-summary__exercise-rep">
+                                    {rep}
+                                </span>
+                                )
+                            })}
+                        </li>
+                    )
+                })}
+            </ul>
+        );
+    }
 
     const handleEditTraining = () => {
         props.isEditTraining(true);
-        props.addTrainingEditForm(props.trainingToShow);
+        props.addTrainingEditForm(trainingToShow);
         props.history.push('/add-training');
     };
 
     return (
-        <div className="training-summary">
-            <i className="far fa-edit edit" onClick={handleEditTraining}/>
-            <i className="far fa-trash-alt trash" onClick={()=>props.setModal(true)}/>
-            <p className="training-summary__element"><span>Data:</span> {props.trainingToShow.date}</p>
-            <p className="training-summary__element"><span>Nazwa:</span> {props.trainingToShow.name}</p>
-            <p className="training-summary__element"><span>Czas:</span> {props.trainingToShow.duration}</p>
-            <p className="training-summary__element"><span>Spalone kalorie:</span> {props.trainingToShow.kcal}</p>
-            <p className="training-summary__element"><span>Łączna ilość serii:</span> {props.trainingToShow.sets.length}</p>
-            {trainingSummaryList}
-            <div className="training-summary__notes">
-                <p>Notatki:</p>
-                {props.trainingToShow.note.toLowerCase()}
-            </div>
-        </div>
+        <>
+            {trainingToShow.length === 1 ?
+                <div className="training-summary">
+                    <i className="far fa-edit edit" onClick={handleEditTraining}/>
+                    <i className="far fa-trash-alt trash" onClick={() => props.setModal(true)}/>
+                    <p className="training-summary__element"><span>Data:</span> {trainingToShow[0].date}</p>
+                    <p className="training-summary__element"><span>Nazwa:</span> {trainingToShow[0].name}</p>
+                    <p className="training-summary__element"><span>Czas:</span> {trainingToShow[0].duration}</p>
+                    <p className="training-summary__element"><span>Spalone kalorie:</span> {trainingToShow[0].kcal}</p>
+                    <p className="training-summary__element">
+                        <span>Łączna ilość serii:</span> {trainingToShow[0].sets.length}</p>
+                    {trainingSummaryList}
+                    <div className="training-summary__notes">
+                        <p>Notatki:</p>
+                        {trainingToShow[0].note.toLowerCase()}
+                    </div>
+                </div> : null}
+
+            {trainingToShow.length === 2 ?
+                <Tabs
+                    id="controlled-tab-example"
+                    activeKey={key}
+                    onSelect={(k) => setKey(k)}
+                >
+                    <Tab eventKey={trainingToShow[0].name} title={trainingToShow[0].name}>
+                        <div className="training-summary">
+                            <i className="far fa-edit edit" onClick={handleEditTraining}/>
+                            <i className="far fa-trash-alt trash" onClick={() => props.setModal(true)}/>
+                            <p className="training-summary__element"><span>Data:</span> {trainingToShow[0].date}</p>
+                            <p className="training-summary__element"><span>Nazwa:</span> {trainingToShow[0].name}</p>
+                            <p className="training-summary__element"><span>Czas:</span> {trainingToShow[0].duration}</p>
+                            <p className="training-summary__element">
+                                <span>Spalone kalorie:</span> {trainingToShow[0].kcal}</p>
+                            <p className="training-summary__element">
+                                <span>Łączna ilość serii:</span> {trainingToShow[0].sets.length}</p>
+                            {trainingSummaryList}
+                            <div className="training-summary__notes">
+                                <p>Notatki:</p>
+                                {trainingToShow[0].note.toLowerCase()}
+                            </div>
+                        </div>
+                    </Tab>
+                    <Tab eventKey={trainingToShow[1].name} title={trainingToShow[1].name}>
+                        <div className="training-summary">
+                            <i className="far fa-edit edit" onClick={handleEditTraining}/>
+                            <i className="far fa-trash-alt trash" onClick={() => props.setModal(true)}/>
+                            <p className="training-summary__element"><span>Data:</span> {trainingToShow[1].date}</p>
+                            <p className="training-summary__element"><span>Nazwa:</span> {trainingToShow[1].name}</p>
+                            <p className="training-summary__element"><span>Czas:</span> {trainingToShow[1].duration}</p>
+                            <p className="training-summary__element">
+                                <span>Spalone kalorie:</span> {trainingToShow[1].kcal}</p>
+                            <p className="training-summary__element">
+                                <span>Łączna ilość serii:</span> {trainingToShow[1].sets.length}</p>
+                            {trainingSummaryList2}
+                            <div className="training-summary__notes">
+                                <p>Notatki:</p>
+                                {trainingToShow[1].note.toLowerCase()}
+                            </div>
+                        </div>
+                    </Tab>
+                </Tabs>
+                : null}
+        </>
     );
 };
 

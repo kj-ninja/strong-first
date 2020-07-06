@@ -1,8 +1,9 @@
 .training-summary {
-  margin: 30px auto;
+  margin: 0 auto 50px;
   max-width: 960px;
   padding: 25px 25px 40px;
-  border: 1px solid rgba(0,0,0,.125);
+  border: 1px solid transparent;
+  border-color: #fff #dee2e6 #dee2e6 #dee2e6;
   background-color: #fff;
   //box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, .12);
   position: relative;
@@ -58,5 +59,23 @@
   }
   .list-group-item {
     background-color: #f7f7f7;
+  }
+}
+
+// TABS
+.nav-tabs {
+  max-width: 960px;
+  margin: 0 auto;
+  a {
+    color: #495057;
+  }
+  .nav-link.active {
+    color: #000;
+  }
+}
+.tab-content {
+  .active {
+    background-color: #fafbfc;
+    color: #2e3d49;
   }
 }
