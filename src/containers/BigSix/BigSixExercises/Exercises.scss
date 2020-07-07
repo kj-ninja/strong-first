@@ -54,6 +54,9 @@
     }
     .exercises__goals-list {
       list-style-image: url("../../../assets/icons/push.svg");
+      span {
+        font-weight: bold;
+      }
     }
   }
   .exercises__paginate-container {

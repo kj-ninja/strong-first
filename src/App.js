@@ -36,7 +36,7 @@ function App(props) {
                 <Route path="/big-six" render={(props) => <BigSix {...props}/>}/>
                 <Route path="/add-training" render={(props) => <AddTraining {...props}/>}/>
                 <Route path="/logout" component={Logout}/>
-                <Redirect to='/big-six'/>
+                <Redirect to='/diary'/>
                 <Route component={NotFound}/>
             </Switch>
         );

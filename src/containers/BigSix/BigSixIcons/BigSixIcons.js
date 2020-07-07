@@ -13,27 +13,27 @@ const BigSixIcons = (props) => {
         <section className="big-six__icons">
             <div className="big-six__icons-container">
                 <div onClick={()=>props.history.push('/big-six/push-ups')}
-                     className="big-six_icon">
+                     className={props.location.pathname === '/big-six/push-ups' ? "big-six_icon push-ups" : "big-six_icon"}>
                     <img src={push} alt="push-ups-logo" id="push-ups"/>
                 </div>
                 <div onClick={()=>props.history.push('/big-six/squats')}
-                     className="big-six_icon">
+                     className={props.location.pathname === '/big-six/squats' ? "big-six_icon squats" : "big-six_icon"}>
                     <img src={squat} alt="squats-logo" id="squats"/>
                 </div>
                 <div onClick={()=>props.history.push('/big-six/pull-ups')}
-                     className="big-six_icon">
+                     className={props.location.pathname === '/big-six/pull-ups' ? "big-six_icon pull-ups" : "big-six_icon"}>
                     <img src={pull} alt="pull-ups-logo" id="pull-ups"/>
                 </div>
                 <div onClick={()=>props.history.push('/big-six/sit-ups')}
-                     className="big-six_icon">
+                     className={props.location.pathname === '/big-six/sit-ups' ? "big-six_icon sit-ups": "big-six_icon"}>
                     <img src={situp} alt="sit-ups-logo" id="sit-ups"/>
                 </div>
                 <div onClick={()=>props.history.push('/big-six/bridge')}
-                     className="big-six_icon">
+                     className={props.location.pathname === '/big-six/bridge' ? "big-six_icon bridge" : "big-six_icon"}>
                     <img src={bridge} alt="bridge-logo" id="bridge"/>
                 </div>
                 <div onClick={()=>props.history.push('/big-six/hand-stand')}
-                     className="big-six_icon">
+                     className={props.location.pathname === '/big-six/hand-stand' ? "big-six_icon hand-stand" : "big-six_icon"}>
                     <img src={hand} alt="hand-stand-logo" id="hand-stand"/>
                 </div>
             </div>

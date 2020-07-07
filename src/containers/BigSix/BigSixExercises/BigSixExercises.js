@@ -14,7 +14,6 @@ const transitionStylesExercise = {
 };
 
 const BigSixExercises = (props) => {
-    console.log(props);
     return (
         <Transition in={true} timeout={50} appear={true} unmountOnExit={true}>
             {state => (
