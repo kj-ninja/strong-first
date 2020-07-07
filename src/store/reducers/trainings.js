@@ -17,13 +17,20 @@ const trainingsReducer = (state = initialState, action) => {
             }
         case actionTypes.FETCH_TRAININGS_SUCCESS:
             const trainingsToShow = [];
-            if (action.trainings.length === 1) {
+            const sortedTrainings = action.trainings.sort((a, b) => {
+                const dateA = new Date(a.date);
+                const dateB = new Date(b.date);
+
+                return dateA - dateB;
+            })
+
+            if (sortedTrainings.length === 1) {
                 trainingsToShow.push(...action.trainings);
-            } else if (action.trainings[action.trainings.length - 1].date === action.trainings[action.trainings.length - 2].date) {
-                trainingsToShow.push(action.trainings[action.trainings.length - 2]);
-                trainingsToShow.push(action.trainings[action.trainings.length - 1]);
+            } else if (sortedTrainings[sortedTrainings.length - 1].date === sortedTrainings[sortedTrainings.length - 2].date) {
+                trainingsToShow.push(sortedTrainings[sortedTrainings.length - 2]);
+                trainingsToShow.push(sortedTrainings[sortedTrainings.length - 1]);
             } else {
-                trainingsToShow.push(action.trainings[action.trainings.length - 1]);
+                trainingsToShow.push(sortedTrainings[sortedTrainings.length - 1]);
             }
             return {
                 ...state,
@@ -41,7 +48,8 @@ const trainingsReducer = (state = initialState, action) => {
         case actionTypes.TRAINING_TO_SHOW_HANDLER:
             return {
                 ...state,
-                trainingToShow: action.trainingToShow
+                trainingToShow: action.trainingToShow,
+                trainingToDelete: action.trainingToShow
             }
         case actionTypes.TRAININGS_CLEAR_ERROR:
             return {
@@ -53,12 +61,6 @@ const trainingsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 trainings: editTrainings.concat(action.payload)
-            }
-        case actionTypes.DELETE_TRAINING_FROM_STORE:
-            const newTrainings = state.trainings.filter(training => training.id !== action.payload);
-            return {
-                ...state,
-                trainings: newTrainings
             }
         case actionTypes.TRAINING_TO_DELETE:
             return {

@@ -38,12 +38,10 @@ const Diary = (props) => {
     const handleDeleteTraining = () => {
         if (trainingToShow.length === 2) {
             deleteTrainingFromApi(trainingToDelete[0].id, token);
-            fetchAllTrainings(token);
-            setTimeout(() => setModal(false), 1000);
+            setModal(false)
         } else {
             deleteTrainingFromApi(trainingToShow[0].id, token);
-            fetchAllTrainings(token);
-            setTimeout(() => setModal(false), 1000);
+            setModal(false)
         }
     };
 
@@ -53,13 +51,11 @@ const Diary = (props) => {
             transform: modal ? 'translateY(0)' : 'translateY(-100vh)',
             opacity: modal ? '1' : '0'
         }}>
-            {props.loading ? <Spinner dimensions={{margin: '9px auto', fontSize: '50px'}}/> :
-                <>
-                    <h2>Na pewno chcesz usunąć trening?</h2>
-                    <button type="button" onClick={() => setModal(false)} style={{color: 'green'}}>Anuluj</button>
-                    <button type="button" onClick={handleDeleteTraining} style={{color: '#bd2130'}}>Usuń trening
-                    </button>
-                </>}
+            <h2>Na pewno chcesz usunąć trening?</h2>
+            <button type="button" onClick={() => setModal(false)} style={{color: 'green'}}>Anuluj</button>
+            <button type="button" onClick={handleDeleteTraining} style={{color: '#bd2130'}}>Usuń trening
+            </button>
+
         </div>
     );
 
@@ -69,7 +65,7 @@ const Diary = (props) => {
                 <Backdrop show={modal} cancel={() => setModal(false)}/>
                 {popUp}
                 <Calendar trainings={trainings} setTrainingToShow={trainingToShowHandler}/>
-                <TrainingSummary trainingToShow={trainingToShow} setModal={setModal}/>
+                <TrainingSummary setModal={setModal}/>
             </>
         );
     }
