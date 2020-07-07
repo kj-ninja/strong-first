@@ -55,7 +55,8 @@ const Exercise = ({bigSix, exercise}) => {
                     <li><span>Próg
                         średniozaawansowany:</span> {bigSix.workouts[exerciseNumber].steps[active].stages.intermediate}
                     </li>
-                    <li><span>Próg przejścia:</span> {bigSix.workouts[exerciseNumber].steps[active].stages.expert}</li>
+                    <li>{active === 9 ? <span>Próg mistrzowski:</span> :
+                        <span>Próg przejścia:</span>} {bigSix.workouts[exerciseNumber].steps[active].stages.expert}</li>
                 </ul>
             </div>
             <Pagination active={active} setActive={setActive} bigSix={bigSix} exerciseNumber={exerciseNumber}/>

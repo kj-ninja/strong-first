@@ -38,7 +38,6 @@ export const login = (values) => {
 
         firebase.auth().signInWithEmailAndPassword(values.email, values.password)
             .then(res => {
-                // zrobic z tego funkcje \/
                 res.user.getIdTokenResult()
                     .then(res => {
                         localStorage.setItem('token', res.token);
@@ -56,34 +55,30 @@ export const login = (values) => {
 export const register = (values) => {
     return dispatch => {
         dispatch(authStart());
-
         firebase.auth().createUserWithEmailAndPassword(values.email, values.password)
-            .then(res => {
-                res.user.getIdTokenResult()
+            .then(result => {
+                result.user.getIdTokenResult()
                     .then(res => {
                         localStorage.setItem('token', res.token);
                         localStorage.setItem('expirationDate', getExpirationDate(res));
                         dispatch(checkAuthTimeout(res.claims.exp - res.claims.auth_time));
-                    });
-                firebase.auth().currentUser.getIdToken()
-                    .then((token) => {
+
                         axios.post('https://ironman.coderaf.com/user', {
-                            username: 'Andrzej' + (Math.floor(Math.random() * 666) + 1),
                             email: values.email,
-                            externalId: res.user.uid
+                            externalId: result.user.uid
                         }, {
                             headers: {
-                                'Access-Token': token
+                                'Access-Token': res.token
                             },
                         })
-                            .then(function (res) {
-                                dispatch(authSuccess(token));
-                                console.log('user zarejestrowany');
+                            .then(function (response) {
+                                dispatch(authSuccess(res.token));
                             })
                             .catch(error => {
                                 dispatch(authFail(translate(error.code)));
                             });
-                    })
+                    });
+
             })
             .catch(function (error) {
                 // Handle Errors here.
