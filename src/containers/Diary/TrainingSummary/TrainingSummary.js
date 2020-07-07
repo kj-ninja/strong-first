@@ -20,7 +20,7 @@ const TrainingSummary = (props) => {
         let trainingToEdit = null;
         if (trainingToShow.length === 2) {
             trainingToShow.forEach(training => {
-                if (training.id === key) {
+                if (training.id === +key) {
                     trainingToEdit = training;
                 }
             });

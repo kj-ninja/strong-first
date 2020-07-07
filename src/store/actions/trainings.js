@@ -20,7 +20,6 @@ export const fetchAllTrainings = (token) => {
             })
             .then(function (response) {
                 // handle success
-                console.log(response.data);
                 dispatch(fetchTrainingsSuccess(response.data));
             })
             .catch(function (error) {
