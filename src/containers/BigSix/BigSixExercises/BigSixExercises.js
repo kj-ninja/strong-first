@@ -1,6 +1,7 @@
 import React from 'react';
 import Transition from "react-transition-group/cjs/Transition";
 import Exercise from "./Exercise/Exercise";
+import BigSixIcons from "../BigSixIcons/BigSixIcons";
 
 const defaultStyleExercise = {
     opacity: '0',
@@ -12,15 +13,16 @@ const transitionStylesExercise = {
     exited: {opacity: 0}
 };
 
-const BigSixExercises = ({bigSix, isExercise, exercise}) => {
+const BigSixExercises = (props) => {
     return (
-        <Transition in={isExercise} timeout={50} appear={true} unmountOnExit={true}>
+        <Transition in={true} timeout={50} appear={true} unmountOnExit={true}>
             {state => (
                 <section className="exercise__cover" style={{
                     ...defaultStyleExercise,
                     ...transitionStylesExercise[state]
                 }}>
-                    <Exercise bigSix={bigSix} exercise={exercise}/>
+                    <BigSixIcons/>
+                    <Exercise exercise={props.exercise}/>
                 </section>
             )}
         </Transition>

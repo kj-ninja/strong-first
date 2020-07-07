@@ -2,6 +2,7 @@ import React from 'react';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Transition from "react-transition-group/cjs/Transition";
+import BigSixIcons from "./BigSixIcons/BigSixIcons";
 
 const defaultStyleBigSixTable = {
     opacity: '1'
@@ -13,15 +14,20 @@ const transitionStylesBigSixTable = {
     exited: {opacity: 0, top: '-1000px'}
 };
 
-const BigSixTable = ({exercise, isTable}) => {
+const styles = {
+    fontSize: '20px',
+    marginTop: '30px',
+    textAlign: 'center'
+};
+
+const BigSixTable = () => {
     return (
-        <Transition in={isTable} timeout={50} appear={true} unmountOnExit={true}>
+        <Transition in={true} timeout={50} appear={true} unmountOnExit={true}>
             {state => (
                 <section className="big-six__cover" style={{
                     ...defaultStyleBigSixTable,
                     ...transitionStylesBigSixTable[state]
                 }}>
-                    {exercise === 'table' &&
                     <section className="big-six">
                         <h2>Wielka szóstka</h2>
                         <p className="big-six__description">
@@ -64,7 +70,9 @@ const BigSixTable = ({exercise, isTable}) => {
                                     przedramion</Col>
                             </Row>
                         </div>
-                    </section>}
+                    </section>
+                    <p style={styles}>Wybierz ćwiczenie!</p>
+                    <BigSixIcons/>
                 </section>
             )}
         </Transition>

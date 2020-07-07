@@ -11,7 +11,7 @@ import NotFound from "./components/NotFound/NotFound";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import BigSix from "./containers/BigSix/BigSix";
 import Logout from "./containers/Auth/Logout/Logout";
-import DodajTrening from "./containers/AddTraining/AddTraining";
+import AddTraining from "./containers/AddTraining/AddTraining";
 
 function App(props) {
     const {authStateCheck} = props;
@@ -33,8 +33,8 @@ function App(props) {
         routes = (
             <Switch>
                 <Route path="/diary" component={Diary}/>
-                <Route path="/big-six" component={BigSix}/>
-                <Route path="/add-training" render={(props) => <DodajTrening {...props}/>}/>
+                <Route path="/big-six" render={(props) => <BigSix {...props}/>}/>
+                <Route path="/add-training" render={(props) => <AddTraining {...props}/>}/>
                 <Route path="/logout" component={Logout}/>
                 <Redirect to='/diary'/>
                 <Route component={NotFound}/>

@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {connect} from 'react-redux';
 import '../Exercises.scss';
 import Pagination from "../../Pagination/Pagination";
 
@@ -7,7 +8,7 @@ const Exercise = ({bigSix, exercise}) => {
     let exerciseNumber = 0;
     let url = 'https://coderaf-strong-first-images.s3.eu-west-3.amazonaws.com/push-up.jpg';
 
-    switch(exercise) {
+    switch (exercise) {
         case 'push-ups':
             exerciseNumber = 0;
             url = 'https://coderaf-strong-first-images.s3.eu-west-3.amazonaws.com/push-up.jpg';
@@ -49,10 +50,12 @@ const Exercise = ({bigSix, exercise}) => {
             <div className="exercises__goals-container">
                 <h3 className="exercises__goals-title">Cele treningowe:</h3>
                 <ul className="exercises__goals-list">
-                    <li>Próg początkowy: {bigSix.workouts[exerciseNumber].steps[active].stages.beginner}</li>
-                    <li>Próg
-                        średniozaawansowany: {bigSix.workouts[exerciseNumber].steps[active].stages.intermediate}</li>
-                    <li>Próg przejścia: {bigSix.workouts[exerciseNumber].steps[active].stages.expert}</li>
+                    <li><span>Próg początkowy:</span> {bigSix.workouts[exerciseNumber].steps[active].stages.beginner}
+                    </li>
+                    <li><span>Próg
+                        średniozaawansowany:</span> {bigSix.workouts[exerciseNumber].steps[active].stages.intermediate}
+                    </li>
+                    <li><span>Próg przejścia:</span> {bigSix.workouts[exerciseNumber].steps[active].stages.expert}</li>
                 </ul>
             </div>
             <Pagination active={active} setActive={setActive} bigSix={bigSix} exerciseNumber={exerciseNumber}/>
@@ -60,4 +63,10 @@ const Exercise = ({bigSix, exercise}) => {
     );
 };
 
-export default Exercise;
+const mapStateToProps = state => {
+    return {
+        bigSix: state.bigSix.bigSix
+    }
+};
+
+export default connect(mapStateToProps)(Exercise);

@@ -1,6 +1,5 @@
 import * as actionTypes from './actionTypes';
 import axios from "axios";
-import {TRAINING_TO_DELETE} from "./actionTypes";
 
 export const fetchTrainingsStart = () => ({type: actionTypes.FETCH_TRAININGS_START});
 export const fetchTrainingsSuccess = (trainings) => ({type: actionTypes.FETCH_TRAININGS_SUCCESS, trainings: trainings});
@@ -81,7 +80,7 @@ export const deleteTrainingFromStore = (id) => {
 
 export const trainingToDelete = (training) => {
     return {
-        type: TRAINING_TO_DELETE,
+        type: actionTypes.TRAINING_TO_DELETE,
         payload: training
     }
 };
