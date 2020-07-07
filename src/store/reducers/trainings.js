@@ -29,7 +29,8 @@ const trainingsReducer = (state = initialState, action) => {
                 ...state,
                 trainingToShow: trainingsToShow,
                 trainings: action.trainings,
-                loading: false
+                loading: false,
+                trainingToDelete: trainingsToShow
             }
         case actionTypes.FETCH_TRAININGS_FAIL:
             return {

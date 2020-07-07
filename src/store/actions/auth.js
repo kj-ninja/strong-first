@@ -68,7 +68,6 @@ export const register = (values) => {
                     });
                 firebase.auth().currentUser.getIdToken()
                     .then((token) => {
-                        console.log(token);
                         axios.post('https://ironman.coderaf.com/user', {
                             username: 'Andrzej' + (Math.floor(Math.random() * 666) + 1),
                             email: values.email,

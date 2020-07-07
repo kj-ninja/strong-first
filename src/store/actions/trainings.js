@@ -25,7 +25,7 @@ export const fetchAllTrainings = (token) => {
             })
             .catch(function (error) {
                 console.log(error);
-                // dispatch(fetchTrainingsFail(error.response.status));
+                dispatch(fetchTrainingsFail(error.response.status));
             })
     };
 };

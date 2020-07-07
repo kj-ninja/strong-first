@@ -21,12 +21,6 @@ const BigSix = () => {
         setIsExercise(true);
     };
 
-    // const handleClickBigSix = () => {
-    //     setIsTable(true);
-    //     setExercise('table');
-    //     setIsExercise(false);
-    // };
-
     return (
         <>
             <BigSixIcons handleClickExercise={handleClickExercise}/>
