@@ -20,3 +20,7 @@ export const AUTH_FAIL = 'AUTH_FAIL';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const AUTH_CLEAR_ERROR = 'AUTH_CLEAR_ERROR';
 
+export const FETCH_BIG_SIX = 'FETCH_BIG_SIX';
+export const FETCH_BIG_SIX_SUCCESS = 'FETCH_BIG_SIX_SUCCESS';
+export const FETCH_BIG_SIX_FAIL = 'FETCH_BIG_SIX_FAIL';
+
