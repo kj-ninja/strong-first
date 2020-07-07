@@ -140,6 +140,7 @@ const TrainingSummary = (props) => {
 
 const mapStateToProps = state => {
     return {
+        trainingToShow: state.trainings.trainingToShow,
         token: state.auth.token
     }
 };

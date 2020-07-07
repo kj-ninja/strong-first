@@ -20,6 +20,7 @@ export const fetchAllTrainings = (token) => {
             })
             .then(function (response) {
                 // handle success
+                console.log(response.data);
                 dispatch(fetchTrainingsSuccess(response.data));
             })
             .catch(function (error) {
@@ -41,6 +42,7 @@ export const addTrainingToApi = (token, training) => {
                 dispatch(trainingsClearError());
             })
             .catch(error => {
+                console.log(error);
                 dispatch(fetchTrainingsFail(error));
             });
     };
@@ -66,16 +68,10 @@ export const editTrainingInApi = (token, training, id) => {
                 dispatch(editTrainingInStore(training));
             })
             .catch(error => {
+                console.log(error);
                 dispatch(fetchTrainingsFail(error));
             });
     };
-};
-
-export const deleteTrainingFromStore = (id) => {
-    return {
-        type: actionTypes.DELETE_TRAINING_FROM_STORE,
-        payload: id
-    }
 };
 
 export const trainingToDelete = (training) => {
@@ -87,7 +83,6 @@ export const trainingToDelete = (training) => {
 
 export const deleteTrainingFromApi = (id, token) => {
     return dispatch => {
-        dispatch(fetchTrainingsStart());
         axios.delete('https://ironman.coderaf.com/training/' + id, {
             headers: {
                 'Access-Token': token
@@ -95,10 +90,10 @@ export const deleteTrainingFromApi = (id, token) => {
         })
             .then(function (res) {
                 dispatch(trainingsClearError());
-                dispatch(deleteTrainingFromStore(id));
-                dispatch(trainingToDelete(null));
+                dispatch(fetchAllTrainings(token));
             })
             .catch(error => {
+                console.log(error);
                 dispatch(fetchTrainingsFail(error));
             });
     };

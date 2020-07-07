@@ -63,7 +63,6 @@ export const register = (values) => {
                     .then(res => {
                         localStorage.setItem('token', res.token);
                         localStorage.setItem('expirationDate', getExpirationDate(res));
-                        dispatch(authSuccess(res.token));
                         dispatch(checkAuthTimeout(res.claims.exp - res.claims.auth_time));
                     });
                 firebase.auth().currentUser.getIdToken()
@@ -78,6 +77,7 @@ export const register = (values) => {
                             },
                         })
                             .then(function (res) {
+                                dispatch(authSuccess(token));
                                 console.log('user zarejestrowany');
                             })
                             .catch(error => {
