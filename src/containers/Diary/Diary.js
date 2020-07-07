@@ -8,14 +8,17 @@ import Spinner from "../../components/UI/Spinner/Spinner";
 import Backdrop from "../../components/UI/Backdrop/Backdrop";
 
 const Diary = (props) => {
-    const {fetchAllTrainings, token, trainingToShow, trainings, trainingToShowHandler, error, deleteTrainingFromApi, trainingToDelete} = props;
+    const {
+        fetchAllTrainings, token, trainingToShow, trainings, trainingToShowHandler, error, deleteTrainingFromApi,
+        trainingToDelete
+    } = props;
     const [modal, setModal] = useState(false);
 
     useEffect(() => {
         fetchAllTrainings(token);
     }, [fetchAllTrainings, token]);
 
-    if (error === 404 || error === 401) {
+    if (error === 404) {
         return (
             <h2 style={{textAlign: 'center', marginTop: '70px', fontSize: '24px'}}>
                 Brak treningów w historii! <br/>
