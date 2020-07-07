@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
+import {connect} from 'react-redux';
 import '../Exercises.scss';
 import Pagination from "../../Pagination/Pagination";
 
 const Exercise = ({bigSix, exercise}) => {
+    console.log(bigSix, exercise);
     const [active, setActive] = useState(0);
     let exerciseNumber = 0;
     let url = 'https://coderaf-strong-first-images.s3.eu-west-3.amazonaws.com/push-up.jpg';
@@ -60,4 +62,10 @@ const Exercise = ({bigSix, exercise}) => {
     );
 };
 
-export default Exercise;
+const mapStateToProps = state => {
+    return {
+        bigSix: state.bigSix.bigSix
+    }
+};
+
+export default connect(mapStateToProps)(Exercise);

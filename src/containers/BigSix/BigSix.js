@@ -1,51 +1,28 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {fetchBigSix} from '../../store/actions/bigSix';
 import './BigSix.scss';
 import BigSixTable from "./BigSixTable";
-import BigSixIcons from "./BigSixIcons/BigSixIcons";
 import BigSixExercises from "./BigSixExercises/BigSixExercises";
 import {Route, Switch} from "react-router-dom";
 
 const BigSix = (props) => {
-    const {token, fetchBigSix, bigSix} = props;
+    const {token, fetchBigSix} = props;
 
-    const [exercise, setExercise] = useState('table');
-    const [isTable, setIsTable] = useState(true);
-    const [isExercise, setIsExercise] = useState(false);
-    console.log(bigSix);
-
-    const styles = {
-        fontSize: '20px',
-        marginTop: '30px',
-        textAlign: 'center'
-    };
-
-    useEffect(()=>{
+    useEffect(() => {
         fetchBigSix(token);
     }, [fetchBigSix, token]);
 
-    const handleClickExercise = (e) => {
-        setIsTable(false);
-        setExercise(e.target.id);
-        setIsExercise(true);
-    };
-
     return (
-        <>
-            <BigSixTable exercise={exercise} isTable={isTable}/>
-            <p style={styles}>Wybierz ćwiczenie!</p>
-            <BigSixIcons handleClickExercise={handleClickExercise}/>
-            {bigSix.length === 0 ? null : <BigSixExercises bigSix={bigSix} isExercise={isExercise} exercise={exercise}/>}
-            <Switch>
-                {/*<Route path="/big-six/" component={DodajTreningStepTwo}/>*/}
-                {/*<Route path="/big-six/" component={DodajTreningStepTwo}/>*/}
-                {/*<Route path="/big-six/" component={DodajTreningStepTwo}/>*/}
-                {/*<Route path="/big-six/" component={DodajTreningStepTwo}/>*/}
-                {/*<Route path="/big-six/" component={DodajTreningStepTwo}/>*/}
-                {/*<Route path="/big-six/" component={DodajTreningStepTwo}/>*/}
-            </Switch>
-        </>
+        <Switch>
+            <Route path="/big-six/push-ups" render={() => <BigSixExercises exercise="push-ups"/>}/>
+            <Route path="/big-six/squats" render={() => <BigSixExercises exercise="squats"/>}/>
+            <Route path="/big-six/pull-ups" render={() => <BigSixExercises exercise="pull-ups"/>}/>
+            <Route path="/big-six/sit-ups" render={() => <BigSixExercises exercise="sit-ups"/>}/>
+            <Route path="/big-six/bridge" render={() => <BigSixExercises exercise="bridge"/>}/>
+            <Route path="/big-six/hand-stand" render={() => <BigSixExercises exercise="hand-stand"/>}/>
+            <Route path='/big-six' component={BigSixTable}/>
+        </Switch>
     )
 };
 
