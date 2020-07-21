@@ -1,0 +1,22 @@
+footer {
+  position: absolute;
+  padding: 1rem;
+  width: 100%;
+  justify-content: space-between;
+  box-shadow: 0 -5px 40px #00000029;
+  background-color: #000;
+  color: #fff;
+  .footer__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    a {
+      color: #ff8324;
+    }
+    p {
+      color: #ff8324;
+      cursor: pointer;
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import './Home.scss';
+import {Link as ScrollLink, animateScroll as scroll} from "react-scroll";
 import Footer from "../Footer/Footer";
 import Jumbotron from "react-bootstrap/Jumbotron";
 
@@ -13,9 +14,11 @@ const Home = () => {
                     <p>to łatwy w użyciu i szybki w działaniu dzienniczek sportowy.
                         Zacznij już dziś kontrolować swój postęp siłowy.</p>
                 </div>
-                <i className="fas fa-arrow-down"/>
+                <ScrollLink to="features" spy={true} smooth={true} offset={40} duration={500}>
+                    <i className="fas fa-arrow-down"/>
+                </ScrollLink>
             </Jumbotron>
-            <section className="home">
+            <section className="home" id="features">
                 <div className="home__feature">
                     <div className="home__feature-heading">
                         <h3>Łatwe i szybkie zarządzanie treningami.</h3>

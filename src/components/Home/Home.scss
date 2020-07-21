@@ -1,3 +1,5 @@
+@import '../../scss/settings/mixins';
+
 .overlay {
   position: absolute;
   top: 0;
@@ -47,13 +49,13 @@
     font-size: 40px;
     color: #fff;
     transform: translateX(-50%);
-    animation: bounce 2s infinite;
+    animation: bounce 1.6s infinite;
     cursor: pointer;
   }
 }
 
 .home {
-
+  padding: 1em;
   .home__feature {
     max-width: 1200px;
     margin: 100px auto;
@@ -67,12 +69,21 @@
       justify-content: flex-end;
       line-height: 30px;
       h3 {
+        text-align: center;
         font-size: 40px;
         margin-bottom: 15px;
         line-height: 45px;
+        @include tablet() {
+          text-align: left;
+        }
       }
       p {
         font-size: 20px;
+        text-align: center;
+        margin-bottom: 30px;
+        @include tablet() {
+          text-align: left;
+        }
       }
     }
     .home__feature-img {
@@ -80,6 +91,7 @@
       max-height: 350px;
       img {
         max-width: 100%;
+        margin-bottom: 30px;
       }
     }
   }
