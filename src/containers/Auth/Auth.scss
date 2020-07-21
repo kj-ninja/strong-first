@@ -2,6 +2,7 @@
 
 .login, .register {
   padding: 15px;
+  color: #000;
   .login__container, .register__container {
     max-width: 500px;
     margin: 0 auto;
@@ -9,10 +10,7 @@
     flex-direction: column;
     align-items: center;
     position: relative;
-    box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, .12);
-    border: 1px solid #dbe2e8;
     padding: 2rem;
-    border-radius: 4px;
     top: 0;
     @include tablet() {
       top: 100px;
@@ -52,6 +50,12 @@
         margin-top: 20px;
         button {
           padding: 0.5rem 1rem;
+          color: #000;
+          border-color: #000;
+          &:hover {
+            color: #fff;
+            background-color: #000;
+        }
         }
       }
     }

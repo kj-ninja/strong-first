@@ -2,7 +2,6 @@ footer {
   position: absolute;
   padding: 1rem;
   width: 100%;
-  justify-content: space-between;
   box-shadow: 0 -5px 40px #00000029;
   background-color: #000;
   color: #fff;
@@ -18,5 +17,8 @@ footer {
       color: #ff8324;
       cursor: pointer;
     }
+  }
+  .center {
+    justify-content: center;
   }
 }

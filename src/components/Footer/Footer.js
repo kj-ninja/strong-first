@@ -1,23 +1,25 @@
 import React from "react";
+import {withRouter} from 'react-router-dom';
 import './Footer.scss';
 import {animateScroll as scroll} from "react-scroll";
 
 const Footer = (props) => {
+    console.log(props.history.location.pathname);
     return (
         <footer style={{bottom: props.bottom}}>
-            <div className="footer__container">
+            <div className={props.history.location.pathname === '/' ? "footer__container" : "footer__container center"}>
 
                 <div className='footer__copyright'>
                     &copy; {new Date().getFullYear()} Copyright: <a href="https://github.com/kj-ninja"> kj-ninja </a>
                 </div>
-                <p onClick={() => {
+                {props.history.location.pathname === '/' ? <p onClick={() => {
                     scroll.scrollToTop();
                 }}>
                     Back to top
-                </p>
+                </p> : null}
             </div>
         </footer>
     );
 };
 
-export default Footer;
+export default withRouter(Footer);
