@@ -1,22 +1,122 @@
+.overlay {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
 .hero {
+  position: relative;
   color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url('../../assets/hero2.jpg');
+  background-image: url('../../assets/bgc3.jpg');
   background-size: cover;
   background-position: center;
-  height: calc(100vh - 118px);
-  margin-bottom: 0;
+  height: calc(100vh - 70px);
+
   h2 {
+    color: #ff8324;
     text-align: center;
     font-size: 4rem;
     margin-bottom: 10px;
   }
+
   .hero__para {
+    font-size: 18px;
+    position: relative;
+    z-index: 2;
     text-align: center;
-    max-width: 400px;
+    max-width: 420px;
     margin-bottom: 20px;
+
+    p {
+      line-height: 22px;
+    }
+  }
+
+  .fa-arrow-down {
+    position: absolute;
+    z-index: 10;
+    bottom: 20px;
+    left: 50%;
+    font-size: 40px;
+    color: #fff;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+    cursor: pointer;
+  }
+}
+
+.home {
+
+  .home__feature {
+    max-width: 1200px;
+    margin: 100px auto;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    .home__feature-heading {
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      line-height: 30px;
+      h3 {
+        font-size: 40px;
+        margin-bottom: 15px;
+        line-height: 45px;
+      }
+      p {
+        font-size: 20px;
+      }
+    }
+    .home__feature-img {
+      max-width: 350px;
+      max-height: 350px;
+      img {
+        max-width: 100%;
+      }
+    }
+  }
+  hr {
+    margin: 100px 0;
+  }
+
+}
+
+//@keyframes scaleUp {
+//  0% {
+//    transform: scale(1);
+//  }
+//  50% {
+//    transform: scale(1);
+//  }
+//  75% {
+//    transform: scale(1.4);
+//  }
+//  100% {
+//    transform: scale(1);
+//  }
+//}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0)
+  }
+
+  40% {
+    -webkit-transform: translateY(-20px);
+    transform: translateY(-20px)
+  }
+
+  60% {
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px)
   }
 }

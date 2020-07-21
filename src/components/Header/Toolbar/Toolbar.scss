@@ -3,8 +3,9 @@
 
 header {
   box-shadow: 0 3px 6px #00000029;
-  background-color: #fafbfc;
+  background-color: #000;
   position: relative;
+  width: 100%;
   z-index: 1000;
   .header__container.header__wrapper {
     max-width: 1350px;
@@ -18,9 +19,9 @@ header {
       font-family: $logo-font;
       font-size: 2.15rem;
       a {
-        color: #bd2130;
+        color: #ff8324;
         .header__logo--accent {
-          color: #1c1919;
+          color: #f1f1f1;
         }
       }
     }
@@ -31,6 +32,7 @@ header {
       }
     }
     .hamburger {
+      color: #f1f1f1;
       font-size: 40px;
       cursor: pointer;
       @include tablet() {
