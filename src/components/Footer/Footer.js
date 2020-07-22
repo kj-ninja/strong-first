@@ -4,7 +4,6 @@ import './Footer.scss';
 import {animateScroll as scroll} from "react-scroll";
 
 const Footer = (props) => {
-    console.log(props.history.location.pathname);
     return (
         <footer style={{bottom: props.bottom}}>
             <div className={props.history.location.pathname === '/' ? "footer__container" : "footer__container center"}>
