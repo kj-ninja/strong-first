@@ -30,13 +30,13 @@ const Home = () => {
                         </p>
                     </div>
                     <div className="home__feature-img">
-                        <img src={require('../../assets/heart.png')} alt=""/>
+                        <img src={require('../../assets/ft.png')} alt=""/>
                     </div>
                 </div>
                 <hr/>
                 <div className="home__feature">
                     <div className="home__feature-img">
-                        <img src={require('../../assets/heart.png')} alt=""/>
+                        <img src={require('../../assets/ft2.png')} alt=""/>
                     </div>
                     <div className="home__feature-heading">
                         <h3>Twój podręczny trener personalny.</h3>
@@ -56,7 +56,7 @@ const Home = () => {
                             tłuszczowej.</p>
                     </div>
                     <div className="home__feature-img">
-                        <img src={require('../../assets/heart.png')} alt=""/>
+                        <img src={require('../../assets/ft3.png')} alt=""/>
                     </div>
                 </div>
             </section>
