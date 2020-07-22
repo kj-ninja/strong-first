@@ -6,6 +6,7 @@ import 'react-image-lightbox/style.css';
 import Footer from "../Footer/Footer";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import useWindowWidth from "../../functions/customHooks/useWindowWidth";
+import ScrollAnimation from 'react-animate-on-scroll';
 
 const trainingsImages = [
     require("../../assets/home/at-1.png"),
@@ -88,6 +89,7 @@ const Home = () => {
                 </ScrollLink>
             </Jumbotron>
             <section className="home" id="features">
+                <ScrollAnimation animateIn="fadeIn" animateOnce>
                 <div className="home__feature">
                     <div className="home__feature-heading">
                         <h3>Łatwe i szybkie zarządzanie treningami.</h3>
@@ -103,7 +105,9 @@ const Home = () => {
                         <img src={require('../../assets/home/ft.png')} alt=""/>
                     </div>
                 </div>
+                </ScrollAnimation>
                 <hr/>
+                <ScrollAnimation animateIn="fadeIn" animateOnce>
                 <div className="home__feature">
                     <div className="home__feature-img">
                         <img src={require('../../assets/home/ft2.png')} alt=""/>
@@ -116,7 +120,9 @@ const Home = () => {
                         {width < 1200 ? null : <button type="button" onClick={()=>setIsStepsOpen(true)}>Szczegóły >></button>}
                     </div>
                 </div>
+                </ScrollAnimation>
                 <hr/>
+                <ScrollAnimation animateIn="fadeIn" animateOnce>
                 <div className="home__feature">
                     <div className="home__feature-heading">
                         <h3>Źródło motywacji.</h3>
@@ -131,6 +137,7 @@ const Home = () => {
                         <img src={require('../../assets/home/ft3.png')} alt=""/>
                     </div>
                 </div>
+                </ScrollAnimation>
             </section>
             <Footer/>
         </>
