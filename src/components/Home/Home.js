@@ -28,6 +28,7 @@ const Home = () => {
                             W każdej chwili masz dostęp do wykonanych wcześniej treningów, dzięki czemu możesz śledzić
                             swój progres.
                         </p>
+                        <button type="button">Sprawdź szczegóły</button>
                     </div>
                     <div className="home__feature-img">
                         <img src={require('../../assets/ft.png')} alt=""/>
@@ -43,6 +44,7 @@ const Home = () => {
                         <p>Aplikacja zawiera specjalną sekcję w której opisane są ćwiczenia angażujące praktycznie
                             wszystkie mięśnie. Ponadto ćwiczenia podzielone są na wiele kroków co czyni trening
                             łatwiejszym dla początkujących.</p>
+                        <button type="button">Sprawdź szczegóły</button>
                     </div>
                 </div>
                 <hr/>
@@ -54,6 +56,7 @@ const Home = () => {
                             aktualna siła, masa ciała i tryb życia w konsekwencji oddziałuję na szybkość pojawiania
                             się założonych celów treningowych tj. poprawę siły, masy mięśniowej lub redukcję tkanki
                             tłuszczowej.</p>
+                        <button type="button">Sprawdź szczegóły</button>
                     </div>
                     <div className="home__feature-img">
                         <img src={require('../../assets/ft3.png')} alt=""/>
