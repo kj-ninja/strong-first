@@ -10,7 +10,7 @@
   background-size: cover;
   background-position: center;
   @include tablet() {
-    height: 100vh;
+    height: 105vh;
   }
 }
 
@@ -22,7 +22,7 @@
   height: 140vh;
   background-color: rgba(0, 0, 0, 0.6);
   @include tablet() {
-    height: 100vh;
+    height: 105vh;
   }
 }
 
@@ -131,7 +131,7 @@
   max-width: 650px;
   margin: 0 auto;
   @include tablet() {
-    height: 335px;
+    height: 350px;
   }
 
   .add-training__exerciseView {
