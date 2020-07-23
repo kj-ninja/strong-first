@@ -9,6 +9,9 @@
   background-color: rgba(0, 0, 0, 0.6);
 }
 
+.jumbotron {
+  margin: 0;
+}
 .hero {
   position: relative;
   color: #fff;
@@ -56,6 +59,7 @@
 
 .home {
   padding: 1em;
+  background-color: #fff;
   .home__feature {
     max-width: 1200px;
     margin: 50px auto;

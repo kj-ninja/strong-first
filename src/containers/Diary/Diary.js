@@ -20,7 +20,7 @@ const Diary = (props) => {
 
     if (error === 404) {
         return (
-            <h2 style={{textAlign: 'center', marginTop: '70px', fontSize: '24px'}}>
+            <h2 className="diary__warning">
                 Brak treningów w historii! <br/>
                 Dodaj swój pierwszy trening!
             </h2>

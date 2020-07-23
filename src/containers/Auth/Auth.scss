@@ -3,6 +3,8 @@
 .login, .register {
   padding: 15px;
   color: #000;
+  height: calc(100vh - 118px);
+  background-color: #fff;
   .login__container, .register__container {
     max-width: 500px;
     margin: 0 auto;
