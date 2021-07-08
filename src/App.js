@@ -8,7 +8,7 @@ import Login from "./containers/Auth/Login/Login";
 import Register from "./containers/Auth/Register/Register";
 import Diary from "./containers/Diary/Diary";
 import NotFound from "./components/NotFound/NotFound";
-import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+import ScrollToTop from "./components/UI/ScrollToTop/ScrollToTop";
 import BigSix from "./containers/BigSix/BigSix";
 import Logout from "./containers/Auth/Logout/Logout";
 import AddTraining from "./containers/AddTraining/AddTraining";
