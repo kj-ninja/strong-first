@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
 import firebase from "../../api/firebase";
-import {translate} from "../../functions/translate";
+import {translate} from "../../helpers/translate";
 import axios from "axios";
 
 export const authStart = () => ({type: actionTypes.AUTH_START});
