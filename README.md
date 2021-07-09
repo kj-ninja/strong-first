@@ -14,20 +14,15 @@ Sports diary based on calisthenic exercises with training management option.
 
 * Application has the user Authenticate handled by `Firebase`. 
 * Otherwise, adding, editing, deleting trainings from an actual calendar.
-* Displaying statistics and training history.
+* Displaying statistics and trainings history.
 
 
 ## Technologies
 
-* ReactJS
+* React
 * Redux
 * SASS
+* Ant Design
 * Webpack
 * Firebase
 * RWD
-* also libraries like:
-    * react-router
-    * react-bootstrap
-    * react-transition
-    * formik and yup
-    * axios
