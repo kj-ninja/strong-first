@@ -1,8 +1,8 @@
 import {combineReducers} from "redux";
-import authReducer from './auth';
-import trainingsReducer from './trainings'
-import addTrainingFormReducer from './addTrainingForm';
-import bigSixReducer from './bigSix';
+import authReducer from './auth.reducer';
+import trainingsReducer from './trainings.reducer'
+import addTrainingFormReducer from './add-training.reducer';
+import bigSixReducer from './big-six.reducer';
 
 export default combineReducers({
     auth: authReducer,

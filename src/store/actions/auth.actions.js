@@ -1,4 +1,4 @@
-import * as actionTypes from './actionTypes';
+import * as actionTypes from '../action-types';
 import firebase from "../../api/firebase";
 import {translate} from "../../helpers/translate";
 import axios from "axios";

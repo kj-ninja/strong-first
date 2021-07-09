@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import './AddTraining.scss';
-import {addTrainingToApi, editTrainingInApi} from "../../store/actions/trainings";
-import Button from "../../components/ui/button/Button";
-import {getRepsView} from "../../helpers/getRepsView";
-import {trainingSummaryView} from "../../helpers/trainingSummaryView";
+import {addTrainingToApi, editTrainingInApi} from "../../../store/actions/trainings.actions";
+import Button from "../../../components/ui/button/Button";
+import {getRepsView} from "../../../helpers/getRepsView";
+import {trainingSummaryView} from "../../../helpers/trainingSummaryView";
 
 const AddTrainingResult = (props) => {
     const {addTrainingForm, addTrainingToApi, editTrainingInApi} = props;

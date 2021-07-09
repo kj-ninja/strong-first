@@ -2,7 +2,7 @@ import React from 'react';
 import '../Auth.scss';
 import * as Yup from 'yup';
 import {connect} from 'react-redux';
-import {login, authClearError} from '../../../store/actions/auth';
+import {login, authClearError} from '../../../store/actions/auth.actions';
 import {Formik, Field, Form, ErrorMessage} from 'formik';
 import Button from "react-bootstrap/Button";
 import Footer from "../../../components/footer/Footer";

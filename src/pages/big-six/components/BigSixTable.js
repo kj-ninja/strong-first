@@ -2,7 +2,7 @@ import React from 'react';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Transition from "react-transition-group/cjs/Transition";
-import BigSixIcons from "./big-six-icons/BigSixIcons";
+import BigSixIcons from "./BigSixIcons";
 
 const defaultStyleBigSixTable = {
     opacity: '1'

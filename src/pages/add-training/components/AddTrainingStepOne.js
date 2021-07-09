@@ -1,8 +1,8 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
 import {connect} from 'react-redux';
-import {addTrainingStepOne} from '../../store/actions/addTrainingForm';
-import Button from "../../components/ui/button/Button";
+import {addTrainingStepOne} from '../../../store/actions/add-training.actions';
+import Button from "../../../components/ui/button/Button";
 
 const AddTrainingStepOne = (props) => {
     const {register, handleSubmit, errors} = useForm();

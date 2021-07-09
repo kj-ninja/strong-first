@@ -1,7 +1,7 @@
 import React from "react";
 import '../Auth.scss';
 import {connect} from 'react-redux';
-import {register, authClearError} from "../../../store/actions/auth";
+import {register, authClearError} from "../../../store/actions/auth.actions";
 import {Formik} from "formik";
 import * as Yup from "yup";
 import Button from "react-bootstrap/Button";

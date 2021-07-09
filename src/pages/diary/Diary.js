@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './Diary.scss';
 import {connect} from 'react-redux';
-import {fetchAllTrainings, trainingToShowHandler, deleteTrainingFromApi} from "../../store/actions/trainings";
+import {fetchAllTrainings, trainingToShowHandler, deleteTrainingFromApi} from "../../store/actions/trainings.actions";
 import TrainingSummary from "./training-summary/TrainingSummary";
 import Calendar from "./calendar/Calendar";
 import Spinner from "../../components/ui/spinner/Spinner";

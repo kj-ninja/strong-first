@@ -1,4 +1,4 @@
-import * as actionTypes from './actionTypes';
+import * as actionTypes from '../action-types';
 import axios from "axios";
 
 export const fetchTrainingsStart = () => ({type: actionTypes.FETCH_TRAININGS_START});
