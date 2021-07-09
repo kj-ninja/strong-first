@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import {addSet, deleteSet} from '../../store/actions/addTrainingForm';
+import {addSet, deleteSet} from '../../../store/actions/add-training.actions';
 import {useForm} from "react-hook-form";
-import ReactSelect from "../../components/react-select/ReactSelect";
-import Button from "../../components/ui/button/Button";
+import ReactSelect from "../../../components/react-select/ReactSelect";
+import Button from "../../../components/ui/button/Button";
 
 const AddTrainingStepTwo = (props) => {
     const {register, handleSubmit, getValues, errors} = useForm();

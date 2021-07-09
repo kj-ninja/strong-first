@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import '../Exercises.scss';
-import Pagination from "../../pagination/Pagination";
+import './Exercises.scss';
+import Pagination from "./Pagination";
 
 const Exercise = ({bigSix, exercise}) => {
     const [active, setActive] = useState(0);

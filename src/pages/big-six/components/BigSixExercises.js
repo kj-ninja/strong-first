@@ -1,7 +1,7 @@
 import React from 'react';
 import Transition from "react-transition-group/cjs/Transition";
-import Exercise from "./exercise/Exercise";
-import BigSixIcons from "../big-six-icons/BigSixIcons";
+import Exercise from "./Exercise";
+import BigSixIcons from "./BigSixIcons";
 
 const defaultStyleExercise = {
     opacity: '0',

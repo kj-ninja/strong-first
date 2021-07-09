@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Route, Switch, Redirect} from 'react-router-dom';
-import {authStateCheck} from './store/actions/auth';
+import {authStateCheck} from './store/actions/auth.actions';
 import Layout from "./layouts/Layout";
 import Home from "./components/home/Home";
 import Login from "./pages/authentication/login/Login";

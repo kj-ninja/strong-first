@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {clearForm, isEditTraining} from '../../../store/actions/addTrainingForm';
-import {trainingsClearError} from '../../../store/actions/trainings';
+import {clearForm, isEditTraining} from '../../../store/actions/add-training.actions';
+import {trainingsClearError} from '../../../store/actions/trainings.actions';
 
 import './NavigationItems.scss';
 import {NavLink} from "react-router-dom";
