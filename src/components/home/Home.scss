@@ -5,13 +5,14 @@
   top: 0;
   z-index: 1;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 48px);
   background-color: rgba(0, 0, 0, 0.6);
 }
 
 .jumbotron {
   margin: 0;
 }
+
 .hero {
   position: relative;
   color: #fff;
@@ -22,7 +23,7 @@
   background-image: url('../../assets/lp-bgc.jpg');
   background-size: cover;
   background-position: center;
-  height: calc(100vh - 70px);
+  height: calc(100vh - 118px);
 
   h2 {
     color: #ff8324;
@@ -60,6 +61,7 @@
 .home {
   padding: 1em;
   background-color: #fff;
+
   .home__feature {
     max-width: 1200px;
     margin: 50px auto;
@@ -69,12 +71,14 @@
     @include tablet() {
       margin: 100px auto;
     }
+
     .home__feature-heading {
       max-width: 500px;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
       line-height: 30px;
+
       h3 {
         text-align: center;
         font-size: 40px;
@@ -84,6 +88,7 @@
           text-align: left;
         }
       }
+
       p {
         font-size: 20px;
         text-align: center;
@@ -92,6 +97,7 @@
           text-align: left;
         }
       }
+
       button {
         border: 0;
         padding: 15px 10px;
@@ -103,12 +109,14 @@
         @media (min-width: 900px) {
           align-self: flex-start;
         }
+
         &:hover {
           color: #fff;
           background-color: #626262;
         }
       }
     }
+
     .home__feature-img {
       max-width: 250px;
       max-height: 250px;
@@ -116,46 +124,17 @@
         max-width: 350px;
         max-height: 350px;
       }
+
       img {
         max-width: 100%;
         margin-bottom: 30px;
       }
     }
   }
+
   hr {
     margin: 100px 0;
   }
-
 }
 
-//@keyframes scaleUp {
-//  0% {
-//    transform: scale(1);
-//  }
-//  50% {
-//    transform: scale(1);
-//  }
-//  75% {
-//    transform: scale(1.4);
-//  }
-//  100% {
-//    transform: scale(1);
-//  }
-//}
 
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0)
-  }
-
-  40% {
-    -webkit-transform: translateY(-20px);
-    transform: translateY(-20px)
-  }
-
-  60% {
-    -webkit-transform: translateY(-10px);
-    transform: translateY(-10px)
-  }
-}
