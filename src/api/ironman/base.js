@@ -19,9 +19,6 @@ const ironmanApi = {
     return axios.get(`${ironmanEndpoint}${path}`);
   },
   post: (path, params) => {
-    // const data = options.json;
-    // const query = options.query;
-
     return axios.post(`${ironmanEndpoint}${path}`, params);
   },
   delete: (path, params) => {
