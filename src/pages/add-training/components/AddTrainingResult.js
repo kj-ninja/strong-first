@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import './AddTraining.scss';
+import '../AddTraining.scss';
 import {addTrainingToApi, editTrainingInApi} from "../../../store/actions/trainings.actions";
 import Button from "../../../components/ui/button/Button";
 import {getRepsView} from "../../../helpers/getRepsView";

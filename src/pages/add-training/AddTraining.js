@@ -4,7 +4,7 @@ import './AddTraining.scss';
 import {Switch, Route} from 'react-router-dom';
 import AddTrainingStepOne from "./components/AddTrainingStepOne";
 import AddTrainingStepTwo from "./components/AddTrainingStepTwo";
-import TrainingSummary from "../diary/training-summary/TrainingSummary";
+import AddTrainingResult from "./components/AddTrainingResult";
 import Spinner from "../../components/ui/spinner/Spinner";
 
 const AddTraining = (props) => {
@@ -14,7 +14,7 @@ const AddTraining = (props) => {
         <>
           <Switch>
             <Route path="/add-training/step2" component={AddTrainingStepTwo}/>
-            <Route path="/add-training/result" component={TrainingSummary}/>
+            <Route path="/add-training/result" component={AddTrainingResult}/>
             <Route path="/add-training" component={AddTrainingStepOne}/>
           </Switch>
         </>}
