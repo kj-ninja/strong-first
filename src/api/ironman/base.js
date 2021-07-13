@@ -24,6 +24,9 @@ const ironmanApi = {
 
     return axios.post(`${ironmanEndpoint}${path}`, params);
   },
+  delete: (path, params) => {
+    return axios.delete(`${ironmanEndpoint}${path}`, params);
+  },
 };
 
 export default ironmanApi;

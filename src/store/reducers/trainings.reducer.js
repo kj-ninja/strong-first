@@ -10,12 +10,12 @@ const initialState = {
 
 const trainingsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.FETCH_TRAININGS_START:
+        case actionTypes.LOADING:
             return {
                 ...state,
                 loading: true
             }
-        case actionTypes.FETCH_TRAININGS_SUCCESS:
+        case actionTypes.GET_TRAININGS_SUCCESS:
             const trainingsToShow = [];
             const sortedTrainings = action.trainings.sort((a, b) => {
                 const dateA = new Date(a.date);
@@ -39,7 +39,7 @@ const trainingsReducer = (state = initialState, action) => {
                 loading: false,
                 trainingToDelete: trainingsToShow
             }
-        case actionTypes.FETCH_TRAININGS_FAIL:
+        case actionTypes.GET_TRAININGS_FAIL:
             return {
                 ...state,
                 loading: false,

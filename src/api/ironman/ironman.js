@@ -18,12 +18,14 @@ export const httpAddTraining = async (params) => {
   return data;
 };
 
-// export const getApodsByDatesRange = async (from, to) => {
-//   const {data} = await NasaClient.get(`${APOD_URL}?start_date=${from}&end_date=${to}`);
-//   return data;
-// };
-//
-// export const getRandomApods = async (count = 6) => {
-//   const {data} = await NasaClient.get(`${APOD_URL}?count=${count}`);
-//   return data;
-// };
+export const httpEditTraining = async (id, training) => {
+  const {data} = await ironman.post(`${TRAINING_URL}/${id}`, training);
+  console.log(data);
+  return data;
+};
+
+export const httpDeleteTraining = async (id) => {
+  const {data} = await ironman.delete(`${TRAINING_URL}/${id}`);
+  console.log(data);
+  return data;
+};

@@ -1,13 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import '../AddTraining.scss';
-import {addTraining, editTrainingInApi} from "../../../store/actions/trainings.actions";
+import {addTraining, editTraining} from "../../../store/actions/trainings.actions";
 import Button from "../../../components/ui/button/Button";
 import {getRepsView} from "../../../helpers/getRepsView";
 import {trainingSummaryView} from "../../../helpers/trainingSummaryView";
 
 const AddTrainingResult = (props) => {
-  const {addTrainingForm, addTraining, editTrainingInApi} = props;
+  const {addTrainingForm, addTraining, editTraining} = props;
 
   const handleAddTraining = () => {
     let counter = 0;
@@ -32,7 +32,7 @@ const AddTrainingResult = (props) => {
   };
 
   const handleEditTraining = () => {
-    editTrainingInApi(props.token, addTrainingForm, addTrainingForm.id);
+    editTraining(addTrainingForm.id, addTrainingForm);
     setTimeout(() => {
       props.history.push('/diary')
     }, 1500);
@@ -90,4 +90,4 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps, {addTraining, editTrainingInApi})(AddTrainingResult);
+export default connect(mapStateToProps, {addTraining, editTraining})(AddTrainingResult);
