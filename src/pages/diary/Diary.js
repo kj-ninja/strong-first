@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './Diary.scss';
 import {connect} from 'react-redux';
-import {fetchAllTrainings, trainingToShowHandler, deleteTrainingFromApi} from "../../store/actions/trainings.actions";
+import {getAllTrainings, trainingToShowHandler, deleteTrainingFromApi} from "../../store/actions/trainings.actions";
 import TrainingSummary from "./training-summary/TrainingSummary";
 import Calendar from "./calendar/Calendar";
 import Spinner from "../../components/ui/spinner/Spinner";
@@ -9,14 +9,14 @@ import Backdrop from "../../components/ui/back-drop/Backdrop";
 
 const Diary = (props) => {
   const {
-    fetchAllTrainings, token, trainingToShow, trainings, trainingToShowHandler, error, deleteTrainingFromApi,
+    getAllTrainings, token, trainingToShow, trainings, trainingToShowHandler, error, deleteTrainingFromApi,
     trainingToDelete
   } = props;
   const [modal, setModal] = useState(false);
 
   useEffect(() => {
-    fetchAllTrainings(token);
-  }, [fetchAllTrainings, token]);
+    getAllTrainings();
+  }, [getAllTrainings]);
 
   if (error === 404) {
     return (
@@ -84,4 +84,4 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps, {fetchAllTrainings, trainingToShowHandler, deleteTrainingFromApi})(Diary);
+export default connect(mapStateToProps, {getAllTrainings, trainingToShowHandler, deleteTrainingFromApi})(Diary);
