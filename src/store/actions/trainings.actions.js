@@ -1,10 +1,11 @@
 import * as actionTypes from '../action-types';
 import {
-  httpGetAllTrainings,
+  httpGetTrainingsByDateRange,
   httpAddTraining,
   httpEditTraining,
   httpDeleteTraining
 } from '../../api/ironman/ironman';
+import {getCalendarInitialData, wrapCalendarWithTrainings} from "./calendar.actions";
 
 export const loading = () => ({type: actionTypes.LOADING});
 export const getTrainingsSuccess = (trainings) => ({type: actionTypes.GET_TRAININGS_SUCCESS, trainings: trainings});
@@ -17,11 +18,21 @@ export const trainingsClearError = () => ({type: actionTypes.TRAININGS_CLEAR_ERR
 export const editTrainingInStore = (training) => ({type: actionTypes.EDIT_TRAINING_IN_STORE, payload: training});
 export const trainingToDelete = (training) => ({type: actionTypes.TRAINING_TO_DELETE, payload: training});
 
-export const getAllTrainings = () => {
-  return async dispatch => {
+export const initCalendar = (today) => {
+  return async (dispatch, getState) => {
     dispatch(loading());
     try {
-      const trainings = await httpGetAllTrainings();
+      dispatch(getCalendarInitialData(today));
+
+      const calendarDates = getState().calendar.calendarStructure[0].dates;
+      const dates = {
+        dateFrom: calendarDates[0].date,
+        dateTo: calendarDates[calendarDates.length -1].date,
+      };
+
+      const trainings = await httpGetTrainingsByDateRange(dates);
+      dispatch(wrapCalendarWithTrainings(trainings));
+
       dispatch(getTrainingsSuccess(trainings));
     } catch (error) {
       dispatch(getTrainingsFail(error.response.status));
@@ -41,8 +52,6 @@ export const addTraining = (training) => {
   };
 };
 
-
-
 export const editTraining = (id, training) => {
   return async dispatch => {
     dispatch(loading());
@@ -61,7 +70,7 @@ export const deleteTraining = (id) => {
     try {
       await httpDeleteTraining(id);
       dispatch(trainingsClearError());
-      dispatch(getAllTrainings());
+      // dispatch(getAllTrainings());
     } catch (error) {
       dispatch(getTrainingsFail(error));
     }

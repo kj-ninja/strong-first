@@ -3,6 +3,26 @@
 @import "./settings/mixins";
 @import "./settings/variables";
 
+html {
+  font-size: 62.5%;
+}
+
+a,
+a:link,
+a:hover,
+a:visited,
+a:active {
+  text-decoration: none;
+}
+
+a:hover {
+  transition: all 0.3s ease-in-out;
+}
+
+a:focus {
+  outline: none;
+}
+
 html, body, .app {
   position: relative;
   min-height: 100vh;
@@ -11,14 +31,7 @@ html, body, .app {
 body {
   color: #2e3d49;
   font-family: $basic-font;
-}
-
-h1 {
-  font-family: $logo-font;
-}
-
-a:focus {
-  outline: none;
+  font-size: 1.6rem;
 }
 
 

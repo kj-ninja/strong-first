@@ -1,22 +1,29 @@
 import React, {useEffect, useState} from 'react';
-import './Diary.scss';
+import moment from 'moment';
 import {connect} from 'react-redux';
-import {getAllTrainings, trainingToShowHandler, deleteTraining} from "../../store/actions/trainings.actions";
-import TrainingSummary from "./training-summary/TrainingSummary";
-import Calendar from "./calendar/Calendar";
+import {initCalendar, trainingToShowHandler, deleteTraining} from "../../store/actions/trainings.actions";
+import TrainingSummary from "./components/TrainingSummary";
+import Calendar from "./components/Calendar";
 import Spinner from "../../components/ui/spinner/Spinner";
 import Backdrop from "../../components/ui/back-drop/Backdrop";
+import './Diary.scss';
+import MonthPicker from "./components/MonthPicker";
 
 const Diary = (props) => {
   const {
-    getAllTrainings, trainingToShow, trainings, trainingToShowHandler, error, deleteTraining,
+    initCalendar,
+    trainingToShow,
+    trainingToShowHandler,
+    error,
+    deleteTraining,
     trainingToDelete
   } = props;
   const [modal, setModal] = useState(false);
+  const today = moment().format('YYYY-MM-DD');
 
   useEffect(() => {
-    getAllTrainings();
-  }, [getAllTrainings]);
+    initCalendar(today);
+  }, [initCalendar, today]);
 
   if (error === 404) {
     return (
@@ -64,7 +71,8 @@ const Diary = (props) => {
       <>
         <Backdrop show={modal} cancel={() => setModal(false)}/>
         {popUp}
-        <Calendar trainings={trainings} setTrainingToShow={trainingToShowHandler}/>
+        <MonthPicker/>
+        <Calendar />
         <TrainingSummary setModal={setModal}/>
       </>
     );
@@ -84,4 +92,4 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps, {getAllTrainings, trainingToShowHandler, deleteTraining})(Diary);
+export default connect(mapStateToProps, {initCalendar, trainingToShowHandler, deleteTraining})(Diary);
