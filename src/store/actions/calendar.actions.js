@@ -25,7 +25,7 @@ export const changeMonth = (direction, calendarStructure, pickedMonth) => async 
 
   if (!monthExist) {
     dispatch(initCalendar(newMonth));
+  } else {
+    dispatch(setPickedMonth(newMonth));
   }
-
-  dispatch(setPickedMonth(newMonth));
 };
