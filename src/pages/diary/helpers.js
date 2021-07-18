@@ -72,8 +72,7 @@ export const getMonthData = (calendarStructure, pickedMonth) => {
   return [];
 };
 
-export const calendarWrapper = (calendar, trainings) => {
-  console.log(calendar);
+export const mapTrainingsToCalendar = (calendar, trainings) => {
   const copiedCalendar = {...calendar};
 
   trainings.forEach((training) => {
@@ -84,24 +83,7 @@ export const calendarWrapper = (calendar, trainings) => {
     });
   });
 
-  console.log(calendar.dates);
   return copiedCalendar;
-
-  // trainings.forEach(training => {
-  //   console.log('training ', training)
-  //   calendar.dates.forEach(day => {
-  //     console.log('day ', day);
-  //     if (day.date === training.date) {
-  //       const newDay = {
-  //         ...day,
-  //         trainings: [],
-  //       };
-  //       newDay.trainings.push(training);
-  //     } else {
-  //       newCalendarDates.push(day);
-  //     }
-  //   })
-  // });
 };
 
 export const getDay = (value) => moment(value).format('DD');

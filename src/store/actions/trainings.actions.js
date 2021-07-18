@@ -5,7 +5,8 @@ import {
   httpEditTraining,
   httpDeleteTraining
 } from '../../api/ironman/ironman';
-import {getCalendarInitialData, wrapCalendarWithTrainings} from "./calendar.actions";
+import {getCalendarInitialData, mapTrainingsToCalendar} from "./calendar.actions";
+import moment from "moment";
 
 export const loading = () => ({type: actionTypes.LOADING});
 export const getTrainingsSuccess = (trainings) => ({type: actionTypes.GET_TRAININGS_SUCCESS, trainings: trainings});
@@ -24,15 +25,19 @@ export const initCalendar = (today) => {
     try {
       dispatch(getCalendarInitialData(today));
 
-      const calendarDates = getState().calendar.calendarStructure[0].dates;
+      const startOfMonth = moment(today).startOf('month').format('YYYY-MM-DD');
+      const monthIndex = getState().calendar.calendarStructure.findIndex((item) => {
+        return item.month === startOfMonth;
+      });
+      const calendarDates = getState().calendar.calendarStructure[monthIndex].dates;
+
       const dates = {
         dateFrom: calendarDates[0].date,
         dateTo: calendarDates[calendarDates.length -1].date,
       };
 
       const trainings = await httpGetTrainingsByDateRange(dates);
-      dispatch(wrapCalendarWithTrainings(trainings));
-
+      dispatch(mapTrainingsToCalendar({trainings, calendarIndex: monthIndex}));
       dispatch(getTrainingsSuccess(trainings));
     } catch (error) {
       dispatch(getTrainingsFail(error.response.status));

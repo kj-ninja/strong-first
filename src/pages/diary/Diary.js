@@ -16,14 +16,16 @@ const Diary = (props) => {
     trainingToShowHandler,
     error,
     deleteTraining,
-    trainingToDelete
+    trainingToDelete,
+    calendarStructureLength
   } = props;
   const [modal, setModal] = useState(false);
   const today = moment().format('YYYY-MM-DD');
 
   useEffect(() => {
+    if (calendarStructureLength) return
     initCalendar(today);
-  }, [initCalendar, today]);
+  }, [initCalendar, today, calendarStructureLength]);
 
   if (error === 404) {
     return (
@@ -88,7 +90,8 @@ const mapStateToProps = state => {
     trainingToShow: state.trainings.trainingToShow,
     error: state.trainings.error,
     loading: state.trainings.loading,
-    trainingToDelete: state.trainings.trainingToDelete
+    trainingToDelete: state.trainings.trainingToDelete,
+    calendarStructureLength: state.calendar.calendarStructure.length,
   }
 };
 

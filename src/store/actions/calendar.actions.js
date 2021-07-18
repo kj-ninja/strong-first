@@ -1,12 +1,13 @@
 import * as actionTypes from '../action-types';
 import moment from 'moment';
+import { initCalendar } from "./trainings.actions";
 import { createCalendarStructure, generateNewMonthDate } from '../../pages/diary/helpers';
 
 export const setPickedDate = (dateData) => ({type: actionTypes.SET_PICKED_DATE, payload: dateData});
 export const setPickedMonth = (month) => ({type: actionTypes.SET_PICKED_MONTH, payload: month});
 export const setDaysOfWeek = (days) => ({type: actionTypes.SET_DAYS_OF_WEEK, payload: days});
 export const setCalendarStructure = (structure) => ({type: actionTypes.SET_CALENDAR_STRUCTURE, payload: structure});
-export const wrapCalendarWithTrainings = (trainings) => ({type: actionTypes.WRAP_CALENDAR_WITH_TRAININGS, payload: trainings});
+export const mapTrainingsToCalendar = (trainings) => ({type: actionTypes.MAP_TRAININGS_TO_CALENDAR, payload: trainings});
 
 export const getCalendarInitialData = (today) => dispatch => {
   const structure = createCalendarStructure(today);
@@ -18,14 +19,12 @@ export const getCalendarInitialData = (today) => dispatch => {
   dispatch(setCalendarStructure(structure));
 };
 
-export const changeMonth = (direction, calendarStructure, pickedMonth) => dispatch => {
+export const changeMonth = (direction, calendarStructure, pickedMonth) => async dispatch => {
   const newMonth = generateNewMonthDate(direction, pickedMonth);
   const monthExist = calendarStructure.some((item) => item.month === newMonth);
 
   if (!monthExist) {
-    const structure = createCalendarStructure(newMonth);
-
-    dispatch(setCalendarStructure(structure));
+    dispatch(initCalendar(newMonth));
   }
 
   dispatch(setPickedMonth(newMonth));

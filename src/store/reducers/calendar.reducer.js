@@ -1,6 +1,6 @@
 import * as actionTypes from '../action-types';
 import moment from "moment";
-import { calendarWrapper } from "../../pages/diary/helpers";
+import {mapTrainingsToCalendar} from "../../pages/diary/helpers";
 
 const initialState = {
   pickedDate: '',
@@ -24,7 +24,7 @@ const calendarReducer = (state = initialState, action) => {
       let monthDate = moment(date).startOf('month').format('YYYY-MM-DD');
       const monthIndex = state.calendarStructure.findIndex((item) => item.month === monthDate);
       const pickedDateExist = state.pickedDate.length;
-      const copiedCalendar = [...state.calendarStructure];
+      const copiedCalendarStructure = [...state.calendarStructure];
 
       if (pickedDateExist) {
         monthDate = moment(state.pickedDate).startOf('month').format('YYYY-MM-DD');
@@ -32,22 +32,22 @@ const calendarReducer = (state = initialState, action) => {
         const oldDateIndex = state.calendarStructure[oldMonthIndex].dates
           .findIndex((day) => day.date === state.pickedDate);
 
-        copiedCalendar[oldMonthIndex].dates[oldDateIndex].isPicked = false
-        copiedCalendar[monthIndex].dates[dayIndex].isPicked = true;
+        copiedCalendarStructure[oldMonthIndex].dates[oldDateIndex].isPicked = false
+        copiedCalendarStructure[monthIndex].dates[dayIndex].isPicked = true;
 
         return {
           ...state,
           pickedDate: date,
-          calendarStructure: copiedCalendar,
+          calendarStructure: copiedCalendarStructure,
         };
       }
 
-      copiedCalendar[monthIndex].dates[dayIndex].isPicked = true;
+      copiedCalendarStructure[monthIndex].dates[dayIndex].isPicked = true;
 
       return {
         ...state,
         pickedDate: date,
-        calendarStructure: copiedCalendar,
+        calendarStructure: copiedCalendarStructure,
       };
     case actionTypes.SET_PICKED_MONTH:
       return {
@@ -59,13 +59,17 @@ const calendarReducer = (state = initialState, action) => {
         ...state,
         daysOfWeek: action.payload,
       };
-    case actionTypes.WRAP_CALENDAR_WITH_TRAININGS:
-    const calendar = calendarWrapper(state.calendarStructure[0], action.payload);
+    case actionTypes.MAP_TRAININGS_TO_CALENDAR:
+      const {trainings, calendarIndex} = action.payload;
 
-    return {
-      ...state,
-      calendarStructure: [calendar],
-    }
+      const calendarWithTrainings = mapTrainingsToCalendar(state.calendarStructure[calendarIndex], trainings);
+      const newCalendarStructure = state.calendarStructure.slice();
+      newCalendarStructure.splice(calendarIndex, 1, calendarWithTrainings);
+
+      return {
+        ...state,
+        calendarStructure: newCalendarStructure,
+      }
     default:
       return state;
   }
