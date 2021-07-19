@@ -3,12 +3,11 @@ import './TrainingSummary.scss';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {isEditTraining, addTrainingEditForm} from '../../../store/actions/add-training.actions';
-import {trainingToDelete} from '../../../store/actions/trainings.actions';
 import {getRepsView} from "../../../utils/getRepsView";
 import {timeConvert} from '../../../utils/timeConvert';
 import {trainingSummaryView} from '../../../utils/trainingSummaryView';
 import Tabs from 'react-bootstrap/Tabs';
-import Tab from 'react-bootstrap/Tab'
+import Tab from 'react-bootstrap/Tab';
 
 const TrainingSummary = (props) => {
     const {trainingToShow, addTrainingEditForm} = props;
@@ -148,5 +147,4 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
     addTrainingEditForm,
     isEditTraining,
-    trainingToDelete
 })(withRouter(TrainingSummary));

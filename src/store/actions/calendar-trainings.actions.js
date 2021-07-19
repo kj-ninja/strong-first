@@ -9,15 +9,8 @@ import {getCalendarInitialData, mapTrainingsToCalendar} from "./calendar.actions
 import {getFirstDayOfMonth} from "../../pages/diary/helpers";
 
 export const loading = () => ({type: actionTypes.LOADING});
-export const getTrainingsSuccess = (trainings) => ({type: actionTypes.GET_TRAININGS_SUCCESS, trainings: trainings});
+export const getTrainingsSuccess = () => ({type: actionTypes.GET_TRAININGS_SUCCESS});
 export const getTrainingsFail = (error) => ({type: actionTypes.GET_TRAININGS_FAIL, error: error});
-export const trainingToShowHandler = (training) => ({
-  type: actionTypes.TRAINING_TO_SHOW_HANDLER,
-  trainingToShow: training
-});
-export const trainingsClearError = () => ({type: actionTypes.TRAININGS_CLEAR_ERROR});
-export const editTrainingInStore = (training) => ({type: actionTypes.EDIT_TRAINING_IN_STORE, payload: training});
-export const trainingToDelete = (training) => ({type: actionTypes.TRAINING_TO_DELETE, payload: training});
 
 export const initCalendar = (date) => {
   return async (dispatch, getState) => {
@@ -38,9 +31,7 @@ export const initCalendar = (date) => {
 
       const trainings = await httpGetTrainingsByDateRange(dates);
       dispatch(mapTrainingsToCalendar({trainings, calendarIndex: monthIndex}));
-      // usuwamy zapisywanie treningow do reduxa zostawiamy je w kalendarzu
-      // getTrainingSuccess do refactoru przy tasku podsumowania treningu
-      dispatch(getTrainingsSuccess(trainings));
+      dispatch(getTrainingsSuccess());
     } catch (error) {
       dispatch(getTrainingsFail(error.response.status));
     }
@@ -52,7 +43,6 @@ export const addTraining = (training) => {
     dispatch(loading());
     try {
       await httpAddTraining(training);
-      dispatch(trainingsClearError());
     } catch (error) {
       dispatch(getTrainingsFail(error));
     }
@@ -64,8 +54,6 @@ export const editTraining = (id, training) => {
     dispatch(loading());
     try {
       await httpEditTraining(id, training);
-      dispatch(trainingsClearError());
-      dispatch(editTrainingInStore(training));
     } catch (error) {
       dispatch(getTrainingsFail(error));
     }
@@ -76,8 +64,6 @@ export const deleteTraining = (id) => {
   return async dispatch => {
     try {
       await httpDeleteTraining(id);
-      dispatch(trainingsClearError());
-      // dispatch(getAllTrainings());
     } catch (error) {
       dispatch(getTrainingsFail(error));
     }

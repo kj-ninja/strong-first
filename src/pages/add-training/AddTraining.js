@@ -1,11 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import './AddTraining.scss';
 import {Switch, Route} from 'react-router-dom';
 import AddTrainingStepOne from "./components/AddTrainingStepOne";
 import AddTrainingStepTwo from "./components/AddTrainingStepTwo";
 import AddTrainingResult from "./components/AddTrainingResult";
 import Spinner from "../../components/ui/spinner/Spinner";
+import './AddTraining.scss';
 
 const AddTraining = (props) => {
   return (
@@ -24,7 +24,7 @@ const AddTraining = (props) => {
 
 const mapStateToProps = state => {
   return {
-    loading: state.trainings.loading,
+    loading: state.calendar.loading,
   }
 };
 

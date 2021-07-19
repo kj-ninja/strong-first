@@ -1,12 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {clearForm, isEditTraining} from '../../../store/actions/add-training.actions';
-import {trainingsClearError} from '../../../store/actions/trainings.actions';
-
-import './NavigationItems.scss';
 import {NavLink} from "react-router-dom";
+import {clearForm, isEditTraining} from '../../../store/actions/add-training.actions';
+import './NavigationItems.scss';
 
 const NavigationItems = (props) => {
+
     const handleAddTrainingLink = () => {
         props.isEditTraining(false);
         props.clearForm();
@@ -31,7 +30,7 @@ const NavigationItems = (props) => {
 
             {props.isAuth ?
             <li className="navigation-item">
-                <NavLink exact to="/logout" onClick={()=>props.trainingsClearError()}>Wyloguj się</NavLink>
+                <NavLink exact to="/logout">Wyloguj się</NavLink>
             </li> :
             <li className="navigation-item">
                 <NavLink exact to="/login">Zaloguj się</NavLink>
@@ -46,4 +45,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, {isEditTraining, clearForm,trainingsClearError})(NavigationItems);
+export default connect(mapStateToProps, {isEditTraining, clearForm})(NavigationItems);
