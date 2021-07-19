@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {setPickedDate} from "../../../store/actions/calendar.actions";
 import {getDay, cutWeekDay, isToday, isNormalDay, getMonthData} from "../helpers";
-import bindClassesDynamically from "../../../helpers/classBinder";
+import bindClassesDynamically from "../../../utils/classBinder";
 import './Calendar.scss';
 
 const Calendar = (props) => {

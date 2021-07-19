@@ -3,8 +3,8 @@ import {connect} from 'react-redux';
 import '../AddTraining.scss';
 import {addTraining, editTraining} from "../../../store/actions/trainings.actions";
 import Button from "../../../components/ui/button/Button";
-import {getRepsView} from "../../../helpers/getRepsView";
-import {trainingSummaryView} from "../../../helpers/trainingSummaryView";
+import {getRepsView} from "../../../utils/getRepsView";
+import {trainingSummaryView} from "../../../utils/trainingSummaryView";
 
 const AddTrainingResult = (props) => {
   const {addTrainingForm, addTraining, editTraining} = props;

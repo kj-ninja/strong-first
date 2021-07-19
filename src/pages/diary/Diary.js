@@ -30,8 +30,8 @@ const Diary = (props) => {
   if (error === 404) {
     return (
       <h2 className="diary__warning">
-        Brak treningów w historii! <br/>
-        Dodaj swój pierwszy trening!
+        Brak treningów w danym miesiacu! <br/>
+        Dodaj swój pierwszy trening w tym miesiacu!
       </h2>
     );
   }
@@ -61,10 +61,13 @@ const Diary = (props) => {
       opacity: modal ? '1' : '0'
     }}>
       <h2>Na pewno chcesz usunąć trening?</h2>
-      <button type="button" onClick={() => setModal(false)} style={{color: 'green'}}>Anuluj</button>
-      <button type="button" onClick={handleDeleteTraining} style={{color: '#bd2130'}}>Usuń trening
+      <button type="button" onClick={() => setModal(false)} style={{color: 'green'}}>
+        Anuluj
       </button>
 
+      <button type="button" onClick={handleDeleteTraining} style={{color: '#bd2130'}}>
+        Usuń trening
+      </button>
     </div>
   );
 
@@ -74,7 +77,7 @@ const Diary = (props) => {
         <Backdrop show={modal} cancel={() => setModal(false)}/>
         {popUp}
         <MonthPicker/>
-        <Calendar />
+        <Calendar/>
         <TrainingSummary setModal={setModal}/>
       </>
     );

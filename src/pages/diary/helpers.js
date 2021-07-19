@@ -1,9 +1,8 @@
 import moment from 'moment';
 
 export const createCalendarStructure = (today) => {
-
   const calendarBody = Array.from({length: 42});
-  const startOfMonth = moment(today).startOf('month').format('YYYY-MM-DD');
+  const startOfMonth = getFirstDayOfMonth(today);
   const actMonthDays = generateMonthDates(today);
   const firstDayIndex = moment(startOfMonth).day() === 0 ? 6 : moment(startOfMonth).day() - 1;
 
@@ -49,27 +48,26 @@ export const generateMonthDates = (date) => {
   return monthDates;
 };
 
-export const generateNewMonthDate = (direction, pickedMonth) => {
-  const startDate = moment(pickedMonth).startOf('month').clone();
-  let newMonth;
+export const getFirstDayOfPreviousMonth = (date) => {
+  const startDate = moment(date).startOf('month').clone();
+  return moment(startDate).subtract(1, 'months').format('YYYY-MM-DD');
+};
 
-  switch (direction) {
-    case 'previous':
-      newMonth = moment(startDate).subtract(1, 'months').format('YYYY-MM-DD');
-      break;
-    default:
-      newMonth = moment(startDate).add(1, 'months').format('YYYY-MM-DD');
-  }
-
-  return newMonth;
+export const getFirstDayOfNextMonth = (date) => {
+  const startDate = moment(date).startOf('month').clone();
+  return moment(startDate).add(1, 'months').format('YYYY-MM-DD');
 };
 
 export const getMonthData = (calendarStructure, pickedMonth) => {
   if (calendarStructure.length) {
-    const formattedMonth = moment(pickedMonth).startOf('month').format('YYYY-MM-DD');
+    const formattedMonth = getFirstDayOfMonth(pickedMonth);
     return calendarStructure.find((item) => item.month === formattedMonth).dates;
   }
   return [];
+};
+
+export const getFirstDayOfMonth = (date) => {
+  return moment(date).startOf('month').format('YYYY-MM-DD')
 };
 
 export const mapTrainingsToCalendar = (calendar, trainings) => {

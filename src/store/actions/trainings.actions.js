@@ -6,7 +6,7 @@ import {
   httpDeleteTraining
 } from '../../api/ironman/ironman';
 import {getCalendarInitialData, mapTrainingsToCalendar} from "./calendar.actions";
-import moment from "moment";
+import {getFirstDayOfMonth} from "../../pages/diary/helpers";
 
 export const loading = () => ({type: actionTypes.LOADING});
 export const getTrainingsSuccess = (trainings) => ({type: actionTypes.GET_TRAININGS_SUCCESS, trainings: trainings});
@@ -19,15 +19,15 @@ export const trainingsClearError = () => ({type: actionTypes.TRAININGS_CLEAR_ERR
 export const editTrainingInStore = (training) => ({type: actionTypes.EDIT_TRAINING_IN_STORE, payload: training});
 export const trainingToDelete = (training) => ({type: actionTypes.TRAINING_TO_DELETE, payload: training});
 
-export const initCalendar = (today) => {
+export const initCalendar = (date) => {
   return async (dispatch, getState) => {
     dispatch(loading());
     try {
-      dispatch(getCalendarInitialData(today));
+      dispatch(getCalendarInitialData(date));
 
-      const startOfMonth = moment(today).startOf('month').format('YYYY-MM-DD');
+      const firstDayOfMonth = getFirstDayOfMonth(date);
       const monthIndex = getState().calendar.calendarStructure.findIndex((item) => {
-        return item.month === startOfMonth;
+        return item.month === firstDayOfMonth;
       });
       const calendarDates = getState().calendar.calendarStructure[monthIndex].dates;
 
@@ -38,6 +38,8 @@ export const initCalendar = (today) => {
 
       const trainings = await httpGetTrainingsByDateRange(dates);
       dispatch(mapTrainingsToCalendar({trainings, calendarIndex: monthIndex}));
+      // usuwamy zapisywanie treningow do reduxa zostawiamy je w kalendarzu
+      // getTrainingSuccess do refactoru przy tasku podsumowania treningu
       dispatch(getTrainingsSuccess(trainings));
     } catch (error) {
       dispatch(getTrainingsFail(error.response.status));

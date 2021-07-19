@@ -1,6 +1,5 @@
 import * as actionTypes from '../action-types';
-import moment from "moment";
-import {mapTrainingsToCalendar} from "../../pages/diary/helpers";
+import {mapTrainingsToCalendar, getFirstDayOfMonth} from "../../pages/diary/helpers";
 
 const initialState = {
   pickedDate: '',
@@ -21,13 +20,13 @@ const calendarReducer = (state = initialState, action) => {
       };
     case actionTypes.SET_PICKED_DATE:
       const {date, dayIndex} = action.payload;
-      let monthDate = moment(date).startOf('month').format('YYYY-MM-DD');
+      let monthDate = getFirstDayOfMonth(date);
       const monthIndex = state.calendarStructure.findIndex((item) => item.month === monthDate);
       const pickedDateExist = state.pickedDate.length;
       const copiedCalendarStructure = [...state.calendarStructure];
 
       if (pickedDateExist) {
-        monthDate = moment(state.pickedDate).startOf('month').format('YYYY-MM-DD');
+        monthDate = getFirstDayOfMonth(state.pickedDate);
         const oldMonthIndex = state.calendarStructure.findIndex((item) => item.month === monthDate);
         const oldDateIndex = state.calendarStructure[oldMonthIndex].dates
           .findIndex((day) => day.date === state.pickedDate);

@@ -1,5 +1,5 @@
 import React from 'react';
-import handleStep from '../../../helpers/handleStep';
+import handleStep from '../../../utils/handleStep';
 
 const Pagination = ({active, setActive, bigSix, exerciseNumber}) => {
   return (

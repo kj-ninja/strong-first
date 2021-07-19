@@ -1,5 +1,5 @@
 import axios from "axios"
-import { getToken } from "../../helpers/getToken";
+import { getToken } from "../../utils/getToken";
 
 const ironmanEndpoint = 'https://ironman.coderaf.com';
 
