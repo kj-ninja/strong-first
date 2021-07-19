@@ -25,7 +25,7 @@ function App(props) {
       <Route path="/login" component={Login}/>
       <Route path="/register" component={Register}/>
       <Route exact path="/" component={Home}/>
-      <Redirect to="/"/>
+      <Route path="/test"  component={NotFound}/>
     </Switch>
   );
 
@@ -37,7 +37,7 @@ function App(props) {
         <Route path="/add-training" render={(props) => <AddTraining {...props}/>}/>
         <Route path="/logout" component={Logout}/>
         <Redirect to='/diary'/>
-        <Route component={NotFound}/>
+        <Route path="/test"  component={NotFound}/>
       </Switch>
     );
   }
