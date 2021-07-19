@@ -1,6 +1,6 @@
 import * as actionTypes from '../action-types';
 import moment from 'moment';
-import { initCalendar } from "./trainings.actions";
+import { initCalendar } from "./calendar-trainings.actions";
 import { createCalendarStructure, getFirstDayOfNextMonth, getFirstDayOfPreviousMonth } from '../../pages/diary/helpers';
 
 export const setPickedDate = (dateData) => ({type: actionTypes.SET_PICKED_DATE, payload: dateData});

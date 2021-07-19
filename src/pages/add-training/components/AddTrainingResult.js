@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import '../AddTraining.scss';
-import {addTraining, editTraining} from "../../../store/actions/trainings.actions";
+import {addTraining, editTraining} from "../../../store/actions/calendar-trainings.actions";
 import Button from "../../../components/ui/button/Button";
 import {getRepsView} from "../../../utils/getRepsView";
 import {trainingSummaryView} from "../../../utils/trainingSummaryView";
@@ -10,25 +10,10 @@ const AddTrainingResult = (props) => {
   const {addTrainingForm, addTraining, editTraining} = props;
 
   const handleAddTraining = () => {
-    let counter = 0;
-    props.trainings.forEach(training => {
-      if (training.date === addTrainingForm.date) {
-        counter++;
-      }
-    })
-
-    if (counter >= 2) {
-      alert('Osiągnięto limit treningów w ciągu jednego dnia! Czas na relaks.' +
-        'Zawsze możesz edytować jeden z treningów w sekcji dzienniczka.');
-      setTimeout(() => {
-        props.history.push('/diary')
-      }, 500);
-    } else {
-      addTraining(addTrainingForm);
-      setTimeout(() => {
-        props.history.push('/diary')
-      }, 1500);
-    }
+    addTraining(addTrainingForm);
+    setTimeout(() => {
+      props.history.push('/diary')
+    }, 1500);
   };
 
   const handleEditTraining = () => {
@@ -85,7 +70,6 @@ const mapStateToProps = state => {
   return {
     addTrainingForm: state.addTrainingForm.training,
     token: state.auth.token,
-    trainings: state.trainings.trainings,
     isEdit: state.addTrainingForm.isEdit
   }
 };

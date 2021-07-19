@@ -6,6 +6,8 @@ const initialState = {
   pickedMonth: '',
   calendarStructure: [],
   daysOfWeek: [],
+  error: false,
+  loading: true,
 };
 
 const calendarReducer = (state = initialState, action) => {
@@ -69,10 +71,21 @@ const calendarReducer = (state = initialState, action) => {
         ...state,
         calendarStructure: newCalendarStructure,
       }
+    case actionTypes.GET_TRAININGS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: false,
+      }
+    case actionTypes.GET_TRAININGS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.error
+      }
     default:
       return state;
   }
 };
 
 export default calendarReducer;
-
