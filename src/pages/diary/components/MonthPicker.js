@@ -11,8 +11,6 @@ const MonthPicker = (props) => {
     changeMonth(direction, calendarStructure, pickedMonth);
   };
 
-
-
   return (
     <div className="month-picker">
 
