@@ -1,10 +1,12 @@
 import * as actionTypes from '../action-types';
 import {
-  httpGetAllTrainings,
+  httpGetTrainingsByDateRange,
   httpAddTraining,
   httpEditTraining,
   httpDeleteTraining
 } from '../../api/ironman/ironman';
+import {getCalendarInitialData, mapTrainingsToCalendar} from "./calendar.actions";
+import {getFirstDayOfMonth} from "../../pages/diary/helpers";
 
 export const loading = () => ({type: actionTypes.LOADING});
 export const getTrainingsSuccess = (trainings) => ({type: actionTypes.GET_TRAININGS_SUCCESS, trainings: trainings});
@@ -17,11 +19,27 @@ export const trainingsClearError = () => ({type: actionTypes.TRAININGS_CLEAR_ERR
 export const editTrainingInStore = (training) => ({type: actionTypes.EDIT_TRAINING_IN_STORE, payload: training});
 export const trainingToDelete = (training) => ({type: actionTypes.TRAINING_TO_DELETE, payload: training});
 
-export const getAllTrainings = () => {
-  return async dispatch => {
+export const initCalendar = (date) => {
+  return async (dispatch, getState) => {
     dispatch(loading());
     try {
-      const trainings = await httpGetAllTrainings();
+      dispatch(getCalendarInitialData(date));
+
+      const firstDayOfMonth = getFirstDayOfMonth(date);
+      const monthIndex = getState().calendar.calendarStructure.findIndex((item) => {
+        return item.month === firstDayOfMonth;
+      });
+      const calendarDates = getState().calendar.calendarStructure[monthIndex].dates;
+
+      const dates = {
+        dateFrom: calendarDates[0].date,
+        dateTo: calendarDates[calendarDates.length -1].date,
+      };
+
+      const trainings = await httpGetTrainingsByDateRange(dates);
+      dispatch(mapTrainingsToCalendar({trainings, calendarIndex: monthIndex}));
+      // usuwamy zapisywanie treningow do reduxa zostawiamy je w kalendarzu
+      // getTrainingSuccess do refactoru przy tasku podsumowania treningu
       dispatch(getTrainingsSuccess(trainings));
     } catch (error) {
       dispatch(getTrainingsFail(error.response.status));
@@ -41,8 +59,6 @@ export const addTraining = (training) => {
   };
 };
 
-
-
 export const editTraining = (id, training) => {
   return async dispatch => {
     dispatch(loading());
@@ -61,7 +77,7 @@ export const deleteTraining = (id) => {
     try {
       await httpDeleteTraining(id);
       dispatch(trainingsClearError());
-      dispatch(getAllTrainings());
+      // dispatch(getAllTrainings());
     } catch (error) {
       dispatch(getTrainingsFail(error));
     }

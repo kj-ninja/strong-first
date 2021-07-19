@@ -14,7 +14,7 @@ import Logout from "./pages/authentication/logout/Logout";
 import AddTraining from "./pages/add-training/AddTraining";
 
 function App(props) {
-  const {authStateCheck} = props;
+  const {authStateCheck, isAuth} = props;
 
   useEffect(() => {
     authStateCheck();
@@ -29,7 +29,7 @@ function App(props) {
     </Switch>
   );
 
-  if (props.isAuth) {
+  if (isAuth) {
     routes = (
       <Switch>
         <Route path="/diary" component={Diary}/>

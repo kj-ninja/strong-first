@@ -1,6 +1,6 @@
 import * as actionTypes from '../action-types';
 import firebase from "../../api/firebase";
-import {translate} from "../../helpers/translate";
+import {translate} from "../../utils/translate";
 import axios from "axios";
 
 export const authStart = () => ({type: actionTypes.AUTH_START});
@@ -10,14 +10,14 @@ export const authSuccess = (token) => {
         token: token
     }
 };
-export const authFail = (error) => ({type: actionTypes.AUTH_FAIL, error})
+export const authFail = (error) => ({type: actionTypes.AUTH_FAIL, error});
 
 export const logout = () => {
     localStorage.removeItem('token');
     return {
         type: actionTypes.AUTH_LOGOUT
     };
-}
+};
 
 export const checkAuthTimeout = (expirationTime) => {
     return dispatch => {
@@ -81,7 +81,6 @@ export const register = (values) => {
 
             })
             .catch(function (error) {
-                // Handle Errors here.
                 dispatch(authFail(translate(error.code)));
             });
     };

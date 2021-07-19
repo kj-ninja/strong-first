@@ -1,28 +1,37 @@
 import React, {useEffect, useState} from 'react';
-import './Diary.scss';
+import moment from 'moment';
 import {connect} from 'react-redux';
-import {getAllTrainings, trainingToShowHandler, deleteTraining} from "../../store/actions/trainings.actions";
-import TrainingSummary from "./training-summary/TrainingSummary";
-import Calendar from "./calendar/Calendar";
+import {initCalendar, trainingToShowHandler, deleteTraining} from "../../store/actions/trainings.actions";
+import TrainingSummary from "./components/TrainingSummary";
+import Calendar from "./components/Calendar";
 import Spinner from "../../components/ui/spinner/Spinner";
 import Backdrop from "../../components/ui/back-drop/Backdrop";
+import './Diary.scss';
+import MonthPicker from "./components/MonthPicker";
 
 const Diary = (props) => {
   const {
-    getAllTrainings, trainingToShow, trainings, trainingToShowHandler, error, deleteTraining,
-    trainingToDelete
+    initCalendar,
+    trainingToShow,
+    trainingToShowHandler,
+    error,
+    deleteTraining,
+    trainingToDelete,
+    calendarStructureLength
   } = props;
   const [modal, setModal] = useState(false);
+  const today = moment().format('YYYY-MM-DD');
 
   useEffect(() => {
-    getAllTrainings();
-  }, [getAllTrainings]);
+    if (calendarStructureLength) return
+    initCalendar(today);
+  }, [initCalendar, today, calendarStructureLength]);
 
   if (error === 404) {
     return (
       <h2 className="diary__warning">
-        Brak treningów w historii! <br/>
-        Dodaj swój pierwszy trening!
+        Brak treningów w danym miesiacu! <br/>
+        Dodaj swój pierwszy trening w tym miesiacu!
       </h2>
     );
   }
@@ -52,10 +61,13 @@ const Diary = (props) => {
       opacity: modal ? '1' : '0'
     }}>
       <h2>Na pewno chcesz usunąć trening?</h2>
-      <button type="button" onClick={() => setModal(false)} style={{color: 'green'}}>Anuluj</button>
-      <button type="button" onClick={handleDeleteTraining} style={{color: '#bd2130'}}>Usuń trening
+      <button type="button" onClick={() => setModal(false)} style={{color: 'green'}}>
+        Anuluj
       </button>
 
+      <button type="button" onClick={handleDeleteTraining} style={{color: '#bd2130'}}>
+        Usuń trening
+      </button>
     </div>
   );
 
@@ -64,7 +76,8 @@ const Diary = (props) => {
       <>
         <Backdrop show={modal} cancel={() => setModal(false)}/>
         {popUp}
-        <Calendar trainings={trainings} setTrainingToShow={trainingToShowHandler}/>
+        <MonthPicker/>
+        <Calendar/>
         <TrainingSummary setModal={setModal}/>
       </>
     );
@@ -80,8 +93,9 @@ const mapStateToProps = state => {
     trainingToShow: state.trainings.trainingToShow,
     error: state.trainings.error,
     loading: state.trainings.loading,
-    trainingToDelete: state.trainings.trainingToDelete
+    trainingToDelete: state.trainings.trainingToDelete,
+    calendarStructureLength: state.calendar.calendarStructure.length,
   }
 };
 
-export default connect(mapStateToProps, {getAllTrainings, trainingToShowHandler, deleteTraining})(Diary);
+export default connect(mapStateToProps, {initCalendar, trainingToShowHandler, deleteTraining})(Diary);

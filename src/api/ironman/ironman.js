@@ -2,13 +2,8 @@ import ironman from "./base";
 
 const TRAINING_URL = '/training';
 
-export const httpGetAllTrainings = async () => {
-  const {data} = await ironman.get(TRAINING_URL);
-  return data;
-};
-
-export const httpGetTrainingsByDateRange = async ({ from, to }) => {
-  const {data} = await ironman.get(`${TRAINING_URL}?dateFrom=${from}&dateTo=${to}`);
+export const httpGetTrainingsByDateRange = async ({ dateFrom, dateTo }) => {
+  const {data} = await ironman.get(`${TRAINING_URL}?dateFrom=${dateFrom}&dateTo=${dateTo}`);
   return data;
 };
 

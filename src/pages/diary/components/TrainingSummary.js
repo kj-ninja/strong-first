@@ -4,9 +4,9 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {isEditTraining, addTrainingEditForm} from '../../../store/actions/add-training.actions';
 import {trainingToDelete} from '../../../store/actions/trainings.actions';
-import {getRepsView} from "../../../helpers/getRepsView";
-import {timeConvert} from '../../../helpers/timeConvert';
-import {trainingSummaryView} from '../../../helpers/trainingSummaryView';
+import {getRepsView} from "../../../utils/getRepsView";
+import {timeConvert} from '../../../utils/timeConvert';
+import {trainingSummaryView} from '../../../utils/trainingSummaryView';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab'
 

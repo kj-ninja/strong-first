@@ -1,0 +1,23 @@
+.month-picker {
+  display: flex;
+  justify-content: space-between;
+
+  &__controls {
+    user-select: none;
+
+    i {
+      cursor: pointer;
+      font-size: 2rem;
+      color: #000;
+    }
+
+    &--month {
+      margin: 0 20px;
+      text-transform: uppercase;
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+  }
+}
