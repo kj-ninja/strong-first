@@ -5,16 +5,13 @@ import {getMonth} from "../helpers";
 import './MonthPicker.scss';
 
 const MonthPicker = (props) => {
-  const [monthBar, setMonthBar] = useState(true);
   const {calendarStructure, pickedMonth, changeMonth} = props;
 
   const handleMonthChange = (direction) => {
     changeMonth(direction, calendarStructure, pickedMonth);
   };
 
-  const handleCLickMonth = () => {
-    setMonthBar(false);
-  };
+
 
   return (
     <div className="month-picker">
@@ -23,7 +20,7 @@ const MonthPicker = (props) => {
 
         <i className="fas fa-caret-left" onClick={() => handleMonthChange('previous')}/>
 
-        <span onClick={handleCLickMonth} className="month-picker__controls--month">
+        <span className="month-picker__controls--month">
           {getMonth(pickedMonth)}
         </span>
 
