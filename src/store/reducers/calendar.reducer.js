@@ -8,6 +8,7 @@ const initialState = {
   daysOfWeek: [],
   error: false,
   loading: true,
+  pickedTrainings: [],
 };
 
 const calendarReducer = (state = initialState, action) => {
@@ -76,12 +77,17 @@ const calendarReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: false,
-      }
+      };
     case actionTypes.GET_TRAININGS_FAIL:
       return {
         ...state,
         loading: false,
-        error: action.error
+        error: action.error,
+      };
+    case actionTypes.SET_PICKED_TRAININGS:
+      return {
+        ...state,
+        pickedTrainings: action.payload,
       }
     default:
       return state;

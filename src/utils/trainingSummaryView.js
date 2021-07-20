@@ -6,14 +6,15 @@ const removeDuplicates = arr => {
     return [...uniqueSet].map(JSON.parse);
 };
 
-export const trainingSummaryView = (trainingToShow) => {
+export const trainingSummaryView = (training) => {
     let tempArray = [];
-    trainingToShow.sets.forEach(set => {
+    training.sets.forEach(set => {
         tempArray.push({name: set.exercise.name, id: set.exercise.id, repetitions: [], weight: [], time: []})
     });
+
     const exerciseView = removeDuplicates(tempArray);
 
-    trainingToShow.sets.forEach((set) => {
+    training.sets.forEach((set) => {
         exerciseView.forEach((element) => {
             if (set.exercise.id === element.id) {
                 element.repetitions.push(set.repetitions);
@@ -22,5 +23,6 @@ export const trainingSummaryView = (trainingToShow) => {
             }
         })
     });
+
     return exerciseView;
 };

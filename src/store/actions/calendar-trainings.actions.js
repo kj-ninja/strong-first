@@ -11,6 +11,7 @@ import {getFirstDayOfMonth} from "../../pages/diary/helpers";
 export const loading = () => ({type: actionTypes.LOADING});
 export const getTrainingsSuccess = () => ({type: actionTypes.GET_TRAININGS_SUCCESS});
 export const getTrainingsFail = (error) => ({type: actionTypes.GET_TRAININGS_FAIL, error: error});
+export const setPickedTrainings = (trainings) => ({type: actionTypes.SET_PICKED_TRAININGS, payload: trainings});
 
 export const initCalendar = (date) => {
   return async (dispatch, getState) => {

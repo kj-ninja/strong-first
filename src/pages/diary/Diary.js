@@ -2,11 +2,11 @@ import React, {useEffect} from 'react';
 import moment from 'moment';
 import {connect} from 'react-redux';
 import {initCalendar, deleteTraining} from "../../store/actions/calendar-trainings.actions";
-import TrainingSummary from "./components/TrainingSummary";
-import Calendar from "./components/Calendar";
 import Spinner from "../../components/ui/spinner/Spinner";
-import './Diary.scss';
 import MonthPicker from "./components/MonthPicker";
+import Calendar from "./components/Calendar";
+import TrainingsSummary from "./components/TrainingsSummary";
+import './Diary.scss';
 
 const Diary = (props) => {
   const {
@@ -35,6 +35,7 @@ const Diary = (props) => {
       <>
         <MonthPicker/>
         <Calendar/>
+        <TrainingsSummary/>
       </>
   );
 };
