@@ -128,6 +128,27 @@ const calendarReducer = (state = initialState, action) => {
         })
       };
     }
+    case actionTypes.ADD_TRAINING: {
+      let monthDate = getFirstDayOfMonth(action.payload.date);
+      const monthIndex = state.calendarStructure.findIndex((item) => item.month === monthDate);
+      const copiedCalendarStructure = state.calendarStructure.slice();
+      const dayIndex = copiedCalendarStructure[monthIndex].dates.findIndex((item) => item.date ===action.payload.date);
+
+      copiedCalendarStructure[monthIndex].dates.forEach(day => {
+        if (day.date === action.payload.date) {
+          day.trainings.push(action.payload);
+        }
+      });
+
+      copiedCalendarStructure[monthIndex].dates[dayIndex].isPicked = true;
+
+      return {
+        ...state,
+        calendarStructure: copiedCalendarStructure,
+        pickedTrainings: state.pickedTrainings.concat(action.payload),
+        pickedDate: action.payload.date,
+      }
+    }
     default:
       return state;
   }
