@@ -6,6 +6,7 @@ import {
   httpDeleteTraining
 } from '../../api/ironman/ironman';
 import {getCalendarInitialData, mapTrainingsToCalendar} from "./calendar.actions";
+import {setAddTrainingFormEditOption, resetForm} from "./add-training.actions";
 import {getFirstDayOfMonth} from "../../pages/diary/helpers";
 
 export const loading = () => ({type: actionTypes.LOADING});
@@ -13,6 +14,7 @@ export const getTrainingsSuccess = () => ({type: actionTypes.GET_TRAININGS_SUCCE
 export const getTrainingsFail = (error) => ({type: actionTypes.GET_TRAININGS_FAIL, error: error});
 export const setPickedTrainings = (trainings) => ({type: actionTypes.SET_PICKED_TRAININGS, payload: trainings});
 export const deleteTrainingFromCalendar = (training) => ({type: actionTypes.DELETE_TRAINING, payload: training});
+export const editTrainingInCalendar = (training) => ({type: actionTypes.EDIT_TRAINING, payload: training});
 
 export const initCalendar = (date) => {
   return async (dispatch, getState) => {
@@ -56,16 +58,17 @@ export const addTraining = (training) => {
   };
 };
 
-export const editTraining = (id, training) => {
+export const editTraining = (training) => {
   return async dispatch => {
     dispatch(loading());
     try {
-      await httpEditTraining(id, training);
-      // tutaj mamy pewnosc ze dany treningi znajduje sie w strukturze kalendarza wiec robimy metode ktora
-      // szuka danego dnia i w tablicy z treningami podmieniamy dany trening nastepnie
-      // odpalamy ten miesiac i wyswietlamy podsumowanie treningu
+      await httpEditTraining(training);
+      dispatch(editTrainingInCalendar(training));
     } catch (error) {
       dispatch(getTrainingsFail(error));
+    } finally {
+      dispatch(setAddTrainingFormEditOption(false));
+      dispatch(resetForm());
     }
   };
 };

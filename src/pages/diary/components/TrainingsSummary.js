@@ -2,21 +2,27 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {deleteTraining} from "../../../store/actions/calendar-trainings.actions";
+import {addTrainingToEditForm, setAddTrainingFormEditOption} from "../../../store/actions/add-training.actions";
 import {getRepsView} from "../../../utils/getRepsView";
 import {timeConvert} from '../../../utils/timeConvert';
 import {trainingSummaryView} from '../../../utils/trainingSummaryView';
 import './TrainingsSummary.scss';
 
 const TrainingsSummary = (props) => {
-  const {pickedTrainings, deleteTraining} = props;
+  const {
+    pickedTrainings,
+    deleteTraining,
+    addTrainingToEditForm,
+    setAddTrainingFormEditOption,
+    history,
+  } = props;
+
   const exercisesViews = pickedTrainings.map(pickedTraining => trainingSummaryView(pickedTraining));
 
   const handleEditTraining = (training) => {
-    console.log(training);
-
-    // props.isEditTraining(true);
-    // addTrainingEditForm(trainingToEdit);
-    // props.history.push('/add-training');
+    setAddTrainingFormEditOption(true);
+    addTrainingToEditForm(training);
+    history.push('/add-training');
   };
 
   const handleDeleteTraining = async (training) => {
@@ -43,8 +49,8 @@ const TrainingsSummary = (props) => {
 
   let trainingsViews = pickedTrainings.map((pickedTraining, index) => (
     <div className={"training-summary"} key={index}>
-      <i className="far fa-edit edit" onClick={()=>handleEditTraining(pickedTraining)}/>
-      <i className="far fa-trash-alt trash" onClick={()=>handleDeleteTraining(pickedTraining)}/>
+      <i className="far fa-edit edit" onClick={() => handleEditTraining(pickedTraining)}/>
+      <i className="far fa-trash-alt trash" onClick={() => handleDeleteTraining(pickedTraining)}/>
 
       <p className="training-summary__element">
         <span>Data:</span> {pickedTraining.date}
@@ -89,4 +95,8 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps, {deleteTraining})(withRouter(TrainingsSummary));
+export default connect(mapStateToProps, {
+  deleteTraining,
+  addTrainingToEditForm,
+  setAddTrainingFormEditOption
+})(withRouter(TrainingsSummary));

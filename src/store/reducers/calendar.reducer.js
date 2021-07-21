@@ -108,6 +108,26 @@ const calendarReducer = (state = initialState, action) => {
         calendarStructure: copiedCalendarStructure,
       };
     }
+    case actionTypes.EDIT_TRAINING: {
+      let monthDate = getFirstDayOfMonth(action.payload.date);
+      const monthIndex = state.calendarStructure.findIndex((item) => item.month === monthDate);
+      const copiedCalendarStructure = state.calendarStructure.slice();
+
+      copiedCalendarStructure[monthIndex].dates.forEach(day => {
+        if (day.date === action.payload.date) {
+          day.trainings = day.trainings.filter(element => element.id !== action.payload.id).concat(action.payload)
+        }
+      });
+
+      return {
+        ...state,
+        calendarStructure: copiedCalendarStructure,
+        pickedTrainings: state.pickedTrainings.map(pickedTraining => {
+          if (pickedTraining.id === action.payload.id) return action.payload;
+          else return pickedTraining;
+        })
+      };
+    }
     default:
       return state;
   }
