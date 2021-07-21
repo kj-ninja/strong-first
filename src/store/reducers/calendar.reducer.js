@@ -21,12 +21,12 @@ const calendarReducer = (state = initialState, action) => {
           action.payload,
         ]
       };
-    case actionTypes.SET_PICKED_DATE:
+    case actionTypes.SET_PICKED_DATE: {
       const {date, dayIndex} = action.payload;
       let monthDate = getFirstDayOfMonth(date);
       const monthIndex = state.calendarStructure.findIndex((item) => item.month === monthDate);
       const pickedDateExist = state.pickedDate.length;
-      const copiedCalendarStructure = [...state.calendarStructure];
+      const copiedCalendarStructure = state.calendarStructure.slice();
 
       if (pickedDateExist) {
         monthDate = getFirstDayOfMonth(state.pickedDate);
@@ -51,6 +51,7 @@ const calendarReducer = (state = initialState, action) => {
         pickedDate: date,
         calendarStructure: copiedCalendarStructure,
       };
+    }
     case actionTypes.SET_PICKED_MONTH:
       return {
         ...state,
@@ -61,17 +62,18 @@ const calendarReducer = (state = initialState, action) => {
         ...state,
         daysOfWeek: action.payload,
       };
-    case actionTypes.MAP_TRAININGS_TO_CALENDAR:
+    case actionTypes.MAP_TRAININGS_TO_CALENDAR: {
       const {trainings, calendarIndex} = action.payload;
 
       const calendarWithTrainings = mapTrainingsToCalendar(state.calendarStructure[calendarIndex], trainings);
-      const newCalendarStructure = state.calendarStructure.slice();
-      newCalendarStructure.splice(calendarIndex, 1, calendarWithTrainings);
+      const copiedCalendarStructure = state.calendarStructure.slice();
+      copiedCalendarStructure.splice(calendarIndex, 1, calendarWithTrainings);
 
       return {
         ...state,
-        calendarStructure: newCalendarStructure,
+        calendarStructure: copiedCalendarStructure,
       }
+    }
     case actionTypes.GET_TRAININGS_SUCCESS:
       return {
         ...state,
@@ -89,6 +91,23 @@ const calendarReducer = (state = initialState, action) => {
         ...state,
         pickedTrainings: action.payload,
       }
+    case actionTypes.DELETE_TRAINING: {
+      const {date, id} = action.payload;
+      let monthDate = getFirstDayOfMonth(date);
+      const monthIndex = state.calendarStructure.findIndex((item) => item.month === monthDate);
+      const copiedCalendarStructure = state.calendarStructure.slice();
+
+      copiedCalendarStructure[monthIndex].dates.forEach(day => {
+        if (day.date === date) {
+          day.trainings = day.trainings.filter(training => training.id !== id)
+        }
+      });
+
+      return {
+        ...state,
+        calendarStructure: copiedCalendarStructure,
+      };
+    }
     default:
       return state;
   }

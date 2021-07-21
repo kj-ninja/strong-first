@@ -12,6 +12,7 @@ export const loading = () => ({type: actionTypes.LOADING});
 export const getTrainingsSuccess = () => ({type: actionTypes.GET_TRAININGS_SUCCESS});
 export const getTrainingsFail = (error) => ({type: actionTypes.GET_TRAININGS_FAIL, error: error});
 export const setPickedTrainings = (trainings) => ({type: actionTypes.SET_PICKED_TRAININGS, payload: trainings});
+export const deleteTrainingFromCalendar = (training) => ({type: actionTypes.DELETE_TRAINING, payload: training});
 
 export const initCalendar = (date) => {
   return async (dispatch, getState) => {
@@ -23,8 +24,8 @@ export const initCalendar = (date) => {
       const monthIndex = getState().calendar.calendarStructure.findIndex((item) => {
         return item.month === firstDayOfMonth;
       });
-      const calendarDates = getState().calendar.calendarStructure[monthIndex].dates;
 
+      const calendarDates = getState().calendar.calendarStructure[monthIndex].dates;
       const dates = {
         dateFrom: calendarDates[0].date,
         dateTo: calendarDates[calendarDates.length -1].date,
@@ -44,6 +45,11 @@ export const addTraining = (training) => {
     dispatch(loading());
     try {
       await httpAddTraining(training);
+      // dodac metoda ktora sprawdza najpierw czy w strukturze kalendarza znajduje sie miesiac na ktory chcemy dodac
+      // trening, jesli nie ma to nie robimy nic czy moze inicjujemy kalendarz z tym miesiacem i ustawiamy wybrany
+      // trening w podsumowaniu?
+      // jesli mamy taki miesiac to mapujemy trening do danego miesiaca i dnia nastepnie wyswietlamy ten trening
+      // i miesiac?
     } catch (error) {
       dispatch(getTrainingsFail(error));
     }
@@ -55,16 +61,20 @@ export const editTraining = (id, training) => {
     dispatch(loading());
     try {
       await httpEditTraining(id, training);
+      // tutaj mamy pewnosc ze dany treningi znajduje sie w strukturze kalendarza wiec robimy metode ktora
+      // szuka danego dnia i w tablicy z treningami podmieniamy dany trening nastepnie
+      // odpalamy ten miesiac i wyswietlamy podsumowanie treningu
     } catch (error) {
       dispatch(getTrainingsFail(error));
     }
   };
 };
 
-export const deleteTraining = (id) => {
+export const deleteTraining = (training) => {
   return async dispatch => {
     try {
-      await httpDeleteTraining(id);
+      await httpDeleteTraining(training.id);
+      dispatch(deleteTrainingFromCalendar(training));
     } catch (error) {
       dispatch(getTrainingsFail(error));
     }

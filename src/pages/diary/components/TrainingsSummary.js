@@ -1,56 +1,50 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
+import {deleteTraining} from "../../../store/actions/calendar-trainings.actions";
 import {getRepsView} from "../../../utils/getRepsView";
 import {timeConvert} from '../../../utils/timeConvert';
 import {trainingSummaryView} from '../../../utils/trainingSummaryView';
 import './TrainingsSummary.scss';
 
 const TrainingsSummary = (props) => {
-  const {pickedTrainings} = props;
+  const {pickedTrainings, deleteTraining} = props;
   const exercisesViews = pickedTrainings.map(pickedTraining => trainingSummaryView(pickedTraining));
 
-  // const handleEditTraining = () => {
-  //   let trainingToEdit = null;
-  //   if (trainingToShow.length === 2) {
-  //     trainingToShow.forEach(training => {
-  //       if (training.id === +key) {
-  //         trainingToEdit = training;
-  //       }
-  //     });
-  //   } else {
-  //     trainingToEdit = trainingToShow[0];
-  //   }
-  //
-  //   props.isEditTraining(true);
-  //   addTrainingEditForm(trainingToEdit);
-  //   props.history.push('/add-training');
-  // };
+  const handleEditTraining = (training) => {
+    console.log(training);
 
-  const generateExercisesListView = (training) => {
-    return (
-      <ul className="training-summary__list list-group">
-        {training.map(element => (
-          <li key={element.id} className="training-summary__exercise list-group-item">
-            <span className="training-summary__exercise-name">
-              {element.name.toUpperCase()}:
-            </span>
-
-            {getRepsView(element).map((rep, i) => (
-              <span key={i} className="training-summary__exercise-rep">
-                {rep}
-              </span>
-            ))}
-          </li>
-        ))}
-      </ul>
-    );
+    // props.isEditTraining(true);
+    // addTrainingEditForm(trainingToEdit);
+    // props.history.push('/add-training');
   };
+
+  const handleDeleteTraining = async (training) => {
+    deleteTraining(training);
+  };
+
+  const generateExercisesListView = (training) => (
+    <ul className="training-summary__list list-group">
+      {training.map(element => (
+        <li key={element.id} className="training-summary__exercise list-group-item">
+          <span className="training-summary__exercise-name">
+            {element.name.toUpperCase()}:
+          </span>
+
+          {getRepsView(element).map((rep, i) => (
+            <span key={i} className="training-summary__exercise-rep">
+              {rep}
+            </span>
+          ))}
+        </li>
+      ))}
+    </ul>
+  );
 
   let trainingsViews = pickedTrainings.map((pickedTraining, index) => (
     <div className={"training-summary"} key={index}>
-      <i className="far fa-edit edit"/>
-      <i className="far fa-trash-alt trash"/>
+      <i className="far fa-edit edit" onClick={()=>handleEditTraining(pickedTraining)}/>
+      <i className="far fa-trash-alt trash" onClick={()=>handleDeleteTraining(pickedTraining)}/>
 
       <p className="training-summary__element">
         <span>Data:</span> {pickedTraining.date}
@@ -95,4 +89,4 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps)(withRouter(TrainingsSummary));
+export default connect(mapStateToProps, {deleteTraining})(withRouter(TrainingsSummary));

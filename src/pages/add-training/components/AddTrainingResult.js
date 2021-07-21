@@ -23,7 +23,7 @@ const AddTrainingResult = (props) => {
     }, 1500);
   };
 
-  const exerciseView = trainingSummaryView(addTrainingForm);
+  const exercisesView = trainingSummaryView(addTrainingForm);
 
   return (
     <>
@@ -38,28 +38,28 @@ const AddTrainingResult = (props) => {
 
         <h3>Cwiczenia:</h3>
         <ul className="add-training__result-list">
-          {exerciseView.map(element => {
-            return (
-              <li key={element.id} className="add-training__result-list--element">
-                                <span
-                                  className="add-training__result-list--element-name">{element.name}:</span>
-                {getRepsView(element).map((rep, i) => {
-                  return (
-                    <span key={i} className="add-training__result-list--element-rep">
-                                    {rep}
-                                </span>
-                  )
-                })}
-              </li>
-            )
-          })}
+          {exercisesView.map(element => (
+            <li key={element.id} className="add-training__result-list--element">
+                <span className="add-training__result-list--element-name">
+                  {element.name}:
+                </span>
+
+              {getRepsView(element).map((rep, i) => (
+                <span key={i} className="add-training__result-list--element-rep">
+                  {rep}
+                </span>
+              ))}
+            </li>
+          ))}
         </ul>
 
         <div className="add-training__buttons">
           <Button type="button" color="blue" clicked={() => props.history.goBack()}>Wstecz</Button>
-          {props.isEdit ?
-            <Button type="button" color="red" clicked={handleEditTraining}>Zapisz zmiany</Button> :
-            <Button type="button" color="red" clicked={handleAddTraining}>Zapisz trening</Button>}
+          {
+            props.isEdit ?
+              <Button type="button" color="red" clicked={handleEditTraining}>Zapisz zmiany</Button> :
+              <Button type="button" color="red" clicked={handleAddTraining}>Zapisz trening</Button>
+          }
         </div>
       </div>
     </>
