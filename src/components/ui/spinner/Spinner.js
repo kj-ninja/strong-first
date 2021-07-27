@@ -4,11 +4,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 import "./Spinner.scss"
 
 
-const Spinner = () =>{
-  return (
-    <LoadingOutlined className="spinnerContainer" spin />
-  )
+const Spinner = () => <LoadingOutlined className="spinner-container" spin/>
 
-}
 
 export default Spinner;

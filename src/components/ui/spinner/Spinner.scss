@@ -1,5 +1,11 @@
-.spinnerContainer {
-  font-size: 10rem;
-  color: yellow;
-  margin: 25% 0 0 40%;
+.content {
+  height: 92vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .spinner-container {
+    font-size: 10rem;
+    color: yellow;
+  }
 }

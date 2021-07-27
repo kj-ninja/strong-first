@@ -9,6 +9,7 @@ const Footer = (props) => {
         <div className='footer__copyright'>
           &copy; {new Date().getFullYear()} Copyright: <a href="https://github.com/kj-ninja"> kj-ninja </a>
         </div>
+        <p>test</p>
       </div>
     </footer>
   );
