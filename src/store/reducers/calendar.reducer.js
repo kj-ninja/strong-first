@@ -91,15 +91,14 @@ const calendarReducer = (state = initialState, action) => {
       };
     case actionTypes.DELETE_TRAINING: {
       const {date, id} = action.payload;
-      const monthDate = getFirstDayOfMonth(date);
-      const monthIndex = state.calendarStructure.findIndex((item) => item.month === monthDate);
       const copiedCalendarStructure = state.calendarStructure.slice();
 
-      copiedCalendarStructure[monthIndex].dates.forEach(day => {
+      // tutaj robie petle po wszystkich dniach zeby usunac trening z widoku skrajnych miesiecy nie wiem czy to spoko?
+      copiedCalendarStructure.forEach(calendar => calendar.dates.forEach(day => {
         if (day.date === date) {
           day.trainings = day.trainings.filter(training => training.id !== id)
         }
-      });
+      }));
 
       return {
         ...state,

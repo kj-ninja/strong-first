@@ -59,7 +59,6 @@ export const addTraining = (training) => {
           date: '',
         }));
       } else {
-        // sprawdzam czy dzien na ktory chcemy dodac trening jest juz w strukturze kalendarza?
         let sharedDate;
         getState().calendar.calendarStructure.forEach(calendar => {
           calendar.dates.forEach(day => {
@@ -75,6 +74,7 @@ export const addTraining = (training) => {
             date: sharedDate,
           }));
         }
+
         await dispatch(initCalendar(firstDayOfMonthAddedTraining));
         dispatch(setPickedDate(trainingToAdd.date));
       }
