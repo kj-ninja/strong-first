@@ -15,21 +15,16 @@ const AddTrainingResult = (props) => {
     history,
   } = props;
 
-  const handleAddTraining = () => {
-    addTraining(training);
-    // TODO: do wywalenia timeouty zamiast tego spinner i redirect
-    setTimeout(() => {
-      history.push('/diary')
-    }, 1500);
+  const handleAddTraining = async () => {
+    // TODO: dodac spinnera
+    await addTraining(training);
+    history.push('/diary');
   };
 
-  const handleEditTraining = () => {
-    console.log(training);
-    editTraining(training);
-    // TODO: do wywalenia timeouty zamiast tego spinner i redirect
-    setTimeout(() => {
-      history.push('/diary')
-    }, 1500);
+  const handleEditTraining = async () => {
+    // TODO: dodac spinnera
+    await editTraining(training);
+    history.push('/diary');
   };
 
   const exercisesView = trainingSummaryView(training);

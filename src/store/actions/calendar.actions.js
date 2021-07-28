@@ -3,7 +3,7 @@ import moment from 'moment';
 import { initCalendar } from "./calendar-trainings.actions";
 import { createCalendarStructure, getFirstDayOfNextMonth, getFirstDayOfPreviousMonth } from '../../pages/diary/helpers';
 
-export const setPickedDate = (dateData) => ({type: actionTypes.SET_PICKED_DATE, payload: dateData});
+export const setPickedDate = (date) => ({type: actionTypes.SET_PICKED_DATE, payload: date});
 export const setPickedMonth = (month) => ({type: actionTypes.SET_PICKED_MONTH, payload: month});
 export const setDaysOfWeek = (days) => ({type: actionTypes.SET_DAYS_OF_WEEK, payload: days});
 export const setCalendarStructure = (structure) => ({type: actionTypes.SET_CALENDAR_STRUCTURE, payload: structure});

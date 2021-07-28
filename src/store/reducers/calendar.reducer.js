@@ -1,5 +1,12 @@
 import * as actionTypes from '../action-types';
-import {mapTrainingsToCalendar, getFirstDayOfMonth} from "../../pages/diary/helpers";
+import {
+  mapTrainingsToCalendar,
+  getFirstDayOfMonth,
+  findCalendarMonthIndexByDate,
+  unpickDate,
+  findCalendarDayIndexByDate,
+  addTrainingToCalendarDay,
+} from "../../pages/diary/helpers";
 
 const initialState = {
   pickedDate: '',
@@ -22,34 +29,30 @@ const calendarReducer = (state = initialState, action) => {
         ]
       };
     case actionTypes.SET_PICKED_DATE: {
-      const {date, dayIndex} = action.payload;
-      let monthDate = getFirstDayOfMonth(date);
+      const monthDate = getFirstDayOfMonth(action.payload);
       const monthIndex = state.calendarStructure.findIndex((item) => item.month === monthDate);
-      const pickedDateExist = state.pickedDate.length;
+      const dateIndex = state.calendarStructure[monthIndex].dates.findIndex((day) => day.date === action.payload);
       const copiedCalendarStructure = state.calendarStructure.slice();
 
-      if (pickedDateExist) {
-        monthDate = getFirstDayOfMonth(state.pickedDate);
-        const oldMonthIndex = state.calendarStructure.findIndex((item) => item.month === monthDate);
-        const oldDateIndex = state.calendarStructure[oldMonthIndex].dates
-          .findIndex((day) => day.date === state.pickedDate);
-
-        copiedCalendarStructure[oldMonthIndex].dates[oldDateIndex].isPicked = false
-        copiedCalendarStructure[monthIndex].dates[dayIndex].isPicked = true;
+      if (state.pickedDate.length) {
+        unpickDate(state, copiedCalendarStructure);
+        copiedCalendarStructure[monthIndex].dates[dateIndex].isPicked = true;
 
         return {
           ...state,
-          pickedDate: date,
+          pickedDate: action.payload,
           calendarStructure: copiedCalendarStructure,
+          pickedTrainings: copiedCalendarStructure[monthIndex].dates[dateIndex].trainings,
         };
       }
 
-      copiedCalendarStructure[monthIndex].dates[dayIndex].isPicked = true;
+      copiedCalendarStructure[monthIndex].dates[dateIndex].isPicked = true;
 
       return {
         ...state,
-        pickedDate: date,
+        pickedDate: action.payload,
         calendarStructure: copiedCalendarStructure,
+        pickedTrainings: copiedCalendarStructure[monthIndex].dates[dateIndex].trainings,
       };
     }
     case actionTypes.SET_PICKED_MONTH:
@@ -86,14 +89,9 @@ const calendarReducer = (state = initialState, action) => {
         loading: false,
         error: action.error,
       };
-    case actionTypes.SET_PICKED_TRAININGS:
-      return {
-        ...state,
-        pickedTrainings: action.payload,
-      }
     case actionTypes.DELETE_TRAINING: {
       const {date, id} = action.payload;
-      let monthDate = getFirstDayOfMonth(date);
+      const monthDate = getFirstDayOfMonth(date);
       const monthIndex = state.calendarStructure.findIndex((item) => item.month === monthDate);
       const copiedCalendarStructure = state.calendarStructure.slice();
 
@@ -106,10 +104,11 @@ const calendarReducer = (state = initialState, action) => {
       return {
         ...state,
         calendarStructure: copiedCalendarStructure,
+        pickedTrainings: state.pickedTrainings.filter(pickedTraining => pickedTraining.id !== id)
       };
     }
     case actionTypes.EDIT_TRAINING: {
-      let monthDate = getFirstDayOfMonth(action.payload.date);
+      const monthDate = getFirstDayOfMonth(action.payload.date);
       const monthIndex = state.calendarStructure.findIndex((item) => item.month === monthDate);
       const copiedCalendarStructure = state.calendarStructure.slice();
 
@@ -128,25 +127,36 @@ const calendarReducer = (state = initialState, action) => {
         })
       };
     }
-    case actionTypes.ADD_TRAINING: {
-      let monthDate = getFirstDayOfMonth(action.payload.date);
-      const monthIndex = state.calendarStructure.findIndex((item) => item.month === monthDate);
+    case actionTypes.ADD_TRAINING_TO_CALENDAR: {
+      const {training, date} = action.payload;
       const copiedCalendarStructure = state.calendarStructure.slice();
-      const dayIndex = copiedCalendarStructure[monthIndex].dates.findIndex((item) => item.date ===action.payload.date);
 
-      copiedCalendarStructure[monthIndex].dates.forEach(day => {
-        if (day.date === action.payload.date) {
-          day.trainings.push(action.payload);
+      if (date) {
+        const monthIndex = findCalendarMonthIndexByDate(state.pickedMonth, state);
+        const trainings = addTrainingToCalendarDay(copiedCalendarStructure[monthIndex], training);
+
+        return {
+          ...state,
+          calendarStructure: copiedCalendarStructure,
+          pickedTrainings: trainings,
         }
-      });
+      }
 
+      const monthIndex = findCalendarMonthIndexByDate(training.date, state);
+      const dayIndex = findCalendarDayIndexByDate(training.date, copiedCalendarStructure[monthIndex]);
       copiedCalendarStructure[monthIndex].dates[dayIndex].isPicked = true;
+
+      const trainings = addTrainingToCalendarDay(copiedCalendarStructure[monthIndex], training);
+
+      if (state.pickedDate.length) {
+        unpickDate(state, copiedCalendarStructure);
+      }
 
       return {
         ...state,
         calendarStructure: copiedCalendarStructure,
-        pickedTrainings: state.pickedTrainings.concat(action.payload),
-        pickedDate: action.payload.date,
+        pickedTrainings: trainings,
+        pickedDate: training.date,
       }
     }
     default:
