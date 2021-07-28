@@ -1,5 +1,7 @@
+@import './src/scss/settings/variables';
+
 .content {
-  height: 92vh;
+  height: calc(100vh - 7rem);
   display: flex;
   justify-content: center;
   align-items: center;
