@@ -59,6 +59,7 @@ export const getFirstDayOfNextMonth = (date) => {
 };
 
 export const getMonthData = (calendarStructure, pickedMonth) => {
+
   if (calendarStructure.length) {
     const formattedMonth = getFirstDayOfMonth(pickedMonth);
     return calendarStructure.find((item) => item.month === formattedMonth).dates;
@@ -67,7 +68,7 @@ export const getMonthData = (calendarStructure, pickedMonth) => {
 };
 
 export const getFirstDayOfMonth = (date) => {
-  return moment(date).startOf('month').format('YYYY-MM-DD')
+  return moment(date).startOf('month').format('YYYY-MM-DD');
 };
 
 export const mapTrainingsToCalendar = (calendar, trainings) => {
@@ -82,6 +83,34 @@ export const mapTrainingsToCalendar = (calendar, trainings) => {
   });
 
   return copiedCalendar;
+};
+
+export const addTrainingToCalendarDay = (calendar, training) => {
+  const trainings = [];
+
+  calendar.dates.forEach(day => {
+    if (day.date === training.date) {
+      day.trainings.push(training);
+      trainings.push(...day.trainings);
+    }
+  });
+
+  return trainings;
+};
+
+export const findCalendarMonthIndexByDate = (date, state) => {
+  const monthDate = getFirstDayOfMonth(date);
+  return state.calendarStructure.findIndex((item) => item.month === monthDate);
+};
+
+export const findCalendarDayIndexByDate = (date, calendar) => calendar.dates.findIndex((item) => item.date === date);
+
+export const unpickDate = (state, calendarStructure) => {
+  const oldMonthDate = getFirstDayOfMonth(state.pickedDate);
+  const oldMonthIndex = state.calendarStructure.findIndex((item) => item.month === oldMonthDate);
+  const oldDateIndex = state.calendarStructure[oldMonthIndex].dates.findIndex((day) => day.date === state.pickedDate);
+
+  calendarStructure[oldMonthIndex].dates[oldDateIndex].isPicked = false;
 };
 
 export const getDay = (value) => moment(value).format('DD');

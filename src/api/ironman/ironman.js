@@ -12,8 +12,8 @@ export const httpAddTraining = async (params) => {
   return data;
 };
 
-export const httpEditTraining = async (id, training) => {
-  const {data} = await ironman.post(`${TRAINING_URL}/${id}`, training);
+export const httpEditTraining = async (training) => {
+  const {data} = await ironman.post(`${TRAINING_URL}/${training.id}`, training);
   return data;
 };
 

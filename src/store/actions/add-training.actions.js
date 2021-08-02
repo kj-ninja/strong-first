@@ -7,12 +7,7 @@ export const addTrainingStepOne = (data) => {
     }
 };
 
-export const addTrainingEditForm = (training) => {
-    return {
-        type: actionTypes.ADD_TRAINING_EDIT_FORM,
-        payload: training
-    }
-};
+export const addTrainingToEditForm = (training) => ({type: actionTypes.ADD_TRAINING_TO_EDIT_FORM, payload: training});
 
 export const addSet = (set) => {
     return {
@@ -28,5 +23,5 @@ export const deleteSet = (index) => {
     }
 };
 
-export const isEditTraining = (bool) => ({type: actionTypes.IS_EDIT_TRAINING, payload: bool})
-export const clearForm = () => ({type: actionTypes.CLEAR_ADD_TRAINING_FORM})
+export const setAddTrainingFormEditOption = (bool) => ({type: actionTypes.SET_ADD_TRAINING_FORM_EDIT_OPTION, payload: bool})
+export const resetForm = () => ({type: actionTypes.RESET_ADD_TRAINING_FORM})
