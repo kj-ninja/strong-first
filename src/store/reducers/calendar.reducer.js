@@ -127,10 +127,10 @@ const calendarReducer = (state = initialState, action) => {
       };
     }
     case actionTypes.ADD_TRAINING_TO_CALENDAR: {
-      const {training, date} = action.payload;
+      const {training, sharedDate} = action.payload;
       const copiedCalendarStructure = state.calendarStructure.slice();
 
-      if (date) {
+      if (sharedDate) {
         const monthIndex = findCalendarMonthIndexByDate(state.pickedMonth, state);
         const trainings = addTrainingToCalendarDay(copiedCalendarStructure[monthIndex], training);
 

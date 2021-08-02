@@ -56,7 +56,7 @@ export const addTraining = (training) => {
       if (firstDayOfMonthAddedTraining === pickedMonth) {
         dispatch(addTrainingToCalendar({
           training: trainingToAdd,
-          date: '',
+          sharedDate: '',
         }));
       } else {
         let sharedDate;
@@ -71,7 +71,7 @@ export const addTraining = (training) => {
         if (sharedDate) {
           dispatch(addTrainingToCalendar({
             training: trainingToAdd,
-            date: sharedDate,
+            sharedDate,
           }));
         }
 
