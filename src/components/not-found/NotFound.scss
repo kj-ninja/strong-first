@@ -1,0 +1,36 @@
+@import "../../scss/settings/variables";
+
+.error-container{
+  height: calc(100vh - 7rem);
+
+  :before {
+    content: "";
+    position: absolute;
+    top: 15%;
+    left: 20%;
+    width: 60%;
+    height: 80%;
+    opacity: .1;
+    z-index: -1;
+    background-image: url("../../assets/not-found.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .ant-result-title {
+    margin-top: 2.5%;
+    font-size: 8rem;
+    color: black;
+  }
+
+  .ant-result-subtitle{
+    margin-top: 20%;
+    font-size: 2.4rem;
+    color: black;
+  }
+
+  .ant-result-icon  {
+    display: none;
+    padding-top: 6%;
+  }
+}

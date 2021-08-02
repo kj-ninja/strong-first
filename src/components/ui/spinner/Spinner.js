@@ -1,6 +1,8 @@
 import React from 'react';
-import './Spinner.scss';
+import { LoadingOutlined } from '@ant-design/icons';
+import 'antd/dist/antd.css';
+import "./Spinner.scss"
 
-const Spinner = (props) => <div className="loader" style={props.dimensions}>Loading...</div>
+const Spinner = () => <LoadingOutlined className="spinner-container" spin/>
 
 export default Spinner;
